@@ -1,0 +1,133 @@
+/* Mobile Fixes */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    touch-action: manipulation;
+}
+
+/* Fix for iOS momentum scrolling */
+.scroll-container {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Improved touch targets for mobile */
+button, 
+a, 
+input, 
+select, 
+textarea {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Mobile Nav Fixes */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        background-color: var(--white);
+        transition: 0.3s;
+        padding: 2rem;
+        z-index: 100;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-link {
+        padding: 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-toggle {
+        display: block;
+        cursor: pointer;
+        z-index: 101;
+    }
+
+    /* Fix for position:fixed elements */
+    .lightbox,
+    .loading,
+    .back-to-top {
+        position: fixed;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
+}
+
+/* Section Padding Fixes */
+@media screen and (max-width: 768px) {
+    section {
+        padding: 4rem 1rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* Form Element Fixes */
+    input, 
+    select, 
+    textarea {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+    }
+
+    /* Gallery Grid Fix */
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    /* Timeline Fixes */
+    .timeline-item {
+        padding-left: 2rem;
+    }
+
+    /* Event Card Fixes */
+    .event-card {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Prevent pull-to-refresh on mobile */
+body {
+    overscroll-behavior-y: none;
+}
+
+/* Fix for iOS 100vh issue */
+.hero {
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: stretch;
+}
+
+/* Fix sticky hover effects on mobile */
+@media (hover: hover) {
+    .nav-link:hover,
+    .btn:hover {
+        opacity: 0.8;
+    }
+}
+
+/* Improve scroll performance */
+* {
+    -webkit-tap-highlight-color: transparent;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
