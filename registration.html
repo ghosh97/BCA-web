@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Durga Puja 2K25 Barcelona</title>
+    <meta name="description" content="Register for Durga Puja 2K25 Barcelona.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-img">
+                    <img src="bca-logo-another.jpg" alt="BCA Barcelona Logo" style="width:50px;height:50px;border-radius:50%;object-fit:cover;" />
+                </div>
+                <span class="logo-text">BCA Barcelona</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="schedule.html" class="nav-link">Schedule</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="registration.html" class="nav-link active">Registration</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Section -->
+    <section id="registration" class="registration" style="margin-top:80px;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Register for Durga Puja 2K25</h2>
+                <p class="section-subtitle">Secure your spot for the grand celebration</p>
+            </div>
+            <div class="registration-content">
+                <div class="registration-form">
+                    <form id="registrationForm" class="form">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                            <select id="guests" name="guests">
+                                <option value="1">1 Person</option>
+                                <option value="2">2 People</option>
+                                <option value="3">3 People</option>
+                                <option value="4">4 People</option>
+                                <option value="5">5+ People</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="events">Events to Attend</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="mahalaya">
+                                    <span class="checkmark"></span>
+                                    Mahalaya (15 Oct)
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="saptami">
+                                    <span class="checkmark"></span>
+                                    Saptami Puja (20 Oct)
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="cultural">
+                                    <span class="checkmark"></span>
+                                    Cultural Night (21 Oct)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Special Requirements</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Any special dietary requirements or accessibility needs..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Registration
+                        </button>
+                    </form>
+                </div>
+                <div class="registration-info">
+                    <div class="info-card">
+                        <h3>Registration Benefits</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Guaranteed entry to all events</li>
+                            <li><i class="fas fa-check"></i> Traditional Bengali lunch</li>
+                            <li><i class="fas fa-check"></i> Cultural program access</li>
+                            <li><i class="fas fa-check"></i> Souvenir package</li>
+                            <li><i class="fas fa-check"></i> Parking assistance</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Event Details</h3>
+                        <div class="event-detail">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <strong>Date:</strong> October 15-22, 2025
+                            </div>
+                        </div>
+                        <div class="event-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Venue:</strong> New Venue (Details upcoming)
+                            </div>
+                        </div>
+                        <div class="event-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Time:</strong> Various times throughout the day
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-img">
+                            <img src="bca-logo-another.jpg" alt="BCA Barcelona Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+                        </div>
+                        <span>Bengali Cultural Association</span>
+                    </div>
+                    <p>Preserving and promoting Bengali culture in Barcelona through community events, cultural programs, and traditional celebrations.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="schedule.html">Schedule</a></li>
+                        <li><a href="registration.html">Registration</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Events</h3>
+                    <ul class="footer-links">
+                        <li><a href="events.html">Durga Puja 2K25</a></li>
+                        <li><a href="events.html">Cultural Programs</a></li>
+                        <li><a href="events.html">Community Gatherings</a></li>
+                        <li><a href="events.html">Language Classes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with our latest events and cultural activities.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
