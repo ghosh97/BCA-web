@@ -1,7 +1,7 @@
 # Durga Puja 2K25 Barcelona - Modern Website
 
 A modern, feature-rich website for the Bengali Cultural Association's Durga Puja celebration in Barcelona. Built with HTML5, CSS3, and JavaScript, featuring a responsive design and interactive elements.
-
+  
 ## 🌟 Features
 
 ### Design & User Experience
