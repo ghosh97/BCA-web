@@ -1,14 +1,619 @@
-favhvhv
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Hello World!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durga Puja 2K25 Barcelona - Bengali Cultural Association</title>
+    <meta name="description" content="Join us for the grand celebration of Durga Puja 2K25 in Barcelona. Experience the rich Bengali culture, traditional rituals, and community festivities.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+                    <div class="nav-logo">
+            <div class="logo-img">
+                <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <path id="text-path-1" d="M 20 30 A 30 30 0 0 1 80 30"/>
+                        <path id="text-path-2" d="M 20 70 A 30 30 0 0 0 80 70"/>
+                    </defs>
+                    <!-- Bindi (red dot) -->
+                    <circle cx="50" cy="35" r="4" fill="#FF4444"/>
+                    <!-- Eyes -->
+                    <ellipse cx="35" cy="50" rx="8" ry="4" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+                    <ellipse cx="65" cy="50" rx="8" ry="4" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+                    <!-- Eye pupils -->
+                    <circle cx="35" cy="50" r="2" fill="#1A1A1A"/>
+                    <circle cx="65" cy="50" r="2" fill="#1A1A1A"/>
+                    <!-- Text arc for "BENGALI" -->
+                    <text font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#1A1A1A">
+                        <textPath href="#text-path-1" startOffset="50%" text-anchor="middle">BENGALI</textPath>
+                    </text>
+                    <!-- Text arc for "CULTURAL ASSOCIATION" -->
+                    <text font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#1A1A1A">
+                        <textPath href="#text-path-2" startOffset="50%" text-anchor="middle">CULTURAL ASSOCIATION</textPath>
+                    </text>
+                </svg>
+            </div>
+            <span class="logo-text">BCA Barcelona</span>
+        </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#events" class="nav-link">Events</a>
+                <a href="#schedule" class="nav-link">Schedule</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#registration" class="nav-link">Registration</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
 
-<h1>Hello world!</h1>
-<p>This is the first file in my new Git Repo.</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">Durga Puja</span>
+                    <span class="title-line highlight">2K25 Barcelona</span>
+                </h1>
+                <p class="hero-subtitle">Experience the divine celebration of Bengali culture in the heart of Barcelona</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('registration')">
+                        <i class="fas fa-ticket-alt"></i>
+                        Register Now
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('schedule')">
+                        <i class="fas fa-calendar-alt"></i>
+                        View Schedule
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-clock"></i> Countdown to Durga Puja</h3>
+                        <div class="countdown" id="countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="days">00</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="hours">00</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="minutes">00</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="seconds">00</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">
+                            <i class="fas fa-star"></i> Join us for the grand celebration! <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Durga Puja</h2>
+                <p class="section-subtitle">Discover the significance and traditions of this sacred festival</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>The Divine Celebration</h3>
+                    <p>Durga Puja is one of the most significant festivals in Bengali culture, celebrating the victory of Goddess Durga over the demon Mahishasura. This five-day festival symbolizes the triumph of good over evil and brings communities together in celebration.</p>
+                    
+                    <h3>Our Mission</h3>
+                    <p>The Bengali Cultural Association of Barcelona is dedicated to preserving and promoting Bengali culture, traditions, and values in Spain. Through events like Durga Puja, we create a home away from home for the Bengali community.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-pray"></i>
+                            <h4>Traditional Rituals</h4>
+                            <p>Authentic puja ceremonies following ancient traditions</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-utensils"></i>
+                            <h4>Cultural Cuisine</h4>
+                            <p>Traditional Bengali food and sweets</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-music"></i>
+                            <h4>Cultural Programs</h4>
+                            <p>Music, dance, and cultural performances</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <h4>Community Bonding</h4>
+                            <p>Connect with fellow Bengalis in Barcelona</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="https://via.placeholder.com/500x600/FFD700/1A1A1A?text=Durga+Puja+2024" alt="Durga Puja 2024" class="about-img">
+                        <div class="image-overlay">
+                            <h4><i class="fas fa-star"></i> Pratima 2024</h4>
+                            <p>Arrived from India</p>
+                            <p><i class="fas fa-pray"></i> Sacred and Blessed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Festival Events</h2>
+                <p class="section-subtitle">Join us for a week of cultural celebration and spiritual awakening</p>
+            </div>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://via.placeholder.com/400x250/FF6B35/FFFFFF?text=Mahalaya" alt="Mahalaya">
+                        <div class="event-date">
+                            <span class="day">15</span>
+                            <span class="month">OCT</span>
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <h3>Mahalaya</h3>
+                        <p class="event-time"><i class="fas fa-clock"></i> 6:00 AM - 8:00 AM</p>
+                        <p>Traditional invocation of Goddess Durga with devotional songs and prayers.</p>
+                        <button class="btn btn-outline">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="event-card featured">
+                    <div class="event-image">
+                        <img src="https://via.placeholder.com/400x250/FF6B35/FFFFFF?text=Saptami" alt="Saptami">
+                        <div class="event-date">
+                            <span class="day">20</span>
+                            <span class="month">OCT</span>
+                        </div>
+                        <div class="featured-badge">Main Event</div>
+                    </div>
+                    <div class="event-content">
+                        <h3>Saptami Puja</h3>
+                        <p class="event-time"><i class="fas fa-clock"></i> 8:00 AM - 12:00 PM</p>
+                        <p>The main day of Durga Puja with elaborate rituals and community feast.</p>
+                        <button class="btn btn-primary">Register Now</button>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://via.placeholder.com/400x250/FF6B35/FFFFFF?text=Cultural+Night" alt="Cultural Night">
+                        <div class="event-date">
+                            <span class="day">21</span>
+                            <span class="month">OCT</span>
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <h3>Cultural Night</h3>
+                        <p class="event-time"><i class="fas fa-clock"></i> 7:00 PM - 11:00 PM</p>
+                        <p>Traditional Bengali music, dance performances, and cultural presentations.</p>
+                        <button class="btn btn-outline">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="schedule">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Event Schedule</h2>
+                <p class="section-subtitle">Complete timeline of Durga Puja 2K25 celebrations</p>
+            </div>
+            <div class="schedule-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date">15 Oct</span>
+                        <span class="time">6:00 AM</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Mahalaya</h3>
+                        <p>Traditional invocation and devotional songs</p>
+                        <span class="timeline-location"><i class="fas fa-map-marker-alt"></i> Main Hall</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date">18 Oct</span>
+                        <span class="time">5:00 PM</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Pratima Installation</h3>
+                        <p>Sacred idol installation ceremony</p>
+                        <span class="timeline-location"><i class="fas fa-map-marker-alt"></i> Puja Mandap</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date">20 Oct</span>
+                        <span class="time">8:00 AM</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Saptami Puja</h3>
+                        <p>Main day celebrations and rituals</p>
+                        <span class="timeline-location"><i class="fas fa-map-marker-alt"></i> Main Venue</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date">21 Oct</span>
+                        <span class="time">7:00 PM</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Cultural Night</h3>
+                        <p>Music, dance, and cultural performances</p>
+                        <span class="timeline-location"><i class="fas fa-map-marker-alt"></i> Auditorium</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date">22 Oct</span>
+                        <span class="time">4:00 PM</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Visarjan</h3>
+                        <p>Immersion ceremony and farewell</p>
+                        <span class="timeline-location"><i class="fas fa-map-marker-alt"></i> Beach</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Photo Gallery</h2>
+                <p class="section-subtitle">Relive the magical moments from previous celebrations</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="https://via.placeholder.com/300x300/FF6B35/FFFFFF?text=Gallery+1" alt="Gallery Image 1">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="https://via.placeholder.com/300x300/FF6B35/FFFFFF?text=Gallery+2" alt="Gallery Image 2">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="https://via.placeholder.com/300x300/FF6B35/FFFFFF?text=Gallery+3" alt="Gallery Image 3">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="https://via.placeholder.com/300x300/FF6B35/FFFFFF?text=Gallery+4" alt="Gallery Image 4">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="https://via.placeholder.com/300x300/FF6B35/FFFFFF?text=Gallery+5" alt="Gallery Image 5">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="https://via.placeholder.com/300x300/FF6B35/FFFFFF?text=Gallery+6" alt="Gallery Image 6">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="registration">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Register for Durga Puja 2K25</h2>
+                <p class="section-subtitle">Secure your spot for the grand celebration</p>
+            </div>
+            <div class="registration-content">
+                <div class="registration-form">
+                    <form id="registrationForm" class="form">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                            <select id="guests" name="guests">
+                                <option value="1">1 Person</option>
+                                <option value="2">2 People</option>
+                                <option value="3">3 People</option>
+                                <option value="4">4 People</option>
+                                <option value="5">5+ People</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="events">Events to Attend</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="mahalaya">
+                                    <span class="checkmark"></span>
+                                    Mahalaya (15 Oct)
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="saptami">
+                                    <span class="checkmark"></span>
+                                    Saptami Puja (20 Oct)
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="events" value="cultural">
+                                    <span class="checkmark"></span>
+                                    Cultural Night (21 Oct)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Special Requirements</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Any special dietary requirements or accessibility needs..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Registration
+                        </button>
+                    </form>
+                </div>
+                <div class="registration-info">
+                    <div class="info-card">
+                        <h3>Registration Benefits</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Guaranteed entry to all events</li>
+                            <li><i class="fas fa-check"></i> Traditional Bengali lunch</li>
+                            <li><i class="fas fa-check"></i> Cultural program access</li>
+                            <li><i class="fas fa-check"></i> Souvenir package</li>
+                            <li><i class="fas fa-check"></i> Parking assistance</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Event Details</h3>
+                        <div class="event-detail">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <strong>Date:</strong> October 15-22, 2025
+                            </div>
+                        </div>
+                        <div class="event-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Venue:</strong> New Venue (Details upcoming)
+                            </div>
+                        </div>
+                        <div class="event-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Time:</strong> Various times throughout the day
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with the Bengali Cultural Association</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>info@bcabarcelona.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+34 123 456 789</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Address</h3>
+                            <p>Barcelona, Spain</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Office Hours</h3>
+                            <p>Mon-Fri: 9:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" class="form">
+                        <div class="form-group">
+                            <label for="contactName">Name</label>
+                            <input type="text" id="contactName" name="contactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email</label>
+                            <input type="email" id="contactEmail" name="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject">Subject</label>
+                            <input type="text" id="contactSubject" name="contactSubject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" name="contactMessage" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                                <div class="footer-logo">
+                <div class="logo-img">
+                    <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <path id="footer-text-path-1" d="M 20 30 A 30 30 0 0 1 80 30"/>
+                            <path id="footer-text-path-2" d="M 20 70 A 30 30 0 0 0 80 70"/>
+                        </defs>
+                        <!-- Bindi (red dot) -->
+                        <circle cx="50" cy="35" r="4" fill="#FF4444"/>
+                        <!-- Eyes -->
+                        <ellipse cx="35" cy="50" rx="8" ry="4" fill="none" stroke="#FFD700" stroke-width="2"/>
+                        <ellipse cx="65" cy="50" rx="8" ry="4" fill="none" stroke="#FFD700" stroke-width="2"/>
+                        <!-- Eye pupils -->
+                        <circle cx="35" cy="50" r="2" fill="#FFD700"/>
+                        <circle cx="65" cy="50" r="2" fill="#FFD700"/>
+                        <!-- Text arc for "BENGALI" -->
+                        <text font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#FFD700">
+                            <textPath href="#footer-text-path-1" startOffset="50%" text-anchor="middle">BENGALI</textPath>
+                        </text>
+                        <!-- Text arc for "CULTURAL ASSOCIATION" -->
+                        <text font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#FFD700">
+                            <textPath href="#footer-text-path-2" startOffset="50%" text-anchor="middle">CULTURAL ASSOCIATION</textPath>
+                        </text>
+                    </svg>
+                </div>
+                <span>Bengali Cultural Association</span>
+            </div>
+                    <p>Preserving and promoting Bengali culture in Barcelona through community events, cultural programs, and traditional celebrations.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#registration">Registration</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Events</h3>
+                    <ul class="footer-links">
+                        <li><a href="#events">Durga Puja 2K25</a></li>
+                        <li><a href="#events">Cultural Programs</a></li>
+                        <li><a href="#events">Community Gatherings</a></li>
+                        <li><a href="#events">Language Classes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with our latest events and cultural activities.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" class="lightbox-content">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 
