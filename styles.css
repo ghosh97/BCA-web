@@ -355,6 +355,16 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: 0 1px 8px rgba(255,255,255,0.18);
 }
 
+.card-content p {
+    color: #f9da2a;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.95;
+    font-weight: 600;
+    text-shadow: 0 1px 8px rgba(255,255,255,0.18);
+}
+
 .countdown {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -363,26 +373,27 @@ h1, h2, h3, h4, h5, h6 {
 
 .countdown-item {
     text-align: center;
-    background: rgba(255, 215, 0, 0.2);
+    background: rgba(255, 255, 255, 0.18); /* lighter background for dark bg */
     padding: 1rem;
     border-radius: 8px;
-    border: 2px solid rgba(255, 215, 0, 0.4);
-    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
 }
 
 .countdown-number {
     display: block;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--text-dark);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #fffbe6;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 .countdown-label {
     font-size: 0.8rem;
-    color: var(--accent-color);
+    color: #ffe066;
     text-transform: uppercase;
     font-weight: 600;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.18);
 }
 
 .scroll-indicator {
