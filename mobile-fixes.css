@@ -17,10 +17,12 @@ body {
 /* Mobile Hero Section Fixes */
 @media screen and (max-width: 768px) {
     .hero {
-        height: calc(100vh - 60px); /* Subtract navbar height */
-        margin-top: 60px; /* Add navbar height margin */
         min-height: 500px;
+        margin-top: 60px; /* Add navbar height margin */
         padding: 2rem 1rem;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
     }
 
     .hero-content {
