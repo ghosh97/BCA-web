@@ -23,6 +23,11 @@ body {
         height: auto !important;
         max-height: none !important;
         overflow: visible !important;
+        background-image: url('adove.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
     }
 
     .hero-content {
