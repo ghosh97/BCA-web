@@ -1340,7 +1340,23 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .countdown {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.3rem;
+    }
+
+    /* Mobile countdown modifications */
+    .countdown-item {
+        padding: 0.3rem;
+        min-width: min-content;
+    }
+
+    .countdown-number {
+        font-size: 1.2rem;
+    }
+
+    .countdown-label {
+        font-size: 0.6rem;
+        white-space: nowrap;
     }
 }
 
@@ -1362,8 +1378,10 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.9rem;
     }
 
+    /* Extra small screen countdown */
     .countdown {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.2rem;
     }
 
     .gallery-grid {
