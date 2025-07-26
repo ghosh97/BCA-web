@@ -21,12 +21,9 @@ body {
 /* Mobile Hero Section Fixes */
 @media screen and (max-width: 768px) {
     .hero {
-        min-height: 500px;
+        min-height: auto;
         margin-top: 60px; /* Add navbar height margin */
         padding: 2rem 1rem;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
         background-image: url('adove.png');
         background-size: cover;
         background-position: center;
@@ -37,6 +34,7 @@ body {
     .hero-content {
         gap: 2rem;
         padding: 1rem;
+        position: relative;
     }
 
     .hero-title {
@@ -229,13 +227,6 @@ textarea {
 /* Prevent pull-to-refresh on mobile */
 body {
     overscroll-behavior-y: none;
-}
-
-/* Fix for iOS 100vh issue */
-.hero {
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
 }
 
 /* Fix sticky hover effects on mobile */
