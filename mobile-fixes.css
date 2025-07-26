@@ -39,7 +39,11 @@ body {
         font-size: 2rem;
         text-align: center;
     }
-
+    /* Fix scroll issue on mobile caused by background */
+    .hero-background {
+        background-attachment: scroll !important;
+        overflow: visible !important;
+    }
     .hero-subtitle {
         font-size: 1rem;
         text-align: center;
@@ -226,9 +230,9 @@ body {
 
 /* Fix for iOS 100vh issue */
 .hero {
-    height: 100vh;
-    height: -webkit-fill-available;
-    height: stretch;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
 }
 
 /* Fix sticky hover effects on mobile */
