@@ -1237,12 +1237,14 @@ h1, h2, h3, h4, h5, h6 {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: var(--white);
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
         width: 100%;
         text-align: center;
         transition: 0.3s;
         box-shadow: var(--shadow-medium);
         padding: 2rem 0;
+        z-index: 1000;
     }
 
     .nav-menu.active {
