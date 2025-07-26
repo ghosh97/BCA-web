@@ -3,15 +3,19 @@ html {
     overflow-x: hidden;
     height: 100%;
     scroll-behavior: smooth;
+    position: relative;
+    width: 100%;
 }
 
 body {
     overflow-x: hidden;
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     position: relative;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
+    touch-action: manipulation;
+    overscroll-behavior-y: contain;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Mobile Hero Section Fixes */
