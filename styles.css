@@ -36,6 +36,7 @@ body {
 }
 
 
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -1395,4 +1396,4 @@ h1, h2, h3, h4, h5, h6 {
         color: var(--text-light);
         font-style: italic;
     }
-} 
+}
