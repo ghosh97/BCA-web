@@ -88,9 +88,14 @@ function handleNavbarScroll() {
 function initSmoothScrolling() {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            scrollToSection(targetId);
+            const href = link.getAttribute('href');
+            // Only handle internal links (those starting with #)
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                scrollToSection(targetId);
+            }
+            // External links (like about.html) will work normally
         });
     });
 }
