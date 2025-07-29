@@ -5,7 +5,6 @@ html {
     scroll-behavior: smooth;
     position: relative;
     width: 100%;
-    overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -15,12 +14,11 @@ body {
     min-height: 100vh;
     position: relative;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y pinch-zoom;
-    overscroll-behavior-y: none;
+    touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
+    background-color: var(--white);
+    overscroll-behavior: contain;
+    scroll-behavior: auto;
 }
 
 /* Mobile Hero Section Fixes */
@@ -59,9 +57,20 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        will-change: transform;
-        -webkit-transform: translateZ(0);
+        transform: none !important;
+        -webkit-transform: none !important;
+    }
+    
+    /* Improve touch scrolling */
+    .hero-content,
+    .floating-card,
+    .section {
         transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        perspective: 1000;
+        -webkit-perspective: 1000;
     }
     .hero-subtitle {
         font-size: 1rem;
