@@ -60,44 +60,68 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+let isScrolling;
 function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPos = window.scrollY + 100;
+    // Skip on mobile devices
+    if (window.innerWidth <= 768) return;
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+    // Debounce scroll updates
+    window.clearTimeout(isScrolling);
+    isScrolling = setTimeout(() => {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPos = window.scrollY + 100;
 
-        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            if (navLink) navLink.classList.add('active');
-        }
-    });
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLink) navLink.classList.add('active');
+            }
+        });
+    }, 100);
 }
 
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
+        // Use different scrolling behavior for mobile
+        if (window.innerWidth <= 768) {
+            window.scrollTo(0, section.offsetTop - 60); // 60px for navbar height
+        } else {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
         closeNavMenu();
     }
 }
 
 function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 768) {
+        window.scrollTo(0, 0);
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
-// Navbar Scroll Effect
+// Navbar Scroll Effect with debouncing for better performance
+let scrollTimeout;
 function handleNavbarScroll() {
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-        backToTopBtn.classList.add('show');
-    } else {
-        navbar.classList.remove('scrolled');
-        backToTopBtn.classList.remove('show');
+    if (scrollTimeout) {
+        window.cancelAnimationFrame(scrollTimeout);
     }
+
+    scrollTimeout = window.requestAnimationFrame(() => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+            backToTopBtn.classList.add('show');
+        } else {
+            navbar.classList.remove('scrolled');
+            backToTopBtn.classList.remove('show');
+        }
+    });
 }
 
 // Smooth Scrolling for Navigation Links
