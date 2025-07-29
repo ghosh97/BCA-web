@@ -46,38 +46,40 @@
             <div class="hero-overlay"></div>
         </div>
         <div class="container">
-            <div class="home-content">
-                <h1 class="hero-title">
-                    <span class="title-line">Durga Puja</span>
-                    <span class="title-line highlight">2K25 Barcelona</span>
-                </h1>
-                <p class="hero-subtitle">Experience the divine celebration of Bengali culture in the heart of Barcelona</p>
-                <div class="home-buttons" style="margin-top:2rem;">
-                    <a href="registration.html" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Register Now</a>
-                    <a href="schedule.html" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> View Schedule</a>
+            <div class="home-content" style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 2rem; position: relative; z-index: 1;">
+                <div style="flex: 1; min-width: 0; position: relative; z-index: 1;">
+                    <h1 class="hero-title">
+                        <span class="title-line">Durga Puja</span>
+                        <span class="title-line highlight">2K25 Barcelona</span>
+                    </h1>
+                    <p class="hero-subtitle">Experience the divine celebration of Bengali culture in the heart of Barcelona</p>
+                    <div class="home-buttons" style="margin-top:2rem;">
+                        <a href="registration.html" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Register Now</a>
+                        <a href="schedule.html" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> View Schedule</a>
+                    </div>
                 </div>
-                <div class="floating-card" style="margin-left:0;margin-top:2rem;align-self:flex-start;">
-                    <div class="card-content">
-                        <h3><i class="fas fa-clock"></i> Countdown to Durga Puja</h3>
-                        <div class="countdown" id="countdown">
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="days">00</span>
-                                <span class="countdown-label">Days</span>
+                <div class="floating-card" style="width:220px; min-width:180px; margin-top:0; align-self:flex-start; box-shadow: var(--shadow-medium);">
+                    <div class="card-content" style="padding:1rem;">
+                        <h3 style="font-size:1rem;"><i class="fas fa-clock"></i> Countdown to Durga Puja</h3>
+                        <div class="countdown" id="countdown" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.3rem; align-items: center;">
+                            <div class="countdown-item" style="padding:0.3rem; text-align:center;">
+                                <span class="countdown-number" id="days" style="font-size:1.1rem;">00</span>
+                                <span class="countdown-label" style="font-size:0.7rem;">Days</span>
                             </div>
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="hours">00</span>
-                                <span class="countdown-label">Hours</span>
+                            <div class="countdown-item" style="padding:0.3rem; text-align:center;">
+                                <span class="countdown-number" id="hours" style="font-size:1.1rem;">00</span>
+                                <span class="countdown-label" style="font-size:0.7rem;">Hours</span>
                             </div>
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="minutes">00</span>
-                                <span class="countdown-label">Minutes</span>
+                            <div class="countdown-item" style="padding:0.3rem; text-align:center;">
+                                <span class="countdown-number" id="minutes" style="font-size:1.1rem;">00</span>
+                                <span class="countdown-label" style="font-size:0.7rem;">Minutes</span>
                             </div>
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="seconds">00</span>
-                                <span class="countdown-label">Seconds</span>
+                            <div class="countdown-item" style="padding:0.3rem; text-align:center;">
+                                <span class="countdown-number" id="seconds" style="font-size:1.1rem;">00</span>
+                                <span class="countdown-label" style="font-size:0.7rem;">Seconds</span>
                             </div>
                         </div>
-                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">
+                        <p style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.9;">
                             <i class="fas fa-star"></i> Join us for the grand celebration! <i class="fas fa-star"></i>
                         </p>
                     </div>
