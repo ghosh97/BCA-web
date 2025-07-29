@@ -234,6 +234,10 @@ function closeLightbox() {
 
 // Intersection Observer for Animations
 function initScrollAnimations() {
+    // Disable scroll animations on mobile devices
+    if (window.innerWidth <= 768) {
+        return;
+    }
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -260,6 +264,10 @@ function initScrollAnimations() {
 
 // Parallax Effect
 function initParallax() {
+    // Disable parallax effect on mobile devices
+    if (window.innerWidth <= 768) {
+        return;
+    }
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const parallaxElements = document.querySelectorAll('.hero-background, .floating-card');
