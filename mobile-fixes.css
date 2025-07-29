@@ -48,8 +48,20 @@ body {
     }
     /* Fix scroll issue on mobile caused by background */
     .hero-background {
+        background-image: url('adove.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         background-attachment: scroll !important;
         overflow: visible !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        will-change: transform;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
     }
     .hero-subtitle {
         font-size: 1rem;
