@@ -12,6 +12,25 @@ const registrationForm = document.getElementById('registrationForm');
 const contactForm = document.getElementById('contactForm');
 const newsletterForm = document.querySelector('.newsletter-form');
 
+// Update last modified time
+function updateLastModified() {
+    const lastUpdatedElement = document.querySelector('.last-updated small');
+    if (lastUpdatedElement) {
+        const lastModified = new Date(document.lastModified);
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+            timeZoneName: 'short'
+        };
+        const formattedDate = lastModified.toLocaleString('en-US', options);
+        lastUpdatedElement.textContent = `Last updated: ${formattedDate}`;
+    }
+}
+
 // Countdown Timer
 function updateCountdown() {
     const now = new Date().getTime();
@@ -58,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (toggle) {
         toggle.addEventListener('click', toggleNavMenu);
     }
+    // Initialize last modified time
+    updateLastModified();
 });
 
 let isScrolling;
