@@ -109,22 +109,18 @@ function updateActiveNavLink() {
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
-        // Use different scrolling behavior for mobile
-        if (window.innerWidth <= 768) {
-            window.scrollTo(0, section.offsetTop - 60); // 60px for navbar height
-        } else {
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
-        closeNavMenu();
+        window.scrollTo({
+            top: section.offsetTop - 60, // 60px for navbar height
+            behavior: 'smooth'
+        });
     }
 }
 
 function scrollToTop() {
-    if (window.innerWidth <= 768) {
-        window.scrollTo(0, 0);
-    } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
 // Navbar Scroll Effect with debouncing for better performance
