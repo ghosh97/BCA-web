@@ -191,24 +191,6 @@
     </button>
 
     <script src="script.js"></script>
-    <script>
-      // Force all menu links except Home to open in a new tab
-      [
-        ['aboutNavLink', 'about.html'],
-        ['eventsNavLink', 'events.html'],
-        ['scheduleNavLink', 'schedule.html'],
-        ['galleryNavLink', 'gallery.html'],
-        ['registrationNavLink', 'registration.html'],
-        ['contactNavLink', 'contact.html']
-      ].forEach(function([id, url]) {
-        var el = document.getElementById(id);
-        if (el) {
-          el.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open(url, '_blank');
-          });
-        }
-      });
-    </script>
+    <!-- No JS needed for menu links; all open in same tab by default -->
 </body>
 </html> 
