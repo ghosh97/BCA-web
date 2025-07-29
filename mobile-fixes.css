@@ -19,6 +19,7 @@ body {
     background-color: var(--white);
     overscroll-behavior: contain;
     scroll-behavior: auto;
+    /* overscroll-behavior-y: none; removed for mobile scroll fix */
 }
 
 /* Mobile Hero Section Fixes */
@@ -252,7 +253,7 @@ textarea {
 
 /* Prevent pull-to-refresh on mobile */
 body {
-    overscroll-behavior-y: none;
+    /* overscroll-behavior-y: none; removed for mobile scroll fix */
 }
 
 /* Fix sticky hover effects on mobile */

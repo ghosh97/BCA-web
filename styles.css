@@ -246,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; removed for mobile scroll fix */
 }
 
 .hero-background {
@@ -259,6 +259,7 @@ h1, h2, h3, h4, h5, h6 {
     background-size: cover;
     background-position: center;
     z-index: -5;
+    pointer-events: none;
 }
 
 .hero-background::before {
