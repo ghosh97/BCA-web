@@ -35,14 +35,30 @@ function updateCountdown() {
 
 // Navigation Functions
 function toggleNavMenu() {
-    navMenu.classList.toggle('active');
-    navToggle.classList.toggle('active');
+    const menu = document.getElementById('nav-menu');
+    const toggle = document.getElementById('nav-toggle');
+    if (menu && toggle) {
+        menu.classList.toggle('active');
+        toggle.classList.toggle('active');
+    }
 }
 
 function closeNavMenu() {
-    navMenu.classList.remove('active');
-    navToggle.classList.remove('active');
+    const menu = document.getElementById('nav-menu');
+    const toggle = document.getElementById('nav-toggle');
+    if (menu && toggle) {
+        menu.classList.remove('active');
+        toggle.classList.remove('active');
+    }
 }
+
+// Initialize Mobile Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('nav-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', toggleNavMenu);
+    }
+});
 
 function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
@@ -198,6 +214,28 @@ function showNotification(message, type = 'info') {
     document.body.appendChild(notification);
     
     // Auto remove after 5 seconds
+    
+// Initialize mobile menu
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+    }
+});
     setTimeout(() => {
         if (notification.parentElement) {
             notification.style.animation = 'slideOutRight 0.3s ease';
