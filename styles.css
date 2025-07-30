@@ -296,7 +296,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 2;
     background: rgba(30, 30, 30, 0.15); /* subtle dark overlay for readability */
     border-radius: 24px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 32px rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(2px);
 }
 
@@ -1360,6 +1360,18 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.6rem;
         white-space: nowrap;
     }
+
+    .floating-card {
+        position: static !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 2rem !important;
+        box-shadow: var(--shadow-medium);
+        transform: none !important;
+        transition: none !important;
+        left: auto !important;
+        right: auto !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1396,4 +1408,63 @@ h1, h2, h3, h4, h5, h6 {
         color: var(--text-light);
         font-style: italic;
     }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+    padding: 0 10px;
+  }
+  .footer-section {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0;
+  }
+  .footer-logo {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .social-links {
+    gap: 1rem;
+    margin: 1rem 0;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .newsletter-form {
+    flex-direction: column;
+    gap: 0.5rem;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .newsletter-form input[type="email"] {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+  .newsletter-form button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .footer-bottom-links {
+    margin-top: 0.5rem;
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
