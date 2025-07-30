@@ -24,26 +24,48 @@ body {
 
 /* Mobile Hero Section Fixes */
 @media screen and (max-width: 768px) {
+    html, body {
+        max-width: 100vw !important;
+        width: 100vw !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
     .hero {
         min-height: auto;
-        margin-top: 60px; /* Add navbar height margin */
-        padding: 2rem 1rem;
+        margin-top: 60px;
+        padding: 2rem 0 1rem 0;
         background-image: url('adove.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: scroll;
+        box-sizing: border-box;
+        width: 100vw !important;
+        max-width: 100vw !important;
     }
 
     .hero-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
         gap: 2rem;
-        padding: 1rem;
         position: relative;
+        margin: 0 !important;
     }
 
     .hero-title {
         font-size: 2rem;
         text-align: center;
+        margin-top: 2.5rem !important;
+        margin-bottom: 1rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
     /* Fix scroll issue on mobile caused by background */
     .hero-background {
@@ -92,6 +114,34 @@ body {
     .floating-card {
         width: 100%;
         margin: 1rem 0 !important;
+    }
+
+    .hero-text {
+        width: 100vw !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        max-width: 100vw !important;
+        margin: 0 !important;
+    }
+
+    .slideshow-container {
+        max-width: 100vw !important;
+        width: 100vw !important;
+        margin: 2rem 0 0 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+    }
+
+    #slideshow-image {
+        margin: 0 auto !important;
+        display: block !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+        height: auto !important;
+        box-sizing: border-box !important;
     }
 }
 
