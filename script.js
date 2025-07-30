@@ -34,22 +34,33 @@ function updateLastModified() {
 // Countdown Timer
 function updateCountdown() {
     const now = new Date().getTime();
-    const durgaPujaDate = new Date('October 20, 2025 08:00:00').getTime();
+    // Set to Barcelona timezone (Europe/Madrid) - October 15, 2025 at 8:00 AM
+    const durgaPujaDate = new Date('2025-10-15T08:00:00+02:00').getTime(); // CEST timezone
     const distance = durgaPujaDate - now;
+
+    if (distance < 0) {
+        const countdownElement = document.getElementById('countdown');
+        if (countdownElement) {
+            countdownElement.innerHTML = '<div style="text-align: center; color: white; font-size: 1.5rem; font-weight: 600;"><i class="fas fa-star"></i> Durga Puja 2K25 has begun! <i class="fas fa-star"></i></div>';
+        }
+        return;
+    }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    // Update countdown display with proper error checking
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
 
-    if (distance < 0) {
-        document.getElementById('countdown').innerHTML = '<h3>Durga Puja has begun!</h3>';
-    }
+    if (daysElement) daysElement.textContent = days.toString().padStart(2, '0');
+    if (hoursElement) hoursElement.textContent = hours.toString().padStart(2, '0');
+    if (minutesElement) minutesElement.textContent = minutes.toString().padStart(2, '0');
+    if (secondsElement) secondsElement.textContent = seconds.toString().padStart(2, '0');
 }
 
 // Navigation Functions

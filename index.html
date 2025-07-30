@@ -5,14 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Durga Puja 2K25 Barcelona - Bengali Cultural Association</title>
     <meta name="description" content="Join us for the grand celebration of Durga Puja 2K25 in Barcelona. Experience the rich Bengali culture, traditional rituals, and community festivities.">
+    <meta name="author" content="Bengali Cultural Association Barcelona">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Durga Puja 2K25 Barcelona - Bengali Cultural Association">
+    <meta property="og:description" content="Experience the divine celebration of Bengali culture in the heart of Barcelona">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bcaspain.github.io">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-fixes.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
-    <!-- Navigation -->
+<body class="scroll-container">
+    <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -23,15 +40,17 @@
                     <span class="logo-text" style="font-size: 1.3rem; font-weight: 600; display: inline-block; vertical-align:middle;">BCA Spain</span>
                 </a>
             </div>
+            
             <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link active" id="homeNavLink" type="text/html">Home</a>
-                <a href="about.html" class="nav-link" id="aboutNavLink" type="text/html">About</a>
-                <a href="events.html" class="nav-link" id="eventsNavLink" type="text/html">Events</a>
-                <a href="schedule.html" class="nav-link" id="scheduleNavLink" type="text/html">Schedule</a>
-                <a href="gallery.html" class="nav-link" id="galleryNavLink" type="text/html">Gallery</a>
-                <a href="registration.html" class="nav-link" id="registrationNavLink" type="text/html">Registration</a>
-                <a href="contact.html" class="nav-link" id="contactNavLink" type="text/html">Contact</a>
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="schedule.html" class="nav-link">Schedule</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="registration.html" class="nav-link">Registration</a>
+                <a href="contact.html" class="nav-link">Contact</a>
             </div>
+            
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -40,169 +59,236 @@
         </div>
     </nav>
 
-
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-background">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content" style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 2.5rem;">
-            <div class="hero-text" style="flex: 1; min-width: 0;">
-                <h1 class="hero-title">
-                    <span class="title-line">Durga Puja</span>
-                    <span class="title-line highlight">2K25 Barcelona</span>
-                </h1>
-                <p class="hero-subtitle">Experience the divine celebration of Bengali culture in the heart of Barcelona</p>
-                <div class="hero-buttons">
-                    <a href="registration.html" target="_blank" class="btn btn-primary">
-                        <i class="fas fa-ticket-alt"></i>
-                        Register Now
-                    </a>
-                    <a href="schedule.html" target="_blank" class="btn btn-secondary">
-                        <i class="fas fa-calendar-alt"></i>
-                        View Schedule
-                    </a>
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <!-- Hero Text Content -->
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">Durga Puja 2K25</span>
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        Experience the divine celebration of Bengali culture in Barcelona. Join our community in preserving traditions and celebrating our rich heritage.
+                    </p>
+                    
+                    <!-- Enhanced Features -->
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <i class="fas fa-pray"></i>
+                            <span>Traditional Puja Rituals</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-music"></i>
+                            <span>Cultural Performances</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-utensils"></i>
+                            <span>Authentic Bengali Cuisine</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Community Bonding</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="hero-buttons">
+                        <a href="registration.html" class="btn btn-primary">
+                            <i class="fas fa-ticket-alt"></i>
+                            Register Now
+                        </a>
+                    </div>
+                    
+                    <!-- Enhanced Countdown Timer -->
+                    <div class="countdown-section">
+                        <h3 class="countdown-title">
+                            <i class="fas fa-clock"></i> Countdown to Durga Puja
+                        </h3>
+                        <div class="countdown" id="countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="days">00</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="hours">00</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="minutes">00</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="seconds">00</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Images Container -->
+                <div class="hero-images">
+                    <!-- Gallery Slideshow -->
+                    <div class="slideshow-container">
+                        <img id="slideshow-image" src="gallery/a11.jpg" alt="Durga Puja Gallery" loading="eager" />
+                        <div class="slideshow-overlay"></div>
+                        <div class="slideshow-dots">
+                            <span class="dot active" data-slide="0" role="button" tabindex="0" aria-label="Go to slide 1"></span>
+                            <span class="dot" data-slide="1" role="button" tabindex="0" aria-label="Go to slide 2"></span>
+                            <span class="dot" data-slide="2" role="button" tabindex="0" aria-label="Go to slide 3"></span>
+                            <span class="dot" data-slide="3" role="button" tabindex="0" aria-label="Go to slide 4"></span>
+                            <span class="dot" data-slide="4" role="button" tabindex="0" aria-label="Go to slide 5"></span>
+                            <span class="dot" data-slide="5" role="button" tabindex="0" aria-label="Go to slide 6"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="slideshow-container" style="max-width:700px;min-width:400px;width:100%;margin-top:0;">
-                <img id="slideshow-image" src="gallery/a11.jpg" alt="Gallery Slideshow" style="width:100%;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:1.5px solid #ccc;" />
-            </div>
         </div>
-        <!-- Section ends cleanly as in about.html -->
     </section>
 
+    <!-- Quick Info Section -->
+    <section class="quick-info">
+        <div class="container">
+            <div class="quick-info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Event Date</h3>
+                    <p>October 15-22, 2025</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Barcelona, Spain</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                                <div class="footer-logo">
-                <div class="logo-img">
-                    <img src="bca-logo-another.jpg" alt="BCA Spain Logo" style="width:60px;height:60px;border-radius:50%;object-fit:cover;" />
-                </div>
-                <span>Bengali Cultural Association</span>
-            </div>
+                    <div class="footer-logo">
+                        <div class="logo-img">
+                            <img src="bca-logo-another.jpg" alt="BCA Spain Logo" loading="lazy" />
+                        </div>
+                        <span>Bengali Cultural Association</span>
+                    </div>
                     <p>Preserving and promoting Bengali culture in Barcelona through community events, cultural programs, and traditional celebrations.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
                 </div>
+                
                 <div class="footer-section">
-                    <h3>Newsletter</h3>
-                    <p>Stay updated with our latest events and cultural activities.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
-                    </form>
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="schedule.html">Schedule</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="registration.html">Registration</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
                 </div>
+                
+
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-                <div class="last-updated">
-                    <small></small>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" class="lightbox-content">
-        <div class="lightbox-caption" id="lightbox-caption"></div>
-    </div>
-
-    <!-- Loading Spinner -->
-    <div id="loading" class="loading">
-        <div class="spinner"></div>
-    </div>
-
     <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
+    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
+    <!-- Loading Screen -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Loading Durga Puja 2K25...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
+    
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+        <style>
+            .loading { display: none !important; }
+        </style>
+    </noscript>
+    
+    <!-- Enhanced Slideshow Script -->
     <script>
-    // Simple slideshow for gallery images
-    const galleryImages = [
-        'gallery/a11.jpg',
-        'gallery/a12.jpg',
-        'gallery/a13.jpg',
-        'gallery/a14.jpg',
-        'gallery/a15.jpg',
-        'gallery/a16.jpg'
-    ];
-    let slideshowIndex = 0;
-    const slideshowImg = document.getElementById('slideshow-image');
-    function showSlideshowImage(idx) {
-        slideshowImg.src = galleryImages[idx];
-    }
-    function nextSlideshowImage() {
-        slideshowIndex = (slideshowIndex + 1) % galleryImages.length;
-        showSlideshowImage(slideshowIndex);
-    }
-    setInterval(nextSlideshowImage, 3000);
-    showSlideshowImage(slideshowIndex);
+        // Enhanced Gallery Slideshow
+        const galleryImages = [
+            'gallery/a11.jpg',
+            'gallery/a12.jpg',
+            'gallery/a13.jpg',
+            'gallery/a14.jpg',
+            'gallery/a15.jpg',
+            'gallery/a16.jpg'
+        ];
+        
+        let currentSlide = 0;
+        const slideshowImg = document.getElementById('slideshow-image');
+        const dots = document.querySelectorAll('.dot');
+        
+        function showSlide(index) {
+            currentSlide = index;
+            slideshowImg.src = galleryImages[index];
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % galleryImages.length;
+            showSlide(currentSlide);
+        }
+        
+        // Auto slideshow
+        setInterval(nextSlide, 4000);
+        
+        // Dot click handlers
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+        
+        // Initialize
+        showSlide(0);
     </script>
-    <style>
-.hero-background {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  background-image: url('adove.webp'); /* Use your actual image path */
-  background-size: cover;
-  background-position: center;
-  filter: blur(.1px) brightness(0.7);
-}
-@media (max-width: 900px) {
-  body {
-    overflow-x: hidden !important;
-    padding: 0 !important;
-  }
-  .hero-content {
-    flex-direction: column !important;
-    gap: 1.5rem !important;
-    align-items: center !important;
-    text-align: center !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
-    box-sizing: border-box !important;
-    padding: 0 10px !important;
-  }
-  .hero-text {
-    width: 100% !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-    padding: 0 10px !important;
-  }
-  .slideshow-container {
-    max-width: 350px !important;
-    margin-top: 2rem !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    padding: 0 10px !important;
-  }
-  #slideshow-image {
-    margin: 0 auto !important;
-    display: block !important;
-    max-width: 100% !important;
-    height: auto !important;
-    box-sizing: border-box !important;
-  }
-}
-</style>
+
+
 </body>
 </html>
