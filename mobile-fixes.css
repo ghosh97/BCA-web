@@ -1,3 +1,77 @@
+/* Android Mobile Scrolling Fixes */
+/* Fix for Android Chrome scrolling issues */
+html {
+    scroll-behavior: auto; /* Changed from smooth for Android compatibility */
+    overflow-x: hidden;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    touch-action: pan-y; /* Better Android scroll handling */
+    -webkit-tap-highlight-color: transparent;
+    background-color: var(--white);
+    overscroll-behavior: auto; /* Changed from contain for Android */
+    scroll-behavior: auto;
+    /* Remove iOS-specific webkit-overflow-scrolling for Android compatibility */
+}
+
+/* Android-specific scroll container fixes */
+.scroll-container {
+    overflow-y: auto; /* Changed from scroll for better Android support */
+    /* Remove -webkit-overflow-scrolling: touch as it can cause issues on Android */
+}
+
+/* Fix Android Chrome viewport issues */
+@media screen and (max-width: 768px) {
+    html, body {
+        max-width: 100% !important; /* Remove vw units that cause issues on Android */
+        width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Remove transforms that can interfere with Android scrolling */
+    .hero-content,
+    .floating-card,
+    .section {
+        transform: none !important; /* Remove translateZ that causes Android issues */
+        -webkit-transform: none !important;
+        backface-visibility: visible !important;
+        -webkit-backface-visibility: visible !important;
+        perspective: none !important;
+        -webkit-perspective: none !important;
+    }
+    
+    /* Fix position:fixed elements for Android */
+    .lightbox,
+    .loading,
+    .back-to-top {
+        position: fixed;
+        transform: none !important; /* Remove translateZ for Android */
+        -webkit-transform: none !important;
+    }
+}
+
+/* Android-specific touch handling */
+* {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Fix for Android scrolling momentum */
+body, .container, section {
+    -webkit-overflow-scrolling: auto !important; /* Remove touch for Android */
+    overflow-scrolling: auto !important;
+}
+
 /* Consistent Mobile Navbar Height */
 @media screen and (max-width: 768px) {
     .navbar {
@@ -1445,5 +1519,222 @@ body {
 @media screen and (max-width: 768px) and (orientation: landscape) {
     .hero-overlay {
         margin-bottom: 0.8rem;
+    }
+}
+
+/* Footer Mobile Responsive Styles */
+@media (max-width: 768px) {
+    footer.footer {
+        padding: 1.5rem 0 !important;
+        margin-top: 2rem !important;
+    }
+    
+    footer .footer-logo {
+        flex-direction: column !important;
+        gap: 10px !important;
+        text-align: center !important;
+    }
+    
+    footer .footer-logo span {
+        font-size: 1.1rem !important;
+    }
+    
+    footer .footer-content p {
+        font-size: 0.9rem !important;
+        padding: 0 1rem !important;
+    }
+    
+    footer .footer-bottom {
+        margin-top: 1rem !important;
+        padding-top: 1rem !important;
+    }
+    
+    footer .footer-bottom p {
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    footer.footer {
+        padding: 1rem 0 !important;
+    }
+    
+    footer .footer-logo img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    footer .footer-logo span {
+        font-size: 1rem !important;
+    }
+}
+
+/* === ANDROID MOBILE SCROLLING FIXES === */
+
+/* Force proper scrolling behavior on Android */
+@media screen and (max-width: 768px) {
+    /* Remove conflicting overflow and scroll properties */
+    * {
+        -webkit-overflow-scrolling: auto !important;
+        overflow-scrolling: auto !important;
+    }
+    
+    /* Fix viewport units that cause Android Chrome issues */
+    .hero {
+        min-height: 100vh !important;
+        /* Remove calc() with vh on Android Chrome */
+        height: auto !important;
+        max-height: none !important;
+    }
+    
+    /* Ensure proper document flow on Android */
+    html {
+        overflow: visible !important;
+        height: auto !important;
+        min-height: 100% !important;
+    }
+    
+    body {
+        overflow: visible !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        position: static !important; /* Changed from relative for Android */
+    }
+    
+    /* Fix Android Chrome address bar resize issues */
+    .hero .container {
+        min-height: auto !important;
+        height: auto !important;
+        flex: none !important;
+    }
+    
+    /* Remove transforms that interfere with Android scrolling */
+    .hero-background {
+        transform: none !important;
+        -webkit-transform: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Fix touch events on Android */
+    body {
+        touch-action: pan-y !important; /* Allow vertical scrolling only */
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Allow text selection on interactive elements */
+    input, textarea, [contenteditable] {
+        -webkit-user-select: text !important;
+        user-select: text !important;
+        touch-action: manipulation !important;
+    }
+    
+    /* Fix Android Chrome scrolling lag */
+    .navbar {
+        will-change: auto !important;
+        transform: none !important;
+        -webkit-transform: none !important;
+    }
+    
+    /* Prevent Android zoom on input focus */
+    input, select, textarea {
+        font-size: 16px !important; /* Prevents zoom on Android */
+        touch-action: manipulation !important;
+    }
+    
+    /* Fix for Android Chrome pull-to-refresh conflicts */
+    html {
+        overscroll-behavior-y: contain !important;
+        overscroll-behavior-x: none !important;
+    }
+    
+    body {
+        overscroll-behavior-y: contain !important;
+        overscroll-behavior-x: none !important;
+    }
+    
+    /* Fix Android scrolling momentum */
+    .container, section, .hero-content {
+        will-change: auto !important;
+    }
+}
+
+/* Android-specific fixes for very problematic devices */
+@media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+    /* High DPI Android devices */
+    .hero {
+        background-attachment: scroll !important; /* Never use fixed on Android */
+    }
+    
+    /* Reduce complexity for Android performance */
+    .hero-content {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+    
+    /* Simplify animations for Android */
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    /* Re-enable essential transitions */
+    .btn, .nav-link {
+        transition: opacity 0.2s ease !important;
+    }
+}
+
+/* Fix for Android Chrome's aggressive optimization */
+@supports (-webkit-touch-callout: none) {
+    /* This targets iOS, so we exclude it for Android fixes */
+}
+
+@supports not (-webkit-touch-callout: none) {
+    /* This likely targets Android */
+    @media screen and (max-width: 768px) {
+        body {
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: auto !important;
+        }
+        
+        .scroll-container {
+            -webkit-overflow-scrolling: auto !important;
+        }
+        
+        /* Force GPU compositing off for problematic Android devices */
+        .hero-content, .floating-card, .section {
+            transform: none !important;
+            will-change: auto !important;
+        }
+    }
+}
+
+/* Final Android compatibility layer */
+@media screen and (max-width: 768px) {
+    /* Ensure scrollable content */
+    html, body {
+        scroll-behavior: auto !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Reset any problematic CSS properties */
+    * {
+        backface-visibility: visible !important;
+        -webkit-backface-visibility: visible !important;
+        perspective: none !important;
+        -webkit-perspective: none !important;
+        transform-style: flat !important;
+        -webkit-transform-style: flat !important;
+    }
+    
+    /* Specific fix for Android Chrome scrolling */
+    body {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
     }
 }

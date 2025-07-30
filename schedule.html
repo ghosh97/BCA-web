@@ -2,15 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Schedule - Durga Puja 2K25 Barcelona</title>
     <meta name="description" content="Event Schedule for Durga Puja 2K25 Barcelona.">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="author" content="Bengali Cultural Association Barcelona">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Schedule - Durga Puja 2K25 Barcelona">
+    <meta property="og:description" content="View the complete schedule of Durga Puja 2K25 celebrations in Barcelona">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bcaspain.github.io/schedule.html">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-fixes.css">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
+<body class="scroll-container">
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -153,41 +171,20 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" style="background-color: #ead599; padding: 2rem 0; margin-top: 3rem; text-align: center;">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <div class="logo-img">
-                            <img src="bca-logo-another.jpg" alt="BCA Spain Logo" style="width:60px;height:60px;border-radius:50%;object-fit:cover;" />
-                        </div>
-                        <span>Bengali Cultural Association</span>
-                    </div>
-                    <p>Preserving and promoting Bengali culture in Barcelona through community events, cultural programs, and traditional celebrations.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
+            <div class="footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                <div class="footer-logo" style="display: flex; align-items: center; gap: 15px; margin-bottom: 1rem;">
+                    <img src="bca-logo-another.jpg" alt="BCA Spain Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" />
+                    <span style="font-size: 1.2rem; font-weight: 600; color: #333;">Bengali Cultural Association Barcelona</span>
                 </div>
-                <div class="footer-section">
-                    <h3>Newsletter</h3>
-                    <p>Stay updated with our latest events and cultural activities.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-                <div class="last-updated">
-                    <small></small>
+                <p style="color: #666; margin: 0; max-width: 600px; line-height: 1.6;">
+                    Preserving and promoting Bengali culture in Barcelona through community events and traditional celebrations.
+                </p>
+                <div class="footer-bottom" style="border-top: 1px solid #ddd; padding-top: 1.5rem; margin-top: 1.5rem; width: 100%;">
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">
+                        &copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.
+                    </p>
                 </div>
             </div>
         </div>
@@ -259,35 +256,134 @@
         /* Mobile responsive adjustments */
         @media (max-width: 768px) {
             .schedule-timeline::before {
-                left: 20px;
+                left: 30px;
+                width: 2px;
             }
             
             .timeline-item {
-                flex-direction: row !important;
-                margin-left: 2rem;
+                flex-direction: column !important;
+                margin-left: 0 !important;
+                margin-bottom: 2rem !important;
+                align-items: flex-start !important;
             }
             
             .timeline-date {
-                flex: 0 0 120px !important;
-                margin-right: 2rem;
+                flex: none !important;
+                margin-right: 0 !important;
+                margin-bottom: 1rem !important;
+                margin-left: 60px !important;
+                width: auto !important;
+                min-width: 120px !important;
+                padding: 1rem !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .timeline-date .date {
+                font-size: 1rem !important;
+            }
+            
+            .timeline-date .time {
+                font-size: 0.85rem !important;
             }
             
             .timeline-content {
-                margin-left: 0 !important;
+                margin-left: 60px !important;
                 margin-right: 0 !important;
+                padding: 1.5rem !important;
+                width: calc(100% - 80px) !important;
+                box-sizing: border-box !important;
+            }
+            
+            .timeline-content h3 {
+                font-size: 1.25rem !important;
+            }
+            
+            .timeline-content p {
+                font-size: 1rem !important;
+            }
+            
+            .schedule-overview {
+                padding: 1.5rem !important;
+                margin-bottom: 2rem !important;
+            }
+            
+            .schedule-overview h3 {
+                font-size: 1.25rem !important;
+            }
+            
+            .schedule-overview p {
+                font-size: 1rem !important;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem !important;
+            }
+            
+            .section-header p {
+                font-size: 1rem !important;
+                padding: 0 1rem !important;
             }
             
             .schedule-cta {
                 padding: 2rem 1rem !important;
+                margin-top: 2rem !important;
             }
             
             .schedule-cta h3 {
                 font-size: 1.5rem !important;
             }
             
+            .schedule-cta p {
+                font-size: 1rem !important;
+            }
+            
             .schedule-cta .btn {
                 width: 100% !important;
                 margin-bottom: 1rem !important;
+                padding: 12px 20px !important;
+                font-size: 1rem !important;
+            }
+            
+            .container {
+                padding: 0 1rem !important;
+            }
+            
+            /* Icon container adjustments */
+            .timeline-content > div:first-child > div:first-child {
+                width: 40px !important;
+                height: 40px !important;
+                font-size: 1.2rem !important;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .timeline-date {
+                margin-left: 50px !important;
+                min-width: 100px !important;
+                padding: 0.75rem !important;
+            }
+            
+            .timeline-content {
+                margin-left: 50px !important;
+                width: calc(100% - 60px) !important;
+                padding: 1rem !important;
+            }
+            
+            .schedule-timeline::before {
+                left: 25px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.75rem !important;
+            }
+            
+            .schedule-overview {
+                padding: 1rem !important;
+            }
+            
+            .schedule-cta {
+                padding: 1.5rem 0.75rem !important;
             }
         }
         
