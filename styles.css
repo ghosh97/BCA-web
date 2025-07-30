@@ -1360,18 +1360,6 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.6rem;
         white-space: nowrap;
     }
-
-    .floating-card {
-        position: static !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        margin-top: 2rem !important;
-        box-shadow: var(--shadow-medium);
-        transform: none !important;
-        transition: none !important;
-        left: auto !important;
-        right: auto !important;
-    }
 }
 
 @media (max-width: 480px) {
