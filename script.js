@@ -598,7 +598,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Durga Puja 2K25 Barcelona website loaded successfully! 🎉');
 });
 
-// Service Worker Registration (for PWA features)
+// Service Worker Registration (for PWA features) - Disabled for now
+// Uncomment below if you want to add PWA features in the future
+/*
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
@@ -610,6 +612,7 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+*/
 
 // Export functions for global access
 window.scrollToSection = scrollToSection;
