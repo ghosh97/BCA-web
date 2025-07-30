@@ -26,12 +26,10 @@
     --navbar-height: 70px;
     --navbar-padding: 1rem 2rem;
 }
-
 html {
     scroll-behavior: smooth;
     max-width: 100%;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow-x: hidden;
     height: 100%;
 }
 
@@ -40,14 +38,14 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
-    overflow-y: auto;
+    /* Let body scroll naturally without forcing auto */
     padding-top: 0;
     margin-top: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    -webkit-overflow-scrolling: touch;
 }
+
 
 .main-content {
     flex: 1;
@@ -344,7 +342,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.4;
 }
 
-.hero-overlay {
+/* .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -355,7 +353,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 2rem;
     border: none !important;
     outline: none !important;
-}
+} */
 
 .hero-content {
     display: grid;
@@ -370,7 +368,7 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(30, 30, 30, 0.12);
     border-radius: 32px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(0px);
     max-width: 100%;
     box-sizing: border-box;
 }
@@ -1619,7 +1617,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.8) 0%, rgba(255, 215, 0, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.8) 0%, 100%);
     z-index: 1;
     margin-bottom: 2rem;
 }
