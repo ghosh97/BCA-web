@@ -150,18 +150,54 @@
                     <p>
                         &copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.
                     </p>
+                    <!-- Website Visitor Counter -->
+                    <div class="visitor-counter">
+                        <a href="https://www.hitwebcounter.com" target="_blank">
+                            <img src="https://hitwebcounter.com/counter/counter.php?page=123456&style=0006&nbdigits=5&type=page&initCount=0" 
+                                 title="Website Visitor Counter" Alt="counter" border="0" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Loading Screen -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Loading Durga Puja 2K25...</p>
+        </div>
+    </div>
+
     <!-- Smooth Scroll Polyfill -->
-    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
     <script>
-      smoothscroll.polyfill();
+        // Check if smoothscroll polyfill is needed
+        if (!('scrollBehavior' in document.documentElement.style)) {
+            // Load polyfill only if needed
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js';
+            script.onload = function() {
+                smoothscroll.polyfill();
+            };
+            document.head.appendChild(script);
+        }
     </script>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+        <style>
+            .loading { display: none !important; }
+        </style>
+    </noscript>
     
     <style>
         /* Enhanced Table Styling */

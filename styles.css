@@ -1630,6 +1630,31 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+/* Visitor Counter Styles */
+.visitor-counter {
+    margin-top: 1rem !important;
+    text-align: center !important;
+    padding: 0.5rem 0 !important;
+}
+
+.visitor-counter a {
+    display: inline-block !important;
+    text-decoration: none !important;
+    transition: transform 0.3s ease !important;
+}
+
+.visitor-counter a:hover {
+    transform: scale(1.05) !important;
+}
+
+.visitor-counter img {
+    border: none !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
 /* Lightbox */
 .lightbox {
     display: none;
@@ -1833,6 +1858,15 @@ h1, h2, h3, h4, h5, h6 {
     .footer-bottom {
         flex-direction: column;
         text-align: center;
+    }
+    
+    .visitor-counter {
+        margin-top: 0.5rem !important;
+        padding: 0.25rem 0 !important;
+    }
+    
+    .visitor-counter img {
+        max-width: 90% !important;
     }
 
     /* Mobile countdown styles */
