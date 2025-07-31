@@ -33,34 +33,100 @@ function updateLastModified() {
 
 // Countdown Timer
 function updateCountdown() {
-    const now = new Date().getTime();
-    // Set to Barcelona timezone (Europe/Madrid) - October 15, 2025 at 8:00 AM
-    const durgaPujaDate = new Date('2025-10-15T08:00:00+02:00').getTime(); // CEST timezone
-    const distance = durgaPujaDate - now;
+    const now = new Date();
+    const targetDate = new Date('2025-10-15T08:00:00+02:00'); // Using ISO 8601 format with timezone offset
+    const timeLeft = targetDate.getTime() - now.getTime();
+    
+    const countdownElement = document.getElementById('countdown');
+    if (!countdownElement) return;
 
-    if (distance < 0) {
-        const countdownElement = document.getElementById('countdown');
-        if (countdownElement) {
-            countdownElement.innerHTML = '<div style="text-align: center; color: white; font-size: 1.5rem; font-weight: 600;"><i class="fas fa-star"></i> Durga Puja 2K25 has begun! <i class="fas fa-star"></i></div>';
+    // Calculate time units
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    if (timeLeft <= 0) {
+        countdownElement.innerHTML = `
+            <div class="countdown-message">
+                <i class="fas fa-star"></i>
+                <span>Durga Puja 2K25 has begun!</span>
+                <i class="fas fa-star"></i>
+            </div>
+        `;
+        if (window.countdownInterval) {
+            clearInterval(window.countdownInterval);
+            window.countdownInterval = null;
         }
         return;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Update countdown display
+    const elements = {
+        days: document.getElementById('days'),
+        hours: document.getElementById('hours'),
+        minutes: document.getElementById('minutes'),
+        seconds: document.getElementById('seconds')
+    };
 
-    // Update countdown display with proper error checking
-    const daysElement = document.getElementById('days');
-    const hoursElement = document.getElementById('hours');
-    const minutesElement = document.getElementById('minutes');
-    const secondsElement = document.getElementById('seconds');
+    // Update numbers
+    Object.entries(elements).forEach(([unit, element]) => {
+        if (element) {
+            const value = eval(unit);
+            element.textContent = String(value).padStart(2, '0');
+        }
+    });
 
-    if (daysElement) daysElement.textContent = days.toString().padStart(2, '0');
-    if (hoursElement) hoursElement.textContent = hours.toString().padStart(2, '0');
-    if (minutesElement) minutesElement.textContent = minutes.toString().padStart(2, '0');
-    if (secondsElement) secondsElement.textContent = seconds.toString().padStart(2, '0');
+    // Update labels
+    const labels = {
+        days: document.querySelector('.days-label'),
+        hours: document.querySelector('.hours-label'),
+        minutes: document.querySelector('.minutes-label'),
+        seconds: document.querySelector('.seconds-label')
+    };
+
+    // Update labels
+    Object.entries(labels).forEach(([unit, label]) => {
+        if (label) {
+            const value = eval(unit);
+            label.textContent = value === 1 ? unit.slice(0, -1) : unit;
+        }
+    });
+}
+
+// Initialize countdown timer with proper interval cleanup
+function initCountdown() {
+    // Clear any existing interval
+    if (window.countdownInterval) {
+        clearInterval(window.countdownInterval);
+        window.countdownInterval = null;
+    }
+
+    // Initial update
+    updateCountdown();
+    
+    // Set new interval
+    window.countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Cleanup on page unload
+    window.addEventListener('unload', () => {
+        if (window.countdownInterval) {
+            clearInterval(window.countdownInterval);
+            window.countdownInterval = null;
+        }
+    });
+}
+
+// Ensure countdown is initialized when DOM is loaded
+if (document.readyState === 'loading') {
+    console.log('DOM still loading, adding DOMContentLoaded listener');
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM loaded, initializing countdown');
+        initCountdown();
+    });
+} else {
+    console.log('DOM already loaded, initializing countdown immediately');
+    initCountdown();
 }
 
 // Navigation Functions
@@ -141,11 +207,11 @@ function scrollToTop() {
 function handleScroll() {
     // Handle navbar scroll effect
     if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-        backToTopBtn.classList.add('show');
+        if (navbar) navbar.classList.add('scrolled');
+        if (backToTopBtn) backToTopBtn.classList.add('show');
     } else {
-        navbar.classList.remove('scrolled');
-        backToTopBtn.classList.remove('show');
+        if (navbar) navbar.classList.remove('scrolled');
+        if (backToTopBtn) backToTopBtn.classList.remove('show');
     }
 
     // Update active nav link
@@ -169,15 +235,17 @@ function handleScroll() {
 
 // Use requestAnimationFrame for smooth scroll handling
 let ticking = false;
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            handleScroll();
-            ticking = false;
-        });
-        ticking = true;
-    }
-}, { passive: true });
+function initScrollHandling() {
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
 
 // Navbar Scroll Effect with debouncing for better performance
 let scrollTimeout;
@@ -188,11 +256,11 @@ function handleNavbarScroll() {
 
     scrollTimeout = window.requestAnimationFrame(() => {
         if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-            backToTopBtn.classList.add('show');
+            if (navbar) navbar.classList.add('scrolled');
+            if (backToTopBtn) backToTopBtn.classList.add('show');
         } else {
-            navbar.classList.remove('scrolled');
-            backToTopBtn.classList.remove('show');
+            if (navbar) navbar.classList.remove('scrolled');
+            if (backToTopBtn) backToTopBtn.classList.remove('show');
         }
     });
 }
@@ -206,9 +274,28 @@ function initSmoothScrolling() {
             if (href.startsWith('#')) {
                 e.preventDefault();
                 const targetId = href.substring(1);
-                scrollToSection(targetId);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // Close mobile menu if open
+                    closeNavMenu();
+                    
+                    // Calculate position with better precision
+                    const navbarHeight = document.getElementById('navbar')?.offsetHeight || 60;
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    // Use native smooth scroll with fallback
+                    try {
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    } catch (error) {
+                        // Fallback for older browsers
+                        window.scrollTo(0, targetPosition);
+                    }
+                }
             }
-            // External links (like about.html) will work normally
         });
     });
 }
@@ -311,28 +398,6 @@ function showNotification(message, type = 'info') {
     document.body.appendChild(notification);
     
     // Auto remove after 5 seconds
-    
-// Initialize mobile menu
-document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
-        
-        // Close menu when clicking a link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-            });
-        });
-    }
-});
     setTimeout(() => {
         if (notification.parentElement) {
             notification.style.animation = 'slideOutRight 0.3s ease';
@@ -530,114 +595,70 @@ function debounce(func, wait) {
 const debouncedNavbarScroll = debounce(handleNavbarScroll, 10);
 const debouncedUpdateActiveNav = debounce(updateActiveNavLink, 10);
 
+// Optimized scroll handler with throttling
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            requestAnimationFrame(() => {
+                inThrottle = false;
+            });
+        }
+    };
+}
+
+// Smooth scroll to top with acceleration
+function scrollToTop() {
+    const duration = 800;
+    const start = window.pageYOffset;
+    const startTime = performance.now();
+    
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    }
+    
+    function scroll() {
+        const elapsed = performance.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        window.scrollTo(0, start * (1 - easeInOutCubic(progress)));
+        
+        if (progress < 1) {
+            requestAnimationFrame(scroll);
+        }
+    }
+    
+    requestAnimationFrame(scroll);
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Hide loading screen
-    hideLoading();
-    
     // Initialize countdown timer
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    initCountdown();
     
-    // Initialize navigation
-    navToggle.addEventListener('click', toggleNavMenu);
+    // Initialize scroll handling
+    initScrollHandling();
+    
+    // Initialize other features
+    hideLoading();
+    if (navToggle) {
+        navToggle.addEventListener('click', toggleNavMenu);
+    }
     initSmoothScrolling();
-    
-    // Initialize scroll effects
-    // window.addEventListener('scroll', debouncedNavbarScroll); // This line is removed as per the new_code
-    // window.addEventListener('scroll', debouncedUpdateActiveNav); // This line is removed as per the new_code
-    
-    // Initialize forms
-    if (registrationForm) {
-        registrationForm.addEventListener('submit', handleRegistrationForm);
-    }
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleContactForm);
-    }
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', handleNewsletterForm);
-    }
-    
-    // Initialize form validation
     initFormValidation();
-    
-    // Initialize lightbox
     initLightboxKeyboard();
-    
-    // Initialize animations
     initScrollAnimations();
-    
-    // Initialize parallax
     initParallax();
-    
-    // Initialize touch gestures
     initTouchGestures();
     
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!navbar.contains(e.target)) {
+        if (navbar && !navbar.contains(e.target)) {
             closeNavMenu();
         }
     });
-    
-    // Add CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 68, 68, 0.6);
-            }
-        }
-        
-        .floating-card {
-            animation: float 6s ease-in-out infinite, glow 3s ease-in-out infinite;
-        }
-        
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .notification-close {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 0;
-            font-size: 1rem;
-        }
-        
-        .notification-close:hover {
-            opacity: 0.8;
-        }
-    `;
-    document.head.appendChild(style);
     
     // Add logo animation on page load
     const logoImg = document.querySelector('.nav-logo .logo-img');
@@ -650,8 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
             logoImg.style.transform = 'scale(1)';
         }, 500);
     }
-    
-    console.log('Durga Puja 2K25 Barcelona website loaded successfully! 🎉');
 });
 
 // Service Worker Registration (for PWA features) - Disabled for now
@@ -675,3 +694,30 @@ window.scrollToSection = scrollToSection;
 window.scrollToTop = scrollToTop;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox; 
+
+// Add styles for countdown message
+const style = document.createElement('style');
+style.textContent += `
+    .countdown-message {
+        text-align: center;
+        color: var(--accent-color, #FF6B35);
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        animation: pulse 2s infinite;
+    }
+
+    .countdown-message i {
+        color: gold;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(style); 

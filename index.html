@@ -113,19 +113,19 @@
                         <div class="countdown" id="countdown">
                             <div class="countdown-item">
                                 <span class="countdown-number" id="days">00</span>
-                                <span class="countdown-label">Days</span>
+                                <span class="countdown-label days-label">Days</span>
                             </div>
                             <div class="countdown-item">
                                 <span class="countdown-number" id="hours">00</span>
-                                <span class="countdown-label">Hours</span>
+                                <span class="countdown-label hours-label">Hours</span>
                             </div>
                             <div class="countdown-item">
                                 <span class="countdown-number" id="minutes">00</span>
-                                <span class="countdown-label">Minutes</span>
+                                <span class="countdown-label minutes-label">Minutes</span>
                             </div>
                             <div class="countdown-item">
                                 <span class="countdown-number" id="seconds">00</span>
-                                <span class="countdown-label">Seconds</span>
+                                <span class="countdown-label seconds-label">Seconds</span>
                             </div>
                         </div>
                     </div>
@@ -266,9 +266,17 @@
     </div>
 
     <!-- Smooth Scroll Polyfill -->
-    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
     <script>
-      smoothscroll.polyfill();
+        // Check if smoothscroll polyfill is needed
+        if (!('scrollBehavior' in document.documentElement.style)) {
+            // Load polyfill only if needed
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js';
+            script.onload = function() {
+                smoothscroll.polyfill();
+            };
+            document.head.appendChild(script);
+        }
     </script>
 
     <!-- Scripts -->
