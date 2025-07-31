@@ -12,6 +12,336 @@ const registrationForm = document.getElementById('registrationForm');
 const contactForm = document.getElementById('contactForm');
 const newsletterForm = document.querySelector('.newsletter-form');
 
+// Language System
+const translations = {
+    en: {
+        // Navigation
+        'nav.home': 'Home',
+        'nav.about': 'About',
+        'nav.events': 'Events',
+        'nav.schedule': 'Schedule',
+        'nav.gallery': 'Gallery',
+        'nav.registration': 'Registration',
+        'nav.contact': 'Contact',
+        
+        // Hero Section
+        'hero.title': 'Durga Puja 2K25',
+        'hero.subtitle': 'Experience the divine celebration of Bengali culture in Barcelona. Join our community in preserving traditions and celebrating our rich heritage.',
+        'hero.feature.rituals': 'Traditional Puja Rituals',
+        'hero.feature.performances': 'Cultural Performances',
+        'hero.feature.cuisine': 'Authentic Bengali Cuisine',
+        'hero.feature.community': 'Community Bonding',
+        'hero.register': 'Register Now',
+        'hero.countdown.title': 'Countdown to Durga Puja',
+        'hero.countdown.days': 'Days',
+        'hero.countdown.hours': 'Hours',
+        'hero.countdown.minutes': 'Minutes',
+        'hero.countdown.seconds': 'Seconds',
+        'hero.countdown.message': 'Durga Puja 2K25 has begun!',
+        
+        // Quick Info
+        'quick.event.date': 'Event Date',
+        'quick.event.date.value': 'October 15-22, 2025',
+        
+        // Venue Section
+        'venue.title': 'Find Us',
+        'venue.subtitle': 'Visit us at these convenient Barcelona locations',
+        'venue.main.title': 'Valid World Hall (Main Pujo Venue)',
+        'venue.main.address': 'Carrer de Buenaventura Muñoz 6, Barcelona',
+        'venue.main.metro': 'Metro: Arc de Triomf (L1)',
+        'venue.main.directions': 'Get Directions',
+        'venue.community.title': 'Federación de Entidades Calàbria (Community Programs)',
+        'venue.community.address': 'Carrer Calàbria 66, Barcelona',
+        'venue.community.metro': 'Metro: Rocafort (L1)',
+        'venue.community.directions': 'Get Directions',
+        
+        // Footer
+        'footer.description': 'Preserving and promoting Bengali culture in Barcelona through community events and traditional celebrations.',
+        'footer.copyright': '© 2025 Bengali Cultural Association Barcelona. All rights reserved.',
+        
+        // About Page
+        'about.title': 'Bengali Cultural Association (BCA) - Barcelona',
+        'about.subtitle': 'Bringing the Indian Bengali community together in Spain since 2021',
+        'about.us.title': 'About Us',
+        'about.us.content': 'The Bengali Cultural Association of India in Spain, a non-profit organisation founded in 2021, is passionately committed to enriching the lives of our vibrant subcontinent community. Our mission is to foster unity and celebrate all the Bengali cultural events together.',
+        'about.history.title': 'Our History',
+        'about.history.quote1': 'Maa Durga aschhen, Kumartuli theke',
+        'about.history.content1': 'It all began with a spark — a few friends (Sanjay, Anindya, Siddharth and Shreyashree), a bold idea, and just 11 days to bring Maa Durga to Barcelona. In 2021, the Bengali Cultural Association (BCA) was born, driven by the belief:',
+        'about.history.quote2': 'Maa Durga nijei nijer pujo koraben. Shob hoye jaabe.',
+        'about.history.content2': 'By 2024, that dream came alive. With unity, love, and unwavering dedication, we brought an Ek-Chala fibreglass idol from Kumartuli — Kolkata\'s sacred hub of Durga artisans — to Spain.',
+        'about.history.content3': 'That year also marked BCA\'s official recognition as a non-profit organisation in Spain, becoming a cultural beacon for the Bengali diaspora.',
+        'about.history.content4': 'Now, as we pass the torch to a new generation of leaders, we continue with the same faith:',
+        'about.history.quote3': 'Where there is devotion, everything is possible. Maa will guide the way.',
+        'about.team.title': 'Our Team',
+        'about.team.subtitle': 'Meet the dedicated people who make BCA Barcelona possible',
+        'about.team.founding': 'Founding Members:',
+        'about.team.working': 'Working Committee',
+        'about.idol.title': 'Pratima 2024',
+        'about.idol.subtitle': 'Arrived from Kumartuli, Kolkata',
+        'about.idol.blessed': 'Sacred and Blessed',
+        
+        // Events Page
+        'events.title': 'Festival Events',
+        'events.subtitle': 'Join us for a week of cultural celebration and spiritual awakening',
+        'events.mahalaya.title': 'Mahalaya',
+        'events.mahalaya.time': '6:00 AM - 8:00 AM',
+        'events.mahalaya.description': 'Traditional invocation of Goddess Durga with devotional songs and prayers.',
+        'events.mahalaya.button': 'Learn More',
+        'events.saptami.title': 'Saptami Puja',
+        'events.saptami.time': '8:00 AM - 12:00 PM',
+        'events.saptami.description': 'The main day of Durga Puja with elaborate rituals and community feast.',
+        'events.saptami.button': 'Register Now',
+        'events.featured': 'Main Event',
+        
+        // Schedule Page
+        'schedule.title': 'Event Schedule',
+        'schedule.subtitle': 'Complete timeline of Durga Puja 2K25 celebrations',
+        
+        // Gallery Page
+        'gallery.title': 'Photo Gallery',
+        'gallery.subtitle': 'Relive the moments from our previous celebrations',
+        
+        // Registration Page
+        'registration.title': 'Event Registration',
+        'registration.subtitle': 'Secure your spot for Durga Puja 2K25',
+        
+        // Contact Page
+        'contact.title': 'Contact Us',
+        'contact.subtitle': 'Get in touch with the Bengali Cultural Association',
+        
+        // Form Labels
+        'form.name': 'Full Name',
+        'form.email': 'Email Address',
+        'form.phone': 'Phone Number',
+        'form.message': 'Message',
+        'form.submit': 'Submit',
+        'form.register': 'Register Now',
+        'form.send': 'Send Message',
+        'form.subscribe': 'Subscribe',
+        
+        // Notifications
+        'notification.registration.success': 'Registration submitted successfully! We will contact you soon.',
+        'notification.contact.success': 'Message sent successfully! We will get back to you soon.',
+        'notification.newsletter.success': 'Successfully subscribed to our newsletter!',
+        'notification.error': 'Please fill in all required fields.',
+        
+        // Loading
+        'loading.text': 'Loading Durga Puja 2K25...',
+        
+        // Back to top
+        'back.to.top': 'Back to top'
+    },
+    es: {
+        // Navigation
+        'nav.home': 'Inicio',
+        'nav.about': 'Acerca de',
+        'nav.events': 'Eventos',
+        'nav.schedule': 'Programa',
+        'nav.gallery': 'Galería',
+        'nav.registration': 'Registro',
+        'nav.contact': 'Contacto',
+        
+        // Hero Section
+        'hero.title': 'Durga Puja 2K25',
+        'hero.subtitle': 'Experimenta la celebración divina de la cultura bengalí en Barcelona. Únete a nuestra comunidad para preservar tradiciones y celebrar nuestro rico patrimonio.',
+        'hero.feature.rituals': 'Rituales Tradicionales de Puja',
+        'hero.feature.performances': 'Actuaciones Culturales',
+        'hero.feature.cuisine': 'Cocina Bengalí Auténtica',
+        'hero.feature.community': 'Unión Comunitaria',
+        'hero.register': 'Registrarse Ahora',
+        'hero.countdown.title': 'Cuenta Regresiva para Durga Puja',
+        'hero.countdown.days': 'Días',
+        'hero.countdown.hours': 'Horas',
+        'hero.countdown.minutes': 'Minutos',
+        'hero.countdown.seconds': 'Segundos',
+        'hero.countdown.message': '¡Durga Puja 2K25 ha comenzado!',
+        
+        // Quick Info
+        'quick.event.date': 'Fecha del Evento',
+        'quick.event.date.value': '15-22 de Octubre, 2025',
+        
+        // Venue Section
+        'venue.title': 'Encuéntranos',
+        'venue.subtitle': 'Visítanos en estas convenientes ubicaciones de Barcelona',
+        'venue.main.title': 'Valid World Hall (Sede Principal de Pujo)',
+        'venue.main.address': 'Carrer de Buenaventura Muñoz 6, Barcelona',
+        'venue.main.metro': 'Metro: Arc de Triomf (L1)',
+        'venue.main.directions': 'Obtener Direcciones',
+        'venue.community.title': 'Federación de Entidades Calàbria (Programas Comunitarios)',
+        'venue.community.address': 'Carrer Calàbria 66, Barcelona',
+        'venue.community.metro': 'Metro: Rocafort (L1)',
+        'venue.community.directions': 'Obtener Direcciones',
+        
+        // Footer
+        'footer.description': 'Preservando y promoviendo la cultura bengalí en Barcelona a través de eventos comunitarios y celebraciones tradicionales.',
+        'footer.copyright': '© 2025 Asociación Cultural Bengalí Barcelona. Todos los derechos reservados.',
+        
+        // About Page
+        'about.title': 'Asociación Cultural Bengalí (BCA) - Barcelona',
+        'about.subtitle': 'Uniendo a la comunidad bengalí india en España desde 2021',
+        'about.us.title': 'Acerca de Nosotros',
+        'about.us.content': 'La Asociación Cultural Bengalí de la India en España, una organización sin fines de lucro fundada en 2021, está apasionadamente comprometida a enriquecer las vidas de nuestra vibrante comunidad del subcontinente. Nuestra misión es fomentar la unidad y celebrar juntos todos los eventos culturales bengalíes.',
+        'about.history.title': 'Nuestra Historia',
+        'about.history.quote1': 'Maa Durga aschhen, Kumartuli theke',
+        'about.history.content1': 'Todo comenzó con una chispa — unos pocos amigos (Sanjay, Anindya, Siddharth y Shreyashree), una idea audaz, y solo 11 días para traer a Maa Durga a Barcelona. En 2021, nació la Asociación Cultural Bengalí (BCA), impulsada por la creencia:',
+        'about.history.quote2': 'Maa Durga nijei nijer pujo koraben. Shob hoye jaabe.',
+        'about.history.content2': 'Para 2024, ese sueño cobró vida. Con unidad, amor y dedicación inquebrantable, trajimos un ídolo Ek-Chala de fibra de vidrio desde Kumartuli — el sagrado centro de artesanos de Durga en Kolkata — a España.',
+        'about.history.content3': 'Ese año también marcó el reconocimiento oficial de BCA como organización sin fines de lucro en España, convirtiéndose en un faro cultural para la diáspora bengalí.',
+        'about.history.content4': 'Ahora, mientras pasamos la antorcha a una nueva generación de líderes, continuamos con la misma fe:',
+        'about.history.quote3': 'Donde hay devoción, todo es posible. Maa guiará el camino.',
+        'about.team.title': 'Nuestro Equipo',
+        'about.team.subtitle': 'Conoce a las personas dedicadas que hacen posible BCA Barcelona',
+        'about.team.founding': 'Miembros Fundadores:',
+        'about.team.working': 'Comité de Trabajo',
+        'about.idol.title': 'Pratima 2024',
+        'about.idol.subtitle': 'Llegó desde Kumartuli, Kolkata',
+        'about.idol.blessed': 'Sagrada y Bendecida',
+        
+        // Events Page
+        'events.title': 'Eventos del Festival',
+        'events.subtitle': 'Únete a nosotros para una semana de celebración cultural y despertar espiritual',
+        'events.mahalaya.title': 'Mahalaya',
+        'events.mahalaya.time': '6:00 AM - 8:00 AM',
+        'events.mahalaya.description': 'Invocación tradicional de la Diosa Durga con canciones devocionales y oraciones.',
+        'events.mahalaya.button': 'Saber Más',
+        'events.saptami.title': 'Puja Saptami',
+        'events.saptami.time': '8:00 AM - 12:00 PM',
+        'events.saptami.description': 'El día principal de Durga Puja con rituales elaborados y festín comunitario.',
+        'events.saptami.button': 'Registrarse Ahora',
+        'events.featured': 'Evento Principal',
+        
+        // Schedule Page
+        'schedule.title': 'Programa de Eventos',
+        'schedule.subtitle': 'Cronología completa de las celebraciones de Durga Puja 2K25',
+        
+        // Gallery Page
+        'gallery.title': 'Galería de Fotos',
+        'gallery.subtitle': 'Revive los momentos de nuestras celebraciones anteriores',
+        
+        // Registration Page
+        'registration.title': 'Registro de Eventos',
+        'registration.subtitle': 'Asegura tu lugar para Durga Puja 2K25',
+        
+        // Contact Page
+        'contact.title': 'Contáctanos',
+        'contact.subtitle': 'Ponte en contacto con la Asociación Cultural Bengalí',
+        
+        // Form Labels
+        'form.name': 'Nombre Completo',
+        'form.email': 'Dirección de Email',
+        'form.phone': 'Número de Teléfono',
+        'form.message': 'Mensaje',
+        'form.submit': 'Enviar',
+        'form.register': 'Registrarse Ahora',
+        'form.send': 'Enviar Mensaje',
+        'form.subscribe': 'Suscribirse',
+        
+        // Notifications
+        'notification.registration.success': '¡Registro enviado exitosamente! Te contactaremos pronto.',
+        'notification.contact.success': '¡Mensaje enviado exitosamente! Te responderemos pronto.',
+        'notification.newsletter.success': '¡Suscrito exitosamente a nuestro boletín!',
+        'notification.error': 'Por favor completa todos los campos requeridos.',
+        
+        // Loading
+        'loading.text': 'Cargando Durga Puja 2K25...',
+        
+        // Back to top
+        'back.to.top': 'Volver arriba'
+    }
+};
+
+// Current language
+let currentLanguage = localStorage.getItem('language') || 'en';
+
+// Language switcher function
+function switchLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    updateLanguageUI();
+    translatePage();
+}
+
+// Update language UI
+function updateLanguageUI() {
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.lang === currentLanguage) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// Translate page content
+function translatePage() {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.dataset.translate;
+        if (translations[currentLanguage] && translations[currentLanguage][key]) {
+            element.textContent = translations[currentLanguage][key];
+        }
+    });
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = currentLanguage;
+    
+    // Update meta tags
+    updateMetaTags();
+}
+
+// Update meta tags for SEO
+function updateMetaTags() {
+    const title = document.querySelector('title');
+    const description = document.querySelector('meta[name="description"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    
+    if (currentLanguage === 'es') {
+        if (title) title.textContent = 'Durga Puja 2K25 Barcelona - Asociación Cultural Bengalí';
+        if (description) description.content = 'Únete a nosotros para la gran celebración de Durga Puja 2K25 en Barcelona. Experimenta la rica cultura bengalí, rituales tradicionales y festividades comunitarias.';
+        if (ogTitle) ogTitle.content = 'Durga Puja 2K25 Barcelona - Asociación Cultural Bengalí';
+        if (ogDescription) ogDescription.content = 'Experimenta la celebración divina de la cultura bengalí en el corazón de Barcelona';
+    } else {
+        if (title) title.textContent = 'Durga Puja 2K25 Barcelona - Bengali Cultural Association';
+        if (description) description.content = 'Join us for the grand celebration of Durga Puja 2K25 in Barcelona. Experience the rich Bengali culture, traditional rituals, and community festivities.';
+        if (ogTitle) ogTitle.content = 'Durga Puja 2K25 Barcelona - Bengali Cultural Association';
+        if (ogDescription) ogDescription.content = 'Experience the divine celebration of Bengali culture in the heart of Barcelona';
+    }
+}
+
+// Initialize language system
+function initLanguageSystem() {
+    // Create language switcher if it doesn't exist
+    if (!document.querySelector('.language-switcher')) {
+        const navContainer = document.querySelector('.nav-container');
+        if (navContainer) {
+            const languageSwitcher = document.createElement('div');
+            languageSwitcher.className = 'language-switcher';
+            languageSwitcher.innerHTML = `
+                <button class="lang-btn ${currentLanguage === 'en' ? 'active' : ''}" data-lang="en">EN</button>
+                <button class="lang-btn ${currentLanguage === 'es' ? 'active' : ''}" data-lang="es">ES</button>
+            `;
+            
+            // Insert before nav-toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navToggle) {
+                navContainer.insertBefore(languageSwitcher, navToggle);
+            }
+            
+            // Add event listeners
+            const langButtons = languageSwitcher.querySelectorAll('.lang-btn');
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    switchLanguage(btn.dataset.lang);
+                });
+            });
+        }
+    }
+    
+    // Initial translation
+    translatePage();
+}
+
 // Update last modified time
 function updateLastModified() {
     const lastUpdatedElement = document.querySelector('.last-updated small');
@@ -47,10 +377,11 @@ function updateCountdown() {
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
     if (timeLeft <= 0) {
+        const message = translations[currentLanguage] ? translations[currentLanguage]['hero.countdown.message'] : 'Durga Puja 2K25 has begun!';
         countdownElement.innerHTML = `
             <div class="countdown-message">
                 <i class="fas fa-star"></i>
-                <span>Durga Puja 2K25 has begun!</span>
+                <span>${message}</span>
                 <i class="fas fa-star"></i>
             </div>
         `;
@@ -635,6 +966,9 @@ function scrollToTop() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize language system first
+    initLanguageSystem();
+    
     // Initialize countdown timer
     initCountdown();
     

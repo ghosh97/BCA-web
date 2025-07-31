@@ -2599,7 +2599,7 @@ section + section {
     
     .hero-content {
         background: rgba(30, 30, 30, 0.08) !important;
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(-1px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         margin: 0 0.5rem;
     }
@@ -2921,7 +2921,7 @@ section + section {
         gap: 6rem;
         grid-template-columns: 1.3fr 0.7fr;
         border-radius: 40px;
-        backdrop-filter: blur(15px);
+        backdrop-filter: blur(-1px);
         box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
     }
     
@@ -4290,5 +4290,60 @@ section + section {
 
     .countdown-number {
         font-size: 1.8rem;
+    }
+}
+
+/* Language Switcher Styles */
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 20px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--accent-color, #FF6B35);
+    color: var(--accent-color, #FF6B35);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 35px;
+    text-align: center;
+}
+
+.lang-btn:hover {
+    background: var(--accent-color, #FF6B35);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.lang-btn.active {
+    background: var(--accent-color, #FF6B35);
+    color: white;
+    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.3);
+}
+
+/* Mobile responsive for language switcher */
+@media (max-width: 768px) {
+    .language-switcher {
+        margin-left: 10px;
+        gap: 3px;
+    }
+    
+    .lang-btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+        min-width: 30px;
+    }
+    
+    /* Move language switcher to nav menu on mobile */
+    .nav-menu.active .language-switcher {
+        display: flex;
+        margin: 10px 0;
+        justify-content: center;
     }
 }
