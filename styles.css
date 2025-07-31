@@ -549,7 +549,7 @@ h1, h2, h3, h4, h5, h6 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.2rem;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
 }
 
@@ -568,6 +568,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     overflow: hidden;
     min-height: 90px;
+    height: 90px;
     max-width: 100%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -610,6 +611,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    min-height: 2.5rem;
 }
 
 .countdown-label {
@@ -631,6 +633,8 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     min-height: 20px;
+    line-height: 1.2;
+    padding: 0 2px;
 }
 
 .scroll-indicator {
@@ -1921,12 +1925,17 @@ h1, h2, h3, h4, h5, h6 {
     .countdown {
         grid-template-columns: repeat(4, 1fr);
         gap: 1rem;
+        align-items: stretch;
     }
 
     .countdown-item {
         padding: 1.5rem 0.8rem;
         border-radius: 15px;
         min-height: 100px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .countdown-number {
@@ -2044,22 +2053,30 @@ h1, h2, h3, h4, h5, h6 {
     .countdown {
         grid-template-columns: repeat(4, 1fr);
         gap: 0.7rem;
+        align-items: stretch;
     }
 
     .countdown-item {
         padding: 1.2rem 0.5rem;
         border-radius: 12px;
         min-height: 85px;
+        height: 85px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .countdown-number {
         font-size: 1.8rem;
         margin-bottom: 0.3rem;
+        min-height: 2.2rem;
     }
 
     .countdown-label {
         font-size: 0.7rem;
         letter-spacing: 0.3px;
+        line-height: 1.1;
+        padding: 0 1px;
     }
 
     .gallery-section {
