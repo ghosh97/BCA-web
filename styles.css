@@ -356,6 +356,8 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    z-index: 1001;
+    position: relative;
 }
 
 .bar {
@@ -364,6 +366,7 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--text-dark);
     margin: 3px 0;
     transition: var(--transition);
+    border-radius: 2px;
 }
 
 /* Hero Section */
@@ -1762,22 +1765,50 @@ h1, h2, h3, h4, h5, h6 {
         backdrop-filter: blur(10px);
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: 0.3s ease-in-out;
         box-shadow: var(--shadow-medium);
         padding: 2rem 0;
         z-index: 1000;
+        height: calc(100vh - 70px);
+        overflow-y: auto;
     }
 
     .nav-menu.active {
         left: 0;
     }
+    
+    .nav-menu .nav-link {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu .nav-link:hover {
+        background-color: rgba(255, 107, 53, 0.1);
+        color: var(--primary-color);
+    }
+    
+    .nav-menu .nav-link.active {
+        background-color: rgba(255, 107, 53, 0.2);
+        color: var(--primary-color);
+    }
 
     .nav-toggle {
-        display: flex;
+        display: flex !important;
+        padding: 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-toggle:hover {
+        background: rgba(255, 255, 255, 0.2);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0;
+        transform: translateX(-20px);
     }
 
     .nav-toggle.active .bar:nth-child(1) {

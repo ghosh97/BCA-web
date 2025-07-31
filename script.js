@@ -151,9 +151,38 @@ function closeNavMenu() {
 // Initialize Mobile Navigation
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
     if (toggle) {
         toggle.addEventListener('click', toggleNavMenu);
     }
+    
+    // Close menu when clicking on nav links (mobile)
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeNavMenu();
+            }
+        });
+    });
+    
+    // Close menu when clicking outside (mobile)
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && navMenu && navMenu.classList.contains('active')) {
+            if (!navMenu.contains(e.target) && !toggle.contains(e.target)) {
+                closeNavMenu();
+            }
+        }
+    });
+    
+    // Close menu on window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeNavMenu();
+        }
+    });
+    
     // Initialize last modified time
     updateLastModified();
 });
