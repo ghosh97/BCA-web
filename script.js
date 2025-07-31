@@ -120,8 +120,11 @@ function updateActiveNavLink() {
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
+        const navbarHeight = document.getElementById('navbar')?.offsetHeight || 60;
+        const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+        
         window.scrollTo({
-            top: section.offsetTop - 60, // 60px for navbar height
+            top: targetPosition,
             behavior: 'smooth'
         });
     }
@@ -133,6 +136,48 @@ function scrollToTop() {
         behavior: 'smooth'
     });
 }
+
+// Optimized scroll event handling
+function handleScroll() {
+    // Handle navbar scroll effect
+    if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+        backToTopBtn.classList.add('show');
+    } else {
+        navbar.classList.remove('scrolled');
+        backToTopBtn.classList.remove('show');
+    }
+
+    // Update active nav link
+    if (window.innerWidth > 768) {
+        const scrollPos = window.scrollY;
+        const sections = document.querySelectorAll('section[id]');
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLink) navLink.classList.add('active');
+            }
+        });
+    }
+}
+
+// Use requestAnimationFrame for smooth scroll handling
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            handleScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
 
 // Navbar Scroll Effect with debouncing for better performance
 let scrollTimeout;
@@ -432,29 +477,40 @@ function initLightboxKeyboard() {
 function initTouchGestures() {
     let startX = 0;
     let startY = 0;
+    let startTime = 0;
     
     document.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
-    });
+        startTime = Date.now();
+    }, { passive: true });
     
     document.addEventListener('touchend', (e) => {
         if (!startX || !startY) return;
         
         const endX = e.changedTouches[0].clientX;
         const endY = e.changedTouches[0].clientY;
+        const endTime = Date.now();
         
         const diffX = startX - endX;
         const diffY = startY - endY;
+        const timeDiff = endTime - startTime;
         
-        // Swipe up to go to top
-        if (Math.abs(diffY) > Math.abs(diffX) && diffY > 50) {
-            scrollToTop();
+        // Only handle quick swipes (less than 300ms)
+        if (timeDiff < 300) {
+            // Swipe up to go to top - only if near bottom of page
+            if (Math.abs(diffY) > 50 && Math.abs(diffY) > Math.abs(diffX) && diffY > 0) {
+                const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+                if (scrolledToBottom) {
+                    scrollToTop();
+                }
+            }
         }
         
         startX = 0;
         startY = 0;
-    });
+        startTime = 0;
+    }, { passive: true });
 }
 
 // Performance Optimization
@@ -488,8 +544,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScrolling();
     
     // Initialize scroll effects
-    window.addEventListener('scroll', debouncedNavbarScroll);
-    window.addEventListener('scroll', debouncedUpdateActiveNav);
+    // window.addEventListener('scroll', debouncedNavbarScroll); // This line is removed as per the new_code
+    // window.addEventListener('scroll', debouncedUpdateActiveNav); // This line is removed as per the new_code
     
     // Initialize forms
     if (registrationForm) {
