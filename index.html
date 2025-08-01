@@ -259,20 +259,15 @@
                             e.preventDefault();
                             var email = document.getElementById('newsletter-email').value;
                             var form = e.target;
-                            var formData = new FormData();
-                            formData.append('email', email);
-                            fetch('https://script.google.com/macros/s/AKfycbxOLmnoAD7vzCMCekVLiKd8pqeWoy16WJn-kGMKqsc3ZeDpJKpjHmg3eKMf5zacYB1G/exec', {
-                                method: 'POST',
-                                body: formData
-                            })
-                            .then(response => response.text())
-                            .then(data => {
-                                form.reset();
-                                alert('Thank you for subscribing!');
-                            })
-                            .catch(error => {
-                                alert('Subscription failed. Please try again later.');
-                            });
+                            fetch(`https://script.google.com/macros/s/AKfycbxOLmnoAD7vzCMCekVLiKd8pqeWoy16WJn-kGMKqsc3ZeDpJKpjHmg3eKMf5zacYB1G/exec?email=${encodeURIComponent(email)}`)
+                                .then(response => response.text())
+                                .then(data => {
+                                    form.reset();
+                                    alert(data);
+                                })
+                                .catch(error => {
+                                    alert('Subscription failed. Try again.');
+                                });
                         });
                         </script>
                         <div style="font-size: 0.95rem; color: #666; margin-top: 6px;">Stay updated with event news and cultural highlights!</div>
