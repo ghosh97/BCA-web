@@ -259,7 +259,7 @@
                             e.preventDefault();
                             var email = document.getElementById('newsletter-email').value;
                             var form = e.target;
-                            fetch(`https://script.google.com/macros/s/AKfycbxOLmnoAD7vzCMCekVLiKd8pqeWoy16WJn-kGMKqsc3ZeDpJKpjHmg3eKMf5zacYB1G/exec?email=${encodeURIComponent(email)}`)
+                            fetch(`https://script.google.com/macros/s/AKfycbzeD51Us6rwvdLCOG6eF_1nYUY6KEbldXXOlnsZO2nGhlKkAiM1sVCnY5_k2SsLYAVc/exec?email=${encodeURIComponent(email)}`)
                                 .then(response => response.text())
                                 .then(data => {
                                     form.reset();
