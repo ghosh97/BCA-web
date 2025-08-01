@@ -136,6 +136,25 @@ body {
         width: 100%;
         padding: 1.5rem;
         overflow: visible;
+        box-sizing: border-box;
+    }
+    
+    /* Prevent horizontal overflow on mobile */
+    .container {
+        max-width: 100%;
+        padding: 0 1rem;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    
+    /* Ensure all text containers don't overflow */
+    .hero-text,
+    .about-text,
+    .section-header {
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 
     /* Optimize touch targets */
@@ -2839,6 +2858,8 @@ section + section {
         border-radius: 8px;
         background: transparent;
         border: 1px solid rgba(255, 255, 255, 0.2);
+        box-sizing: border-box;
+        overflow: hidden;
     }
     
     .hero-features .feature-item:hover {
@@ -3646,6 +3667,26 @@ section + section {
     overflow: hidden;
 }
 
+/* About page text justification */
+.about-section-bg .about-text p {
+    text-align: justify;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.about-section-bg .about-text h2 {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.about-section-bg .about-text strong {
+    text-align: justify;
+}
+
+.about-section-bg .about-text em {
+    text-align: justify;
+}
+
 .about-section-bg::before {
     content: '';
     position: absolute;
@@ -3859,6 +3900,55 @@ section + section {
     .working-committee-section h3 {
         font-size: 1.4rem;
     }
+    
+    /* Mobile text justification adjustments */
+    .about-section-bg .about-text p {
+        text-align: justify;
+        line-height: 1.7;
+        margin-bottom: 1.2rem;
+        font-size: 0.95rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .about-section-bg .about-text h2 {
+        text-align: left;
+        margin-bottom: 1.2rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* General mobile text overflow fixes */
+    .hero-title {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .hero-subtitle {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .hero-features .feature-item span {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .section-title {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .section-subtitle {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3890,6 +3980,61 @@ section + section {
     .about-section-bg::before,
     .team-section-bg::before {
         opacity: 0.2;
+    }
+    
+    /* Small mobile text justification adjustments */
+    .about-section-bg .about-text p {
+        text-align: justify;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .about-section-bg .about-text h2 {
+        text-align: left;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Additional small mobile text overflow fixes */
+    .hero-title {
+        font-size: clamp(1.8rem, 4vw, 2rem);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .hero-features .feature-item span {
+        font-size: 0.75rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        line-height: 1.2;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    .section-subtitle {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
 }
 

@@ -136,12 +136,27 @@ body {
     section {
         padding: 3rem 1rem;
         scroll-margin-top: var(--navbar-height);
+        overflow-x: hidden;
     }
 
     .container {
         padding: 0 1rem;
         max-width: 100%;
         overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    /* Prevent text overflow on mobile */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure text containers don't overflow */
+    p, h1, h2, h3, h4, h5, h6, span, div {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
 
     /* Form optimizations */

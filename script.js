@@ -197,19 +197,38 @@ function updateActiveNavLink() {
     isScrolling = setTimeout(() => {
         const sections = document.querySelectorAll('section[id]');
         const scrollPos = window.scrollY + 100;
+        let currentSection = null;
 
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
 
             if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                if (navLink) navLink.classList.add('active');
+                currentSection = sectionId;
             }
         });
-    }, 100);
+
+        // Update active nav link
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#') && href.substring(1) === currentSection) {
+                link.classList.add('active');
+            }
+        });
+
+        // If no section is active, check if we're at the top (home)
+        if (!currentSection && scrollPos < 200) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === '#home' || href === 'index.html' || href === '/') {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }, 50);
 }
 
 function scrollToSection(sectionId) {
@@ -244,22 +263,7 @@ function handleScroll() {
     }
 
     // Update active nav link
-    if (window.innerWidth > 768) {
-        const scrollPos = window.scrollY;
-        const sections = document.querySelectorAll('section[id]');
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionBottom = sectionTop + section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                if (navLink) navLink.classList.add('active');
-            }
-        });
-    }
+    updateActiveNavLink();
 }
 
 // Use requestAnimationFrame for smooth scroll handling
@@ -274,6 +278,11 @@ function initScrollHandling() {
             ticking = true;
         }
     }, { passive: true });
+    
+    // Initial call to set active nav link on page load
+    setTimeout(() => {
+        updateActiveNavLink();
+    }, 100);
 }
 
 // Navbar Scroll Effect with debouncing for better performance
@@ -725,6 +734,34 @@ function scrollToTop() {
     requestAnimationFrame(scroll);
 }
 
+// Function to set initial active navigation link based on current page
+function setInitialActiveNavLink() {
+    const currentPage = window.location.pathname;
+    const currentHash = window.location.hash;
+    
+    // Remove all active classes first
+    navLinks.forEach(link => link.classList.remove('active'));
+    
+    // If there's a hash in the URL, set that as active
+    if (currentHash) {
+        const activeLink = document.querySelector(`.nav-link[href="${currentHash}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+            return;
+        }
+    }
+    
+    // Otherwise, set active based on current page
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || 
+            (currentPage === '/' && (href === 'index.html' || href === '#home')) ||
+            (currentPage === '/index.html' && (href === 'index.html' || href === '#home'))) {
+            link.classList.add('active');
+        }
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize countdown timer
@@ -751,6 +788,9 @@ document.addEventListener('DOMContentLoaded', () => {
             closeNavMenu();
         }
     });
+    
+    // Set initial active navigation link based on current page
+    setInitialActiveNavLink();
     
     // Add logo animation on page load
     const logoImg = document.querySelector('.nav-logo .logo-img');
