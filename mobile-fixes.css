@@ -50,6 +50,26 @@ body {
         border-radius: 16px;
         backdrop-filter: blur(8px);
     }
+    
+    /* Ensure consistent feature styling on mobile */
+    .feature-group-block {
+        background: rgba(0,0,0,0.25) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: var(--border-radius) !important;
+        border: 2px solid transparent !important;
+        transition: var(--transition) !important;
+    }
+    
+    .hero-features .feature-item {
+        background: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        transition: var(--transition) !important;
+    }
+    
+    .hero-features .feature-item:hover {
+        background: rgba(236, 95, 8, 0.05) !important;
+        border-color: var(--primary-color) !important;
+    }
 }
 
 /* Mobile Navigation */
