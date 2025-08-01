@@ -192,6 +192,15 @@ function updateActiveNavLink() {
     // Skip on mobile devices
     if (window.innerWidth <= 768) return;
 
+    // Check if we're on a multi-page site (not just index.html with sections)
+    const currentPage = window.location.pathname;
+    const isMultiPageSite = currentPage !== '/' && currentPage !== '/index.html' && !currentPage.endsWith('index.html');
+    
+    // If we're on a multi-page site, don't update active links on scroll
+    if (isMultiPageSite) {
+        return;
+    }
+
     // Debounce scroll updates
     window.clearTimeout(isScrolling);
     isScrolling = setTimeout(() => {
@@ -225,8 +234,8 @@ function updateActiveNavLink() {
                 const href = link.getAttribute('href');
                 if (href === '#home' || href === 'index.html' || href === '/') {
                     link.classList.add('active');
-            }
-        });
+                }
+            });
         }
     }, 50);
 }
@@ -262,8 +271,13 @@ function handleScroll() {
         if (backToTopBtn) backToTopBtn.classList.remove('show');
     }
 
-    // Update active nav link
-    updateActiveNavLink();
+    // Only update active nav link on single-page sites (index.html with sections)
+    const currentPage = window.location.pathname;
+    const isSinglePageSite = currentPage === '/' || currentPage === '/index.html' || currentPage.endsWith('index.html');
+    
+    if (isSinglePageSite) {
+        updateActiveNavLink();
+    }
 }
 
 // Use requestAnimationFrame for smooth scroll handling
@@ -754,12 +768,55 @@ function setInitialActiveNavLink() {
     // Otherwise, set active based on current page
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
+        
+        // Handle different page scenarios for home page
         if (href === currentPage || 
             (currentPage === '/' && (href === 'index.html' || href === '#home')) ||
-            (currentPage === '/index.html' && (href === 'index.html' || href === '#home'))) {
+            (currentPage === '/index.html' && (href === 'index.html' || href === '#home')) ||
+            (currentPage.endsWith('index.html') && (href === 'index.html' || href === '#home')) ||
+            (currentPage.endsWith('/') && (href === 'index.html' || href === '#home'))) {
             link.classList.add('active');
+            return; // Exit early if we found the home link
+        }
+        
+        // Handle specific page matches - use exact matching for better reliability
+        if (currentPage.includes('about.html') && href === 'about.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('events.html') && href === 'events.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('schedule.html') && href === 'schedule.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('gallery.html') && href === 'gallery.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('registration.html') && href === 'registration.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('contact.html') && href === 'contact.html') {
+            link.classList.add('active');
+            return;
         }
     });
+    
+    // Debug logging (remove in production)
+    console.log('Current page:', currentPage);
+    console.log('Active link set for:', currentPage);
+    
+    // Verify active link was set
+    const activeLink = document.querySelector('.nav-link.active');
+    if (activeLink) {
+        console.log('Active link found:', activeLink.getAttribute('href'));
+    } else {
+        console.log('No active link found - this might be an issue');
+    }
 }
 
 // Initialize everything when DOM is loaded
@@ -791,6 +848,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set initial active navigation link based on current page
     setInitialActiveNavLink();
+    
+    // Ensure active state persists by setting it again after a short delay
+    setTimeout(() => {
+        setInitialActiveNavLink();
+    }, 100);
+    
+    // Add click handlers to nav links to maintain active state
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            this.classList.add('active');
+        });
+    });
     
     // Add logo animation on page load
     const logoImg = document.querySelector('.nav-logo .logo-img');
