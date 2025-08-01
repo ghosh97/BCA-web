@@ -385,25 +385,10 @@ function handleContactForm(e) {
         message: data.contactMessage
     };
 
-    // Check if we're in test mode (localhost)
-    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    
-    if (isLocalhost) {
-        // Test mode - simulate submission
-        console.log('🧪 TEST MODE: Form data would be sent to Google Sheets:', sheetData);
-        
-        setTimeout(() => {
-            showNotification('✅ TEST MODE: Message would be sent successfully! (Check console for data)', 'success');
-            e.target.reset();
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }, 1500);
-        
-        return;
-    }
+
 
     // Production mode - send to Google Sheets
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JnmiTu-QDht9yFoYxXuSyn--KTPBJjb4eCw8xOv8z39F1CECJ7b2YaBlVUvX6nJlAA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JnmiTu-QDht9yFoYxXuSyn--KTPBJjb4eCw8xOv8z39F1CECJ7b2YaBlVUvX6nJlAA/exec'; // ⚠️ REPLACE WITH YOUR NEW DEPLOYED URL!
 
     
     
@@ -420,7 +405,7 @@ function handleContactForm(e) {
         e.target.reset();
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('Error sending to Google Sheets:', error);
         showNotification('Failed to send message. Please try again or contact us directly.', 'error');
     })
     .finally(() => {
@@ -584,12 +569,18 @@ function initParallax() {
 
 // Loading Screen
 function hideLoading() {
-    setTimeout(() => {
-        loading.classList.add('hidden');
+    if (loading) {
         setTimeout(() => {
-            loading.style.display = 'none';
-        }, 500);
-    }, 1000);
+            if (loading && loading.classList) {
+                loading.classList.add('hidden');
+            }
+            setTimeout(() => {
+                if (loading && loading.style) {
+                    loading.style.display = 'none';
+                }
+            }, 500);
+        }, 1000);
+    }
 }
 
 // Form Validation
@@ -612,23 +603,26 @@ function validateForm(form) {
 
 // Enhanced Form Handling with Validation
 function initFormValidation() {
-    [registrationForm, contactForm].forEach(form => {
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                if (!validateForm(form)) {
-                    e.preventDefault();
-                    showNotification('Please fill in all required fields.', 'error');
-                    return;
-                }
-            });
-        }
-    });
+    // Handle registration form
+    if (registrationForm) {
+        registrationForm.addEventListener('submit', handleRegistrationForm);
+    }
+    
+    // Handle contact form
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactForm);
+    }
+    
+    // Handle newsletter form
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', handleNewsletterForm);
+    }
 }
 
 // Keyboard Navigation for Lightbox
 function initLightboxKeyboard() {
     document.addEventListener('keydown', (e) => {
-        if (lightbox.style.display === 'block') {
+        if (lightbox && lightbox.style.display === 'block') {
             if (e.key === 'Escape') {
                 closeLightbox();
             }

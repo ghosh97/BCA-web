@@ -8,6 +8,7 @@ yarn.lock
 
 GOOGLE_SHEETS_SETUP.md
 google-apps-script.js
+bca-contact-form-script.js
 
 # Environment variables
 .env
