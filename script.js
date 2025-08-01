@@ -357,19 +357,57 @@ function handleContactForm(e) {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     
+    // Validate form data
+    if (!data.contactName || !data.contactEmail || !data.contactSubject || !data.contactMessage) {
+        showNotification('Please fill in all required fields.', 'error');
+        return;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.contactEmail)) {
+        showNotification('Please enter a valid email address.', 'error');
+        return;
+    }
+    
     // Show loading state
     const submitBtn = e.target.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
 
-    // Simulate form submission
-    setTimeout(() => {
+    // Prepare data for Google Sheets
+    const sheetData = {
+        timestamp: new Date().toISOString(),
+        name: data.contactName,
+        email: data.contactEmail,
+        subject: data.contactSubject,
+        message: data.contactMessage
+    };
+
+    // Send to Google Sheets
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JnmiTu-QDht9yFoYxXuSyn--KTPBJjb4eCw8xOv8z39F1CECJ7b2YaBlVUvX6nJlAA/exec';
+    
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sheetData)
+    })
+    .then(response => {
         showNotification('Message sent successfully! We will get back to you soon.', 'success');
         e.target.reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Failed to send message. Please try again or contact us directly.', 'error');
+    })
+    .finally(() => {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-    }, 2000);
+    });
 }
 
 function handleNewsletterForm(e) {
@@ -396,9 +434,16 @@ function handleNewsletterForm(e) {
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
+    
+    // Choose appropriate icon based on type
+    let icon = 'info-circle';
+    if (type === 'success') icon = 'check-circle';
+    if (type === 'error') icon = 'exclamation-circle';
+    if (type === 'warning') icon = 'exclamation-triangle';
+    
     notification.innerHTML = `
         <div class="notification-content">
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+            <i class="fas fa-${icon}"></i>
             <span>${message}</span>
         </div>
         <button class="notification-close" onclick="this.parentElement.remove()">
@@ -406,12 +451,17 @@ function showNotification(message, type = 'info') {
         </button>
     `;
     
-    // Add styles
+    // Add styles with color based on type
+    let bgColor = '#2196F3'; // default blue
+    if (type === 'success') bgColor = '#4CAF50'; // green
+    if (type === 'error') bgColor = '#f44336'; // red
+    if (type === 'warning') bgColor = '#ff9800'; // orange
+    
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+        background: ${bgColor};
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 8px;

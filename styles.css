@@ -3003,7 +3003,7 @@ section + section {
         gap: 6rem;
         grid-template-columns: 1.3fr 0.7fr;
         border-radius: 40px;
-        backdrop-filter: blur(15px);
+        backdrop-filter: blur(1px);
         box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
     }
     
