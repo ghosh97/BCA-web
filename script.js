@@ -385,8 +385,27 @@ function handleContactForm(e) {
         message: data.contactMessage
     };
 
-    // Send to Google Sheets
+    // Check if we're in test mode (localhost)
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    if (isLocalhost) {
+        // Test mode - simulate submission
+        console.log('🧪 TEST MODE: Form data would be sent to Google Sheets:', sheetData);
+        
+        setTimeout(() => {
+            showNotification('✅ TEST MODE: Message would be sent successfully! (Check console for data)', 'success');
+            e.target.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 1500);
+        
+        return;
+    }
+
+    // Production mode - send to Google Sheets
     const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JnmiTu-QDht9yFoYxXuSyn--KTPBJjb4eCw8xOv8z39F1CECJ7b2YaBlVUvX6nJlAA/exec';
+
+    
     
     fetch(scriptURL, {
         method: 'POST',
