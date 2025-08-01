@@ -1,3 +1,30 @@
+@media (max-width: 600px) {
+    .feature-group-block {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        overflow-x: auto !important;
+    }
+    .feature-group-block .feature-item {
+        min-width: 60px !important;
+        max-width: 80px !important;
+        flex: 1 1 80px !important;
+        margin: 2px !important;
+        text-align: center !important;
+        font-size: 0.8rem !important;
+        box-sizing: border-box !important;
+        word-break: break-word !important;
+        padding: 6px 4px !important;
+    }
+    .feature-group-block .feature-item i {
+        font-size: 1.1rem !important;
+    }
+}
 /* Reset and Base Styles */
 * {
     margin: 0;
