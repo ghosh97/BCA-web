@@ -225,8 +225,8 @@ function updateActiveNavLink() {
                 const href = link.getAttribute('href');
                 if (href === '#home' || href === 'index.html' || href === '/') {
                     link.classList.add('active');
-                }
-            });
+            }
+        });
         }
     }, 50);
 }
