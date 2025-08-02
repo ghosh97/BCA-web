@@ -136,8 +136,8 @@
                 <!-- Hero Images Container -->
                 <div class="hero-images">
                     <!-- Gallery Slideshow -->
-                    <div class="slideshow-container">
-                        <img id="slideshow-image" src="gallery/a11.jpg" alt="Durga Puja Gallery" loading="eager" />
+                    <div class="slideshow-container" style="border: 3px solid #B3471B; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(179, 71, 27, 0.3); width: 100%; max-width: 600px; height: 400px; margin: 0 auto;">
+                        <img id="slideshow-image" src="gallery/a11.jpg" alt="Durga Puja Gallery" loading="eager" style="width: 100%; height: 100%; object-fit: cover;" />
                         <div class="slideshow-overlay"></div>
                         <div class="slideshow-dots">
                             <span class="dot active" data-slide="0" role="button" tabindex="0" aria-label="Go to slide 1"></span>
@@ -334,6 +334,28 @@
             'gallery/a15.webp',
             'gallery/a16.webp'
         ];
+        
+        // Responsive slider sizing
+        function adjustSliderSize() {
+            const slider = document.querySelector('.slideshow-container');
+            if (window.innerWidth <= 768) {
+                // Mobile
+                slider.style.maxWidth = '100%';
+                slider.style.height = '300px';
+            } else if (window.innerWidth <= 1024) {
+                // Tablet
+                slider.style.maxWidth = '500px';
+                slider.style.height = '350px';
+            } else {
+                // Desktop
+                slider.style.maxWidth = '600px';
+                slider.style.height = '400px';
+            }
+        }
+        
+        // Adjust size on load and resize
+        window.addEventListener('load', adjustSliderSize);
+        window.addEventListener('resize', adjustSliderSize);
         
         let currentSlide = 0;
         const slideshowImg = document.getElementById('slideshow-image');
