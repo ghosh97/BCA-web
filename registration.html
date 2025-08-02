@@ -67,7 +67,7 @@
             <div class="registration-info" style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem;">
                 <div class="info-header" style="text-align: center; margin-bottom: 2rem;">
                     <h3 style="color: #FF6B35; font-size: 2rem; margin-bottom: 1rem;">Durga Pujo Registration 2025</h3>
-                    <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">Join Us in Celebrating Durga Puja! <a href="https://bcabcn.blog" style="color: #FF6B35; text-decoration: none; font-weight: 600;">Official website</a></p>
+                    <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">Join Us in Celebrating Durga Puja! <a href="https://bcaspain.blog" style="color: #FF6B35; text-decoration: none; font-weight: 600;">Official website</a></p>
                 </div>
                 
                 <div class="info-content" style="color: #333; line-height: 1.8; font-size: 1.1rem; margin-bottom: 2rem;">
@@ -143,18 +143,124 @@
             <div class="form-container" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem; position: relative; overflow: hidden;">
                 <!-- Form Header -->
                 
-                <!-- Google Form with Enhanced Styling -->
-                <div class="google-form-wrapper" style="position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <iframe 
-                        src="https://forms.gle/9T2xVkxEm2nQWgNt5" 
-                        width="100%" 
-                        height="800" 
-                        frameborder="0" 
-                        marginheight="0" 
-                        marginwidth="0"
-                        style="background: white; border-radius: 15px; display: block; margin: 0 auto; border: 2px solid #FF6B35;">
-                        Loading form...
-                    </iframe>
+                <!-- Custom Registration Form -->
+                <div class="custom-form-wrapper" style="position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <form id="registrationForm" class="registration-form" style="background: white; padding: 2rem; border-radius: 15px; border: 2px solid #FF6B35;">
+                        <div class="form-header" style="text-align: center; margin-bottom: 2rem;">
+                            <h3 style="color: #FF6B35; font-size: 1.8rem; margin-bottom: 0.5rem;">Registration Form</h3>
+                            <p style="color: #666; font-size: 1rem;">Please fill in your details below</p>
+                        </div>
+                        
+                        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                            <!-- Name Field -->
+                            <div class="form-group">
+                                <label for="name" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Name *</label>
+                                <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                            </div>
+                            
+                            <!-- Contact Number Field -->
+                            <div class="form-group">
+                                <label for="contact" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Contact Number *</label>
+                                <input type="tel" id="contact" name="contact" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                            <!-- Email Field -->
+                            <div class="form-group">
+                                <label for="email" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Email *</label>
+                                <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                            </div>
+                            
+                            <!-- Re-enter Email Field -->
+                            <div class="form-group">
+                                <label for="emailConfirm" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Re-enter Email *</label>
+                                <input type="email" id="emailConfirm" name="emailConfirm" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                            </div>
+                        </div>
+                        
+                        <!-- Contribution Types Section -->
+                        <div class="contribution-types" style="margin-bottom: 2rem;">
+                            <label style="display: block; margin-bottom: 1rem; color: #333; font-weight: 600; font-size: 1.1rem;">Contribution Types *</label>
+                            <div class="contribution-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <input type="checkbox" id="adult" name="contributionTypes" value="adult" data-price="55" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <label for="adult" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Adult</label>
+                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€55</span>
+                                    </div>
+                                    <input type="number" id="adult-count" name="adult-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
+                                </div>
+                                
+                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <input type="checkbox" id="children" name="contributionTypes" value="children" data-price="35" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <label for="children" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children (5-12 years)</label>
+                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€35</span>
+                                    </div>
+                                    <input type="number" id="children-count" name="children-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
+                                </div>
+                                
+                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <input type="checkbox" id="children-under-5" name="contributionTypes" value="children-under-5" data-price="0" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <label for="children-under-5" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children under 5</label>
+                                        <span style="color: #228B22; font-weight: 700; margin-left: auto;">Free</span>
+                                    </div>
+                                    <input type="number" id="children-under-5-count" name="children-under-5-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
+                                </div>
+                                
+                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <input type="checkbox" id="students" name="contributionTypes" value="students" data-price="50" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <label for="students" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Students</label>
+                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€50</span>
+                                    </div>
+                                    <input type="number" id="students-count" name="students-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
+                                </div>
+                                
+                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <input type="checkbox" id="day-pass" name="contributionTypes" value="day-pass" data-price="20" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <label for="day-pass" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Day Pass (Guests)</label>
+                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€20</span>
+                                    </div>
+                                    <input type="number" id="day-pass-count" name="day-pass-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Total Amount Display -->
+                        <div class="total-amount" style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
+                            <h4 style="color: #FF6B35; margin-bottom: 0.5rem; font-size: 1.2rem;">Total Amount</h4>
+                            <div id="totalAmount" style="font-size: 2rem; font-weight: 700; color: #FF6B35;">€0</div>
+                        </div>
+                        
+                        <!-- Payment Proof Field -->
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label for="paymentProof" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Payment Proof *</label>
+                            <input type="file" id="paymentProof" name="paymentProof" accept="image/*,.pdf" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; background: white;">
+                            <small style="color: #666; font-size: 0.9rem; margin-top: 0.5rem; display: block;">Please upload a screenshot or PDF of your payment confirmation</small>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="form-submit" style="text-align: center;">
+                            <button type="submit" id="submitBtn" style="background: #FF6B35; color: white; border: none; padding: 15px 40px; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Registration
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="successMessage" style="display: none; background: linear-gradient(135deg, rgba(34, 139, 34, 0.1) 0%, rgba(50, 205, 50, 0.1) 100%); padding: 2rem; border-radius: 15px; text-align: center; border: 2px solid #228B22;">
+                        <div style="width: 80px; height: 80px; background: #228B22; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 2rem;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 style="color: #228B22; font-size: 1.5rem; margin-bottom: 1rem;">Registration Submitted Successfully!</h3>
+                        <p style="color: #333; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">Thank you for registering for Durga Puja 2K25 Barcelona. You will receive your tickets shortly after payment verification.</p>
+                        <p style="color: #228B22; font-weight: 600; font-size: 1.2rem;">Thank you! 🙏</p>
+                    </div>
                 </div>
                 
                 <!-- Form Footer -->
@@ -263,6 +369,167 @@
     <!-- Scripts -->
     <script src="script.js"></script>
     
+    <!-- Registration Form JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const totalAmount = document.getElementById('totalAmount');
+            const email = document.getElementById('email');
+            const emailConfirm = document.getElementById('emailConfirm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Get all contribution checkboxes and their count inputs
+            const contributionCheckboxes = document.querySelectorAll('input[name="contributionTypes"]');
+            const countInputs = document.querySelectorAll('input[id$="-count"]');
+            
+            // Calculate total amount based on selected contributions
+            function calculateTotal() {
+                let total = 0;
+                
+                contributionCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const price = parseFloat(checkbox.dataset.price);
+                        const countId = checkbox.id + '-count';
+                        const countInput = document.getElementById(countId);
+                        const count = parseInt(countInput.value) || 0;
+                        total += price * count;
+                    }
+                });
+                
+                totalAmount.textContent = `€${total}`;
+            }
+            
+            // Handle checkbox changes
+            contributionCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const countId = this.id + '-count';
+                    const countInput = document.getElementById(countId);
+                    const optionDiv = this.closest('.contribution-option');
+                    
+                    if (this.checked) {
+                        countInput.style.display = 'block';
+                        countInput.value = '1';
+                        optionDiv.style.borderColor = '#FF6B35';
+                        optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
+                    } else {
+                        countInput.style.display = 'none';
+                        countInput.value = '0';
+                        optionDiv.style.borderColor = '#ddd';
+                        optionDiv.style.background = '#f8f9fa';
+                    }
+                    
+                    calculateTotal();
+                });
+            });
+            
+            // Handle count input changes
+            countInputs.forEach(input => {
+                input.addEventListener('input', calculateTotal);
+            });
+            
+            // Email validation
+            function validateEmails() {
+                const emailValue = email.value;
+                const emailConfirmValue = emailConfirm.value;
+                
+                if (emailValue && emailConfirmValue && emailValue !== emailConfirmValue) {
+                    emailConfirm.setCustomValidity('Emails do not match');
+                    emailConfirm.style.borderColor = '#ff4444';
+                } else {
+                    emailConfirm.setCustomValidity('');
+                    emailConfirm.style.borderColor = '#ddd';
+                }
+            }
+            
+            email.addEventListener('input', validateEmails);
+            emailConfirm.addEventListener('input', validateEmails);
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Check if at least one contribution type is selected
+                const selectedContributions = document.querySelectorAll('input[name="contributionTypes"]:checked');
+                if (selectedContributions.length === 0) {
+                    alert('Please select at least one contribution type.');
+                    return;
+                }
+                
+                // Check if all selected contributions have valid counts
+                let hasValidCounts = false;
+                selectedContributions.forEach(checkbox => {
+                    const countId = checkbox.id + '-count';
+                    const countInput = document.getElementById(countId);
+                    const count = parseInt(countInput.value) || 0;
+                    if (count > 0) {
+                        hasValidCounts = true;
+                    }
+                });
+                
+                if (!hasValidCounts) {
+                    alert('Please enter a count greater than 0 for at least one selected contribution type.');
+                    return;
+                }
+                
+                // Validate form
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                // Simulate form submission (replace with actual backend integration)
+                setTimeout(function() {
+                    // Hide form and show success message
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Reset form
+                    form.reset();
+                    totalAmount.textContent = '€0';
+                    
+                    // Reset contribution options styling
+                    contributionCheckboxes.forEach(checkbox => {
+                        const countId = checkbox.id + '-count';
+                        const countInput = document.getElementById(countId);
+                        const optionDiv = checkbox.closest('.contribution-option');
+                        
+                        countInput.style.display = 'none';
+                        countInput.value = '0';
+                        optionDiv.style.borderColor = '#ddd';
+                        optionDiv.style.background = '#f8f9fa';
+                    });
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                }, 2000);
+            });
+            
+            // Add focus effects to form inputs
+            const inputs = form.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.borderColor = '#FF6B35';
+                    this.style.boxShadow = '0 0 0 3px rgba(255, 107, 53, 0.1)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.borderColor = '#ddd';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+    
     <!-- Fallback for users with JavaScript disabled -->
     <noscript>
         <style>
@@ -271,7 +538,7 @@
     </noscript>
     
     <style>
-        /* Enhanced Google Form Integration Styles */
+        /* Enhanced Custom Form Integration Styles */
         .form-container {
             position: relative;
             transition: all 0.3s ease;
@@ -282,17 +549,126 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
         
-        .google-form-wrapper {
+        .custom-form-wrapper {
             position: relative;
             transition: all 0.3s ease;
         }
         
-        .google-form-wrapper iframe {
+        .registration-form {
             transition: all 0.3s ease;
         }
         
-        .google-form-wrapper:hover iframe {
+        .custom-form-wrapper:hover .registration-form {
             box-shadow: 0 8px 25px rgba(255, 107, 53, 0.2);
+        }
+        
+        /* Form styling enhancements */
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FF6B35 !important;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1) !important;
+        }
+        
+        .form-group input:invalid,
+        .form-group select:invalid {
+            border-color: #ff4444;
+        }
+        
+        .form-group input:valid,
+        .form-group select:valid {
+            border-color: #228B22;
+        }
+        
+        /* Total amount animation */
+        .total-amount {
+            transition: all 0.3s ease;
+        }
+        
+        .total-amount:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+        }
+        
+        /* Submit button enhancements */
+        #submitBtn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #submitBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        #submitBtn:hover::before {
+            left: 100%;
+        }
+        
+        #submitBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+        
+        #submitBtn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Success message animation */
+        #successMessage {
+            animation: slideInUp 0.5s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Contribution options styling */
+        .contribution-option {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .contribution-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contribution-option input[type="checkbox"] {
+            cursor: pointer;
+        }
+        
+        .contribution-option label {
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .contribution-option input[type="number"] {
+            transition: all 0.3s ease;
+        }
+        
+        .contribution-option input[type="number"]:focus {
+            border-color: #FF6B35 !important;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1) !important;
         }
         
         /* Form Header Styling */
@@ -514,8 +890,26 @@
                 font-size: 0.9rem !important;
             }
             
-            .google-form-wrapper iframe {
-                height: 700px !important;
+            .custom-form-wrapper {
+                padding: 1rem !important;
+            }
+            
+            .registration-form {
+                padding: 1.5rem !important;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            .contribution-options {
+                grid-template-columns: 1fr !important;
+                gap: 0.8rem !important;
+            }
+            
+            .contribution-option {
+                padding: 0.8rem !important;
             }
             
             .form-footer {
@@ -669,8 +1063,42 @@
                 font-size: 1.3rem !important;
             }
             
-            .google-form-wrapper iframe {
-                height: 600px !important;
+            .custom-form-wrapper {
+                padding: 0.5rem !important;
+            }
+            
+            .registration-form {
+                padding: 1rem !important;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.8rem !important;
+            }
+            
+            .contribution-options {
+                grid-template-columns: 1fr !important;
+                gap: 0.6rem !important;
+            }
+            
+            .contribution-option {
+                padding: 0.6rem !important;
+            }
+            
+            .contribution-option label {
+                font-size: 0.9rem !important;
+            }
+            
+            .total-amount {
+                padding: 1rem !important;
+            }
+            
+            .total-amount h4 {
+                font-size: 1rem !important;
+            }
+            
+            #totalAmount {
+                font-size: 1.5rem !important;
             }
             
             .form-footer span {
