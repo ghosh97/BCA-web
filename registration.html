@@ -122,10 +122,22 @@
                         <!-- Contribution Types Section -->
                         <div class="contribution-types" style="margin-bottom: 2rem;">
                             <label style="display: block; margin-bottom: 1rem; color: #333; font-weight: 600; font-size: 1.1rem;">Contribution Types *</label>
-                            <div class="contribution-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            
+                            <!-- Category Selection Dropdown -->
+                            <div class="form-group" style="margin-bottom: 1.5rem;">
+                                <label for="categorySelect" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Select Membership *</label>
+                                <select id="categorySelect" name="categorySelect" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; background: white;">
+                                    <option value="">Please select your membership type</option>
+                                    <option value="bca-members">BCA Members</option>
+                                    <option value="guests">Guests</option>
+                                </select>
+                            </div>
+                            
+                            <!-- BCA Members Options -->
+                            <div id="bcaMembersOptions" class="contribution-options" style="display: none; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="adult" name="contributionTypes" value="adult" data-price="55" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <input type="checkbox" id="adult" name="contributionTypes" value="adult" data-price="65" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
                                         <label for="adult" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Adult</label>
                                         <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€65</span>
                                     </div>
@@ -134,7 +146,7 @@
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="children" name="contributionTypes" value="children" data-price="35" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <input type="checkbox" id="children" name="contributionTypes" value="children" data-price="35" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
                                         <label for="children" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children (5-12 years)</label>
                                         <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€35</span>
                                     </div>
@@ -143,16 +155,7 @@
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="children-under-5" name="contributionTypes" value="children-under-5" data-price="0" style="width: 18px; height: 18px; accent-color: #FF6B35;">
-                                        <label for="children-under-5" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children under 5</label>
-                                        <span style="color: #228B22; font-weight: 700; margin-left: auto;">Free</span>
-                                    </div>
-                                    <input type="number" id="children-under-5-count" name="children-under-5-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
-                                </div>
-                                
-                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="students" name="contributionTypes" value="students" data-price="50" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <input type="checkbox" id="students" name="contributionTypes" value="students" data-price="55" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
                                         <label for="students" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Students</label>
                                         <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€55</span>
                                     </div>
@@ -161,12 +164,31 @@
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="day-pass" name="contributionTypes" value="day-pass" data-price="20" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <input type="checkbox" id="children-under-5" name="contributionTypes" value="children-under-5" data-price="0" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <label for="children-under-5" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children under 5</label>
+                                        <span style="color: #228B22; font-weight: 700; margin-left: auto;">Free</span>
+                                    </div>
+                                    <input type="number" id="children-under-5-count" name="children-under-5-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
+                                </div>
+                            </div>
+                            
+                            <!-- Guests Options -->
+                            <div id="guestsOptions" class="contribution-options" style="display: none; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <input type="checkbox" id="day-pass" name="contributionTypes" value="day-pass" data-price="20" data-category="guests" style="width: 18px; height: 18px; accent-color: #FF6B35;">
                                         <label for="day-pass" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Day Pass (Guests)</label>
                                         <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€20</span>
                                     </div>
                                     <input type="number" id="day-pass-count" name="day-pass-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
                                 </div>
+                            </div>
+                            
+                            <!-- Ticket Validity Note -->
+                            <div style="background: rgba(255, 107, 53, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem; border-left: 4px solid #FF6B35;">
+                                <p style="color: #333; font-weight: 600; margin: 0; font-size: 1rem;">
+                                    <strong>NOTE:</strong> All tickets are for all day during puja (Sun, Sep 28, 2025 – Thu, Oct 2, 2025) except Day pass.
+                                </p>
                             </div>
                         </div>
                         
@@ -197,6 +219,8 @@
                                 <div style="background: rgba(255, 107, 53, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #FF6B35;">
                                     <strong style="color: #ee2f0d; font-size: 1.2rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: #FF6B35; font-size: 1.3rem;">Your NAME - Donation</span>
                                 </div>
+                                
+
                             </div>
                         </div>
                         
@@ -332,185 +356,7 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
-    
-    <!-- Registration Form JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('registrationForm');
-            const totalAmount = document.getElementById('totalAmount');
-            const email = document.getElementById('email');
-            const emailConfirm = document.getElementById('emailConfirm');
-            const successMessage = document.getElementById('successMessage');
-            
-            // Get all contribution checkboxes and their count inputs
-            const contributionCheckboxes = document.querySelectorAll('input[name="contributionTypes"]');
-            const countInputs = document.querySelectorAll('input[id$="-count"]');
-            
-            // Calculate total amount based on selected contributions
-            function calculateTotal() {
-                let total = 0;
-                let hasValidSelections = false;
-                
-                contributionCheckboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        const price = parseFloat(checkbox.dataset.price);
-                        const countId = checkbox.id + '-count';
-                        const countInput = document.getElementById(countId);
-                        const count = parseInt(countInput.value) || 0;
-                        total += price * count;
-                        
-                        if (count > 0) {
-                            hasValidSelections = true;
-                        }
-                    }
-                });
-                
-                totalAmount.textContent = `€${total}`;
-                
-                // Show/hide bank information based on selections
-                const bankInfo = document.getElementById('bankInfo');
-                if (hasValidSelections && total > 0) {
-                    bankInfo.style.display = 'block';
-                    bankInfo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else {
-                    bankInfo.style.display = 'none';
-                }
-            }
-            
-            // Handle checkbox changes
-            contributionCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const countId = this.id + '-count';
-                    const countInput = document.getElementById(countId);
-                    const optionDiv = this.closest('.contribution-option');
-                    
-                    if (this.checked) {
-                        countInput.style.display = 'block';
-                        countInput.value = '1';
-                        optionDiv.style.borderColor = '#FF6B35';
-                        optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
-                    } else {
-                        countInput.style.display = 'none';
-                        countInput.value = '0';
-                        optionDiv.style.borderColor = '#ddd';
-                        optionDiv.style.background = '#f8f9fa';
-                    }
-                    
-                    calculateTotal();
-                });
-            });
-            
-            // Handle count input changes
-            countInputs.forEach(input => {
-                input.addEventListener('input', calculateTotal);
-            });
-            
-            // Email validation
-            function validateEmails() {
-                const emailValue = email.value;
-                const emailConfirmValue = emailConfirm.value;
-                
-                if (emailValue && emailConfirmValue && emailValue !== emailConfirmValue) {
-                    emailConfirm.setCustomValidity('Emails do not match');
-                    emailConfirm.style.borderColor = '#ff4444';
-                } else {
-                    emailConfirm.setCustomValidity('');
-                    emailConfirm.style.borderColor = '#ddd';
-                }
-            }
-            
-            email.addEventListener('input', validateEmails);
-            emailConfirm.addEventListener('input', validateEmails);
-            
-            // Form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Check if at least one contribution type is selected
-                const selectedContributions = document.querySelectorAll('input[name="contributionTypes"]:checked');
-                if (selectedContributions.length === 0) {
-                    alert('Please select at least one contribution type.');
-                    return;
-                }
-                
-                // Check if all selected contributions have valid counts
-                let hasValidCounts = false;
-                selectedContributions.forEach(checkbox => {
-                    const countId = checkbox.id + '-count';
-                    const countInput = document.getElementById(countId);
-                    const count = parseInt(countInput.value) || 0;
-                    if (count > 0) {
-                        hasValidCounts = true;
-                    }
-                });
-                
-                if (!hasValidCounts) {
-                    alert('Please enter a count greater than 0 for at least one selected contribution type.');
-                    return;
-                }
-                
-                // Validate form
-                if (!form.checkValidity()) {
-                    form.reportValidity();
-                    return;
-                }
-                
-                // Show loading state
-                const submitBtn = document.getElementById('submitBtn');
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                submitBtn.disabled = true;
-                
-                // Simulate form submission (replace with actual backend integration)
-                setTimeout(function() {
-                    // Hide form and show success message
-                    form.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    
-                    // Reset form
-                    form.reset();
-                    totalAmount.textContent = '€0';
-                    
-                    // Reset contribution options styling
-                    contributionCheckboxes.forEach(checkbox => {
-                        const countId = checkbox.id + '-count';
-                        const countInput = document.getElementById(countId);
-                        const optionDiv = checkbox.closest('.contribution-option');
-                        
-                        countInput.style.display = 'none';
-                        countInput.value = '0';
-                        optionDiv.style.borderColor = '#ddd';
-                        optionDiv.style.background = '#f8f9fa';
-                    });
-                    
-                    // Hide bank information
-                    const bankInfo = document.getElementById('bankInfo');
-                    bankInfo.style.display = 'none';
-                    
-                    // Reset button
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                }, 2000);
-            });
-            
-            // Add focus effects to form inputs
-            const inputs = form.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.style.borderColor = '#FF6B35';
-                    this.style.boxShadow = '0 0 0 3px rgba(255, 107, 53, 0.1)';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.style.borderColor = '#ddd';
-                    this.style.boxShadow = 'none';
-                });
-            });
-        });
-    </script>
+    <script src="registration-form.js"></script>
     
     <!-- Fallback for users with JavaScript disabled -->
     <noscript>

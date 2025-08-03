@@ -80,21 +80,55 @@
                     <!-- Enhanced Features -->
                     <div class="hero-features">
                         <div class="feature-group-block">
-                            <div class="feature-item">
+                            <div class="feature-item" data-video="index-attraction/maadurgamurti.mp4" data-title="Traditional Puja Rituals">
                                 <i class="fa-solid fa-hands-praying"></i>
                                 <span>Traditional Puja Rituals</span>
+                                <video src="index-attraction/maadurgamurti.mp4" autoplay muted loop></video>
+                                <!-- <div class="play-overlay">
+                                    <i class="fas fa-play-circle"></i>
+                                </div> -->
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item" data-video="index-attraction/dance.mp4" data-title="Cultural Performances">
                                 <i class="fa-solid fa-music"></i>
                                 <span>Cultural Performances</span>
+                                <video src="index-attraction/dance.mp4" autoplay muted loop></video>
+                                <!-- <div class="play-overlay">
+                                    <i class="fas fa-play-circle"></i>
+                                </div> -->
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item" data-video="index-attraction/bhog.mp4" data-title="Authentic Bengali Cuisine">
                                 <i class="fa-solid fa-utensils"></i>
                                 <span>Authentic Bengali Cuisine</span>
+                                <video src="index-attraction/bhog.mp4" autoplay muted loop></video>
+                                <!-- <div class="play-overlay">
+                                    <i class="fas fa-play-circle"></i>
+                                </div> -->
                             </div>
-                            <div class="feature-item">
+                            <div class="feature-item" data-video="index-attraction/dhunuchinaach.mp4" data-title="Community Bonding">
                                 <i class="fa-solid fa-heart"></i>
                                 <span>Community Bonding</span>
+                                <video src="index-attraction/dhunuchinaach.mp4" autoplay muted loop></video>
+                                <!-- <div class="play-overlay">
+                                    <i class="fas fa-play-circle"></i>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Overlay Modal -->
+                    <div id="videoModal" class="video-modal">
+                        <div class="video-modal-content">
+                            <div class="video-modal-header">
+                                <h3 id="videoModalTitle">Video Title</h3>
+                                <button class="video-modal-close" id="videoModalClose">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="video-modal-body">
+                                <video id="videoModalPlayer" controls>
+                                    <source src="" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
                             </div>
                         </div>
                     </div>

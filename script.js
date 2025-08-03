@@ -12,6 +12,12 @@ const registrationForm = document.getElementById('registrationForm');
 const contactForm = document.getElementById('contactForm');
 const newsletterForm = document.querySelector('.newsletter-form');
 
+// Video Modal Elements
+const videoModal = document.getElementById('videoModal');
+const videoModalPlayer = document.getElementById('videoModalPlayer');
+const videoModalTitle = document.getElementById('videoModalTitle');
+const videoModalClose = document.getElementById('videoModalClose');
+
 // Update last modified time
 function updateLastModified() {
     const lastUpdatedElement = document.querySelector('.last-updated small');
@@ -838,6 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initParallax();
     initTouchGestures();
+    initVideoModal();
     
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
@@ -897,7 +904,81 @@ if ('serviceWorker' in navigator) {
 window.scrollToSection = scrollToSection;
 window.scrollToTop = scrollToTop;
 window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox; 
+window.closeLightbox = closeLightbox;
+
+// Video Modal Functions
+function openVideoModal(videoSrc, title) {
+    console.log('Opening video modal:', videoSrc, title);
+    if (videoModal && videoModalPlayer && videoModalTitle) {
+        videoModalTitle.textContent = title;
+        videoModalPlayer.src = videoSrc;
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Focus on close button for accessibility
+        if (videoModalClose) {
+            videoModalClose.focus();
+        }
+        
+        console.log('Video modal opened successfully');
+    } else {
+        console.error('Video modal elements not found:', {
+            videoModal: !!videoModal,
+            videoModalPlayer: !!videoModalPlayer,
+            videoModalTitle: !!videoModalTitle
+        });
+    }
+}
+
+function closeVideoModal() {
+    if (videoModal && videoModalPlayer) {
+        videoModal.classList.remove('active');
+        videoModalPlayer.pause();
+        videoModalPlayer.src = '';
+        document.body.style.overflow = '';
+    }
+}
+
+function initVideoModal() {
+    // Add click event listeners to feature items
+    const featureItems = document.querySelectorAll('.feature-item[data-video]');
+    console.log('Found feature items with videos:', featureItems.length);
+    
+    featureItems.forEach((item, index) => {
+        console.log(`Feature item ${index}:`, item.getAttribute('data-video'), item.getAttribute('data-title'));
+        item.addEventListener('click', function() {
+            console.log('Feature item clicked:', this.getAttribute('data-video'));
+            const videoSrc = this.getAttribute('data-video');
+            const title = this.getAttribute('data-title');
+            openVideoModal(videoSrc, title);
+        });
+    });
+    
+    // Close modal when clicking close button
+    if (videoModalClose) {
+        videoModalClose.addEventListener('click', closeVideoModal);
+    }
+    
+    // Close modal when clicking outside
+    if (videoModal) {
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal && videoModal.classList.contains('active')) {
+            closeVideoModal();
+        }
+    });
+}
+
+// Export video modal functions
+window.openVideoModal = openVideoModal;
+window.closeVideoModal = closeVideoModal; 
 
 // Add styles for countdown message
 const style = document.createElement('style');
