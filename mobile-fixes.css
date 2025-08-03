@@ -18,6 +18,172 @@ body {
     background-color: var(--white);
 }
 
+/* Mobile Button Fixes - Ensure buttons are clickable on mobile */
+@media (max-width: 768px) {
+    .btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-large {
+        position: relative;
+        z-index: 10;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+        pointer-events: auto;
+        cursor: pointer;
+        min-height: 44px; /* iOS minimum touch target size */
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border: none;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    
+    /* Focus and active states for accessibility */
+    .btn:focus,
+    .btn-primary:focus,
+    .btn-secondary:focus,
+    .btn-large:focus {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn:active,
+    .btn-primary:active,
+    .btn-secondary:active,
+    .btn-large:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Mobile-specific hover and active states */
+    @media (hover: none) and (pointer: coarse) {
+        .btn:hover,
+        .btn-primary:hover,
+        .btn-secondary:hover,
+        .btn-large:hover {
+            /* Disable hover effects on touch devices */
+        }
+        
+        .btn:active,
+        .btn-primary:active,
+        .btn-secondary:active,
+        .btn-large:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+    }
+    
+    /* Ensure hero buttons are properly positioned and clickable */
+    .hero-buttons {
+        position: relative;
+        z-index: 15;
+        pointer-events: auto;
+    }
+    
+    .hero-buttons .btn {
+        position: relative;
+        z-index: 20;
+        pointer-events: auto;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Additional fix to ensure button is always clickable */
+    .hero-buttons a.btn {
+        position: relative;
+        z-index: 25 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-decoration: none !important;
+        min-height: 44px !important;
+        min-width: 44px !important;
+        cursor: pointer !important;
+    }
+    
+    /* Fix for any overlapping elements that might block button clicks */
+    .hero-content {
+        position: relative;
+        z-index: 5;
+    }
+    
+    .hero-text {
+        position: relative;
+        z-index: 10;
+    }
+    
+    /* Ensure feature items don't interfere with button clicks */
+    .hero-features {
+        position: relative;
+        z-index: 8;
+    }
+    
+    .hero-features .feature-item {
+        position: relative;
+        z-index: 9;
+    }
+    
+    /* Enhanced video feature mobile fixes */
+    .hero-features .feature-item {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.3);
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    
+    .hero-features .feature-item:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    .play-overlay {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.3);
+        pointer-events: auto;
+    }
+    
+    .play-overlay:active {
+        transform: scale(1.05);
+        transition: transform 0.1s ease;
+    }
+    
+    /* Video modal mobile optimizations */
+    .video-modal {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .video-modal-content {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .video-modal-close {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .video-modal-close:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+}
+
 /* Mobile Hero Section */
 @media (max-width: 768px) {
     .hero {
@@ -51,25 +217,7 @@ body {
         backdrop-filter: blur(8px);
     }
     
-    /* Ensure consistent feature styling on mobile */
-    .feature-group-block {
-        background: rgba(0,0,0,0.25) !important;
-        backdrop-filter: blur(10px) !important;
-        border-radius: var(--border-radius) !important;
-        border: 2px solid transparent !important;
-        transition: var(--transition) !important;
-    }
-    
-    .hero-features .feature-item {
-        background: transparent !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        transition: var(--transition) !important;
-    }
-    
-    .hero-features .feature-item:hover {
-        background: rgba(236, 95, 8, 0.05) !important;
-        border-color: var(--primary-color) !important;
-    }
+
 }
 
 /* Mobile Navigation */
@@ -182,5 +330,151 @@ body {
 
     .logo-text {
         font-size: 1rem;
+    }
+    
+    /* Additional button fixes for very small screens */
+    .btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-large {
+        min-height: 48px; /* Larger touch target for very small screens */
+        min-width: 48px;
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding: 12px 20px;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    /* Additional fix for very small screens */
+    .hero-buttons a.btn {
+        position: relative;
+        z-index: 30 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-decoration: none !important;
+        min-height: 48px !important;
+        min-width: 48px !important;
+        cursor: pointer !important;
+        font-size: 16px !important;
+        padding: 12px 20px !important;
+    }
+    
+    /* Enhanced video feature fixes for small screens */
+    .hero-features .feature-item {
+        min-height: 80px;
+        padding: 0.7rem 0.5rem;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.3);
+    }
+    
+    .play-overlay {
+        opacity: 0.95;
+        background: rgba(255, 107, 53, 0.95);
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.3);
+    }
+    
+    .video-modal-close {
+        min-height: 48px;
+        min-width: 48px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Extra small screen optimizations */
+@media (max-width: 360px) {
+    .hero-features .feature-item {
+        min-height: 75px;
+        padding: 0.6rem 0.4rem;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.3);
+    }
+    
+    .play-overlay {
+        opacity: 1;
+        background: rgba(255, 107, 53, 1);
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 107, 53, 0.3);
+    }
+    
+    .video-modal-close {
+        min-height: 44px;
+        min-width: 44px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Touch device specific optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .hero-features .feature-item:hover {
+        /* Disable hover effects on touch devices */
+        transform: none;
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .hero-features .feature-item:hover i {
+        transform: none;
+        color: var(--primary-color);
+    }
+    
+    .hero-features .feature-item:hover .play-overlay {
+        opacity: 0.8;
+        background: rgba(255, 107, 53, 0.8);
+    }
+    
+    .play-overlay {
+        opacity: 0.8;
+        background: rgba(255, 107, 53, 0.8);
+    }
+    
+    .video-modal-close:hover {
+        background: rgba(0, 0, 0, 0.1);
+        transform: none;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .hero-features .feature-item,
+    .hero-features .feature-item i,
+    .hero-features .feature-item video,
+    .play-overlay,
+    .video-modal,
+    .video-modal-content,
+    .video-modal-close {
+        transition: none;
+    }
+    
+    .hero-features .feature-item:hover,
+    .hero-features .feature-item:active {
+        transform: none;
+    }
+    
+    .hero-features .feature-item:hover i,
+    .hero-features .feature-item:active i {
+        transform: none;
+    }
+    
+    .play-overlay:active {
+        transform: none;
+    }
+    
+    .video-modal-close:active {
+        transform: none;
     }
 }

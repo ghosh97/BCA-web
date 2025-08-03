@@ -18,6 +18,58 @@ const videoModalPlayer = document.getElementById('videoModalPlayer');
 const videoModalTitle = document.getElementById('videoModalTitle');
 const videoModalClose = document.getElementById('videoModalClose');
 
+// Mobile Button Fix - Ensure Register Now button is clickable on mobile
+function initMobileButtonFix() {
+    const registerButton = document.querySelector('.hero-buttons .btn');
+    if (registerButton) {
+        console.log('Mobile button fix initialized for:', registerButton);
+        
+        // Add touch event listener for mobile devices
+        registerButton.addEventListener('touchstart', function(e) {
+            console.log('Register button touched');
+            // Don't prevent default to allow normal navigation
+        }, { passive: true });
+        
+        // Add click event listener as backup
+        registerButton.addEventListener('click', function(e) {
+            console.log('Register button clicked');
+            // Don't prevent default to allow normal navigation
+        });
+        
+        // Add mousedown event for better mobile support
+        registerButton.addEventListener('mousedown', function(e) {
+            console.log('Register button mousedown');
+        });
+        
+        // Ensure the button is properly styled for mobile
+        registerButton.style.position = 'relative';
+        registerButton.style.zIndex = '20';
+        registerButton.style.pointerEvents = 'auto';
+        registerButton.style.touchAction = 'manipulation';
+        registerButton.style.webkitTapHighlightColor = 'rgba(255, 255, 255, 0.3)';
+        registerButton.style.minHeight = '44px';
+        registerButton.style.minWidth = '44px';
+        
+        // Add focus and active states
+        registerButton.addEventListener('focus', function() {
+            this.style.outline = '2px solid #fff';
+            this.style.outlineOffset = '2px';
+        });
+        
+        registerButton.addEventListener('blur', function() {
+            this.style.outline = 'none';
+        });
+        
+        // Ensure the button is accessible
+        registerButton.setAttribute('role', 'button');
+        registerButton.setAttribute('tabindex', '0');
+        
+        console.log('Mobile button fix applied successfully');
+    } else {
+        console.log('Register button not found');
+    }
+}
+
 // Update last modified time
 function updateLastModified() {
     const lastUpdatedElement = document.querySelector('.last-updated small');
@@ -845,6 +897,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallax();
     initTouchGestures();
     initVideoModal();
+    initMobileButtonFix(); // Initialize mobile button fix
     
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
@@ -913,12 +966,35 @@ function openVideoModal(videoSrc, title) {
         videoModalTitle.textContent = title;
         videoModalPlayer.src = videoSrc;
         videoModal.classList.add('active');
+        
+        // Prevent body scroll on mobile
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = `-${window.scrollY}px`;
         
         // Focus on close button for accessibility
         if (videoModalClose) {
-            videoModalClose.focus();
+            setTimeout(() => {
+                videoModalClose.focus();
+            }, 100);
         }
+        
+        // Ensure video loads and plays on mobile
+        videoModalPlayer.load();
+        videoModalPlayer.play().catch(function(error) {
+            console.log('Video autoplay failed:', error);
+            // This is normal on mobile - user needs to tap to play
+        });
+        
+        // Add keyboard event listener for escape key
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
         
         console.log('Video modal opened successfully');
     } else {
@@ -935,7 +1011,16 @@ function closeVideoModal() {
         videoModal.classList.remove('active');
         videoModalPlayer.pause();
         videoModalPlayer.src = '';
+        
+        // Restore body scroll on mobile
+        const scrollY = document.body.style.top;
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        if (scrollY) {
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
     }
 }
 
@@ -946,17 +1031,78 @@ function initVideoModal() {
     
     featureItems.forEach((item, index) => {
         console.log(`Feature item ${index}:`, item.getAttribute('data-video'), item.getAttribute('data-title'));
-        item.addEventListener('click', function() {
+        
+        // Add click event listener to the entire feature item
+        item.addEventListener('click', function(e) {
             console.log('Feature item clicked:', this.getAttribute('data-video'));
+            e.preventDefault();
+            e.stopPropagation();
             const videoSrc = this.getAttribute('data-video');
             const title = this.getAttribute('data-title');
             openVideoModal(videoSrc, title);
         });
+        
+        // Add touch event listener for mobile devices
+        item.addEventListener('touchstart', function(e) {
+            console.log('Feature item touched:', this.getAttribute('data-video'));
+            e.preventDefault();
+            e.stopPropagation();
+            const videoSrc = this.getAttribute('data-video');
+            const title = this.getAttribute('data-title');
+            openVideoModal(videoSrc, title);
+        }, { passive: false });
+        
+        // Also add click event listener to the play overlay specifically
+        const playOverlay = item.querySelector('.play-overlay');
+        if (playOverlay) {
+            playOverlay.addEventListener('click', function(e) {
+                console.log('Play overlay clicked:', item.getAttribute('data-video'));
+                e.preventDefault();
+                e.stopPropagation();
+                const videoSrc = item.getAttribute('data-video');
+                const title = item.getAttribute('data-title');
+                openVideoModal(videoSrc, title);
+            });
+            
+            // Add touch event listener for play overlay on mobile
+            playOverlay.addEventListener('touchstart', function(e) {
+                console.log('Play overlay touched:', item.getAttribute('data-video'));
+                e.preventDefault();
+                e.stopPropagation();
+                const videoSrc = item.getAttribute('data-video');
+                const title = item.getAttribute('data-title');
+                openVideoModal(videoSrc, title);
+            }, { passive: false });
+        }
+        
+        // Add keyboard support for accessibility
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const videoSrc = this.getAttribute('data-video');
+                const title = this.getAttribute('data-title');
+                openVideoModal(videoSrc, title);
+            }
+        });
+        
+        // Make feature items focusable
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('role', 'button');
+        item.setAttribute('aria-label', `Play video: ${item.getAttribute('data-title')}`);
     });
     
     // Close modal when clicking close button
     if (videoModalClose) {
         videoModalClose.addEventListener('click', closeVideoModal);
+        videoModalClose.addEventListener('touchstart', closeVideoModal, { passive: false });
+        
+        // Add keyboard support for close button
+        videoModalClose.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeVideoModal();
+            }
+        });
     }
     
     // Close modal when clicking outside
@@ -966,14 +1112,44 @@ function initVideoModal() {
                 closeVideoModal();
             }
         });
+        
+        // Add touch event for mobile
+        videoModal.addEventListener('touchstart', function(e) {
+            if (e.target === videoModal) {
+                e.preventDefault();
+                closeVideoModal();
+            }
+        }, { passive: false });
     }
     
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && videoModal && videoModal.classList.contains('active')) {
-            closeVideoModal();
-        }
-    });
+    // Prevent body scroll when modal is open (mobile fix)
+    if (videoModal) {
+        videoModal.addEventListener('touchmove', function(e) {
+            if (videoModal.classList.contains('active')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        // Prevent scroll on body when modal is open
+        videoModal.addEventListener('wheel', function(e) {
+            if (videoModal.classList.contains('active')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    }
+    
+    // Handle video player events
+    if (videoModalPlayer) {
+        videoModalPlayer.addEventListener('ended', function() {
+            // Optionally restart video or close modal when video ends
+            // closeVideoModal();
+        });
+        
+        videoModalPlayer.addEventListener('error', function(e) {
+            console.error('Video playback error:', e);
+            // Handle video error gracefully
+        });
+    }
 }
 
 // Export video modal functions
