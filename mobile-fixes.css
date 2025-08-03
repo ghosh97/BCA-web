@@ -1,11 +1,11 @@
-/* Mobile Fixes */
+/* Essential Mobile Fixes */
 html {
+    scroll-behavior: smooth;
     overflow-x: hidden;
     height: 100%;
-    scroll-behavior: smooth;
     position: relative;
     width: 100%;
-    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -13,186 +13,98 @@ body {
     width: 100%;
     min-height: 100vh;
     position: relative;
-    -webkit-overflow-scrolling: touch;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     background-color: var(--white);
-    overscroll-behavior: contain;
-    scroll-behavior: auto;
-    /* overscroll-behavior-y: none; removed for mobile scroll fix */
 }
 
-/* Mobile Hero Section Fixes */
-@media screen and (max-width: 768px) {
-    html, body {
-        max-width: 100vw !important;
-        width: 100vw !important;
-        overflow-x: hidden !important;
-        box-sizing: border-box !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
+/* Mobile Hero Section */
+@media (max-width: 768px) {
     .hero {
-        min-height: auto;
-        margin-top: 60px;
-        padding: 2rem 0 1rem 0;
-        background-image: url('adove.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        box-sizing: border-box;
-        width: 100vw !important;
-        max-width: 100vw !important;
-    }
-
-    .hero-content {
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
-        box-sizing: border-box !important;
-        padding: 0 !important;
-        gap: 2rem;
         position: relative;
-        margin: 0 !important;
+        min-height: calc(100vh - var(--navbar-height));
+        width: 100%;
+        margin-top: var(--navbar-height);
+        overflow: hidden;
     }
 
-    .hero-title {
-        font-size: 2rem;
-        text-align: center;
-        margin-top: 2.5rem !important;
-        margin-bottom: 1rem !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-    /* Fix scroll issue on mobile caused by background */
-    .hero-background {
-        background-image: url('adove.webp');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: scroll !important;
-        overflow: visible !important;
+    .hero-background,
+    .hero-overlay {
         position: absolute;
         top: 0;
         left: 0;
+        right: 0;
+        bottom: 0;
         width: 100%;
         height: 100%;
-        transform: none !important;
-        -webkit-transform: none !important;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+        backdrop-filter: blur(8px);
     }
     
-    /* Improve touch scrolling */
-    .hero-content,
-    .floating-card,
-    .section {
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        perspective: 1000;
-        -webkit-perspective: 1000;
+    /* Ensure consistent feature styling on mobile */
+    .feature-group-block {
+        background: rgba(0,0,0,0.25) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: var(--border-radius) !important;
+        border: 2px solid transparent !important;
+        transition: var(--transition) !important;
     }
-    .hero-subtitle {
-        font-size: 1rem;
-        text-align: center;
+    
+    .hero-features .feature-item {
+        background: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        transition: var(--transition) !important;
     }
-
-    .hero-buttons {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-        margin: 0;
-    }
-
-    .floating-card {
-        width: 100%;
-        margin: 1rem 0 !important;
-    }
-
-    .hero-text {
-        width: 100vw !important;
-        text-align: center !important;
-        box-sizing: border-box !important;
-        padding: 0 !important;
-        max-width: 100vw !important;
-        margin: 0 !important;
-    }
-
-    .slideshow-container {
-        max-width: 100vw !important;
-        width: 100vw !important;
-        margin: 2rem 0 0 0 !important;
-        display: flex !important;
-        justify-content: center !important;
-        box-sizing: border-box !important;
-        padding: 0 !important;
-    }
-
-    #slideshow-image {
-        margin: 0 auto !important;
-        display: block !important;
-        max-width: 100vw !important;
-        width: 100vw !important;
-        height: auto !important;
-        box-sizing: border-box !important;
+    
+    .hero-features .feature-item:hover {
+        background: rgba(236, 95, 8, 0.05) !important;
+        border-color: var(--primary-color) !important;
     }
 }
 
-/* Fix for iOS momentum scrolling */
-.scroll-container {
-    -webkit-overflow-scrolling: touch;
-    overflow-y: scroll;
-}
-
-/* Improved touch targets for mobile */
-button, 
-a, 
-input, 
-select, 
-textarea {
-    min-height: 44px;
-    min-width: 44px;
-}
-
-/* Mobile Nav Fixes */
-@media screen and (max-width: 768px) {
+/* Mobile Navigation */
+@media (max-width: 768px) {
     .navbar {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        background: var(--white);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
     }
 
     .nav-container {
-        padding: 1rem;
+        padding: 0.8rem 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
     .nav-menu {
-        width: 100%;
-        height: 100vh;
         position: fixed;
         top: 0;
         left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: var(--white);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 1.5rem;
-        background-color: var(--white);
         transition: 0.3s;
-        padding: 2rem;
         z-index: 100;
     }
 
@@ -200,118 +112,75 @@ textarea {
         left: 0;
     }
 
-    .nav-link {
-        padding: 0.8rem;
-        width: 100%;
-        text-align: center;
-    }
-
-    .nav-toggle {
-        display: block;
-        cursor: pointer;
-        z-index: 101;
-    }
-
-    .nav-logo {
+    /* Logo adjustments */
+    .nav-logo, .footer-logo {
         display: flex;
         align-items: center;
         gap: 0.5rem;
     }
 
-    .logo-img img {
-        width: 40px !important;
-        height: 40px !important;
+    .nav-logo .logo-img,
+    .footer-logo .logo-img {
+        width: 45px;
+        height: 45px;
     }
 
     .logo-text {
-        font-size: 1rem;
-    }
-
-    /* Fix for position:fixed elements */
-    .lightbox,
-    .loading,
-    .back-to-top {
-        position: fixed;
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
+        font-size: 1.1rem;
+        font-weight: 600;
     }
 }
 
-/* Section Padding Fixes */
-@media screen and (max-width: 768px) {
+/* Section Spacing */
+@media (max-width: 768px) {
     section {
         padding: 3rem 1rem;
-        scroll-margin-top: 60px; /* For smooth scrolling with fixed header */
+        scroll-margin-top: var(--navbar-height);
+        overflow-x: hidden;
     }
 
     .container {
         padding: 0 1rem;
         max-width: 100%;
         overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    /* Prevent text overflow on mobile */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure text containers don't overflow */
+    p, h1, h2, h3, h4, h5, h6, span, div {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
 
-    /* Fix section spacing */
-    section:not(:first-child) {
-        margin-top: 2rem;
-    }
-
-    /* Form Element Fixes */
+    /* Form optimizations */
     input, 
     select, 
     textarea {
-        font-size: 16px; /* Prevents iOS zoom on focus */
+        font-size: 16px;
+        touch-action: manipulation;
+    }
+}
+
+/* Small Screen Adjustments */
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0.6rem 0.8rem;
     }
 
-    /* Gallery Grid Fix */
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 1rem;
-    }
-
-    /* Timeline Fixes */
-    .nav-toggle {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .nav-logo .logo-img,
+    .footer-logo .logo-img {
         width: 40px;
         height: 40px;
-        cursor: pointer;
-        z-index: 101;
-        background: none;
-        border: none;
     }
 
-    .nav-toggle .bar {
-        display: block;
-        width: 28px;
-        height: 4px;
-        margin: 4px 0;
-        background-color: #ec5f08;
-        border-radius: 2px;
-        transition: 0.3s;
-    }
-    .timeline-item {
-        padding-left: 2rem;
-    }
-
-    /* Event Card Fixes */
-    .event-card {
-        margin-bottom: 2rem;
-    }
-}
-
-/* Prevent pull-to-refresh on mobile */
-body {
-    /* overscroll-behavior-y: none; removed for mobile scroll fix */
-}
-
-/* Fix sticky hover effects on mobile */
-@media (hover: hover) {
-    .nav-link:hover,
-    .btn:hover {
-        opacity: 0.8;
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
+    .logo-text {
+        font-size: 1rem;
     }
 }

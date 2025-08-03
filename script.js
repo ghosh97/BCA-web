@@ -12,6 +12,12 @@ const registrationForm = document.getElementById('registrationForm');
 const contactForm = document.getElementById('contactForm');
 const newsletterForm = document.querySelector('.newsletter-form');
 
+// Video Modal Elements
+const videoModal = document.getElementById('videoModal');
+const videoModalPlayer = document.getElementById('videoModalPlayer');
+const videoModalTitle = document.getElementById('videoModalTitle');
+const videoModalClose = document.getElementById('videoModalClose');
+
 // Update last modified time
 function updateLastModified() {
     const lastUpdatedElement = document.querySelector('.last-updated small');
@@ -33,23 +39,100 @@ function updateLastModified() {
 
 // Countdown Timer
 function updateCountdown() {
-    const now = new Date().getTime();
-    const durgaPujaDate = new Date('October 20, 2025 08:00:00').getTime();
-    const distance = durgaPujaDate - now;
+    const now = new Date();
+    const targetDate = new Date('2025-10-15T08:00:00+02:00'); // Using ISO 8601 format with timezone offset
+    const timeLeft = targetDate.getTime() - now.getTime();
+    
+    const countdownElement = document.getElementById('countdown');
+    if (!countdownElement) return;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Calculate time units
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-
-    if (distance < 0) {
-        document.getElementById('countdown').innerHTML = '<h3>Durga Puja has begun!</h3>';
+    if (timeLeft <= 0) {
+        countdownElement.innerHTML = `
+            <div class="countdown-message">
+                <i class="fas fa-star"></i>
+                <span>Durga Puja 2K25 has begun!</span>
+                <i class="fas fa-star"></i>
+            </div>
+        `;
+        if (window.countdownInterval) {
+            clearInterval(window.countdownInterval);
+            window.countdownInterval = null;
+        }
+        return;
     }
+
+    // Update countdown display
+    const elements = {
+        days: document.getElementById('days'),
+        hours: document.getElementById('hours'),
+        minutes: document.getElementById('minutes'),
+        seconds: document.getElementById('seconds')
+    };
+
+    // Update numbers
+    Object.entries(elements).forEach(([unit, element]) => {
+        if (element) {
+            const value = eval(unit);
+            element.textContent = String(value).padStart(2, '0');
+        }
+    });
+
+    // Update labels
+    const labels = {
+        days: document.querySelector('.days-label'),
+        hours: document.querySelector('.hours-label'),
+        minutes: document.querySelector('.minutes-label'),
+        seconds: document.querySelector('.seconds-label')
+    };
+
+    // Update labels
+    Object.entries(labels).forEach(([unit, label]) => {
+        if (label) {
+            const value = eval(unit);
+            label.textContent = value === 1 ? unit.slice(0, -1) : unit;
+        }
+    });
+}
+
+// Initialize countdown timer with proper interval cleanup
+function initCountdown() {
+    // Clear any existing interval
+    if (window.countdownInterval) {
+        clearInterval(window.countdownInterval);
+        window.countdownInterval = null;
+    }
+
+    // Initial update
+    updateCountdown();
+    
+    // Set new interval
+    window.countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Cleanup on page unload
+    window.addEventListener('unload', () => {
+        if (window.countdownInterval) {
+            clearInterval(window.countdownInterval);
+            window.countdownInterval = null;
+        }
+    });
+}
+
+// Ensure countdown is initialized when DOM is loaded
+if (document.readyState === 'loading') {
+    console.log('DOM still loading, adding DOMContentLoaded listener');
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM loaded, initializing countdown');
+        initCountdown();
+    });
+} else {
+    console.log('DOM already loaded, initializing countdown immediately');
+    initCountdown();
 }
 
 // Navigation Functions
@@ -74,9 +157,38 @@ function closeNavMenu() {
 // Initialize Mobile Navigation
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
     if (toggle) {
         toggle.addEventListener('click', toggleNavMenu);
     }
+    
+    // Close menu when clicking on nav links (mobile)
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeNavMenu();
+            }
+        });
+    });
+    
+    // Close menu when clicking outside (mobile)
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && navMenu && navMenu.classList.contains('active')) {
+            if (!navMenu.contains(e.target) && !toggle.contains(e.target)) {
+                closeNavMenu();
+            }
+        }
+    });
+    
+    // Close menu on window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeNavMenu();
+        }
+    });
+    
     // Initialize last modified time
     updateLastModified();
 });
@@ -86,31 +198,62 @@ function updateActiveNavLink() {
     // Skip on mobile devices
     if (window.innerWidth <= 768) return;
 
+    // Check if we're on a multi-page site (not just index.html with sections)
+    const currentPage = window.location.pathname;
+    const isMultiPageSite = currentPage !== '/' && currentPage !== '/index.html' && !currentPage.endsWith('index.html');
+    
+    // If we're on a multi-page site, don't update active links on scroll
+    if (isMultiPageSite) {
+        return;
+    }
+
     // Debounce scroll updates
     window.clearTimeout(isScrolling);
     isScrolling = setTimeout(() => {
         const sections = document.querySelectorAll('section[id]');
         const scrollPos = window.scrollY + 100;
+        let currentSection = null;
 
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
 
             if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                if (navLink) navLink.classList.add('active');
+                currentSection = sectionId;
             }
         });
-    }, 100);
+
+        // Update active nav link
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#') && href.substring(1) === currentSection) {
+                link.classList.add('active');
+            }
+        });
+
+        // If no section is active, check if we're at the top (home)
+        if (!currentSection && scrollPos < 200) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === '#home' || href === 'index.html' || href === '/') {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }, 50);
 }
 
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
+        const navbarHeight = document.getElementById('navbar')?.offsetHeight || 60;
+        const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+        
         window.scrollTo({
-            top: section.offsetTop - 60, // 60px for navbar height
+            top: targetPosition,
             behavior: 'smooth'
         });
     }
@@ -123,6 +266,45 @@ function scrollToTop() {
     });
 }
 
+// Optimized scroll event handling
+function handleScroll() {
+    // Handle navbar scroll effect
+    if (window.scrollY > 100) {
+        if (navbar) navbar.classList.add('scrolled');
+        if (backToTopBtn) backToTopBtn.classList.add('show');
+    } else {
+        if (navbar) navbar.classList.remove('scrolled');
+        if (backToTopBtn) backToTopBtn.classList.remove('show');
+    }
+
+    // Only update active nav link on single-page sites (index.html with sections)
+    const currentPage = window.location.pathname;
+    const isSinglePageSite = currentPage === '/' || currentPage === '/index.html' || currentPage.endsWith('index.html');
+    
+    if (isSinglePageSite) {
+        updateActiveNavLink();
+    }
+}
+
+// Use requestAnimationFrame for smooth scroll handling
+let ticking = false;
+function initScrollHandling() {
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    // Initial call to set active nav link on page load
+    setTimeout(() => {
+        updateActiveNavLink();
+    }, 100);
+}
+
 // Navbar Scroll Effect with debouncing for better performance
 let scrollTimeout;
 function handleNavbarScroll() {
@@ -132,11 +314,11 @@ function handleNavbarScroll() {
 
     scrollTimeout = window.requestAnimationFrame(() => {
         if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-            backToTopBtn.classList.add('show');
+            if (navbar) navbar.classList.add('scrolled');
+            if (backToTopBtn) backToTopBtn.classList.add('show');
         } else {
-            navbar.classList.remove('scrolled');
-            backToTopBtn.classList.remove('show');
+            if (navbar) navbar.classList.remove('scrolled');
+            if (backToTopBtn) backToTopBtn.classList.remove('show');
         }
     });
 }
@@ -150,9 +332,28 @@ function initSmoothScrolling() {
             if (href.startsWith('#')) {
                 e.preventDefault();
                 const targetId = href.substring(1);
-                scrollToSection(targetId);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // Close mobile menu if open
+                    closeNavMenu();
+                    
+                    // Calculate position with better precision
+                    const navbarHeight = document.getElementById('navbar')?.offsetHeight || 60;
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    // Use native smooth scroll with fallback
+                    try {
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    } catch (error) {
+                        // Fallback for older browsers
+                        window.scrollTo(0, targetPosition);
+                    }
+                }
             }
-            // External links (like about.html) will work normally
         });
     });
 }
@@ -185,19 +386,61 @@ function handleContactForm(e) {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     
+    // Validate form data
+    if (!data.contactName || !data.contactEmail || !data.contactSubject || !data.contactMessage) {
+        showNotification('Please fill in all required fields.', 'error');
+        return;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.contactEmail)) {
+        showNotification('Please enter a valid email address.', 'error');
+        return;
+    }
+    
     // Show loading state
     const submitBtn = e.target.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
 
-    // Simulate form submission
-    setTimeout(() => {
+    // Prepare data for Google Sheets
+    const sheetData = {
+        timestamp: new Date().toISOString(),
+        name: data.contactName,
+        email: data.contactEmail,
+        subject: data.contactSubject,
+        message: data.contactMessage
+    };
+
+
+
+    // Production mode - send to Google Sheets
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JnmiTu-QDht9yFoYxXuSyn--KTPBJjb4eCw8xOv8z39F1CECJ7b2YaBlVUvX6nJlAA/exec'; // ⚠️ REPLACE WITH YOUR NEW DEPLOYED URL!
+
+    
+    
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sheetData)
+    })
+    .then(response => {
         showNotification('Message sent successfully! We will get back to you soon.', 'success');
         e.target.reset();
+    })
+    .catch(error => {
+        console.error('Error sending to Google Sheets:', error);
+        showNotification('Failed to send message. Please try again or contact us directly.', 'error');
+    })
+    .finally(() => {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-    }, 2000);
+    });
 }
 
 function handleNewsletterForm(e) {
@@ -224,9 +467,16 @@ function handleNewsletterForm(e) {
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
+    
+    // Choose appropriate icon based on type
+    let icon = 'info-circle';
+    if (type === 'success') icon = 'check-circle';
+    if (type === 'error') icon = 'exclamation-circle';
+    if (type === 'warning') icon = 'exclamation-triangle';
+    
     notification.innerHTML = `
         <div class="notification-content">
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+            <i class="fas fa-${icon}"></i>
             <span>${message}</span>
         </div>
         <button class="notification-close" onclick="this.parentElement.remove()">
@@ -234,12 +484,17 @@ function showNotification(message, type = 'info') {
         </button>
     `;
     
-    // Add styles
+    // Add styles with color based on type
+    let bgColor = '#2196F3'; // default blue
+    if (type === 'success') bgColor = '#4CAF50'; // green
+    if (type === 'error') bgColor = '#f44336'; // red
+    if (type === 'warning') bgColor = '#ff9800'; // orange
+    
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+        background: ${bgColor};
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 8px;
@@ -255,28 +510,6 @@ function showNotification(message, type = 'info') {
     document.body.appendChild(notification);
     
     // Auto remove after 5 seconds
-    
-// Initialize mobile menu
-document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
-        
-        // Close menu when clicking a link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-            });
-        });
-    }
-});
     setTimeout(() => {
         if (notification.parentElement) {
             notification.style.animation = 'slideOutRight 0.3s ease';
@@ -365,12 +598,18 @@ function initParallax() {
 
 // Loading Screen
 function hideLoading() {
-    setTimeout(() => {
-        loading.classList.add('hidden');
+    if (loading) {
         setTimeout(() => {
-            loading.style.display = 'none';
-        }, 500);
-    }, 1000);
+            if (loading && loading.classList) {
+                loading.classList.add('hidden');
+            }
+            setTimeout(() => {
+                if (loading && loading.style) {
+                    loading.style.display = 'none';
+                }
+            }, 500);
+        }, 1000);
+    }
 }
 
 // Form Validation
@@ -393,23 +632,26 @@ function validateForm(form) {
 
 // Enhanced Form Handling with Validation
 function initFormValidation() {
-    [registrationForm, contactForm].forEach(form => {
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                if (!validateForm(form)) {
-                    e.preventDefault();
-                    showNotification('Please fill in all required fields.', 'error');
-                    return;
-                }
-            });
-        }
-    });
+    // Handle registration form
+    if (registrationForm) {
+        registrationForm.addEventListener('submit', handleRegistrationForm);
+    }
+    
+    // Handle contact form
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactForm);
+    }
+    
+    // Handle newsletter form
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', handleNewsletterForm);
+    }
 }
 
 // Keyboard Navigation for Lightbox
 function initLightboxKeyboard() {
     document.addEventListener('keydown', (e) => {
-        if (lightbox.style.display === 'block') {
+        if (lightbox && lightbox.style.display === 'block') {
             if (e.key === 'Escape') {
                 closeLightbox();
             }
@@ -421,29 +663,40 @@ function initLightboxKeyboard() {
 function initTouchGestures() {
     let startX = 0;
     let startY = 0;
+    let startTime = 0;
     
     document.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
-    });
+        startTime = Date.now();
+    }, { passive: true });
     
     document.addEventListener('touchend', (e) => {
         if (!startX || !startY) return;
         
         const endX = e.changedTouches[0].clientX;
         const endY = e.changedTouches[0].clientY;
+        const endTime = Date.now();
         
         const diffX = startX - endX;
         const diffY = startY - endY;
+        const timeDiff = endTime - startTime;
         
-        // Swipe up to go to top
-        if (Math.abs(diffY) > Math.abs(diffX) && diffY > 50) {
-            scrollToTop();
+        // Only handle quick swipes (less than 300ms)
+        if (timeDiff < 300) {
+            // Swipe up to go to top - only if near bottom of page
+            if (Math.abs(diffY) > 50 && Math.abs(diffY) > Math.abs(diffX) && diffY > 0) {
+                const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+                if (scrolledToBottom) {
+                    scrollToTop();
+                }
+            }
         }
         
         startX = 0;
         startY = 0;
-    });
+        startTime = 0;
+    }, { passive: true });
 }
 
 // Performance Optimization
@@ -463,114 +716,160 @@ function debounce(func, wait) {
 const debouncedNavbarScroll = debounce(handleNavbarScroll, 10);
 const debouncedUpdateActiveNav = debounce(updateActiveNavLink, 10);
 
+// Optimized scroll handler with throttling
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            requestAnimationFrame(() => {
+                inThrottle = false;
+            });
+        }
+    };
+}
+
+// Smooth scroll to top with acceleration
+function scrollToTop() {
+    const duration = 800;
+    const start = window.pageYOffset;
+    const startTime = performance.now();
+    
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    }
+    
+    function scroll() {
+        const elapsed = performance.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        window.scrollTo(0, start * (1 - easeInOutCubic(progress)));
+        
+        if (progress < 1) {
+            requestAnimationFrame(scroll);
+        }
+    }
+    
+    requestAnimationFrame(scroll);
+}
+
+// Function to set initial active navigation link based on current page
+function setInitialActiveNavLink() {
+    const currentPage = window.location.pathname;
+    const currentHash = window.location.hash;
+    
+    // Remove all active classes first
+    navLinks.forEach(link => link.classList.remove('active'));
+    
+    // If there's a hash in the URL, set that as active
+    if (currentHash) {
+        const activeLink = document.querySelector(`.nav-link[href="${currentHash}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+            return;
+        }
+    }
+    
+    // Otherwise, set active based on current page
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        
+        // Handle different page scenarios for home page
+        if (href === currentPage || 
+            (currentPage === '/' && (href === 'index.html' || href === '#home')) ||
+            (currentPage === '/index.html' && (href === 'index.html' || href === '#home')) ||
+            (currentPage.endsWith('index.html') && (href === 'index.html' || href === '#home')) ||
+            (currentPage.endsWith('/') && (href === 'index.html' || href === '#home'))) {
+            link.classList.add('active');
+            return; // Exit early if we found the home link
+        }
+        
+        // Handle specific page matches - use exact matching for better reliability
+        if (currentPage.includes('about.html') && href === 'about.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('events.html') && href === 'events.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('schedule.html') && href === 'schedule.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('gallery.html') && href === 'gallery.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('registration.html') && href === 'registration.html') {
+            link.classList.add('active');
+            return;
+        }
+        if (currentPage.includes('contact.html') && href === 'contact.html') {
+            link.classList.add('active');
+            return;
+        }
+    });
+    
+    // Debug logging (remove in production)
+    console.log('Current page:', currentPage);
+    console.log('Active link set for:', currentPage);
+    
+    // Verify active link was set
+    const activeLink = document.querySelector('.nav-link.active');
+    if (activeLink) {
+        console.log('Active link found:', activeLink.getAttribute('href'));
+    } else {
+        console.log('No active link found - this might be an issue');
+    }
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Hide loading screen
-    hideLoading();
-    
     // Initialize countdown timer
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    initCountdown();
     
-    // Initialize navigation
-    navToggle.addEventListener('click', toggleNavMenu);
+    // Initialize scroll handling
+    initScrollHandling();
+    
+    // Initialize other features
+    hideLoading();
+    if (navToggle) {
+        navToggle.addEventListener('click', toggleNavMenu);
+    }
     initSmoothScrolling();
-    
-    // Initialize scroll effects
-    window.addEventListener('scroll', debouncedNavbarScroll);
-    window.addEventListener('scroll', debouncedUpdateActiveNav);
-    
-    // Initialize forms
-    if (registrationForm) {
-        registrationForm.addEventListener('submit', handleRegistrationForm);
-    }
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleContactForm);
-    }
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', handleNewsletterForm);
-    }
-    
-    // Initialize form validation
     initFormValidation();
-    
-    // Initialize lightbox
     initLightboxKeyboard();
-    
-    // Initialize animations
     initScrollAnimations();
-    
-    // Initialize parallax
     initParallax();
-    
-    // Initialize touch gestures
     initTouchGestures();
+    initVideoModal();
     
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!navbar.contains(e.target)) {
+        if (navbar && !navbar.contains(e.target)) {
             closeNavMenu();
         }
     });
     
-    // Add CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 68, 68, 0.6);
-            }
-        }
-        
-        .floating-card {
-            animation: float 6s ease-in-out infinite, glow 3s ease-in-out infinite;
-        }
-        
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .notification-close {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 0;
-            font-size: 1rem;
-        }
-        
-        .notification-close:hover {
-            opacity: 0.8;
-        }
-    `;
-    document.head.appendChild(style);
+    // Set initial active navigation link based on current page
+    setInitialActiveNavLink();
+    
+    // Ensure active state persists by setting it again after a short delay
+    setTimeout(() => {
+        setInitialActiveNavLink();
+    }, 100);
+    
+    // Add click handlers to nav links to maintain active state
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            this.classList.add('active');
+        });
+    });
     
     // Add logo animation on page load
     const logoImg = document.querySelector('.nav-logo .logo-img');
@@ -583,11 +882,11 @@ document.addEventListener('DOMContentLoaded', () => {
             logoImg.style.transform = 'scale(1)';
         }, 500);
     }
-    
-    console.log('Durga Puja 2K25 Barcelona website loaded successfully! 🎉');
 });
 
-// Service Worker Registration (for PWA features)
+// Service Worker Registration (for PWA features) - Disabled for now
+// Uncomment below if you want to add PWA features in the future
+/*
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
@@ -599,9 +898,111 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+*/
 
 // Export functions for global access
 window.scrollToSection = scrollToSection;
 window.scrollToTop = scrollToTop;
 window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox; 
+window.closeLightbox = closeLightbox;
+
+// Video Modal Functions
+function openVideoModal(videoSrc, title) {
+    console.log('Opening video modal:', videoSrc, title);
+    if (videoModal && videoModalPlayer && videoModalTitle) {
+        videoModalTitle.textContent = title;
+        videoModalPlayer.src = videoSrc;
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Focus on close button for accessibility
+        if (videoModalClose) {
+            videoModalClose.focus();
+        }
+        
+        console.log('Video modal opened successfully');
+    } else {
+        console.error('Video modal elements not found:', {
+            videoModal: !!videoModal,
+            videoModalPlayer: !!videoModalPlayer,
+            videoModalTitle: !!videoModalTitle
+        });
+    }
+}
+
+function closeVideoModal() {
+    if (videoModal && videoModalPlayer) {
+        videoModal.classList.remove('active');
+        videoModalPlayer.pause();
+        videoModalPlayer.src = '';
+        document.body.style.overflow = '';
+    }
+}
+
+function initVideoModal() {
+    // Add click event listeners to feature items
+    const featureItems = document.querySelectorAll('.feature-item[data-video]');
+    console.log('Found feature items with videos:', featureItems.length);
+    
+    featureItems.forEach((item, index) => {
+        console.log(`Feature item ${index}:`, item.getAttribute('data-video'), item.getAttribute('data-title'));
+        item.addEventListener('click', function() {
+            console.log('Feature item clicked:', this.getAttribute('data-video'));
+            const videoSrc = this.getAttribute('data-video');
+            const title = this.getAttribute('data-title');
+            openVideoModal(videoSrc, title);
+        });
+    });
+    
+    // Close modal when clicking close button
+    if (videoModalClose) {
+        videoModalClose.addEventListener('click', closeVideoModal);
+    }
+    
+    // Close modal when clicking outside
+    if (videoModal) {
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal && videoModal.classList.contains('active')) {
+            closeVideoModal();
+        }
+    });
+}
+
+// Export video modal functions
+window.openVideoModal = openVideoModal;
+window.closeVideoModal = closeVideoModal; 
+
+// Add styles for countdown message
+const style = document.createElement('style');
+style.textContent += `
+    .countdown-message {
+        text-align: center;
+        color: var(--accent-color, #FF6B35);
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        animation: pulse 2s infinite;
+    }
+
+    .countdown-message i {
+        color: gold;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(style); 

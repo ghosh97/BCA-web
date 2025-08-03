@@ -2,45 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Contact Us - Durga Puja 2K25 Barcelona</title>
     <meta name="description" content="Contact the Bengali Cultural Association for Durga Puja 2K25 Barcelona.">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="author" content="Bengali Cultural Association Barcelona">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contact Us - Durga Puja 2K25 Barcelona">
+    <meta property="og:description" content="Get in touch with the Bengali Cultural Association Barcelona">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bcaspain.github.io/contact.html">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-fixes.css">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 10px;">
-                    <span class="logo-img" style="display: inline-block;">
-                        <img src="bca-logo-another.jpg" alt="BCA Spain Logo" style="width:50px;height:50px;border-radius:50%;object-fit:cover;vertical-align:middle;" />
-                    </span>
-                    <span class="logo-text" style="font-size: 1.3rem; font-weight: 600; display: inline-block; vertical-align:middle;">BCA Spain</span>
-                </a>
+<body class="scroll-container">
+    <div class="main-content">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 10px;">
+                        <span class="logo-img" style="display: inline-block;">
+                            <img src="bca-logo-another.jpg" alt="BCA Spain Logo" style="width:50px;height:50px;border-radius:50%;object-fit:cover;vertical-align:middle;" />
+                        </span>
+                        <span class="logo-text" style="font-size: 1.3rem; font-weight: 600; display: inline-block; vertical-align:middle;">BCA Spain</span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="events.html" class="nav-link">Attractions</a>
+                    <a href="schedule.html" class="nav-link">Schedule</a>
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="registration.html" class="nav-link">Registration</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </div>
+                
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="events.html" class="nav-link">Events</a>
-                <a href="schedule.html" class="nav-link">Schedule</a>
-                <a href="gallery.html" class="nav-link">Gallery</a>
-                <a href="registration.html" class="nav-link">Registration</a>
-                <a href="contact.html" class="nav-link active">Contact</a>
-            </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+        </nav>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact" style="margin-top:80px;">
+    <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Contact Us</h2>
@@ -72,7 +93,9 @@
                         </div>
                         <div class="contact-details">
                             <h3>Address</h3>
-                            <p>Barcelona, Spain</p>
+                            <p class="contact-venue">Valid World Hall (Main Venue)</p>
+                            <p>Carrer de Buenaventura Muñoz 6, Barcelona</p>
+                            <p class="contact-metro"><i class="fas fa-train"></i> Metro: Arc de Triomf (L1)</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -113,17 +136,105 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-            <div class="footer-bottom">
-                <p>&copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+    <!-- Our Locations Section -->
+    <section class="locations-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Locations</h2>
+                <p class="section-subtitle">Find us at these Barcelona venues for all BCA events and activities</p>
+            </div>
+            
+            <!-- Interactive Maps Section -->
+            <div class="maps-section">
+                <div class="maps-grid">
+                    <div class="map-container">
+                        <h4>Valid World Hall (Main Office & Pujo Venue)</h4>
+                        <div class="map-wrapper">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.073891159877!2d2.1806887!3d41.3920639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a31c4e8b5c3d%3A0x8c5e8e5e8e8e8e8e!2sCarrer%20de%20Buenaventura%20Mu%C3%B1oz%2C%206%2C%20Barcelona%2C%20Spain!5e0!3m2!1sen!2sus!4v1635789012345!5m2!1sen!2sus"
+                                width="100%" 
+                                height="300" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Valid World Hall Location">
+                            </iframe>
+                        </div>
+                        <div class="location-details">
+                            <p class="map-address">
+                                <i class="fas fa-map-marker-alt"></i> 
+                                <strong>Address:</strong> Carrer de Buenaventura Muñoz 6, Barcelona
+                            </p>
+                            <p class="map-address">
+                                <i class="fas fa-train"></i> 
+                                <strong>Metro:</strong> Arc de Triomf (L1)
+                            </p>
+                            <p class="map-address">
+                                <i class="fas fa-calendar"></i> 
+                                <strong>Used for:</strong> Main Durga Puja celebrations, community meetings
+                            </p>
+                        </div>
+                        <a href="https://g.co/kgs/79Ap8Zf" target="_blank" rel="noopener noreferrer" class="venue-link-small">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </a>
+                    </div>
+                    
+                    <div class="map-container">
+                        <h4>Federación de Entidades Calàbria (Cultural Programs)</h4>
+                        <div class="map-wrapper">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.568234567891!2d2.1506887!3d41.3850639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2a8f5b6c7d8%3A0x7d4f7f7f7f7f7f7f!2sCarrer%20Cal%C3%A0bria%2C%2066%2C%20Barcelona%2C%20Spain!5e0!3m2!1sen!2sus!4v1635789098765!5m2!1sen!2sus"
+                                width="100%" 
+                                height="300" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Federación de Entidades Calàbria Location">
+                            </iframe>
+                        </div>
+                        <div class="location-details">
+                            <p class="map-address">
+                                <i class="fas fa-map-marker-alt"></i> 
+                                <strong>Address:</strong> Carrer Calàbria 66, Barcelona
+                            </p>
+                            <p class="map-address">
+                                <i class="fas fa-train"></i> 
+                                <strong>Metro:</strong> Rocafort (L1)
+                            </p>
+                            <p class="map-address">
+                                <i class="fas fa-music"></i> 
+                                <strong>Used for:</strong> Cultural nights, performances, workshops
+                            </p>
+                        </div>
+                        <a href="https://g.co/kgs/gC8HVJD" target="_blank" rel="noopener noreferrer" class="venue-link-small">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
+    </div> <!-- End main-content -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                
+                    <p>
+                        &copy; 2025 Bengali Cultural Association Barcelona. All rights reserved.
+                    </p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Smooth Scroll Polyfill -->
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+    <script>
+      smoothscroll.polyfill();
+    </script>
 
     <script src="script.js"></script>
 </body>
