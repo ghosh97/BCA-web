@@ -9,6 +9,11 @@ yarn.lock
 GOOGLE_SHEETS_SETUP.md
 google-apps-script.js
 bca-contact-form-script.js
+GOOGLE_SHEETS_SETUP.md
+REGISTRATION_SETUP_GUIDE.md
+registration-apps-script.js
+test-registration.html
+test-folder-access.html
 
 # Environment variables
 .env
