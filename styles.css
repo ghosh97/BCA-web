@@ -1503,7 +1503,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .event-content p {
     color: var(--text-light);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* Schedule Section */
