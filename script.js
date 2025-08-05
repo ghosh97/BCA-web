@@ -1052,28 +1052,7 @@ function initVideoModal() {
             openVideoModal(videoSrc, title);
         }, { passive: false });
         
-        // Also add click event listener to the play overlay specifically
-        const playOverlay = item.querySelector('.play-overlay');
-        if (playOverlay) {
-            playOverlay.addEventListener('click', function(e) {
-                console.log('Play overlay clicked:', item.getAttribute('data-video'));
-                e.preventDefault();
-                e.stopPropagation();
-                const videoSrc = item.getAttribute('data-video');
-                const title = item.getAttribute('data-title');
-                openVideoModal(videoSrc, title);
-            });
-            
-            // Add touch event listener for play overlay on mobile
-            playOverlay.addEventListener('touchstart', function(e) {
-                console.log('Play overlay touched:', item.getAttribute('data-video'));
-                e.preventDefault();
-                e.stopPropagation();
-                const videoSrc = item.getAttribute('data-video');
-                const title = item.getAttribute('data-title');
-                openVideoModal(videoSrc, title);
-            }, { passive: false });
-        }
+
         
         // Add keyboard support for accessibility
         item.addEventListener('keydown', function(e) {

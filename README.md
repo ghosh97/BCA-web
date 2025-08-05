@@ -1,46 +1,77 @@
 # Durga Puja 2K25 Barcelona - Modern Website
 
 A modern, feature-rich website for the Bengali Cultural Association's Durga Puja celebration in Barcelona. Built with HTML5, CSS3, and JavaScript, featuring a responsive design and interactive elements.
-  
+
 ## 🌟 Features
 
 ### Design & User Experience
 - **Modern Responsive Design** - Works perfectly on all devices (desktop, tablet, mobile)
 - **Beautiful Animations** - Smooth scroll animations, hover effects, and transitions
-- **Interactive Elements** - Countdown timer, lightbox gallery, form validation
+- **Interactive Elements** - Countdown timer, lightbox gallery, form validation, video modals
 - **Professional Typography** - Google Fonts (Poppins & Playfair Display)
 - **Color Scheme** - Vibrant orange and warm colors representing Bengali culture
+- **Accessibility** - Keyboard navigation, screen reader support, reduced motion preferences
 
 ### Navigation & Structure
 - **Fixed Navigation Bar** - Sticky header with smooth scrolling
 - **Mobile-Friendly Menu** - Hamburger menu for mobile devices
 - **Active Section Highlighting** - Navigation links highlight current section
 - **Back to Top Button** - Easy navigation to the top of the page
+- **Multi-Page Architecture** - Dedicated pages for different sections
 
 ### Interactive Features
-- **Live Countdown Timer** - Countdown to Durga Puja 2025
-- **Registration Form** - Complete registration system with validation
-- **Contact Form** - Contact form with email validation
+- **Live Countdown Timer** - Countdown to Durga Puja 2025 (October 15, 2025)
+- **Video Modal System** - Interactive video previews with full-screen playback
+- **Registration Form** - Complete registration system with validation and Google Sheets integration
+- **Contact Form** - Contact form with email validation and Google Sheets integration
 - **Newsletter Subscription** - Email subscription functionality
 - **Photo Gallery** - Lightbox gallery with keyboard navigation
 - **Event Timeline** - Visual timeline of festival events
+- **Interactive Maps** - Google Maps integration for venue locations
 
 ### Performance & Optimization
-- **Fast Loading** - Optimized images and code
+- **Fast Loading** - Optimized images (WebP format) and code
 - **Smooth Animations** - Hardware-accelerated CSS animations
 - **Touch Gestures** - Mobile-friendly touch interactions
 - **Keyboard Navigation** - Full keyboard accessibility
-- **Progressive Web App Ready** - Service worker integration
+- **Lazy Loading** - Images and videos load on demand
+- **Debounced Scroll Handlers** - Optimized performance for smooth scrolling
 
 ## 📁 Project Structure
 
 ```
-durga-puja-website/
-├── index.html          # Main HTML file
-├── styles.css          # CSS styles and animations
-├── script.js           # JavaScript functionality
-├── README.md           # Project documentation
-└── favicon.ico         # Website favicon
+BCA-web/
+├── index.html              # Main homepage with hero section and countdown
+├── about.html              # About BCA and organization history
+├── events.html             # Events/Attractions page
+├── schedule.html           # Schedule and timeline page
+├── gallery.html            # Photo gallery with lightbox
+├── registration.html       # Registration form with payment options
+├── contact.html            # Contact information and form
+├── styles.css              # Main stylesheet (5873 lines)
+├── mobile-fixes.css        # Mobile-specific optimizations
+├── script.js               # Main JavaScript functionality
+├── registration-form.js    # Registration form logic
+├── README.md               # Project documentation
+├── gallery/                # Image assets
+│   ├── g1.webp - g15.webp  # Gallery images
+│   └── a11.webp - a16.webp # Additional images
+├── index-attraction/       # Video assets
+│   ├── bhog.mp4            # Authentic Bengali cuisine
+│   ├── dance.mp4           # Cultural performances
+│   ├── dhunuchinaach.mp4   # Community bonding
+│   └── maadurgamurti.mp4   # Traditional puja rituals
+├── members/                # Team member photos
+│   ├── p.jpeg
+│   ├── s.jpeg
+│   ├── s1.jpeg
+│   ├── t.jpeg
+│   └── vp.jpeg
+└── Various assets          # Logos, backgrounds, and other images
+    ├── bca-logo-another.jpg
+    ├── bca-background.jpeg
+    ├── idol.jpg
+    └── adove.webp
 ```
 
 ## 🚀 Getting Started
@@ -93,6 +124,7 @@ The website uses CSS custom properties (variables) for easy color customization.
 - **Event Information**: Modify the events section in `index.html`
 - **Contact Information**: Update contact details in the contact section
 - **Images**: Replace placeholder images with actual event photos
+- **Videos**: Update video files in the `index-attraction/` directory
 
 ### Styling
 - **Typography**: Change fonts by updating the Google Fonts link in `index.html`
@@ -107,26 +139,44 @@ The website is fully responsive and optimized for:
 - **Tablet** (768px - 1199px): Adjusted grid layouts
 - **Mobile** (320px - 767px): Single column layout with mobile menu
 
+### Mobile Optimizations
+- Touch-friendly interface with 44px minimum touch targets
+- Mobile-specific CSS fixes in `mobile-fixes.css`
+- Optimized viewport settings
+- Swipe gestures and touch interactions
+- Reduced animations on mobile for better performance
+
 ## 🔧 Technical Features
 
 ### HTML5 Features
 - Semantic HTML structure
-- Accessibility attributes
+- Accessibility attributes (ARIA labels, roles)
 - Meta tags for SEO
 - Open Graph tags for social sharing
+- Viewport optimization for mobile devices
 
 ### CSS3 Features
 - CSS Grid and Flexbox layouts
 - CSS Custom Properties (variables)
 - Advanced animations and transitions
 - Backdrop filters and modern effects
+- Media queries for responsive design
+- Hardware-accelerated animations
 
 ### JavaScript Features
-- ES6+ syntax
-- Intersection Observer API
-- Form validation
-- Event handling
-- Performance optimization
+- ES6+ syntax with modern APIs
+- Intersection Observer API for scroll animations
+- Form validation with real-time feedback
+- Event handling and delegation
+- Performance optimization with debouncing
+- Touch gesture support
+- Video modal system with full-screen playback
+
+### Form Integration
+- **Google Sheets Integration**: Forms submit data to Google Sheets
+- **File Upload**: Support for payment proof uploads (JPG, PNG, PDF)
+- **Real-time Validation**: Instant feedback on form inputs
+- **Email Confirmation**: Double email validation with visual indicators
 
 ## 🌐 Browser Support
 
@@ -153,6 +203,7 @@ This project is created for the Bengali Cultural Association Barcelona. All righ
 - **Font Awesome** for icons
 - **Bengali Cultural Association** for the inspiration
 - **Durga Puja Community** for cultural significance
+- **Google Sheets API** for form data collection
 
 ## 🎯 Future Enhancements
 
@@ -167,6 +218,10 @@ Potential features for future versions:
 - [ ] Event calendar integration
 - [ ] Push notifications
 - [ ] Offline functionality (PWA)
+- [ ] Advanced analytics and tracking
+- [ ] Content management system
+- [ ] Multi-venue support
+- [ ] Event registration with QR codes
 
 ## 📊 Performance Metrics
 
@@ -174,9 +229,42 @@ Potential features for future versions:
 - **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
 - **Mobile Performance**: Optimized for mobile devices
 - **SEO Optimized**: Meta tags, structured data, semantic HTML
+- **Image Optimization**: WebP format for better compression
+- **Code Splitting**: Modular JavaScript for better performance
+
+## 🔍 SEO Features
+
+- Semantic HTML structure
+- Meta tags for search engines
+- Open Graph tags for social sharing
+- Structured data markup
+- Alt text for images
+- Proper heading hierarchy
+- Mobile-friendly design
+- Fast loading times
+
+## 🛡️ Security Features
+
+- Form validation on both client and server side
+- File upload restrictions (type and size)
+- XSS prevention through proper input sanitization
+- HTTPS ready for secure deployment
+- No sensitive data stored in client-side code
+
+## 📈 Analytics & Tracking
+
+- Google Analytics ready
+- Form submission tracking
+- User interaction analytics
+- Performance monitoring
+- Error tracking and reporting
 
 ---
 
 **Built with ❤️ for the Bengali Cultural Association Barcelona**
 
-*Celebrating Durga Puja 2K25 in the heart of Barcelona* 
+*Celebrating Durga Puja 2K25 in the heart of Barcelona*
+
+**Last Updated**: January 2025
+**Version**: 2.0
+**Status**: Production Ready 
