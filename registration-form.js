@@ -6,59 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailConfirm = document.getElementById('emailConfirm');
     const successMessage = document.getElementById('successMessage');
     
-    // Category selection elements
-    const categorySelect = document.getElementById('categorySelect');
-    const bcaMembersOptions = document.getElementById('bcaMembersOptions');
-    const guestsOptions = document.getElementById('guestsOptions');
-    
     // Get all contribution checkboxes and their count inputs
     const contributionCheckboxes = document.querySelectorAll('input[name="contributionTypes"]');
     const countInputs = document.querySelectorAll('input[id$="-count"]');
-    
-    // Handle category selection
-    if (categorySelect) {
-        categorySelect.addEventListener('change', function() {
-            const selectedCategory = this.value;
-            
-            // Hide all options first
-            bcaMembersOptions.style.display = 'none';
-            guestsOptions.style.display = 'none';
-            
-            // Uncheck all checkboxes and reset counts
-            contributionCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-                const countId = checkbox.id + '-count';
-                const countInput = document.getElementById(countId);
-                if (countInput) {
-                    countInput.style.display = 'none';
-                    countInput.value = '0';
-                }
-                
-                // Reset styling
-                const optionDiv = checkbox.closest('.contribution-option');
-                if (optionDiv) {
-                    optionDiv.style.borderColor = '#ddd';
-                    optionDiv.style.background = '#f8f9fa';
-                }
-            });
-            
-            // Show selected category options
-            if (selectedCategory === 'bca-members') {
-                bcaMembersOptions.style.display = 'grid';
-            } else if (selectedCategory === 'guests') {
-                guestsOptions.style.display = 'grid';
-            }
-            
-            // Reset total amount
-            totalAmount.textContent = '€0';
-            
-            // Hide bank information
-            const bankInfo = document.getElementById('bankInfo');
-            if (bankInfo) {
-                bankInfo.style.display = 'none';
-            }
-        });
-    }
     
     // Calculate total amount based on selected contributions
     function calculateTotal() {
@@ -85,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const bankInfo = document.getElementById('bankInfo');
         if (hasValidSelections && total > 0) {
             bankInfo.style.display = 'block';
-            bankInfo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
             bankInfo.style.display = 'none';
         }
