@@ -94,9 +94,6 @@ function updateCountdown() {
     const now = new Date();
     const targetDate = new Date('2025-10-15T08:00:00+02:00'); // Using ISO 8601 format with timezone offset
     const timeLeft = targetDate.getTime() - now.getTime();
-    
-    const countdownElement = document.getElementById('countdown');
-    if (!countdownElement) return;
 
     // Calculate time units
     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -105,13 +102,18 @@ function updateCountdown() {
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
     if (timeLeft <= 0) {
-        countdownElement.innerHTML = `
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdownMessage = `
             <div class="countdown-message">
                 <i class="fas fa-star"></i>
                 <span>Durga Puja 2K25 has begun!</span>
                 <i class="fas fa-star"></i>
             </div>
         `;
+        
+        if (countdownElement) countdownElement.innerHTML = countdownMessage;
+        
         if (window.countdownInterval) {
             clearInterval(window.countdownInterval);
             window.countdownInterval = null;

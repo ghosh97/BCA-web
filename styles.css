@@ -3556,6 +3556,184 @@ section + section {
     }
 }
 
+/* Hero Right Section Container */
+.hero-right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-right-section .countdown-section {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+}
+
+
+
+/* Mobile Responsive Styles for Additional Donation */
+@media (max-width: 768px) {
+    .contribution-option {
+        padding: 1rem !important;
+    }
+    
+    .contribution-option > div:first-child {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 1rem !important;
+    }
+    
+    .contribution-option h4 {
+        font-size: 1.1rem !important;
+        text-align: center !important;
+    }
+    
+    .contribution-option p {
+        font-size: 0.85rem !important;
+        text-align: center !important;
+    }
+    
+    .contribution-option small {
+        font-size: 0.8rem !important;
+        text-align: center !important;
+    }
+    
+    .contribution-option > div:first-child > div:first-child {
+        min-width: auto !important;
+        flex: 1 !important;
+    }
+    
+    .contribution-option > div:first-child > div:last-child {
+        min-width: auto !important;
+        flex: 1 !important;
+        max-width: 250px !important;
+        margin: 0 auto !important;
+    }
+    
+    .contribution-option input[type="number"] {
+        font-size: 1rem !important;
+        padding: 12px 12px 12px 35px !important;
+    }
+    
+    .contribution-option span {
+        font-size: 1.1rem !important;
+        left: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contribution-option {
+        padding: 0.75rem !important;
+    }
+    
+    .contribution-option h4 {
+        font-size: 1rem !important;
+    }
+    
+    .contribution-option p {
+        font-size: 0.8rem !important;
+    }
+    
+    .contribution-option small {
+        font-size: 0.75rem !important;
+    }
+    
+    .contribution-option > div:first-child > div:last-child {
+        max-width: 200px !important;
+    }
+    
+    .contribution-option input[type="number"] {
+        font-size: 0.9rem !important;
+        padding: 10px 10px 10px 30px !important;
+    }
+    
+    .contribution-option span {
+        font-size: 1rem !important;
+        left: 10px !important;
+    }
+}
+
+/* Mobile Responsive Styles for Contribution Options (Adult, Children, etc.) */
+@media (max-width: 768px) {
+    .contribution-options {
+        gap: 0.75rem !important;
+    }
+    
+    .contribution-option {
+        padding: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .contribution-option > div:first-child {
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .contribution-option label {
+        font-size: 0.9rem !important;
+    }
+    
+    .contribution-option input[type="checkbox"] {
+        width: 16px !important;
+        height: 16px !important;
+    }
+    
+    .contribution-option input[type="number"] {
+        padding: 8px !important;
+        font-size: 0.9rem !important;
+        margin-top: 0.25rem !important;
+    }
+    
+    .contribution-option span {
+        font-size: 0.9rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contribution-options {
+        gap: 0.5rem !important;
+    }
+    
+    .contribution-option {
+        padding: 0.5rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    .contribution-option > div:first-child {
+        margin-bottom: 0.25rem !important;
+    }
+    
+    .contribution-option label {
+        font-size: 0.85rem !important;
+    }
+    
+    .contribution-option input[type="checkbox"] {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    
+    .contribution-option input[type="number"] {
+        padding: 6px !important;
+        font-size: 0.85rem !important;
+        margin-top: 0.25rem !important;
+    }
+    
+    .contribution-option span {
+        font-size: 0.85rem !important;
+    }
+}
+
 /* Hero Images Container */
 .hero-images {
     display: flex;
@@ -3626,6 +3804,21 @@ section + section {
     .hero {
         min-height: auto !important;
         padding: 1rem 0 2rem 0;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+    }
+    
+    .hero-right-section {
+        width: 100%;
+        max-width: 100%;
+        gap: 15px;
+        order: 2; /* Move to end after hero-text */
+    }
+    
+    .hero-text {
+        order: 1; /* Keep at top */
     }
     
     .hero-content {

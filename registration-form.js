@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         contributionCheckboxes.forEach(checkbox => {
             if (checkbox.checked) {
+                // Handle regular options
                 const price = parseFloat(checkbox.dataset.price);
                 const countId = checkbox.id + '-count';
                 const countInput = document.getElementById(countId);
@@ -28,6 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        
+        // Add custom donation amount (always check for it)
+        const customDonationAmount = parseFloat(document.getElementById('custom-donation-amount').value) || 0;
+        if (customDonationAmount > 0) {
+            total += customDonationAmount;
+            hasValidSelections = true;
+        }
         
         totalAmount.textContent = `€${total}`;
         
@@ -48,15 +56,38 @@ document.addEventListener('DOMContentLoaded', function() {
             const optionDiv = this.closest('.contribution-option');
             
             if (this.checked) {
-                countInput.style.display = 'block';
-                countInput.value = '1';
-                optionDiv.style.borderColor = '#FF6B35';
-                optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
+                if (this.id === 'custom-donation') {
+                    // Handle custom donation
+                    const customInputs = document.getElementById('custom-donation-inputs');
+                    customInputs.style.display = 'block';
+                    optionDiv.style.borderColor = '#FF6B35';
+                    optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
+                } else {
+                    // Handle regular options
+                    countInput.style.display = 'block';
+                    countInput.value = '1';
+                    optionDiv.style.borderColor = '#FF6B35';
+                    optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
+                }
             } else {
-                countInput.style.display = 'none';
-                countInput.value = '0';
-                optionDiv.style.borderColor = '#ddd';
-                optionDiv.style.background = '#f8f9fa';
+                if (this.id === 'custom-donation') {
+                    // Handle custom donation
+                    const customInputs = document.getElementById('custom-donation-inputs');
+                    const warningElement = document.getElementById('custom-donation-warning');
+                    customInputs.style.display = 'none';
+                    document.getElementById('custom-donation-amount').value = '';
+                    if (warningElement) {
+                        warningElement.style.display = 'none';
+                    }
+                    optionDiv.style.borderColor = '#ddd';
+                    optionDiv.style.background = '#f8f9fa';
+                } else {
+                    // Handle regular options
+                    countInput.style.display = 'none';
+                    countInput.value = '0';
+                    optionDiv.style.borderColor = '#ddd';
+                    optionDiv.style.background = '#f8f9fa';
+                }
             }
             
             calculateTotal();
@@ -67,6 +98,35 @@ document.addEventListener('DOMContentLoaded', function() {
     countInputs.forEach(input => {
         input.addEventListener('input', calculateTotal);
     });
+    
+    // Handle custom donation input changes
+    const customDonationAmount = document.getElementById('custom-donation-amount');
+    
+    if (customDonationAmount) {
+        customDonationAmount.addEventListener('input', function() {
+            const amount = parseFloat(this.value) || 0;
+            const warningElement = document.getElementById('custom-donation-warning');
+            
+            // Visual feedback for amount
+            if (amount > 0) {
+                this.style.borderColor = '#228B22';
+                this.style.boxShadow = '0 0 0 3px rgba(34, 139, 34, 0.1)';
+                // Hide warning message
+                if (warningElement) {
+                    warningElement.style.display = 'none';
+                }
+            } else {
+                this.style.borderColor = '#ddd';
+                this.style.boxShadow = 'none';
+                // Hide warning message when empty or zero
+                if (warningElement) {
+                    warningElement.style.display = 'none';
+                }
+            }
+            
+            calculateTotal();
+        });
+    }
     
     // Enhanced instantaneous email validation with visual indicators
     function validateEmails() {
