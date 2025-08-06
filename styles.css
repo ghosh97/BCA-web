@@ -3698,6 +3698,16 @@ section + section {
     .contribution-option span {
         font-size: 0.9rem !important;
     }
+    
+    /* Euro sign positioning for Additional Donation section */
+    .contribution-option > div:first-child > div:last-child span {
+        left: 8px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .contribution-option > div:first-child > div:last-child input[type="number"] {
+        padding-left: 25px !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3731,6 +3741,16 @@ section + section {
     
     .contribution-option span {
         font-size: 0.85rem !important;
+    }
+    
+    /* Euro sign positioning for Additional Donation section */
+    .contribution-option > div:first-child > div:last-child span {
+        left: 6px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .contribution-option > div:first-child > div:last-child input[type="number"] {
+        padding-left: 22px !important;
     }
 }
 
