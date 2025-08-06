@@ -964,6 +964,15 @@ function openVideoModal(videoSrc, title) {
     console.log('Opening video modal:', videoSrc, title);
     if (videoModal && videoModalPlayer && videoModalTitle) {
         videoModalTitle.textContent = title;
+        
+        // iOS Safari Video Fixes
+        videoModalPlayer.setAttribute('webkit-playsinline', 'true');
+        videoModalPlayer.setAttribute('playsinline', 'true');
+        videoModalPlayer.setAttribute('x-webkit-airplay', 'allow');
+        videoModalPlayer.setAttribute('controls', 'true');
+        videoModalPlayer.setAttribute('preload', 'metadata');
+        
+        // Set video source
         videoModalPlayer.src = videoSrc;
         videoModal.classList.add('active');
         
@@ -980,12 +989,41 @@ function openVideoModal(videoSrc, title) {
             }, 100);
         }
         
-        // Ensure video loads and plays on mobile
+        // iOS Video Load and Play Fix
         videoModalPlayer.load();
-        videoModalPlayer.play().catch(function(error) {
-            console.log('Video autoplay failed:', error);
-            // This is normal on mobile - user needs to tap to play
-        });
+        
+        // Handle video play with iOS compatibility
+        const playVideo = () => {
+            videoModalPlayer.play().catch(function(error) {
+                console.log('Video autoplay failed (normal on iOS):', error);
+                // Show play button or instruction for iOS
+                const playButton = document.createElement('div');
+                playButton.innerHTML = '<i class="fas fa-play"></i> Tap to Play';
+                playButton.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0,0,0,0.7);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 8px;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    z-index: 10;
+                `;
+                videoModalPlayer.parentElement.style.position = 'relative';
+                videoModalPlayer.parentElement.appendChild(playButton);
+                
+                playButton.addEventListener('click', function() {
+                    videoModalPlayer.play();
+                    this.remove();
+                });
+            });
+        };
+        
+        // Try to play immediately
+        playVideo();
         
         // Add keyboard event listener for escape key
         const handleEscape = (e) => {
@@ -1011,6 +1049,10 @@ function closeVideoModal() {
         videoModal.classList.remove('active');
         videoModalPlayer.pause();
         videoModalPlayer.src = '';
+        
+        // Remove any play buttons that might have been added
+        const playButtons = videoModal.querySelectorAll('[style*="position: absolute"]');
+        playButtons.forEach(btn => btn.remove());
         
         // Restore body scroll on mobile
         const scrollY = document.body.style.top;

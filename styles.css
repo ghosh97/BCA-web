@@ -295,7 +295,7 @@
     
     .hero-features .feature-item:active .play-overlay {
         opacity: 1;
-        background: rgba(255, 107, 53, 1);
+        background: rgb(255, 80, 53);
         transform: scale(1.05);
     }
 }
@@ -552,25 +552,38 @@
     hyphens: auto;
 }
 
+
+
 :root {
-    --primary-color: #ec5f08;
-    --secondary-color: #FF6B35;
-    --accent-color: #FF4444;
-    --text-dark: #3e1010;
+    --primary-color: var(--red);
+    --secondary-color: var(--yellow);
+    --accent-color: var(--orange);
+    --text-dark: #2C1810;
     --text-light: #666666;
     --white: #FFFFFF;
     --light-bg: #FFFBF0;
-    --dark-bg: #d7c6c6;
-    --gradient-primary: linear-gradient(135deg, #f9da2a 0%, #FF6B35 100%);
-    --gradient-secondary: linear-gradient(135deg, #FF4444 0%, #FFD700 100%);
-    --gradient-hero: linear-gradient(135deg, #FFD700 0%, #FF6B35 50%, #FF4444 100%);
-    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
-    --shadow-medium: 0 5px 20px rgba(0, 0, 0, 0.15);
-    --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --dark-bg: #F5F5F5;
+    --gradient-primary: linear-gradient(135deg, var(--red) 100%, var(--yellow) 10%);
+    --gradient-secondary: linear-gradient(135deg, var(--yellow) 0%, var(--red) 100%);
+    --gradient-hero: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 50%, var(--red) 100%);
+    --shadow-light: 0 2px 10px rgba(253, 126, 20, 0.1);
+    --shadow-medium: 0 5px 20px rgba(253, 126, 20, 0.15);
+    --shadow-heavy: 0 10px 30px rgba(253, 126, 20, 0.2);
     --border-radius: 12px;
     --transition: all 0.3s ease;
     --navbar-height: 70px;
     --navbar-padding: 1rem 2rem;
+    
+    /* Bootstrap-style color palette */
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
 }
 
 /* Base Scrolling Behavior */
@@ -700,10 +713,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     text-align: center;
-    color: var(--text-dark);
+    color: var(--red);
 }
 
 .section-subtitle {
@@ -711,6 +724,16 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-light);
     text-align: center;
     margin-bottom: 3rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    border: 2px solid rgba(253, 126, 20, 0.1);
+    box-shadow: var(--shadow-light);
 }
 
 /* Buttons */
@@ -749,23 +772,28 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--gradient-primary);
     color: var(--white);
     box-shadow: var(--shadow-medium);
+    border: none;
+    font-weight: 600;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-heavy);
+    background: var(--gradient-secondary);
 }
 
 .btn-secondary {
     background: transparent;
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
+    font-weight: 600;
 }
 
 .btn-secondary:hover {
     background: var(--primary-color);
     color: var(--white);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
 }
 
 .btn-outline {
@@ -784,26 +812,27 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1.2rem 2.5rem;
     font-size: 1.3rem;
     font-weight: bold;
-    background: linear-gradient(90deg, #e98903 0%, #dd5f05 100%);
+    background: var(--gradient-secondary);
     border: none;
-    box-shadow: 0 4px 15px rgba(233, 137, 3, 0.3);
+    box-shadow: var(--shadow-medium);
     transition: all 0.3s ease;
 }
 
 .btn-large:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(233, 137, 3, 0.4);
+    box-shadow: var(--shadow-heavy);
+    background: var(--gradient-primary);
 }
 
 .btn-large i {
     font-size: 2rem;
-    color: #f5f8e4;
+    color: white;
     margin-right: 0.5rem;
 }
 
 .btn-large span {
     font-weight: bold;
-    color: #fefcfb;
+    color: white;
 }
 
 /* Navigation */
@@ -1019,7 +1048,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease forwards, titleGlow 3s ease-in-out infinite alternate, titleFloat 4s ease-in-out infinite;
-    background: linear-gradient(135deg, #FFD700 0%, #FF6B35 100%);
+    background: linear-gradient(135deg, var(--yellow) 100%, var(--red) 10%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1034,7 +1063,7 @@ h1, h2, h3, h4, h5, h6 {
     left: -10px;
     right: -10px;
     bottom: -10px;
-    background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 53, 0.1), rgba(255, 215, 0, 0.1));
+    background: linear-gradient(45deg, rgba(255, 193, 7, 0.1), rgba(220, 53, 69, 0.1), rgba(255, 193, 7, 0.1));
     border-radius: 20px;
     z-index: -1;
     animation: titlePulse 2s ease-in-out infinite;
@@ -1043,15 +1072,15 @@ h1, h2, h3, h4, h5, h6 {
 
 @keyframes titleGlow {
     0% {
-        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)) drop-shadow(0 0 10px rgba(255, 107, 53, 0.2));
+        filter: drop-shadow(0 0 5px rgba(255, 193, 7, 0.3)) drop-shadow(0 0 10px rgba(220, 53, 69, 0.2));
         transform: scale(1) translateY(0);
     }
     50% {
-        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 20px rgba(255, 107, 53, 0.4)) drop-shadow(0 0 25px rgba(255, 215, 0, 0.3));
+        filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.6)) drop-shadow(0 0 20px rgba(220, 53, 69, 0.4)) drop-shadow(0 0 25px rgba(255, 193, 7, 0.3));
         transform: scale(1.02) translateY(-2px);
     }
     100% {
-        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4)) drop-shadow(0 0 15px rgba(255, 107, 53, 0.3));
+        filter: drop-shadow(0 0 8px rgba(255, 193, 7, 0.4)) drop-shadow(0 0 15px rgba(220, 53, 69, 0.3));
         transform: scale(1) translateY(0);
     }
 }
@@ -1803,9 +1832,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .form {
     background: var(--white);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
+    border: 2px solid rgba(253, 126, 20, 0.15);
+    transition: var(--transition);
+}
+
+.form:hover {
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
 }
 
 .form-group {
@@ -1835,7 +1871,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.2);
 }
 
 .checkbox-group {
@@ -2074,27 +2110,27 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Add alternating colors for variety */
 .team div:nth-child(3n+1) {
-    background: linear-gradient(135deg, #fff5f5 0%, #ffe5e0 100%);
+    background: white;
 }
 
 .team div:nth-child(3n+1):hover {
-    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    background: rgba(220, 53, 69, 0.1);
 }
 
 .team div:nth-child(3n+2) {
-    background: linear-gradient(135deg, #fff8f0 0%, #ffecd0 100%);  
+    background: white;
 }
 
 .team div:nth-child(3n+2):hover {
-    background: linear-gradient(135deg, #ec5f08 0%, #ff7b2f 100%);
+    background: rgba(220, 53, 69, 0.1);
 }
 
 .team div:nth-child(3n+3) {
-    background: linear-gradient(135deg, #fffbf0 0%, #fff4d6 100%);
+    background: white;
 }
 
 .team div:nth-child(3n+3):hover {
-    background: linear-gradient(135deg, #ffd700 0%, #ffdc1c 100%);
+    background: rgba(220, 53, 69, 0.1);
     color: var(--text-dark);
 }
 
@@ -2181,12 +2217,31 @@ h1, h2, h3, h4, h5, h6 {
 /* Contact Section */
 .contact {
     padding: 6rem 0;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.05) 0%, rgba(253, 126, 20, 0.05) 100%);
+    position: relative;
+    border: 2px solid rgba(253, 126, 20, 0.1);
+    border-radius: var(--border-radius);
+    margin: 2rem 0;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contactPattern" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="1" fill="%23fd7e14" fill-opacity="0.02"/><circle cx="80" cy="80" r="1" fill="%23ffc107" fill-opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23contactPattern)"/></svg>');
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-item {
@@ -2194,6 +2249,19 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 1rem;
     margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border: 2px solid rgba(253, 126, 20, 0.15);
+}
+
+.contact-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.98);
 }
 
 .contact-icon {
@@ -2206,21 +2274,39 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     color: var(--white);
     font-size: 1.5rem;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    box-shadow: var(--shadow-medium);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .contact-details h3 {
-    color: var(--text-dark);
+    color: var(--primary-color);
     margin-bottom: 0.25rem;
+    font-weight: 600;
 }
 
 .contact-details p {
+    color: var(--text-dark);
+    margin: 0.25rem 0;
+}
+
+.contact-details .contact-venue {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.contact-details .contact-metro {
     color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.contact-details .contact-metro i {
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
 }
 
 /* Footer */
 .footer {
-    background-color: #ff8c5a94 !important;
+    background-color: rgba(220, 53, 69, 0.1) !important;
     padding: 2rem 0 !important;
     margin-top: auto !important; /* Changed from 3rem to auto for sticky footer */
     text-align: center !important;
@@ -2260,12 +2346,12 @@ h1, h2, h3, h4, h5, h6 {
 .footer-logo span {
     font-size: 1.2rem !important;
     font-weight: 600 !important;
-    color: #333 !important;
+    color: var(--red) !important;
     text-align: center;
 }
 
 .footer-content > p {
-    color: #666 !important;
+    color: var(--text-dark) !important;
     margin: 0 !important;
     max-width: 600px !important;
     line-height: 1.6 !important;
@@ -2275,7 +2361,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-bottom {
-    border-top: 1px solid #ddd !important;
+    border-top: 1px solid rgba(220, 53, 69, 0.2) !important;
     padding-top: 1.5rem !important;
     margin-top: 1.5rem !important;
     width: 100% !important;
@@ -2284,7 +2370,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-bottom p {
     margin: 0 !important;
-    color: #666 !important;
+    color: var(--text-dark) !important;
     font-size: 0.9rem !important;
     text-align: center;
 }
@@ -2418,7 +2504,7 @@ h1, h2, h3, h4, h5, h6 {
         top: 70px;
         flex-direction: column;
         background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(1px);
+        backdrop-filter: blur(10px);
         width: 100%;
         text-align: center;
         transition: 0.3s ease-in-out;
@@ -2536,6 +2622,73 @@ h1, h2, h3, h4, h5, h6 {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    .contact {
+        padding: 3rem 1rem;
+        margin: 1rem 0;
+    }
+    
+    .contact-item {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .contact-details h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.9rem;
+    }
+    
+    .form {
+        padding: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        padding: 0.8rem;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 16px;
+        min-height: 48px;
+    }
+    
+    .locations-section {
+        padding: 2rem 1rem;
+        margin: 1rem 0;
+    }
+    
+    .location-details {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .map-container {
+        padding: 1rem;
+    }
+    
+    .venue-link-small {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+        min-height: 48px;
     }
 
     .footer-content {
@@ -2689,6 +2842,89 @@ h1, h2, h3, h4, h5, h6 {
     .btn {
         padding: 10px 20px;
         font-size: 0.9rem;
+    }
+    
+    .contact {
+        padding: 2rem 0.8rem;
+        margin: 0.5rem 0;
+    }
+    
+    .contact-item {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-details h3 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.85rem;
+    }
+    
+    .form {
+        padding: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        padding: 0.7rem;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 16px;
+        min-height: 44px;
+    }
+    
+    .locations-section {
+        padding: 1.5rem 0.8rem;
+        margin: 0.5rem 0;
+    }
+    
+    .location-details {
+        padding: 0.8rem;
+        margin: 0.8rem 0;
+    }
+    
+    .map-container {
+        padding: 0.8rem;
+    }
+    
+    .venue-link-small {
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+        min-height: 44px;
+    }
+    
+    .section-header {
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
     }
 
     /* Extra small screen countdown */
@@ -3063,10 +3299,11 @@ h1, h2, h3, h4, h5, h6 {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
+        backdrop-filter: blur(10px);
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
     }
 
     .about-content {
@@ -3393,13 +3630,14 @@ section + section {
     
     .hero-content {
         background: rgba(30, 30, 30, 0.08) !important;
-        backdrop-filter: blur(1px);
+        backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         margin: 0 0.5rem;
     }
     
     /* Typography mobile optimization */
     .hero-title {
+        font-size: 3.5rem;
         text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
     }
     
@@ -3465,7 +3703,7 @@ section + section {
     
     /* Section improvements */
     .quick-info {
-        background: linear-gradient(135deg, #FF6B35 0%, #ec5f08 100%) !important;
+        background: var(--white) !important;
     }
     
     .info-card {
@@ -3763,7 +4001,7 @@ section + section {
         gap: 6rem;
         grid-template-columns: 1.3fr 0.7fr;
         border-radius: 40px;
-        backdrop-filter: blur(1px);
+        backdrop-filter: blur(10px);
         box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
     }
     
@@ -4193,9 +4431,9 @@ section + section {
 
 /* About Page Section Colors */
 
-/* Main About Section - Light warm background */
+/* Main About Section - White background */
 .about-section-bg {
-    background: linear-gradient(135deg, #fdf6f0 0%, #f9f1e7 100%);
+    background: white;
     position: relative;
     overflow: hidden;
 }
@@ -4234,12 +4472,12 @@ section + section {
 
 /* About Us Subsection */
 .about-us-section {
-    background: linear-gradient(135deg, rgba(255, 127, 62, 0.08) 0%, rgba(255, 127, 62, 0.04) 100%);
+    background: white;
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
     border-left: 4px solid var(--primary-color);
-    box-shadow: 0 4px 20px rgba(255, 127, 62, 0.1);
+    box-shadow: 0 4px 20px rgba(220, 53, 69, 0.1);
     position: relative;
 }
 
@@ -4251,12 +4489,12 @@ section + section {
 
 /* History Section */
 .history-section {
-    background: linear-gradient(135deg, rgba(34, 139, 34, 0.08) 0%, rgba(34, 139, 34, 0.04) 100%);
+    background: white;
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
-    border-left: 4px solid #228B22;
-    box-shadow: 0 4px 20px rgba(34, 139, 34, 0.1);
+    border-left: 4px solid var(--green);
+    box-shadow: 0 4px 20px rgba(40, 167, 69, 0.1);
 }
 
 .history-section h2 {
@@ -4277,12 +4515,12 @@ section + section {
 
 /* Features Section */
 .features-section {
-    background: linear-gradient(135deg, rgba(75, 0, 130, 0.08) 0%, rgba(75, 0, 130, 0.04) 100%);
+    background: white;
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
-    border: 2px solid rgba(75, 0, 130, 0.1);
-    box-shadow: 0 6px 25px rgba(75, 0, 130, 0.15);
+    border: 2px solid rgba(220, 53, 69, 0.1);
+    box-shadow: 0 6px 25px rgba(220, 53, 69, 0.15);
 }
 
 .features-section .feature-item {
@@ -4335,12 +4573,12 @@ section + section {
 
 /* Founding Members Section */
 .founding-members-section {
-    /* background: linear-gradient(135deg, var(--primary-color) 0%, rgba(32, 178, 170, 0.06) 100%); */
+    background: white;
     padding: 2.5rem;
     border-radius: 20px;
     margin: 2rem 0 3rem 0;
-    border: 2px solid rgba(32, 178, 170, 0.15);
-    box-shadow: 0 8px 30px rgba(32, 178, 170, 0.2);
+    border: 2px solid rgba(220, 53, 69, 0.15);
+    box-shadow: 0 8px 30px rgba(220, 53, 69, 0.2);
     position: relative;
     z-index: 1;
 }
@@ -4372,12 +4610,12 @@ section + section {
 
 /* Working Committee Section */
 .working-committee-section {
-    /* background: linear-gradient(135deg, rgba(218, 112, 214, 0.12) 0%, rgba(218, 112, 214, 0.06) 100%); */
+    background: white;
     padding: 2.5rem;
     border-radius: 20px;
     margin: 2rem 0;
-    border: 2px solid rgba(218, 112, 214, 0.15);
-    box-shadow: 0 8px 30px rgba(218, 112, 214, 0.2);
+    border: 2px solid rgba(220, 53, 69, 0.15);
+    box-shadow: 0 8px 30px rgba(220, 53, 69, 0.2);
     position: relative;
     z-index: 1;
 }
@@ -4908,18 +5146,18 @@ section + section {
 }
 
 .map-container {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(255, 127, 62, 0.1);
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    border: 2px solid rgba(253, 126, 20, 0.15);
     transition: all 0.3s ease;
 }
 
 .map-container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 127, 62, 0.3);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
 }
 
 .map-container h4 {
@@ -4934,7 +5172,7 @@ section + section {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-light);
     position: relative;
 }
 
@@ -4945,7 +5183,7 @@ section + section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 45%, rgba(255, 127, 62, 0.1) 50%, transparent 55%);
+    background: linear-gradient(45deg, transparent 45%, rgba(253, 126, 20, 0.1) 50%, transparent 55%);
     pointer-events: none;
     z-index: 1;
     opacity: 0;
@@ -5045,9 +5283,12 @@ section + section {
 
 /* Locations Section (Contact Page) */  
 .locations-section {
-    background: linear-gradient(135deg, #e8f4f8 0%, #d1e9f0 100%);
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(253, 126, 20, 0.1) 100%);
     padding: 4rem 0;
     position: relative;
+    border: 2px solid rgba(253, 126, 20, 0.15);
+    border-radius: var(--border-radius);
+    margin: 2rem 0;
 }
 
 .locations-section .section-header {
@@ -5061,10 +5302,12 @@ section + section {
 /* Location Details for Contact Page */
 .location-details {
     margin: 1rem 0;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.5);
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
+    border: 2px solid rgba(253, 126, 20, 0.15);
     border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-light);
 }
 
 .location-details .map-address {
@@ -5088,15 +5331,15 @@ section + section {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, var(--primary-color), #ff8c5a);
+    background: var(--gradient-primary);
     color: white !important;
-    padding: 0.6rem 1.2rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 20px;
     text-decoration: none !important;
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 12px rgba(255, 127, 62, 0.3);
+    box-shadow: var(--shadow-medium);
     margin-top: 1rem;
     justify-content: center;
     width: 100%;
@@ -5104,12 +5347,14 @@ section + section {
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .venue-link-small:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 127, 62, 0.4);
-    background: linear-gradient(135deg, #ff8c5a, var(--primary-color));
+    box-shadow: var(--shadow-heavy);
+    background: var(--gradient-secondary);
+    color: white !important;
 }
 
 .venue-link-small i {
@@ -5148,7 +5393,7 @@ section + section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contactGrain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="%2320B2AA" fill-opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%2320B2AA" fill-opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23contactGrain)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contactGrain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="%23fd7e14" fill-opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%23ffc107" fill-opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23contactGrain)"/></svg>');
     opacity: 0.4;
     pointer-events: none;
 }
@@ -5236,7 +5481,7 @@ section + section {
     }
 
     .hero-title {
-        font-size: clamp(2rem, 5vw, 2.5rem);
+        font-size: clamp(2rem, 5vw, 3.5rem);
         line-height: 1.2;
         margin-bottom: 1rem;
     }
@@ -5339,7 +5584,7 @@ section + section {
     }
 
     .hero-title {
-        font-size: clamp(1.8rem, 4vw, 2rem);
+        font-size: clamp(1.8rem, 4vw, 3.5rem);
     }
 
     .hero-subtitle {
@@ -5828,6 +6073,246 @@ section + section {
     
     .hero-features .feature-item:hover i {
         transform: none;
+    }
+}
+
+/* Contact Page Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .contact {
+        padding: 3rem 1rem;
+        margin: 1rem 0;
+    }
+    
+    .contact-item {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .contact-details h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.9rem;
+    }
+    
+    .form {
+        padding: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        padding: 0.8rem;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 16px;
+        min-height: 48px;
+    }
+    
+    .locations-section {
+        padding: 2rem 1rem;
+        margin: 1rem 0;
+    }
+    
+    .location-details {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .map-container {
+        padding: 1rem;
+    }
+    
+    .venue-link-small {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+        min-height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact {
+        padding: 2rem 0.8rem;
+        margin: 0.5rem 0;
+    }
+    
+    .contact-item {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-details h3 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.85rem;
+    }
+    
+    .form {
+        padding: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        padding: 0.7rem;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 16px;
+        min-height: 44px;
+    }
+    
+    .locations-section {
+        padding: 1.5rem 0.8rem;
+        margin: 0.5rem 0;
+    }
+    
+    .location-details {
+        padding: 0.8rem;
+        margin: 0.8rem 0;
+    }
+    
+    .map-container {
+        padding: 0.8rem;
+    }
+    
+    .venue-link-small {
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+        min-height: 44px;
+    }
+    
+    .section-header {
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .contact {
+        padding: 1.5rem 0.5rem;
+        margin: 0.3rem 0;
+    }
+    
+    .contact-item {
+        padding: 0.6rem;
+        margin-bottom: 0.8rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.6rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .contact-details h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.8rem;
+    }
+    
+    .form {
+        padding: 0.8rem;
+    }
+    
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        padding: 0.6rem;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        padding: 0.7rem;
+        font-size: 16px;
+        min-height: 42px;
+    }
+    
+    .locations-section {
+        padding: 1rem 0.5rem;
+        margin: 0.3rem 0;
+    }
+    
+    .location-details {
+        padding: 0.6rem;
+        margin: 0.6rem 0;
+    }
+    
+    .map-container {
+        padding: 0.6rem;
+    }
+    
+    .venue-link-small {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
+        min-height: 42px;
+    }
+    
+    .section-header {
+        padding: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
     }
 }
 
