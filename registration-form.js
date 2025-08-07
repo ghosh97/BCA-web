@@ -339,9 +339,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Send to Google Sheets
         sendToGoogleSheets(data);
         
+        
         function sendToGoogleSheets(data) {
             // Send to Registration Google Sheets
-            const registrationScriptUrl = 'https://script.google.com/macros/s/AKfycbyxvg2FT4MGJiPLpv8RgoCgdlKH7s0O3cufrObyd_qnlUWEMTfDCgXfErRM_rN4wH6o/exec';
+            const registrationScriptUrl = 'https://script.google.com/macros/s/AKfycbxfFFyyEG8GOl072pXXTk96yMO3ETUzur6boq3wB5Ty7cO_rXZxsZJlJNq8sWZG2lz1wA/exec';
             
             console.log('Submitting registration data:', data);
             
