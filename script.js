@@ -471,7 +471,7 @@ function handleContactForm(e) {
 
 
     // Production mode - send to Google Sheets
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JnmiTu-QDht9yFoYxXuSyn--KTPBJjb4eCw8xOv8z39F1CECJ7b2YaBlVUvX6nJlAA/exec'; // ⚠️ REPLACE WITH YOUR NEW DEPLOYED URL!
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNnWhmvY5RLAvr29gjdPaFHmNCGnaJ8Qt_Pr7UkPjVOqVmQdX3_reC9qn-GEup7QHwiQ/exec'; // ⚠️ REPLACE WITH YOUR NEW DEPLOYED URL!
 
     
     
