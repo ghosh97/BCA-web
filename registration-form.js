@@ -90,9 +90,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
+            // Handle children-under-5 visibility based on adult selection
+            updateChildrenUnder5Visibility();
+            
             calculateTotal();
         });
     });
+    
+    // Function to update children-under-5 option visibility
+    function updateChildrenUnder5Visibility() {
+        const adultCheckbox = document.getElementById('adult');
+        const childrenUnder5Option = document.getElementById('children-under-5').closest('.contribution-option');
+        
+        if (adultCheckbox.checked) {
+            // Show children-under-5 option when adult is selected
+            childrenUnder5Option.style.display = 'block';
+            childrenUnder5Option.style.opacity = '1';
+        } else {
+            // Hide children-under-5 option when adult is not selected
+            childrenUnder5Option.style.display = 'none';
+            childrenUnder5Option.style.opacity = '0';
+            
+            // Uncheck and reset children-under-5 if adult is unchecked
+            const childrenUnder5Checkbox = document.getElementById('children-under-5');
+            const childrenUnder5Count = document.getElementById('children-under-5-count');
+            if (childrenUnder5Checkbox.checked) {
+                childrenUnder5Checkbox.checked = false;
+                childrenUnder5Count.style.display = 'none';
+                childrenUnder5Count.value = '0';
+                childrenUnder5Option.style.borderColor = '#ddd';
+                childrenUnder5Option.style.background = '#f8f9fa';
+            }
+        }
+    }
+    
+    // Initialize children-under-5 visibility on page load
+    updateChildrenUnder5Visibility();
     
     // Handle count input changes
     countInputs.forEach(input => {
@@ -235,19 +268,18 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Check if all selected contributions have valid counts
-        let hasValidCounts = false;
-        selectedContributions.forEach(checkbox => {
-            const countId = checkbox.id + '-count';
-            const countInput = document.getElementById(countId);
-            const count = parseInt(countInput.value) || 0;
-            if (count > 0) {
-                hasValidCounts = true;
-            }
-        });
+        // Check if at least one contribution has a valid count
+        const adultCount = parseInt(document.getElementById('adult-count').value) || 0;
+        const studentCount = parseInt(document.getElementById('students-count').value) || 0;
+        const childAboveCount = parseInt(document.getElementById('children-count').value) || 0;
+        const childBelowCount = parseInt(document.getElementById('children-under-5-count').value) || 0;
+        const customDonationInput = document.getElementById('custom-donation-amount');
+        const customDonationAmount = parseFloat(customDonationInput.value) || 0;
         
-        if (!hasValidCounts) {
-            alert('Please enter a count greater than 0 for at least one selected contribution type.');
+        const totalPeople = adultCount + studentCount + childAboveCount + childBelowCount;
+        
+        if (totalPeople === 0 && customDonationAmount === 0) {
+            alert('Please select at least one contribution type or enter an additional donation amount.');
             return;
         }
         
@@ -266,86 +298,52 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare form data for Google Sheets
         const formData = new FormData(form);
         
-        // Get contribution details
-        let contributionDetails = [];
-        let totalAmountValue = 0;
+        // Validate custom donation amount
+        if (customDonationInput.value && (isNaN(customDonationAmount) || customDonationAmount < 0)) {
+            alert('Please enter a valid amount for additional donation.');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
         
-        selectedContributions.forEach(checkbox => {
-            const countId = checkbox.id + '-count';
-            const countInput = document.getElementById(countId);
-            const count = parseInt(countInput.value) || 0;
-            const price = parseFloat(checkbox.dataset.price);
-            const total = price * count;
-            
-            if (count > 0) {
-                contributionDetails.push(`${checkbox.nextElementSibling.textContent.trim()}: ${count} × €${price} = €${total}`);
-                totalAmountValue += total;
-            }
+        // Calculate total amount
+        let totalAmountValue = (adultCount * 65) + (studentCount * 55) + (childAboveCount * 35) + customDonationAmount;
+        
+        // Debug logging for total calculation
+        console.log('Total calculation:', {
+            adultCount: adultCount,
+            studentCount: studentCount,
+            childAboveCount: childAboveCount,
+            childBelowCount: childBelowCount,
+            customDonationAmount: customDonationAmount,
+            totalAmountValue: totalAmountValue
         });
         
-        // Handle file upload
-        const fileInput = document.getElementById('paymentProof');
-        let fileData = null;
-        let fileName = null;
+        // Handle Transaction ID
+        const transactionId = document.getElementById('transactionId').value.trim();
         
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            fileName = file.name;
-            
-            // Convert file to base64
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                fileData = e.target.result.split(',')[1]; // Remove data URL prefix
-                
-                // Create data object for Google Sheets
-                const data = {
-                    name: formData.get('name'),
-                    contact: formData.get('contact'),
-                    email: formData.get('email'),
-                    contributionTypes: contributionDetails.join('; '),
-                    totalAmount: `€${totalAmountValue}`,
-                    fileData: fileData,
-                    fileName: fileName,
-                    timestamp: new Date().toLocaleString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
-                    })
-                };
-                
-                // Send to Google Sheets
-                sendToGoogleSheets(data);
-            };
-            
-            reader.readAsDataURL(file);
-        } else {
-            // No file uploaded
-            const data = {
-                name: formData.get('name'),
-                contact: formData.get('contact'),
-                email: formData.get('email'),
-                contributionTypes: contributionDetails.join('; '),
-                totalAmount: `€${totalAmountValue}`,
-                timestamp: new Date().toLocaleString('en-US', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
-                })
-            };
-            
-            // Send to Google Sheets
-            sendToGoogleSheets(data);
-        }
+        // Create data object for Google Script
+        const data = {
+            name: formData.get('name'),
+            whatsapp: formData.get('contact'), // Map contact to whatsapp
+            email: formData.get('email'),
+            member_type: 'BCA Member', // Default member type
+            adult: adultCount,
+            student: studentCount,
+            child_above: childAboveCount,
+            child_below: childBelowCount,
+            total_amount: totalAmountValue, // Send as number, not string
+            payment_proof: transactionId || 'Not provided'
+        };
+        
+        // Send to Google Sheets
+        sendToGoogleSheets(data);
         
         function sendToGoogleSheets(data) {
             // Send to Registration Google Sheets
-            const registrationScriptUrl = 'https://script.google.com/macros/s/AKfycbwIjRlrsRWljVPm2BuKhtofNE2hrEvlJqLQGmcekQkpIeqKcvm5whQNC_mm41QSerRN/exec';
+            const registrationScriptUrl = 'https://script.google.com/macros/s/AKfycbyxvg2FT4MGJiPLpv8RgoCgdlKH7s0O3cufrObyd_qnlUWEMTfDCgXfErRM_rN4wH6o/exec';
+            
+            console.log('Submitting registration data:', data);
             
             // Simple direct request (no CORS complications)
             fetch(registrationScriptUrl, {
@@ -380,6 +378,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     optionDiv.style.borderColor = '#ddd';
                     optionDiv.style.background = '#f8f9fa';
                 });
+                
+                // Reset custom donation amount
+                const customDonationInput = document.getElementById('custom-donation-amount');
+                if (customDonationInput) {
+                    customDonationInput.value = '';
+                }
+                
+                // Reset children-under-5 visibility
+                updateChildrenUnder5Visibility();
                 
                 // Hide bank information
                 const bankInfo = document.getElementById('bankInfo');
@@ -420,6 +427,32 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Reset form and button
                         form.reset();
                         totalAmount.textContent = '€0';
+                        
+                        // Reset contribution options styling
+                        contributionCheckboxes.forEach(checkbox => {
+                            const countId = checkbox.id + '-count';
+                            const countInput = document.getElementById(countId);
+                            const optionDiv = checkbox.closest('.contribution-option');
+                            
+                            countInput.style.display = 'none';
+                            countInput.value = '0';
+                            optionDiv.style.borderColor = '#ddd';
+                            optionDiv.style.background = '#f8f9fa';
+                        });
+                        
+                        // Reset custom donation amount
+                        const customDonationInput = document.getElementById('custom-donation-amount');
+                        if (customDonationInput) {
+                            customDonationInput.value = '';
+                        }
+                        
+                        // Reset children-under-5 visibility
+                        updateChildrenUnder5Visibility();
+                        
+                        // Hide bank information
+                        const bankInfo = document.getElementById('bankInfo');
+                        bankInfo.style.display = 'none';
+                        
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                         
@@ -460,42 +493,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // File upload handling
-    const fileInput = document.getElementById('paymentProof');
-    fileInput.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            // Validate file type
-            const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-            if (!allowedTypes.includes(file.type)) {
-                alert('Please upload only JPG, PNG, or PDF files.');
-                this.value = '';
-                return;
-            }
-            
-            // Validate file size (max 5MB)
-            const maxSize = 5 * 1024 * 1024; // 5MB
-            if (file.size > maxSize) {
-                alert('File size must be less than 5MB.');
-                this.value = '';
-                return;
-            }
-            
-            // Show file name
-            const fileName = file.name;
-            const fileInfo = document.createElement('div');
-            fileInfo.style.cssText = 'color: #228B22; font-size: 0.9rem; margin-top: 0.5rem; font-weight: 600;';
-            fileInfo.textContent = `✓ ${fileName} selected`;
-            
-            // Remove previous file info
-            const prevFileInfo = this.parentNode.querySelector('div[style*="color: #228B22"]');
-            if (prevFileInfo) {
-                prevFileInfo.remove();
-            }
-            
-            this.parentNode.appendChild(fileInfo);
-        }
-    });
+
 });
 
 // Responsive slider sizing for any sliders on the page
