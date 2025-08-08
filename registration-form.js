@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const email = document.getElementById('email');
     const emailConfirm = document.getElementById('emailConfirm');
     const contact = document.getElementById('contact');
+    const countryCode = document.getElementById('country-code');
     const successMessage = document.getElementById('successMessage');
     
     // Contact number validation
@@ -15,8 +16,33 @@ document.addEventListener('DOMContentLoaded', function() {
         // Validate length (minimum 9 digits)
         if (this.value.length < 9) {
             this.setCustomValidity('Please enter a valid phone number (minimum 9 digits)');
+            this.style.borderColor = 'var(--red)';
+            this.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.1)';
         } else {
             this.setCustomValidity('');
+            this.style.borderColor = 'var(--green)';
+            this.style.boxShadow = '0 0 0 3px rgba(40, 167, 69, 0.1)';
+        }
+    });
+
+    // Style country code select on focus and change
+    countryCode.addEventListener('focus', function() {
+        this.style.borderColor = 'var(--red)';
+        this.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.1)';
+    });
+
+    countryCode.addEventListener('change', function() {
+        this.style.borderColor = 'var(--green)';
+        this.style.boxShadow = '0 0 0 3px rgba(40, 167, 69, 0.1)';
+    });
+
+    countryCode.addEventListener('blur', function() {
+        if (this.value) {
+            this.style.borderColor = 'var(--green)';
+            this.style.boxShadow = '0 0 0 3px rgba(40, 167, 69, 0.1)';
+        } else {
+            this.style.borderColor = '#ddd';
+            this.style.boxShadow = 'none';
         }
     });
     
@@ -68,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Function to handle option disabling
-    function handleOptionDisabling(isStudentSelected) {
+    function handleOptionDisabling(checkbox) {
         const adultCheckbox = document.getElementById('adult');
         const childrenCheckbox = document.getElementById('children');
         const childrenUnder5Checkbox = document.getElementById('children-under-5');
@@ -79,59 +105,68 @@ document.addEventListener('DOMContentLoaded', function() {
         const childrenOption = childrenCheckbox.closest('.contribution-option');
         const childrenUnder5Option = childrenUnder5Checkbox.closest('.contribution-option');
         const studentOption = studentCheckbox.closest('.contribution-option');
-        
-        if (isStudentSelected) {
-            // If student is selected, disable other options
-            adultCheckbox.disabled = true;
-            childrenCheckbox.disabled = true;
-            childrenUnder5Checkbox.disabled = true;
+
+        if (checkbox.id === 'students') {
+            // If student is selected/deselected
+            const isStudentSelected = checkbox.checked;
+            
+            // Handle Regular and Children options
+            adultCheckbox.disabled = isStudentSelected;
+            childrenCheckbox.disabled = isStudentSelected;
+            childrenUnder5Checkbox.disabled = isStudentSelected;
             
             // Add visual indication for disabled options
-            adultOption.style.opacity = '0.5';
-            childrenOption.style.opacity = '0.5';
-            childrenUnder5Option.style.opacity = '0.5';
-            adultOption.style.cursor = 'not-allowed';
-            childrenOption.style.cursor = 'not-allowed';
-            childrenUnder5Option.style.cursor = 'not-allowed';
+            adultOption.style.opacity = isStudentSelected ? '0.5' : '1';
+            childrenOption.style.opacity = isStudentSelected ? '0.5' : '1';
+            childrenUnder5Option.style.opacity = isStudentSelected ? '0.5' : '1';
+            adultOption.style.cursor = isStudentSelected ? 'not-allowed' : 'pointer';
+            childrenOption.style.cursor = isStudentSelected ? 'not-allowed' : 'pointer';
+            childrenUnder5Option.style.cursor = isStudentSelected ? 'not-allowed' : 'pointer';
             
-            // Uncheck other options
-            if (adultCheckbox.checked) {
-                adultCheckbox.checked = false;
-                const adultCount = document.getElementById('adult-count');
-                adultCount.style.display = 'none';
-                adultCount.value = '0';
-                adultOption.style.borderColor = '#ddd';
-                adultOption.style.background = '#f8f9fa';
-            }
-            if (childrenCheckbox.checked) {
-                childrenCheckbox.checked = false;
-                const childrenCount = document.getElementById('children-count');
-                childrenCount.style.display = 'none';
-                childrenCount.value = '0';
-                childrenOption.style.borderColor = '#ddd';
-                childrenOption.style.background = '#f8f9fa';
-            }
-            if (childrenUnder5Checkbox.checked) {
-                childrenUnder5Checkbox.checked = false;
-                const childrenUnder5Count = document.getElementById('children-under-5-count');
-                childrenUnder5Count.style.display = 'none';
-                childrenUnder5Count.value = '0';
-                childrenUnder5Option.style.borderColor = '#ddd';
-                childrenUnder5Option.style.background = '#f8f9fa';
+            if (isStudentSelected) {
+                // Uncheck other options if student is selected
+                if (adultCheckbox.checked) {
+                    adultCheckbox.checked = false;
+                    const adultCount = document.getElementById('adult-count');
+                    adultCount.style.display = 'none';
+                    adultCount.value = '0';
+                    adultOption.style.borderColor = '#ddd';
+                    adultOption.style.background = '#f8f9fa';
+                }
+                if (childrenCheckbox.checked) {
+                    childrenCheckbox.checked = false;
+                    const childrenCount = document.getElementById('children-count');
+                    childrenCount.style.display = 'none';
+                    childrenCount.value = '0';
+                    childrenOption.style.borderColor = '#ddd';
+                    childrenOption.style.background = '#f8f9fa';
+                }
+                if (childrenUnder5Checkbox.checked) {
+                    childrenUnder5Checkbox.checked = false;
+                    const childrenUnder5Count = document.getElementById('children-under-5-count');
+                    childrenUnder5Count.style.display = 'none';
+                    childrenUnder5Count.value = '0';
+                    childrenUnder5Option.style.borderColor = '#ddd';
+                    childrenUnder5Option.style.background = '#f8f9fa';
+                }
             }
         } else {
-            // If student is not selected, enable other options
-            adultCheckbox.disabled = false;
-            childrenCheckbox.disabled = false;
-            childrenUnder5Checkbox.disabled = false;
+            // If Regular or Children options are selected/deselected
+            const isRegularOrChildrenSelected = adultCheckbox.checked || childrenCheckbox.checked || childrenUnder5Checkbox.checked;
             
-            // Remove visual indication for disabled options
-            adultOption.style.opacity = '1';
-            childrenOption.style.opacity = '1';
-            childrenUnder5Option.style.opacity = '1';
-            adultOption.style.cursor = 'pointer';
-            childrenOption.style.cursor = 'pointer';
-            childrenUnder5Option.style.cursor = 'pointer';
+            // Handle Student option
+            studentCheckbox.disabled = isRegularOrChildrenSelected;
+            
+            // Add visual indication for disabled student option
+            studentOption.style.opacity = isRegularOrChildrenSelected ? '0.5' : '1';
+            studentOption.style.cursor = isRegularOrChildrenSelected ? 'not-allowed' : 'pointer';
+            
+            if (isRegularOrChildrenSelected && studentCheckbox.checked) {
+                // Uncheck student if Regular or Children are selected
+                studentCheckbox.checked = false;
+                studentOption.style.borderColor = '#ddd';
+                studentOption.style.background = '#f8f9fa';
+            }
         }
         
         calculateTotal();
@@ -144,14 +179,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const countInput = document.getElementById(countId);
             const optionDiv = this.closest('.contribution-option');
             
-            if (this.id === 'students') {
-                // Handle student option selection
-                handleOptionDisabling(this.checked);
-            } else if (this.checked && document.getElementById('students').checked) {
-                // Prevent selecting other options if student is selected
-                this.checked = false;
-                return;
-            }
+            // Call handleOptionDisabling with the current checkbox
+            handleOptionDisabling(this);
             
             if (this.checked) {
                 if (this.id === 'custom-donation') {
@@ -164,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Handle student option - no count needed
                     optionDiv.style.borderColor = '#FF6B35';
                     optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
-                    hasValidSelections = true;
                 } else {
                     // Handle regular options
                     countInput.style.display = 'block';
@@ -190,8 +218,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     optionDiv.style.background = '#f8f9fa';
                 } else {
                     // Handle regular options
-                    countInput.style.display = 'none';
-                    countInput.value = '0';
+                    if (countInput) {
+                        countInput.style.display = 'none';
+                        countInput.value = '0';
+                    }
                     optionDiv.style.borderColor = '#ddd';
                     optionDiv.style.background = '#f8f9fa';
                 }
@@ -395,6 +425,14 @@ document.addEventListener('DOMContentLoaded', function() {
             form.reportValidity();
             return;
         }
+
+        // Validate phone number format
+        const phoneNumber = contact.value;
+        if (phoneNumber.length < 9) {
+            alert('Please enter a valid phone number (minimum 9 digits).');
+            contact.focus();
+            return;
+        }
         
         // Show loading state
         const submitBtn = document.getElementById('submitBtn');
@@ -405,33 +443,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare form data for Google Sheets
         const formData = new FormData(form);
         
-        // Validate custom donation amount
-        if (customDonationInput.value && (isNaN(customDonationAmount) || customDonationAmount < 0)) {
-            alert('Please enter a valid amount for additional donation.');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            return;
-        }
-        
         // Calculate total amount
         let totalAmountValue = (adultCount * 65) + (childAboveCount * 35);
-        
-        // Add student contribution if selected (always count as 1)
-        if (document.getElementById('students').checked) {
+        if (isStudentSelected) {
             totalAmountValue += 55;
         }
-        
         totalAmountValue += customDonationAmount;
-        
-        // Debug logging for total calculation
-        console.log('Total calculation:', {
-            adultCount: adultCount,
-            isStudent: isStudentSelected,
-            childAboveCount: childAboveCount,
-            childBelowCount: childBelowCount,
-            customDonationAmount: customDonationAmount,
-            totalAmountValue: totalAmountValue
-        });
         
         // Handle Transaction ID
         const transactionId = document.getElementById('transactionId').value.trim();
@@ -439,14 +456,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create data object for Google Script
         const data = {
             name: formData.get('name'),
-            whatsapp: formData.get('contact'), // Map contact to whatsapp
+            whatsapp: countryCode.value + formData.get('contact'), // Combine country code with number
             email: formData.get('email'),
-            member_type: 'BCA Member', // Default member type
+            member_type: 'BCA Member',
             adult: adultCount,
             student: isStudentSelected ? 1 : 0,
             child_above: childAboveCount,
             child_below: childBelowCount,
-            total_amount: totalAmountValue, // Send as number, not string
+            total_amount: totalAmountValue,
             payment_proof: transactionId || 'Not provided'
         };
         
