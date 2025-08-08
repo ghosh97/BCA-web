@@ -773,7 +773,7 @@ body {
         right: 0 !important;
         bottom: 0 !important;
         z-index: 9999 !important;
-        background: rgba(0, 0, 0, 0.9) !important;
+        background: rgba(0, 0, 0, 0) !important;
         -webkit-overflow-scrolling: touch !important;
     }
     
