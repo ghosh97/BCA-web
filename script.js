@@ -605,10 +605,6 @@ function closeLightbox() {
 
 // Intersection Observer for Animations
 function initScrollAnimations() {
-    // Disable scroll animations on mobile devices
-    if (window.innerWidth <= 768) {
-        return;
-    }
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -619,18 +615,67 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animate');
             }
         });
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.feature-item, .event-card, .timeline-item, .gallery-item, .contact-item');
+    const animateElements = document.querySelectorAll('.feature-item, .event-card, .timeline-item, .gallery-item, .contact-item, .animate-on-scroll');
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+    
+    // Add staggered animation for event cards
+    const eventCards = document.querySelectorAll('.event-card.animate-on-scroll');
+    eventCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.2}s`;
+    });
+    
+    // Debug: Log found elements
+    console.log('Found animate elements:', animateElements.length);
+    console.log('Found event cards:', eventCards.length);
+    
+    // Mobile fallback: Trigger animations on scroll for mobile devices
+    if (window.innerWidth <= 768) {
+        const mobileAnimateElements = document.querySelectorAll('.animate-on-scroll');
+        mobileAnimateElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        });
+        
+        // Simple scroll listener for mobile
+        let mobileObserver;
+        try {
+            mobileObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+            
+            mobileAnimateElements.forEach(el => mobileObserver.observe(el));
+        } catch (e) {
+            console.log('Intersection Observer not supported, using scroll fallback');
+            // Fallback for older browsers
+            window.addEventListener('scroll', () => {
+                mobileAnimateElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                        el.classList.add('animate');
+                    }
+                });
+            });
+        }
+    }
 }
 
 // Parallax Effect
