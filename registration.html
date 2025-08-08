@@ -101,7 +101,7 @@
                             <!-- Contact Number Field -->
                             <div class="form-group">
                                 <label for="contact" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Contact/Whatsapp Number *</label>
-                                <input type="tel" id="contact" name="contact" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <input type="number" id="contact" name="contact" required pattern="[0-9]*" inputmode="numeric" min="0" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; -moz-appearance: textfield;" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                             </div>
                         </div>
                         
@@ -148,12 +148,11 @@
                                 </div>
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
                                         <input type="checkbox" id="students" name="contributionTypes" value="students" data-price="55" data-category="bca-members" style="width: 18px; height: 18px; accent-color: var(--red);">
                                         <label for="students" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Students (Individuals)</label>
                                         <span style="color: var(--red); font-weight: 700; margin-left: auto;">€55</span>
                                     </div>
-                                    <input type="number" id="students-count" name="students-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
                                 </div>
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
@@ -233,13 +232,22 @@
                             <div id="totalAmount" style="font-size: 2rem; font-weight: 700; color: var(--red);">€0</div>
                         </div>
                         
-                        <!-- Bank Account Information (Hidden by default) -->
-                        <div id="bankInfo" style="display: none; background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(32, 201, 151, 0.05) 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--green); animation: slideInUp 0.5s ease-out; position: relative;">
+                        <!-- Bank Account Information (Always visible) -->
+                        <div id="bankInfo" style="background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(32, 201, 151, 0.05) 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--green); animation: slideInUp 0.5s ease-out; position: relative;">
                             <!-- Bank Details Tag -->
                             
-                            <h4 style="color: var(--green); font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <h4 style="color: var(--green); font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                                 <i class="fas fa-university"></i> Bank Account Details
                             </h4>
+                            
+                            <!-- Payment Instructions Note -->
+                            <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--red); margin-bottom: 1.5rem;">
+                                <p style="margin: 0; color: var(--red); font-weight: 600; font-size: 0.95rem;">
+                                    <i class="fas fa-exclamation-circle" style="color: var(--red); margin-right: 0.5rem;"></i>
+                                    NOTE: All contributions (tickets and donations) must be paid to this bank account only.
+                                </p>
+                            </div>
+
                             <div class="bank-details" style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                                 <div style="margin-bottom: 1rem;">
                                     <strong style="color: #333; font-size: 1.2rem;">Account Number:</strong>
@@ -253,10 +261,10 @@
                                     <strong style="color: #333; font-size: 1.2rem;">Account Name:</strong>
                                     <span style="color: var(--green); font-weight: 600; font-size: 1.3rem;">Bengali Cultural Association</span>
                                 </div>
-                                <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--red);">
-                                    <strong style="color: var(--red); font-size: 1.2rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: var(--red); font-size: 1.3rem;">Your NAME - Donation</span>
+                                <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--red); margin-bottom: 1rem;">
+                                    <strong style="color: var(--red); font-size: 1.1rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: var(--red); font-size: 1.6rem;">Your NAME - Donation</span>
                                 </div>
-                                
+
 
                             </div>
                         </div>
@@ -292,8 +300,11 @@
                 
                 <!-- Form Footer -->
                 <div class="form-footer" style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(220, 53, 69, 0.2);">
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">📧 Need help? Contact us at <a href="mailto:info@bcaspain.org" style="color: var(--red); text-decoration: none;">info@bcaspain.org</a></p>
-                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.1rem;">
+                        <p style="margin: 0;">📧 Need help?</p>
+                        <p style="margin: 0;">Contact us at <a href="mailto:info@bcaspain.org" style="color: var(--red); text-decoration: none;">info@bcaspain.org</a></p>
+                    </div>
+                    <!-- <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
                         <span style="background: rgba(220, 53, 69, 0.1); color: var(--red); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
                             <i class="fas fa-shield-alt"></i> Secure Form
                         </span>
@@ -303,7 +314,7 @@
                         <span style="background: rgba(40, 167, 69, 0.1); color: var(--green); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
                             <i class="fas fa-check-circle"></i> Instant Confirmation
                         </span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
@@ -409,6 +420,35 @@
         .form-container {
             position: relative;
             transition: all 0.3s ease;
+        }
+        
+        /* Hide number input spinners */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        
+        /* Contact number validation styles */
+        input#contact:invalid {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+        
+        input#contact:valid {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+        
+        input#contact:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
         }
         
         .form-container:hover {
@@ -711,34 +751,38 @@
             }
             
             /* Bank Info Mobile Styles */
-            .bank-info {
-                padding: 1.5rem !important;
-                margin-bottom: 1.5rem !important;
+            #bankInfo {
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
             }
             
-            .bank-info h4 {
-                font-size: 1.3rem !important;
+            #bankInfo h4 {
+                font-size: 1.1rem !important;
+                margin-bottom: 1rem !important;
             }
             
             .bank-details {
-                padding: 1rem !important;
+                padding: 0.8rem !important;
             }
             
             .bank-details div {
-                margin-bottom: 0.8rem !important;
+                margin-bottom: 0.5rem !important;
             }
             
             .bank-details strong {
-                font-size: 1.1rem !important;
+                font-size: 0.9rem !important;
+                display: block !important;
             }
             
             .bank-details span {
-                font-size: 1.2rem !important;
+                font-size: 1rem !important;
             }
             
             .bank-details span[style*="font-family: monospace"] {
-                font-size: 1.3rem !important;
+                font-size: 1.1rem !important;
                 word-break: break-all;
+                display: block !important;
+                margin-top: 0.2rem !important;
             }
             
             /* Closing Message Mobile Styles */
@@ -809,6 +853,27 @@
             
             .form-footer {
                 padding: 1rem !important;
+            }
+            
+            .form-footer {
+                padding: 0.8rem !important;
+            }
+
+            .form-footer > div {
+                font-size: 0.85rem !important;
+                line-height: 1.6 !important;
+            }
+            
+            .form-footer p {
+                margin: 0.2rem 0 !important;
+                padding: 0 !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .form-footer a {
+                display: inline-block !important;
+                padding: 0.1rem 0 !important;
+                color: var(--red) !important;
             }
             
             .form-footer span {
@@ -926,28 +991,29 @@
             }
             
             /* Bank Info Extra Small Mobile */
-            .bank-info {
-                padding: 1rem !important;
-            }
-            
-            .bank-info h4 {
-                font-size: 1.2rem !important;
-            }
-            
-            .bank-details {
+            #bankInfo {
                 padding: 0.8rem !important;
             }
             
-            .bank-details strong {
+            #bankInfo h4 {
                 font-size: 1rem !important;
             }
             
+            .bank-details {
+                padding: 0.6rem !important;
+            }
+            
+            .bank-details strong {
+                font-size: 0.85rem !important;
+            }
+            
             .bank-details span {
-                font-size: 1.1rem !important;
+                font-size: 0.9rem !important;
             }
             
             .bank-details span[style*="font-family: monospace"] {
-                font-size: 1.2rem !important;
+                font-size: 1rem !important;
+                letter-spacing: -0.5px !important;
             }
             
             /* Closing Message Extra Small Mobile */

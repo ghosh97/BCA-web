@@ -4,7 +4,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalAmount = document.getElementById('totalAmount');
     const email = document.getElementById('email');
     const emailConfirm = document.getElementById('emailConfirm');
+    const contact = document.getElementById('contact');
     const successMessage = document.getElementById('successMessage');
+    
+    // Contact number validation
+    contact.addEventListener('input', function() {
+        // Remove any non-numeric characters
+        this.value = this.value.replace(/[^0-9]/g, '');
+        
+        // Validate length (minimum 9 digits)
+        if (this.value.length < 9) {
+            this.setCustomValidity('Please enter a valid phone number (minimum 9 digits)');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+    
+    // Prevent 'e', '+', '-' in number input
+    contact.addEventListener('keydown', function(e) {
+        if (e.key === 'e' || e.key === '+' || e.key === '-' || e.key === '.') {
+            e.preventDefault();
+        }
+    });
     
     // Get all contribution checkboxes and their count inputs
     const contributionCheckboxes = document.querySelectorAll('input[name="contributionTypes"]');
@@ -17,15 +38,21 @@ document.addEventListener('DOMContentLoaded', function() {
         
         contributionCheckboxes.forEach(checkbox => {
             if (checkbox.checked) {
-                // Handle regular options
-                const price = parseFloat(checkbox.dataset.price);
-                const countId = checkbox.id + '-count';
-                const countInput = document.getElementById(countId);
-                const count = parseInt(countInput.value) || 0;
-                total += price * count;
-                
-                if (count > 0) {
+                // Handle student option differently
+                if (checkbox.id === 'students') {
+                    total += 55; // Add fixed price for one student
                     hasValidSelections = true;
+                } else if (checkbox.id !== 'custom-donation') {
+                    // Handle regular options (excluding custom donation)
+                    const price = parseFloat(checkbox.dataset.price);
+                    const countId = checkbox.id + '-count';
+                    const countInput = document.getElementById(countId);
+                    const count = parseInt(countInput.value) || 0;
+                    total += price * count;
+                    
+                    if (count > 0) {
+                        hasValidSelections = true;
+                    }
                 }
             }
         });
@@ -38,22 +65,93 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         totalAmount.textContent = `€${total}`;
-        
-        // Show/hide bank information based on selections
-        const bankInfo = document.getElementById('bankInfo');
-        if (hasValidSelections && total > 0) {
-            bankInfo.style.display = 'block';
-        } else {
-            bankInfo.style.display = 'none';
-        }
     }
     
+    // Function to handle option disabling
+    function handleOptionDisabling(isStudentSelected) {
+        const adultCheckbox = document.getElementById('adult');
+        const childrenCheckbox = document.getElementById('children');
+        const childrenUnder5Checkbox = document.getElementById('children-under-5');
+        const studentCheckbox = document.getElementById('students');
+        
+        // Get the container divs
+        const adultOption = adultCheckbox.closest('.contribution-option');
+        const childrenOption = childrenCheckbox.closest('.contribution-option');
+        const childrenUnder5Option = childrenUnder5Checkbox.closest('.contribution-option');
+        const studentOption = studentCheckbox.closest('.contribution-option');
+        
+        if (isStudentSelected) {
+            // If student is selected, disable other options
+            adultCheckbox.disabled = true;
+            childrenCheckbox.disabled = true;
+            childrenUnder5Checkbox.disabled = true;
+            
+            // Add visual indication for disabled options
+            adultOption.style.opacity = '0.5';
+            childrenOption.style.opacity = '0.5';
+            childrenUnder5Option.style.opacity = '0.5';
+            adultOption.style.cursor = 'not-allowed';
+            childrenOption.style.cursor = 'not-allowed';
+            childrenUnder5Option.style.cursor = 'not-allowed';
+            
+            // Uncheck other options
+            if (adultCheckbox.checked) {
+                adultCheckbox.checked = false;
+                const adultCount = document.getElementById('adult-count');
+                adultCount.style.display = 'none';
+                adultCount.value = '0';
+                adultOption.style.borderColor = '#ddd';
+                adultOption.style.background = '#f8f9fa';
+            }
+            if (childrenCheckbox.checked) {
+                childrenCheckbox.checked = false;
+                const childrenCount = document.getElementById('children-count');
+                childrenCount.style.display = 'none';
+                childrenCount.value = '0';
+                childrenOption.style.borderColor = '#ddd';
+                childrenOption.style.background = '#f8f9fa';
+            }
+            if (childrenUnder5Checkbox.checked) {
+                childrenUnder5Checkbox.checked = false;
+                const childrenUnder5Count = document.getElementById('children-under-5-count');
+                childrenUnder5Count.style.display = 'none';
+                childrenUnder5Count.value = '0';
+                childrenUnder5Option.style.borderColor = '#ddd';
+                childrenUnder5Option.style.background = '#f8f9fa';
+            }
+        } else {
+            // If student is not selected, enable other options
+            adultCheckbox.disabled = false;
+            childrenCheckbox.disabled = false;
+            childrenUnder5Checkbox.disabled = false;
+            
+            // Remove visual indication for disabled options
+            adultOption.style.opacity = '1';
+            childrenOption.style.opacity = '1';
+            childrenUnder5Option.style.opacity = '1';
+            adultOption.style.cursor = 'pointer';
+            childrenOption.style.cursor = 'pointer';
+            childrenUnder5Option.style.cursor = 'pointer';
+        }
+        
+        calculateTotal();
+    }
+
     // Handle checkbox changes
     contributionCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             const countId = this.id + '-count';
             const countInput = document.getElementById(countId);
             const optionDiv = this.closest('.contribution-option');
+            
+            if (this.id === 'students') {
+                // Handle student option selection
+                handleOptionDisabling(this.checked);
+            } else if (this.checked && document.getElementById('students').checked) {
+                // Prevent selecting other options if student is selected
+                this.checked = false;
+                return;
+            }
             
             if (this.checked) {
                 if (this.id === 'custom-donation') {
@@ -62,6 +160,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     customInputs.style.display = 'block';
                     optionDiv.style.borderColor = '#FF6B35';
                     optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
+                } else if (this.id === 'students') {
+                    // Handle student option - no count needed
+                    optionDiv.style.borderColor = '#FF6B35';
+                    optionDiv.style.background = 'rgba(255, 107, 53, 0.05)';
+                    hasValidSelections = true;
                 } else {
                     // Handle regular options
                     countInput.style.display = 'block';
@@ -79,6 +182,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (warningElement) {
                         warningElement.style.display = 'none';
                     }
+                    optionDiv.style.borderColor = '#ddd';
+                    optionDiv.style.background = '#f8f9fa';
+                } else if (this.id === 'students') {
+                    // Handle student option unchecked
                     optionDiv.style.borderColor = '#ddd';
                     optionDiv.style.background = '#f8f9fa';
                 } else {
@@ -270,13 +377,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if at least one contribution has a valid count
         const adultCount = parseInt(document.getElementById('adult-count').value) || 0;
-        const studentCount = parseInt(document.getElementById('students-count').value) || 0;
         const childAboveCount = parseInt(document.getElementById('children-count').value) || 0;
         const childBelowCount = parseInt(document.getElementById('children-under-5-count').value) || 0;
         const customDonationInput = document.getElementById('custom-donation-amount');
         const customDonationAmount = parseFloat(customDonationInput.value) || 0;
+        const isStudentSelected = document.getElementById('students').checked;
         
-        const totalPeople = adultCount + studentCount + childAboveCount + childBelowCount;
+        const totalPeople = adultCount + (isStudentSelected ? 1 : 0) + childAboveCount + childBelowCount;
         
         if (totalPeople === 0 && customDonationAmount === 0) {
             alert('Please select at least one contribution type or enter an additional donation amount.');
@@ -307,12 +414,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Calculate total amount
-        let totalAmountValue = (adultCount * 65) + (studentCount * 55) + (childAboveCount * 35) + customDonationAmount;
+        let totalAmountValue = (adultCount * 65) + (childAboveCount * 35);
+        
+        // Add student contribution if selected (always count as 1)
+        if (document.getElementById('students').checked) {
+            totalAmountValue += 55;
+        }
+        
+        totalAmountValue += customDonationAmount;
         
         // Debug logging for total calculation
         console.log('Total calculation:', {
             adultCount: adultCount,
-            studentCount: studentCount,
+            isStudent: isStudentSelected,
             childAboveCount: childAboveCount,
             childBelowCount: childBelowCount,
             customDonationAmount: customDonationAmount,
@@ -329,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
             email: formData.get('email'),
             member_type: 'BCA Member', // Default member type
             adult: adultCount,
-            student: studentCount,
+            student: isStudentSelected ? 1 : 0,
             child_above: childAboveCount,
             child_below: childBelowCount,
             total_amount: totalAmountValue, // Send as number, not string
@@ -374,10 +488,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     const countInput = document.getElementById(countId);
                     const optionDiv = checkbox.closest('.contribution-option');
                     
-                    countInput.style.display = 'none';
-                    countInput.value = '0';
+                    if (checkbox.id !== 'students') {
+                        // Handle regular options
+                        if (countInput) {
+                            countInput.style.display = 'none';
+                            countInput.value = '0';
+                        }
+                    }
+                    
+                    // Reset styling for all options
+                    checkbox.checked = false;
                     optionDiv.style.borderColor = '#ddd';
                     optionDiv.style.background = '#f8f9fa';
+                    optionDiv.style.opacity = '1';
+                    optionDiv.style.cursor = 'pointer';
+                    
+                    // Re-enable all options
+                    checkbox.disabled = false;
                 });
                 
                 // Reset custom donation amount
@@ -388,10 +515,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Reset children-under-5 visibility
                 updateChildrenUnder5Visibility();
-                
-                // Hide bank information
-                const bankInfo = document.getElementById('bankInfo');
-                bankInfo.style.display = 'none';
                 
                 // Reset button
                 submitBtn.innerHTML = originalText;
@@ -435,10 +558,23 @@ document.addEventListener('DOMContentLoaded', function() {
                             const countInput = document.getElementById(countId);
                             const optionDiv = checkbox.closest('.contribution-option');
                             
-                            countInput.style.display = 'none';
-                            countInput.value = '0';
+                            if (checkbox.id !== 'students') {
+                                // Handle regular options
+                                if (countInput) {
+                                    countInput.style.display = 'none';
+                                    countInput.value = '0';
+                                }
+                            }
+                            
+                            // Reset styling for all options
+                            checkbox.checked = false;
                             optionDiv.style.borderColor = '#ddd';
                             optionDiv.style.background = '#f8f9fa';
+                            optionDiv.style.opacity = '1';
+                            optionDiv.style.cursor = 'pointer';
+                            
+                            // Re-enable all options
+                            checkbox.disabled = false;
                         });
                         
                         // Reset custom donation amount
@@ -450,10 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Reset children-under-5 visibility
                         updateChildrenUnder5Visibility();
                         
-                        // Hide bank information
-                        const bankInfo = document.getElementById('bankInfo');
-                        bankInfo.style.display = 'none';
-                        
+                        // Reset button
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                         
