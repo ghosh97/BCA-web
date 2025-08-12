@@ -8,7 +8,6 @@ const loading = document.getElementById('loading');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
-const registrationForm = document.getElementById('registrationForm');
 const contactForm = document.getElementById('contactForm');
 const newsletterForm = document.querySelector('.newsletter-form');
 
@@ -22,23 +21,19 @@ const videoModalClose = document.getElementById('videoModalClose');
 function initMobileButtonFix() {
     const registerButton = document.querySelector('.hero-buttons .btn');
     if (registerButton) {
-        console.log('Mobile button fix initialized for:', registerButton);
         
         // Add touch event listener for mobile devices
         registerButton.addEventListener('touchstart', function(e) {
-            console.log('Register button touched');
             // Don't prevent default to allow normal navigation
         }, { passive: true });
         
         // Add click event listener as backup
         registerButton.addEventListener('click', function(e) {
-            console.log('Register button clicked');
             // Don't prevent default to allow normal navigation
         });
         
         // Add mousedown event for better mobile support
         registerButton.addEventListener('mousedown', function(e) {
-            console.log('Register button mousedown');
         });
         
         // Ensure the button is properly styled for mobile
@@ -63,10 +58,6 @@ function initMobileButtonFix() {
         // Ensure the button is accessible
         registerButton.setAttribute('role', 'button');
         registerButton.setAttribute('tabindex', '0');
-        
-        console.log('Mobile button fix applied successfully');
-    } else {
-        console.log('Register button not found');
     }
 }
 
@@ -412,27 +403,7 @@ function initSmoothScrolling() {
     });
 }
 
-// Form Handling
-function handleRegistrationForm(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    
-    // Show loading state
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-    submitBtn.disabled = true;
 
-    // Simulate form submission
-    setTimeout(() => {
-        showNotification('Registration submitted successfully! We will contact you soon.', 'success');
-        e.target.reset();
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }, 2000);
-}
 
 function handleContactForm(e) {
     e.preventDefault();
@@ -635,9 +606,7 @@ function initScrollAnimations() {
         card.style.transitionDelay = `${index * 0.2}s`;
     });
     
-    // Debug: Log found elements
-    console.log('Found animate elements:', animateElements.length);
-    console.log('Found event cards:', eventCards.length);
+    
     
     // Mobile fallback: Trigger animations on scroll for mobile devices
     if (window.innerWidth <= 768) {
@@ -731,11 +700,6 @@ function validateForm(form) {
 
 // Enhanced Form Handling with Validation
 function initFormValidation() {
-    // Handle registration form
-    if (registrationForm) {
-        registrationForm.addEventListener('submit', handleRegistrationForm);
-    }
-    
     // Handle contact form
     if (contactForm) {
         contactForm.addEventListener('submit', handleContactForm);
@@ -911,7 +875,7 @@ function setInitialActiveNavLink() {
         }
     });
     
-    // Debug logging (remove in production)
+    
     console.log('Current page:', currentPage);
     console.log('Active link set for:', currentPage);
     
