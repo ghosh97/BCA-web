@@ -105,7 +105,7 @@
                             <!-- Name Field -->
                             <div class="form-group">
                                 <label for="name" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Name *</label>
-                                <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <input type="text" id="name" name="name" required minlength="2" maxlength="100" title="Name can only contain letters and spaces, minimum 2 characters" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
                             </div>
                             
                             <!-- Contact Number Field -->
@@ -124,7 +124,7 @@
                                         <option value="+32">+32</option>
                                         <option value="+351">+351</option>
                                     </select>
-                                    <input type="number" id="contact" name="contact" required pattern="[0-9]*" inputmode="numeric" min="0" placeholder="Enter number without country code" style="flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; -moz-appearance: textfield;" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <input type="tel" id="contact" name="contact" required pattern="[0-9]{9,15}" inputmode="numeric" minlength="9" maxlength="15" placeholder="Enter number without country code" title="Please enter a valid phone number (9-15 digits)" style="flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                             </div>
                         </div>
@@ -133,13 +133,13 @@
                             <!-- Email Field -->
                             <div class="form-group">
                                 <label for="email" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Email *</label>
-                                <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <input type="email" id="email" name="email" required maxlength="254" title="Please enter a valid email address" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
                             </div>
                             
                             <!-- Re-enter Email Field -->
                             <div class="form-group">
                                 <label for="emailConfirm" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Re-enter Email *</label>
-                                <input type="email" id="emailConfirm" name="emailConfirm" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <input type="email" id="emailConfirm" name="emailConfirm" required maxlength="254" title="Please re-enter your email address to confirm" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
                             </div>
                         </div>
                         
@@ -149,7 +149,7 @@
                             <div style="border: 2px solid var(--red); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; background: rgba(255, 255, 255, 0.8); position: relative;">
                                 <!-- BCA Members Tag -->
                                 <div style="position: absolute; top: -12px; left: 20px; background: var(--red); color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                    Contribution Types *
+                                    Select Tickets (Mandatory) *
                                 </div>
                                 <!-- BCA Members Options -->
                                 <div id="bcaMembersOptions" class="contribution-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
@@ -224,26 +224,31 @@
                                     <div style="flex: 1; min-width: 250px;">
                                         <h4 style="color: var(--red); font-size: 1.2rem; margin-bottom: 0.25rem;">
                                             <i class="fas fa-heart" style="margin-right: 0.5rem; color: #ff4444;"></i>
-                                            Would you like to make additional donation?
+                                            Additional Donation (Optional)
                                         </h4>
-                                        <p style="color: #666; font-size: 0.9rem; margin: 0;">This is completely optional.</p>
+                                        <p style="color: #666; font-size: 0.9rem; margin: 0;">Add any donation amount you wish to contribute.</p>
                                         <small style="color: #666; font-size: 0.9rem; display: block; margin-top: 0.5rem;">
                                             <i class="fas fa-info-circle" style="margin-right: 0.25rem;"></i>
-                                            Any amount is welcome! Your generosity helps us organize better puja and events.
+                                            Your ticket price covers the event cost. Any additional amount helps us organize better puja and events.
                                         </small>
                                     </div>
-                                    <div style="flex: 0 0 200px; min-width: 200px;">
-                                        <div style="position: relative; display: flex; align-items: center;">
-                                            <span style="position: absolute; left: 10px; color: #f30505; font-weight: 600; font-size: 1rem; z-index: 1;">€</span>
-                                            <input type="number" id="custom-donation-amount" name="custom-donation-amount" min="0" step="1" placeholder="Enter amount" style="width: 100%; padding: 10px 10px 10px 30px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; text-align: left;">
+                                    <div class="donation-controls" style="flex: 0 0 300px; min-width: 300px;">
+                                        <div style="position: relative; display: flex; align-items: center; gap: 8px;">
+                                            <button type="button" id="donation-minus" class="donation-btn" style="width: 40px; height: 40px; border: 2px solid #ddd; background: white; border-radius: 8px; font-size: 1.3rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #666; transition: all 0.3s ease; flex-shrink: 0;" title="Decrease donation">−</button>
+                                            <div style="position: relative; flex: 1; min-width: 120px;">
+                                                <span style="position: absolute; left: 12px; color: #f30505; font-weight: 600; font-size: 1.1rem; z-index: 1; top: 50%; transform: translateY(-50%);">€</span>
+                                                <input type="number" id="custom-donation-amount" name="custom-donation-amount" min="0" max="10000" step="0.01" placeholder="Optional donation amount" title="Optional: Add any donation amount you wish to contribute" style="width: 100%; padding: 12px 12px 12px 35px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; text-align: left; font-weight: 600;">
+                                            </div>
+                                            <button type="button" id="donation-plus" class="donation-btn" style="width: 40px; height: 40px; border: 2px solid #ddd; background: white; border-radius: 8px; font-size: 1.3rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #666; transition: all 0.3s ease; flex-shrink: 0;" title="Increase donation">+</button>
+                                        </div>
+                                        <!-- Warning message positioned within donation controls -->
+                                        <div id="custom-donation-warning" class="donation-warning" style="display: none; background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; border-radius: 6px; padding: 0.5rem 0.75rem; margin-top: 0.5rem;">
+                                            <p style="color: #ff4444; font-size: 0.85rem; margin: 0; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                                                <i class="fas fa-exclamation-triangle" style="font-size: 0.8rem;"></i>
+                                                <span>Please enter a valid amount greater than €0.</span>
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="custom-donation-warning" style="display: none; background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem;">
-                                    <p style="color: #ff4444; font-size: 0.9rem; margin: 0; font-weight: 600;">
-                                        <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
-                                        Please enter a valid amount greater than €0.
-                                    </p>
                                 </div>
                             </div>
                             
@@ -477,6 +482,7 @@
         
         /* Firefox */
         input[type="number"] {
+            appearance: textfield;
             -moz-appearance: textfield;
         }
         
@@ -734,6 +740,104 @@
         .registration-cta .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Donation button styles */
+        .donation-btn {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .donation-btn:hover:not(:disabled) {
+            border-color: var(--red) !important;
+            color: var(--red) !important;
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .donation-btn:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+        }
+        
+        .donation-btn:disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+        }
+        
+        /* Donation warning styles */
+        .donation-warning {
+            animation: slideInDown 0.3s ease-out;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .donation-warning p {
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        
+        /* Donation validation message styles */
+        #donation-validation-msg {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+            line-height: 1.4;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding: 0.25rem 0;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Tablet Responsive Styles */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .donation-controls {
+                flex: 0 0 280px !important;
+                min-width: 280px !important;
+            }
+            
+            .donation-btn {
+                width: 38px !important;
+                height: 38px !important;
+                font-size: 1.2rem !important;
+            }
+            
+            #custom-donation-amount {
+                padding: 10px 10px 10px 32px !important;
+                font-size: 0.95rem !important;
+            }
+            
+            /* Tablet warning styling */
+            .donation-warning {
+                padding: 0.4rem 0.6rem !important;
+                margin-top: 0.4rem !important;
+            }
+            
+            .donation-warning p {
+                font-size: 0.8rem !important;
+            }
+            
+            .donation-warning i {
+                font-size: 0.75rem !important;
+            }
+            
+            /* Tablet donation validation message */
+            #donation-validation-msg {
+                font-size: 0.8rem !important;
+                margin-top: 0.4rem !important;
+                padding: 0.2rem 0 !important;
+            }
         }
         
         /* Mobile Responsive Styles */
@@ -1128,21 +1232,124 @@
                 padding: 1.5rem !important;
             }
             
-            /* Additional donation section mobile optimization */
+            /* Additional donation section extra small mobile optimization */
             .contribution-option[style*="linear-gradient"] {
-                padding: 1rem !important;
+                padding: 0.8rem !important;
             }
             
             .contribution-option[style*="linear-gradient"] h4 {
-                font-size: 1rem !important;
+                font-size: 0.9rem !important;
             }
             
             .contribution-option[style*="linear-gradient"] p {
-                font-size: 0.8rem !important;
+                font-size: 0.75rem !important;
             }
             
             .contribution-option[style*="linear-gradient"] small {
+                font-size: 0.7rem !important;
+            }
+            
+            /* Extra small donation buttons */
+            .donation-btn {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 1rem !important;
+                border-width: 1.5px !important;
+            }
+            
+            #custom-donation-amount {
+                padding: 8px 8px 8px 28px !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .donation-controls > div {
+                gap: 4px !important;
+            }
+            
+            /* Extra small mobile warning styling */
+            .donation-warning {
+                padding: 0.3rem 0.5rem !important;
+                margin-top: 0.3rem !important;
+                border-radius: 4px !important;
+            }
+            
+            .donation-warning p {
                 font-size: 0.75rem !important;
+                gap: 0.3rem !important;
+                line-height: 1.3 !important;
+            }
+            
+            .donation-warning i {
+                font-size: 0.7rem !important;
+            }
+            
+            /* Extra small mobile donation validation message */
+            #donation-validation-msg {
+                font-size: 0.75rem !important;
+                margin-top: 0.3rem !important;
+                padding: 0.25rem 0 !important;
+                line-height: 1.3 !important;
+            }
+            
+            /* Donation controls mobile layout */
+            .contribution-option[style*="linear-gradient"] > div {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 1rem !important;
+            }
+            
+            .donation-controls {
+                flex: 1 1 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+                order: 2;
+            }
+            
+            .contribution-option[style*="linear-gradient"] > div > div:first-child {
+                order: 1;
+                flex: 1;
+            }
+            
+            /* Donation buttons mobile sizing */
+            .donation-btn {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 1.1rem !important;
+                border-radius: 6px !important;
+            }
+            
+            #custom-donation-amount {
+                padding: 10px 10px 10px 30px !important;
+                font-size: 0.9rem !important;
+                border-radius: 6px !important;
+            }
+            
+            .donation-controls > div {
+                gap: 6px !important;
+            }
+            
+            /* Mobile warning styling */
+            .donation-warning {
+                padding: 0.4rem 0.6rem !important;
+                margin-top: 0.4rem !important;
+                border-radius: 5px !important;
+            }
+            
+            .donation-warning p {
+                font-size: 0.8rem !important;
+                gap: 0.4rem !important;
+            }
+            
+            .donation-warning i {
+                font-size: 0.75rem !important;
+            }
+            
+            /* Mobile donation validation message */
+            #donation-validation-msg {
+                font-size: 0.8rem !important;
+                margin-top: 0.4rem !important;
+                padding: 0.3rem 0 !important;
+                line-height: 1.3 !important;
             }
             
             #bankInfo {
