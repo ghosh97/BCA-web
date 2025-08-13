@@ -295,7 +295,7 @@
     
     .hero-features .feature-item:active .play-overlay {
         opacity: 1;
-        background: rgb(255, 80, 53);
+        background: rgba(255, 80, 53);
         transform: scale(1.05);
     }
 }
@@ -6264,9 +6264,8 @@ section + section {
 }
 
 .hero-features .feature-item:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.3);
+    background: rgba(236, 95, 8, 0.05);
+    border-color: var(--primary-color);
 }
 
 /* Reduced motion support */
@@ -6890,6 +6889,902 @@ section + section {
     .schedule-link {
         font-size: 0.75rem;
         padding: 0.25rem 0.6rem;
+    }
+}
+
+/* Sponsorships Section Styles */
+.sponsorships-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 4rem 0;
+    position: relative;
+}
+
+.sponsorships-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.sponsorships-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.sponsorships-text h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.sponsorships-text p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.sponsorship-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.benefit {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.benefit i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.benefit span {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.sponsorships-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.sponsorships-cta .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.sponsorships-cta .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-color);
+}
+
+.sponsorships-cta .btn-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.sponsorships-cta .btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.sponsorships-cta .btn-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.sponsorships-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sponsorship-preview {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.sponsorship-preview h4 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.tier-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.tier-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.tier-item:hover {
+    transform: scale(1.02);
+}
+
+.tier-item.platinum {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.tier-item.gold {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.tier-item.silver {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.tier-item.community {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.tier-name {
+    font-size: 1.1rem;
+}
+
+.tier-price {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Sponsorships Page Specific Styles */
+.sponsorships-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.sponsorships-hero .hero-title {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sponsorships-hero .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+}
+
+.mission-section {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.mission-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.mission-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.mission-icon i {
+    color: white;
+    font-size: 2rem;
+}
+
+.mission-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.mission-card p {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.why-sponsor-section {
+    padding: 4rem 0;
+    background: white;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.benefit-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.benefit-icon i {
+    color: white;
+    font-size: 1.8rem;
+}
+
+.benefit-item h4 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.benefit-item p {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.sponsorship-tiers {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.tier-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tier-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.tier-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.tier-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.tier-header h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.tier-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.tier-benefits {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.tier-benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.tier-benefits i {
+    color: var(--primary-color);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.tier-card .btn {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.current-sponsors {
+    padding: 4rem 0;
+    background: white;
+}
+
+.sponsors-grid {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.sponsor-placeholder {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 16px;
+    color: var(--text-color);
+}
+
+.sponsor-placeholder i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.sponsor-placeholder h4 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-sponsorship {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.contact-info h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.contact-info p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-method i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.contact-method h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.contact-method p {
+    color: var(--text-color);
+    margin: 0;
+}
+
+.contact-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Responsive Design for Sponsorships */
+@media (max-width: 768px) {
+    .sponsorships-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .sponsorships-cta {
+        flex-direction: column;
+    }
+    
+    .sponsorships-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .tiers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .mission-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sponsorships-section {
+        padding: 2rem 0;
+    }
+    
+    .sponsorships-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .sponsorships-text p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sponsorship-preview {
+        padding: 1.5rem;
+    }
+    
+    .tier-item {
+        padding: 0.8rem;
+    }
+    
+    .tier-name,
+    .tier-price {
+        font-size: 0.9rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .mission-card,
+    .tier-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Sponsors Showcase Section Styles */
+.sponsors-showcase {
+    padding: 4rem 0;
+    background: white;
+    position: relative;
+}
+
+.sponsors-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="sponsors-pattern" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23f8f9fa" opacity="0.3"/><circle cx="80" cy="80" r="1" fill="%23f8f9fa" opacity="0.3"/><circle cx="50" cy="50" r="0.5" fill="%23f8f9fa" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23sponsors-pattern)"/></svg>');
+    opacity: 0.5;
+}
+
+.sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.sponsor-category {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sponsor-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid;
+}
+
+.category-title.platinum {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.category-title.gold {
+    color: #f093fb;
+    border-bottom-color: #f093fb;
+}
+
+.category-title.silver {
+    color: #4facfe;
+    border-bottom-color: #4facfe;
+}
+
+.category-title.community {
+    color: #43e97b;
+    border-bottom-color: #43e97b;
+}
+
+.category-title i {
+    font-size: 1.2rem;
+}
+
+.sponsors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sponsor-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid;
+}
+
+.sponsor-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.sponsor-card.platinum {
+    border-left-color: #667eea;
+}
+
+.sponsor-card.gold {
+    border-left-color: #f093fb;
+}
+
+.sponsor-card.silver {
+    border-left-color: #4facfe;
+}
+
+.sponsor-card.community {
+    border-left-color: #43e97b;
+}
+
+.sponsor-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sponsor-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.placeholder-logo {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 1.5rem;
+}
+
+.sponsor-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sponsor-info h4 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+}
+
+.sponsor-info p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+.sponsor-type {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: #f8f9fa;
+    color: var(--text-color);
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.become-sponsor-cta {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 20px;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.become-sponsor-cta h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.become-sponsor-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.become-sponsor-cta .btn {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid white;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.become-sponsor-cta .btn:hover {
+    background: transparent;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design for Sponsors Showcase */
+@media (max-width: 768px) {
+    .sponsors-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .sponsor-category {
+        padding: 1.5rem;
+    }
+    
+    .sponsor-card {
+        padding: 1rem;
+    }
+    
+    .sponsor-logo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .category-title {
+        font-size: 1.2rem;
+    }
+    
+    .become-sponsor-cta {
+        margin-top: 2rem;
+        padding: 1.5rem;
+    }
+    
+    .become-sponsor-cta h3 {
+        font-size: 1.5rem;
+    }
+    
+    .become-sponsor-cta p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sponsor-category {
+        padding: 1rem;
+    }
+    
+    .sponsor-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+    
+    .sponsor-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .sponsor-info h4 {
+        font-size: 1rem;
+    }
+    
+    .sponsor-info p {
+        font-size: 0.85rem;
+    }
+    
+    .become-sponsor-cta {
+        padding: 1rem;
+    }
+    
+    .become-sponsor-cta h3 {
+        font-size: 1.3rem;
+    }
+    
+    .become-sponsor-cta .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
     }
 }
 
