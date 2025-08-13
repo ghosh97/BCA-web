@@ -8,7 +8,6 @@ const loading = document.getElementById('loading');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
-const registrationForm = document.getElementById('registrationForm');
 const contactForm = document.getElementById('contactForm');
 const newsletterForm = document.querySelector('.newsletter-form');
 
@@ -17,6 +16,50 @@ const videoModal = document.getElementById('videoModal');
 const videoModalPlayer = document.getElementById('videoModalPlayer');
 const videoModalTitle = document.getElementById('videoModalTitle');
 const videoModalClose = document.getElementById('videoModalClose');
+
+// Mobile Button Fix - Ensure Register Now button is clickable on mobile
+function initMobileButtonFix() {
+    const registerButton = document.querySelector('.hero-buttons .btn');
+    if (registerButton) {
+        
+        // Add touch event listener for mobile devices
+        registerButton.addEventListener('touchstart', function(e) {
+            // Don't prevent default to allow normal navigation
+        }, { passive: true });
+        
+        // Add click event listener as backup
+        registerButton.addEventListener('click', function(e) {
+            // Don't prevent default to allow normal navigation
+        });
+        
+        // Add mousedown event for better mobile support
+        registerButton.addEventListener('mousedown', function(e) {
+        });
+        
+        // Ensure the button is properly styled for mobile
+        registerButton.style.position = 'relative';
+        registerButton.style.zIndex = '20';
+        registerButton.style.pointerEvents = 'auto';
+        registerButton.style.touchAction = 'manipulation';
+        registerButton.style.webkitTapHighlightColor = 'rgba(255, 255, 255, 0.3)';
+        registerButton.style.minHeight = '44px';
+        registerButton.style.minWidth = '44px';
+        
+        // Add focus and active states
+        registerButton.addEventListener('focus', function() {
+            this.style.outline = '2px solid #fff';
+            this.style.outlineOffset = '2px';
+        });
+        
+        registerButton.addEventListener('blur', function() {
+            this.style.outline = 'none';
+        });
+        
+        // Ensure the button is accessible
+        registerButton.setAttribute('role', 'button');
+        registerButton.setAttribute('tabindex', '0');
+    }
+}
 
 // Update last modified time
 function updateLastModified() {
@@ -42,9 +85,6 @@ function updateCountdown() {
     const now = new Date();
     const targetDate = new Date('2025-10-15T08:00:00+02:00'); // Using ISO 8601 format with timezone offset
     const timeLeft = targetDate.getTime() - now.getTime();
-    
-    const countdownElement = document.getElementById('countdown');
-    if (!countdownElement) return;
 
     // Calculate time units
     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -53,13 +93,18 @@ function updateCountdown() {
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
     if (timeLeft <= 0) {
-        countdownElement.innerHTML = `
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdownMessage = `
             <div class="countdown-message">
                 <i class="fas fa-star"></i>
                 <span>Durga Puja 2K25 has begun!</span>
                 <i class="fas fa-star"></i>
             </div>
         `;
+        
+        if (countdownElement) countdownElement.innerHTML = countdownMessage;
+        
         if (window.countdownInterval) {
             clearInterval(window.countdownInterval);
             window.countdownInterval = null;
@@ -358,27 +403,7 @@ function initSmoothScrolling() {
     });
 }
 
-// Form Handling
-function handleRegistrationForm(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    
-    // Show loading state
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-    submitBtn.disabled = true;
 
-    // Simulate form submission
-    setTimeout(() => {
-        showNotification('Registration submitted successfully! We will contact you soon.', 'success');
-        e.target.reset();
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }, 2000);
-}
 
 function handleContactForm(e) {
     e.preventDefault();
@@ -417,7 +442,7 @@ function handleContactForm(e) {
 
 
     // Production mode - send to Google Sheets
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6JnmiTu-QDht9yFoYxXuSyn--KTPBJjb4eCw8xOv8z39F1CECJ7b2YaBlVUvX6nJlAA/exec'; // ⚠️ REPLACE WITH YOUR NEW DEPLOYED URL!
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNnWhmvY5RLAvr29gjdPaFHmNCGnaJ8Qt_Pr7UkPjVOqVmQdX3_reC9qn-GEup7QHwiQ/exec'; // ⚠️ REPLACE WITH YOUR NEW DEPLOYED URL!
 
     
     
@@ -551,10 +576,6 @@ function closeLightbox() {
 
 // Intersection Observer for Animations
 function initScrollAnimations() {
-    // Disable scroll animations on mobile devices
-    if (window.innerWidth <= 768) {
-        return;
-    }
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -565,18 +586,65 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animate');
             }
         });
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.feature-item, .event-card, .timeline-item, .gallery-item, .contact-item');
+    const animateElements = document.querySelectorAll('.feature-item, .event-card, .timeline-item, .gallery-item, .contact-item, .animate-on-scroll');
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+    
+    // Add staggered animation for event cards
+    const eventCards = document.querySelectorAll('.event-card.animate-on-scroll');
+    eventCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.2}s`;
+    });
+    
+    
+    
+    // Mobile fallback: Trigger animations on scroll for mobile devices
+    if (window.innerWidth <= 768) {
+        const mobileAnimateElements = document.querySelectorAll('.animate-on-scroll');
+        mobileAnimateElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        });
+        
+        // Simple scroll listener for mobile
+        let mobileObserver;
+        try {
+            mobileObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+            
+            mobileAnimateElements.forEach(el => mobileObserver.observe(el));
+        } catch (e) {
+            console.log('Intersection Observer not supported, using scroll fallback');
+            // Fallback for older browsers
+            window.addEventListener('scroll', () => {
+                mobileAnimateElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                        el.classList.add('animate');
+                    }
+                });
+            });
+        }
+    }
 }
 
 // Parallax Effect
@@ -632,11 +700,6 @@ function validateForm(form) {
 
 // Enhanced Form Handling with Validation
 function initFormValidation() {
-    // Handle registration form
-    if (registrationForm) {
-        registrationForm.addEventListener('submit', handleRegistrationForm);
-    }
-    
     // Handle contact form
     if (contactForm) {
         contactForm.addEventListener('submit', handleContactForm);
@@ -812,7 +875,7 @@ function setInitialActiveNavLink() {
         }
     });
     
-    // Debug logging (remove in production)
+    
     console.log('Current page:', currentPage);
     console.log('Active link set for:', currentPage);
     
@@ -845,6 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallax();
     initTouchGestures();
     initVideoModal();
+    initMobileButtonFix(); // Initialize mobile button fix
     
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
@@ -910,15 +974,243 @@ window.closeLightbox = closeLightbox;
 function openVideoModal(videoSrc, title) {
     console.log('Opening video modal:', videoSrc, title);
     if (videoModal && videoModalPlayer && videoModalTitle) {
+        // Create a unique session ID for this modal open
+        const sessionId = Date.now() + Math.random();
+        currentVideoModalSession = sessionId;
+        
+        // Store current scroll position
+        const scrollY = window.scrollY;
+        videoModal.setAttribute('data-scroll-position', scrollY);
+        videoModal.setAttribute('data-session-id', sessionId);
+        
         videoModalTitle.textContent = title;
-        videoModalPlayer.src = videoSrc;
-        videoModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        
+        // iOS Safari Video Fixes
+        videoModalPlayer.setAttribute('webkit-playsinline', 'true');
+        videoModalPlayer.setAttribute('playsinline', 'true');
+        videoModalPlayer.setAttribute('x-webkit-airplay', 'allow');
+        videoModalPlayer.setAttribute('controls', 'true');
+        videoModalPlayer.setAttribute('preload', 'metadata');
+        
+        // Show modal first, then set video source to prevent race conditions
+        videoModal.style.display = 'flex';
+        requestAnimationFrame(() => {
+            // Check if this session is still current
+            if (currentVideoModalSession !== sessionId) {
+                console.log('Modal session changed, aborting video load');
+                return;
+            }
+            
+            videoModal.classList.add('active');
+            
+            // Validate video source before setting
+            if (!videoSrc || videoSrc === '') {
+                console.error('Invalid video source:', videoSrc);
+                showNotification('Video source not found. Please try again.', 'error');
+                return;
+            }
+            
+            console.log('Setting video source:', videoSrc);
+            
+            // Set video source after modal is visible
+            videoModalPlayer.src = videoSrc;
+            
+            // Load the video
+            videoModalPlayer.load();
+        });
+        
+        // Prevent body scroll while maintaining position
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflowY = 'scroll'; // Prevent layout shift
+        
+        // Handle video metadata loaded to set proper dimensions
+        const handleMetadataLoaded = function() {
+            // Check if this session is still current
+            if (currentVideoModalSession !== sessionId) {
+                console.log('Session changed during metadata load, aborting');
+                return;
+            }
+            
+            console.log('Video metadata loaded successfully');
+            const videoWidth = this.videoWidth;
+            const videoHeight = this.videoHeight;
+            const aspectRatio = videoWidth / videoHeight;
+            
+            // Calculate dimensions to fit screen while maintaining aspect ratio
+            let width = videoWidth;
+            let height = videoHeight;
+            
+            const maxWidth = window.innerWidth * 0.9; // 90% of screen width
+            const maxHeight = window.innerHeight * 0.9; // 90% of screen height
+            
+            if (width > maxWidth) {
+                width = maxWidth;
+                height = width / aspectRatio;
+            }
+            
+            if (height > maxHeight) {
+                height = maxHeight;
+                width = height * aspectRatio;
+            }
+            
+            // Apply calculated dimensions
+            this.style.width = `${width}px`;
+            this.style.height = `${height}px`;
+
+            // Update modal content width to match video
+            const modalContent = this.closest('.video-modal-content');
+            if (modalContent) {
+                modalContent.style.width = `${width}px`;
+            }
+            
+            // Remove the event listener to prevent memory leaks
+            this.removeEventListener('loadedmetadata', handleMetadataLoaded);
+        };
+        
+        videoModalPlayer.addEventListener('loadedmetadata', handleMetadataLoaded);
+        
+        // Add error handling for video loading
+        const loadStartHandler = function() {
+            console.log('Video loading started');
+        };
+        
+        videoModalPlayer.addEventListener('loadstart', loadStartHandler);
+        
+        const canPlayHandler = function() {
+            console.log('Video can play');
+        };
+        
+        videoModalPlayer.addEventListener('canplay', canPlayHandler);
+        
+        const errorHandler = function(e) {
+            // Check if this session is still current (use currentVideoModalSession directly)
+            if (!currentVideoModalSession) {
+                console.log('No active session, ignoring error');
+                return;
+            }
+            
+            console.error('Video playback error:', e);
+            console.error('Video error details:', {
+                error: videoModalPlayer.error,
+                networkState: videoModalPlayer.networkState,
+                readyState: videoModalPlayer.readyState,
+                src: videoModalPlayer.src
+            });
+            
+            // Only show error for actual video loading failures, not autoplay restrictions
+            if (videoModalPlayer.error && videoModalPlayer.error.code !== 4) { // 4 = MEDIA_ERR_SRC_NOT_SUPPORTED
+                const errorMessage = 'Video playback failed. Please check your connection and try again.';
+                showNotification(errorMessage, 'error');
+                
+                // Close modal after error (but give user time to see the message)
+                setTimeout(() => {
+                    closeVideoModal();
+                }, 3000);
+            }
+        };
+        
+        videoModalPlayer.addEventListener('error', errorHandler);
         
         // Focus on close button for accessibility
         if (videoModalClose) {
-            videoModalClose.focus();
+            setTimeout(() => {
+                videoModalClose.focus();
+            }, 100);
         }
+        
+        // iOS Video Load and Play Fix - removed duplicate load() call
+        
+        // Handle video play with iOS compatibility
+        const playVideo = () => {
+            videoModalPlayer.play().catch(function(error) {
+                console.log('Video autoplay failed (normal on iOS):', error);
+                // Show play button or instruction for iOS
+                const playButton = document.createElement('div');
+                playButton.innerHTML = '<i class="fas fa-play"></i> Tap to Play';
+                playButton.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0,0,0,0.7);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 8px;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    z-index: 10;
+                `;
+                videoModalPlayer.parentElement.style.position = 'relative';
+                videoModalPlayer.parentElement.appendChild(playButton);
+                
+                const playButtonClickHandler = function() {
+                    // Check if this session is still current
+                    if (currentVideoModalSession !== sessionId) {
+                        console.log('Session changed, removing play button');
+                        this.remove();
+                        return;
+                    }
+                    
+                    videoModalPlayer.play().catch(function(playError) {
+                        console.error('Manual play failed:', playError);
+                        // Only show error for actual playback failures, not autoplay restrictions
+                        if (playError.name !== 'NotAllowedError') {
+                            showNotification('Video playback failed. Please try again.', 'error');
+                        }
+                    });
+                    this.remove();
+                };
+                
+                playButton.addEventListener('click', playButtonClickHandler);
+            });
+        };
+        
+        // Try to play immediately
+        playVideo();
+        
+        // Add keyboard event listener for escape key
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+
+        // Handle window resize
+        const handleResize = debounce(() => {
+            if (videoModalPlayer.videoWidth && videoModalPlayer.videoHeight) {
+                const aspectRatio = videoModalPlayer.videoWidth / videoModalPlayer.videoHeight;
+                const maxWidth = window.innerWidth * 0.9;
+                const maxHeight = window.innerHeight * 0.9;
+                
+                let width = videoModalPlayer.videoWidth;
+                let height = videoModalPlayer.videoHeight;
+                
+                if (width > maxWidth) {
+                    width = maxWidth;
+                    height = width / aspectRatio;
+                }
+                
+                if (height > maxHeight) {
+                    height = maxHeight;
+                    width = height * aspectRatio;
+                }
+                
+                videoModalPlayer.style.width = `${width}px`;
+                videoModalPlayer.style.height = `${height}px`;
+
+                // Update modal content width on resize
+                const modalContent = videoModalPlayer.closest('.video-modal-content');
+                if (modalContent) {
+                    modalContent.style.width = `${width}px`;
+                }
+            }
+        }, 100);
+        
+        window.addEventListener('resize', handleResize);
         
         console.log('Video modal opened successfully');
     } else {
@@ -932,57 +1224,349 @@ function openVideoModal(videoSrc, title) {
 
 function closeVideoModal() {
     if (videoModal && videoModalPlayer) {
+        console.log('Closing video modal...');
+        
+        // Clear the current session
+        currentVideoModalSession = null;
+        
+        // Start closing animation
         videoModal.classList.remove('active');
-        videoModalPlayer.pause();
-        videoModalPlayer.src = '';
-        document.body.style.overflow = '';
+        
+        // Wait for animation to complete
+        setTimeout(() => {
+            try {
+                // Pause video first
+                if (videoModalPlayer.readyState >= 1) {
+                    videoModalPlayer.pause();
+                }
+                
+                // Clear video source
+                videoModalPlayer.src = '';
+                videoModalPlayer.load(); // Force reload to clear any cached data
+                
+                // Remove any play buttons that might have been added
+                const playButtons = videoModal.querySelectorAll('[style*="position: absolute"]');
+                playButtons.forEach(btn => {
+                    try {
+                        btn.remove();
+                    } catch (e) {
+                        console.log('Error removing play button:', e);
+                    }
+                });
+                
+                // Restore body scroll and position
+                const scrollY = parseInt(videoModal.getAttribute('data-scroll-position') || '0');
+                document.body.style.position = '';
+                document.body.style.width = '';
+                document.body.style.top = '';
+                document.body.style.overflowY = '';
+                
+                // Use requestAnimationFrame for smooth scroll restoration
+                requestAnimationFrame(() => {
+                    try {
+                        window.scrollTo(0, scrollY);
+                    } catch (e) {
+                        console.log('Error restoring scroll position:', e);
+                    }
+                });
+                
+                // Clean up modal
+                videoModal.style.display = 'none';
+                videoModal.removeAttribute('data-scroll-position');
+                videoModal.removeAttribute('data-session-id'); // Clear session ID on close
+                
+                // Reset video player styles
+                videoModalPlayer.style.width = '';
+                videoModalPlayer.style.height = '';
+                
+                console.log('Video modal closed successfully');
+                
+            } catch (error) {
+                console.error('Error during modal close:', error);
+                // Fallback: just hide the modal
+                videoModal.style.display = 'none';
+                videoModal.classList.remove('active');
+            }
+        }, 300); // Match this with CSS transition duration
+    } else {
+        console.warn('Video modal elements not found for closing');
+    }
+}
+
+// Track if video modal has been initialized to prevent duplicate event listeners
+let videoModalInitialized = false;
+let videoModalEventListeners = [];
+let currentVideoModalSession = null; // Track current modal session
+
+function cleanupVideoModal() {
+    // Remove any existing event listeners to prevent duplicates
+    videoModalEventListeners.forEach(listener => {
+        try {
+            if (listener.element && listener.event && listener.handler) {
+                listener.element.removeEventListener(listener.event, listener.handler);
+            }
+        } catch (e) {
+            console.log('Error removing event listener:', e);
+        }
+    });
+    videoModalEventListeners = [];
+    currentVideoModalSession = null;
+}
+
+function addVideoModalEventListener(element, event, handler, options = {}) {
+    try {
+        element.addEventListener(event, handler, options);
+        videoModalEventListeners.push({ element, event, handler, options });
+    } catch (e) {
+        console.error('Error adding event listener:', e);
     }
 }
 
 function initVideoModal() {
+    // Prevent multiple initializations
+    if (videoModalInitialized) {
+        console.log('Video modal already initialized, skipping...');
+        return;
+    }
+    
+    console.log('Initializing video modal...');
+    
+    // Clean up any existing event listeners
+    cleanupVideoModal();
+    
     // Add click event listeners to feature items
     const featureItems = document.querySelectorAll('.feature-item[data-video]');
     console.log('Found feature items with videos:', featureItems.length);
     
+    if (featureItems.length === 0) {
+        console.warn('No feature items with data-video attribute found!');
+        return;
+    }
+    
     featureItems.forEach((item, index) => {
-        console.log(`Feature item ${index}:`, item.getAttribute('data-video'), item.getAttribute('data-title'));
-        item.addEventListener('click', function() {
+        const videoSrc = item.getAttribute('data-video');
+        const title = item.getAttribute('data-title');
+        console.log(`Feature item ${index}:`, videoSrc, title);
+        
+        // Add click event listener to the entire feature item
+        const clickHandler = function(e) {
             console.log('Feature item clicked:', this.getAttribute('data-video'));
+            e.preventDefault();
+            e.stopPropagation();
             const videoSrc = this.getAttribute('data-video');
             const title = this.getAttribute('data-title');
             openVideoModal(videoSrc, title);
-        });
+        };
+        
+        addVideoModalEventListener(item, 'click', clickHandler);
+        
+        // Add touch event listener for mobile devices
+        const touchHandler = function(e) {
+            console.log('Feature item touched:', this.getAttribute('data-video'));
+            e.preventDefault();
+            e.stopPropagation();
+            const videoSrc = this.getAttribute('data-video');
+            const title = this.getAttribute('data-title');
+            openVideoModal(videoSrc, title);
+        };
+        
+        addVideoModalEventListener(item, 'touchstart', touchHandler, { passive: false });
+        
+        // Add keyboard support for accessibility
+        const keyHandler = function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const videoSrc = this.getAttribute('data-video');
+                const title = this.getAttribute('data-title');
+                openVideoModal(videoSrc, title);
+            }
+        };
+        
+        addVideoModalEventListener(item, 'keydown', keyHandler);
+        
+        // Make feature items focusable
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('role', 'button');
+        item.setAttribute('aria-label', `Play video: ${item.getAttribute('data-title')}`);
     });
     
     // Close modal when clicking close button
     if (videoModalClose) {
-        videoModalClose.addEventListener('click', closeVideoModal);
+        const closeButtonHandler = (e) => {
+            try {
+                e.preventDefault();
+                closeVideoModal();
+            } catch (error) {
+                console.error('Error in close button handler:', error);
+                // Fallback: just hide the modal
+                if (videoModal) {
+                    videoModal.style.display = 'none';
+                    videoModal.classList.remove('active');
+                }
+            }
+        };
+        
+        addVideoModalEventListener(videoModalClose, 'click', closeButtonHandler);
+        addVideoModalEventListener(videoModalClose, 'touchstart', closeButtonHandler, { passive: false });
+        
+        // Add keyboard support for close button
+        const closeKeyHandler = function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeVideoModal();
+            }
+        };
+        
+        addVideoModalEventListener(videoModalClose, 'keydown', closeKeyHandler);
     }
     
     // Close modal when clicking outside
     if (videoModal) {
-        videoModal.addEventListener('click', function(e) {
+        const outsideClickHandler = (e) => {
             if (e.target === videoModal) {
                 closeVideoModal();
             }
-        });
+        };
+        
+        addVideoModalEventListener(videoModal, 'click', outsideClickHandler);
+        
+        // Add touch event for mobile
+        const outsideTouchHandler = function(e) {
+            if (e.target === videoModal) {
+                e.preventDefault();
+                closeVideoModal();
+            }
+        };
+        
+        addVideoModalEventListener(videoModal, 'touchstart', outsideTouchHandler, { passive: false });
     }
     
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && videoModal && videoModal.classList.contains('active')) {
-            closeVideoModal();
-        }
-    });
+    // Prevent body scroll when modal is open (mobile fix)
+    if (videoModal) {
+        const touchMoveHandler = function(e) {
+            if (videoModal.classList.contains('active')) {
+                e.preventDefault();
+            }
+        };
+        
+        addVideoModalEventListener(videoModal, 'touchmove', touchMoveHandler, { passive: false });
+        
+        // Prevent scroll on body when modal is open
+        const wheelHandler = function(e) {
+            if (videoModal.classList.contains('active')) {
+                e.preventDefault();
+            }
+        };
+        
+        addVideoModalEventListener(videoModal, 'wheel', wheelHandler, { passive: false });
+    }
+    
+    // Handle video player events
+    if (videoModalPlayer) {
+        const endedHandler = function() {
+            // Optionally restart video or close modal when video ends
+            // closeVideoModal();
+        };
+        
+        addVideoModalEventListener(videoModalPlayer, 'ended', endedHandler);
+        
+        // Note: Error handling is done in openVideoModal function to access sessionId
+    }
+    
+    // Mark as initialized
+    videoModalInitialized = true;
+    console.log('Video modal initialization completed successfully');
 }
+
+// Clean up video modal on page unload
+window.addEventListener('beforeunload', () => {
+    if (videoModalInitialized) {
+        cleanupVideoModal();
+        videoModalInitialized = false;
+    }
+});
 
 // Export video modal functions
 window.openVideoModal = openVideoModal;
 window.closeVideoModal = closeVideoModal; 
 
-// Add styles for countdown message
+// Add styles for countdown message and video modal
 const style = document.createElement('style');
 style.textContent += `
+    /* Video Modal Styles */
+    .video-modal {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        z-index: 10000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .video-modal.active {
+        display: flex !important;
+    }
+
+    .video-modal-content {
+        position: relative;
+        background: transparent;
+        z-index: 10001;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+    }
+
+    .video-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        width: 100%;
+        color: white;
+        background: rgb(222 14 14 / 89%);
+        border-radius: 4px;
+        margin-bottom: 0.25rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10002;
+    }
+
+    .video-modal-body {
+        position: relative;
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .video-modal-body video {
+        max-width: 100vw;
+        max-height: 100vh;
+        width: auto;
+        height: auto;
+    }
+
+    .video-modal-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .video-modal-close:hover {
+        transform: scale(1.1);
+    }
     .countdown-message {
         text-align: center;
         color: var(--accent-color, #FF6B35);

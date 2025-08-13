@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <title>Durga Puja 2K25 Barcelona - Bengali Cultural Association</title>
+    <title>Durga Puja 2025 Barcelona - Bengali Cultural Association</title>
     <meta name="description" content="Join us for the grand celebration of Durga Puja 2K25 in Barcelona. Experience the rich Bengali culture, traditional rituals, and community festivities.">
     <meta name="author" content="Bengali Cultural Association Barcelona">
     
@@ -46,7 +46,7 @@
                 <div class="nav-logo">
                     <a href="index.html" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 10px;">
                         <span class="logo-img" style="display: inline-block;">
-                            <img src="bca-logo-another.jpg" alt="BCA Spain Logo" style="width:50px;height:50px;border-radius:50%;object-fit:cover;vertical-align:middle;" />
+                            <img src="BCA-logo.webp" alt="BCA Spain Logo" style="width:50px;height:50px;border-radius:50%;object-fit:cover;vertical-align:middle;" />
                         </span>
                         <span class="logo-text" style="font-size: 1.3rem; font-weight: 600; display: inline-block; vertical-align:middle;">BCA Spain</span>
                     </a>
@@ -80,11 +80,11 @@
                 <!-- Hero Text Content -->
                 <div class="hero-text">
                     <h1 class="hero-title">
-                        <span class="title-line">Durga Puja 2K25</span>
+                        <span class="title-line">Durga Puja 2025</span>
                     </h1>
                     
                     <p class="hero-subtitle">
-                        Experience the divine celebration of Bengali culture in Barcelona. Join our community in preserving traditions and celebrating our rich heritage.
+                        Experience the divine celebration of Bengali culture in Barcelona. The Bengali Cultural Association of India in Spain, a non-profit organisation founded in 2021, is passionately committed to enriching the lives of our vibrant subcontinent community. Our mission is to foster unity and celebrate all the Bengali cultural events together.
                     </p>
                     
                     <!-- Enhanced Features -->
@@ -93,34 +93,23 @@
                             <div class="feature-item" data-video="index-attraction/maadurgamurti.mp4" data-title="Traditional Puja Rituals">
                                 <i class="fa-solid fa-hands-praying"></i>
                                 <span>Traditional Puja Rituals</span>
-                                <video src="index-attraction/maadurgamurti.mp4" autoplay muted loop></video>
-                                <!-- <div class="play-overlay">
-                                    <i class="fas fa-play-circle"></i>
-                                </div> -->
+                                <video src="index-attraction/maadurgamurti.mp4" preload="metadata" muted></video>
                             </div>
                             <div class="feature-item" data-video="index-attraction/dance.mp4" data-title="Cultural Performances">
                                 <i class="fa-solid fa-music"></i>
                                 <span>Cultural Performances</span>
-                                <video src="index-attraction/dance.mp4" autoplay muted loop></video>
-                                <!-- <div class="play-overlay">
-                                    <i class="fas fa-play-circle"></i>
-                                </div> -->
+                                <video src="index-attraction/dance.mp4" preload="metadata" muted></video>
+
                             </div>
                             <div class="feature-item" data-video="index-attraction/bhog.mp4" data-title="Authentic Bengali Cuisine">
                                 <i class="fa-solid fa-utensils"></i>
                                 <span>Authentic Bengali Cuisine</span>
-                                <video src="index-attraction/bhog.mp4" autoplay muted loop></video>
-                                <!-- <div class="play-overlay">
-                                    <i class="fas fa-play-circle"></i>
-                                </div> -->
+                                <video src="index-attraction/bhog.mp4" preload="metadata" muted></video>
                             </div>
                             <div class="feature-item" data-video="index-attraction/dhunuchinaach.mp4" data-title="Community Bonding">
                                 <i class="fa-solid fa-heart"></i>
                                 <span>Community Bonding</span>
-                                <video src="index-attraction/dhunuchinaach.mp4" autoplay muted loop></video>
-                                <!-- <div class="play-overlay">
-                                    <i class="fas fa-play-circle"></i>
-                                </div> -->
+                                <video src="index-attraction/dhunuchinaach.mp4" preload="metadata" muted></video>
                             </div>
                         </div>
                     </div>
@@ -136,7 +125,6 @@
                             </div>
                             <div class="video-modal-body">
                                 <video id="videoModalPlayer" controls>
-                                    <source src="" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -150,9 +138,26 @@
                             <span>Register Now</span>
                         </a>
                     </div>
+                </div>
+                
+                <!-- Hero Images and Countdown Container -->
+                <div class="hero-right-section">
+                    <!-- Gallery Slideshow -->
+                    <div class="slideshow-container" style="border: 3px solid var(--red); border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3); width: 100%; max-width: 600px; height: 350px; margin: 0 auto 20px auto;">
+                        <img id="slideshow-image" src="gallery/a11.jpg" alt="Durga Puja Gallery" loading="eager" style="width: 100%; height: 100%; object-fit: cover;" />
+                        <div class="slideshow-overlay"></div>
+                        <div class="slideshow-dots">
+                            <span class="dot active" data-slide="0" role="button" tabindex="0" aria-label="Go to slide 1"></span>
+                            <span class="dot" data-slide="1" role="button" tabindex="0" aria-label="Go to slide 2"></span>
+                            <span class="dot" data-slide="2" role="button" tabindex="0" aria-label="Go to slide 3"></span>
+                            <span class="dot" data-slide="3" role="button" tabindex="0" aria-label="Go to slide 4"></span>
+                            <span class="dot" data-slide="4" role="button" tabindex="0" aria-label="Go to slide 5"></span>
+                            <span class="dot" data-slide="5" role="button" tabindex="0" aria-label="Go to slide 6"></span>
+                        </div>
+                    </div>
                     
                     <!-- Enhanced Countdown Timer -->
-                    <div class="countdown-section">
+                    <div class="countdown-section" style="text-align: center; margin-top: 20px;">
                         <h3 class="countdown-title">
                             <i class="fas fa-clock"></i> Countdown to Durga Puja
                         </h3>
@@ -176,38 +181,50 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Hero Images Container -->
-                <div class="hero-images">
-                    <!-- Gallery Slideshow -->
-                    <div class="slideshow-container" style="border: 3px solid #B3471B; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(179, 71, 27, 0.3); width: 100%; max-width: 600px; height: 400px; margin: 0 auto;">
-                        <img id="slideshow-image" src="gallery/a11.jpg" alt="Durga Puja Gallery" loading="eager" style="width: 100%; height: 100%; object-fit: cover;" />
-                        <div class="slideshow-overlay"></div>
-                        <div class="slideshow-dots">
-                            <span class="dot active" data-slide="0" role="button" tabindex="0" aria-label="Go to slide 1"></span>
-                            <span class="dot" data-slide="1" role="button" tabindex="0" aria-label="Go to slide 2"></span>
-                            <span class="dot" data-slide="2" role="button" tabindex="0" aria-label="Go to slide 3"></span>
-                            <span class="dot" data-slide="3" role="button" tabindex="0" aria-label="Go to slide 4"></span>
-                            <span class="dot" data-slide="4" role="button" tabindex="0" aria-label="Go to slide 5"></span>
-                            <span class="dot" data-slide="5" role="button" tabindex="0" aria-label="Go to slide 6"></span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Info Section -->
-    <section class="quick-info">
+    <!-- Events Section -->
+    <section class="events-section">
         <div class="container">
-            <div class="quick-info-grid">
-                <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fas fa-calendar-alt"></i>
+            <div class="section-header">
+                <h2 class="section-title">Events</h2>
+                <p class="section-subtitle">Join us for these exciting celebrations</p>
+            </div>
+            
+            <div class="events-grid">
+
+                <!-- Durga Puja Events Card -->
+                <div class="event-card durga-puja-events animate-on-scroll">
+                    <div class="event-icon">
+                        <i class="fas fa-pray"></i>
                     </div>
-                    <h3>Event Date</h3>
-                    <p>Sun, Sep 28, 2025 – Thu, Oct 2, 2025</p>
+                    <h3>Durga Puja Events</h3>
+                    <p class="event-description">Traditional puja ceremonies and religious rituals</p>
+                    
+                    <a href="schedule.html" class="schedule-link">
+                        <i class="fas fa-calendar-alt"></i>
+                        View Full Schedule
+                    </a>
                 </div>
+                
+                <!-- Cultural Events Card -->
+                <div class="event-card cultural-events animate-on-scroll">
+                    <div class="event-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Cultural Events</h3>
+                    <p class="event-description">Traditional music, dance performances, and cultural activities</p>
+                    
+                    <div class="free-badge">FREE</div>
+                    <a href="events.html" class="schedule-link">
+                        <i class="fas fa-calendar-alt"></i>
+                        View Full Schedule
+                    </a>
+                </div>
+                
+                
             </div>
         </div>
     </section>
@@ -283,7 +300,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="bca-logo-another.jpg" alt="BCA Spain Logo" />
+                                            <img src="BCA-logo.webp" alt="BCA Spain Logo" />
                     <span>Bengali Cultural Association Barcelona</span>
                 </div>
                 <p>
@@ -298,7 +315,7 @@
                         <form action="#" method="post" style="display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center;">
                             <label for="newsletter-email" style="font-weight: 500; margin-right: 8px;">Join our newsletter:</label>
                             <input type="email" id="newsletter-email" name="email" placeholder="Your email address" required style="padding: 6px 12px; border-radius: 4px; border: 1px solid #ccc; min-width: 220px;">
-                            <button type="submit" class="btn btn-primary" style="padding: 6px 18px; border-radius: 4px; font-weight: 500; background: #B3471B; color: #fff; border: none; cursor: pointer;">Subscribe</button>
+                            <button type="submit" class="btn btn-primary" style="padding: 6px 18px; border-radius: 4px; font-weight: 500; background: var(--red); color: #fff; border: none; cursor: pointer;">Subscribe</button>
                         </form>
                         <script>
                         document.querySelector('.newsletter-signup form').addEventListener('submit', function(e) {
@@ -385,15 +402,15 @@
             if (window.innerWidth <= 768) {
                 // Mobile
                 slider.style.maxWidth = '100%';
-                slider.style.height = '300px';
+                slider.style.height = '250px';
             } else if (window.innerWidth <= 1024) {
                 // Tablet
                 slider.style.maxWidth = '500px';
-                slider.style.height = '350px';
+                slider.style.height = '300px';
             } else {
                 // Desktop
                 slider.style.maxWidth = '600px';
-                slider.style.height = '400px';
+                slider.style.height = '350px';
             }
         }
         

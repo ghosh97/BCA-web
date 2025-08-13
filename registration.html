@@ -46,7 +46,7 @@
                 <div class="nav-logo">
                     <a href="index.html" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 10px;">
                         <span class="logo-img" style="display: inline-block;">
-                            <img src="bca-logo-another.jpg" alt="BCA Spain Logo" style="width:50px;height:50px;border-radius:50%;object-fit:cover;vertical-align:middle;" />
+                            <img src="BCA-logo.webp" alt="BCA Spain Logo" style="width:50px;height:50px;border-radius:50%;object-fit:cover;vertical-align:middle;" />
                         </span>
                         <span class="logo-text" style="font-size: 1.3rem; font-weight: 600; display: inline-block; vertical-align:middle;">BCA Spain</span>
                     </a>
@@ -71,13 +71,13 @@
         </nav>
 
     <!-- Registration Section -->
-    <section id="registration" class="registration" style="margin-top:80px; background: linear-gradient(135deg, #FFFBF0 0%, #FFE4B5 100%);">
+    <section id="registration" class="registration" style="margin-top:80px; background: white;">
         <div class="container">
             <!-- Registration Information -->
             <div class="registration-info" style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem;">
                 <div class="info-header" style="text-align: center; margin-bottom: 2rem;">
-                    <h3 style="color: #FF6B35; font-size: 2rem; margin-bottom: 1rem;">Durga Pujo Registration 2025</h3>
-                    <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">Join Us in Celebrating Durga Puja! <a href="https://bcaspain.blog" style="color: #FF6B35; text-decoration: none; font-weight: 600;">Official website</a></p>
+                    <h3 style="color: var(--red); font-size: 3.5rem; margin-bottom: 1rem;">Durga Pujo Registration 2025</h3>
+                    <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">Join Us in Celebrating Durga Puja! </p>
                 </div>
                 
                 <div class="info-content" style="color: #333; line-height: 1.8; font-size: 1.1rem; margin-bottom: 2rem;">
@@ -95,9 +95,9 @@
                 
                 <!-- Custom Registration Form -->
                 <div class="custom-form-wrapper" style="position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <form id="registrationForm" class="registration-form" style="background: white; padding: 2rem; border-radius: 15px; border: 2px solid #FF6B35;">
+                    <form id="registrationForm" class="registration-form" style="background: white; padding: 2rem; border-radius: 15px; border: 2px solid var(--red);">
                         <div class="form-header" style="text-align: center; margin-bottom: 2rem;">
-                            <h3 style="color: #FF6B35; font-size: 1.8rem; margin-bottom: 0.5rem;">Registration Form</h3>
+                                                          <h3 style="color: var(--red); font-size: 1.8rem; margin-bottom: 0.5rem;">Registration Form</h3>
                             <p style="color: #666; font-size: 1rem;">Please fill in your details below</p>
                         </div>
                         
@@ -105,13 +105,27 @@
                             <!-- Name Field -->
                             <div class="form-group">
                                 <label for="name" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Name *</label>
-                                <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <input type="text" id="name" name="name" required minlength="2" maxlength="100" title="Name can only contain letters and spaces, minimum 2 characters" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
                             </div>
                             
                             <!-- Contact Number Field -->
                             <div class="form-group">
-                                <label for="contact" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Contact Number *</label>
-                                <input type="tel" id="contact" name="contact" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <label for="contact" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Contact/Whatsapp Number *</label>
+                                <div style="display: flex; gap: 8px; align-items: stretch;">
+                                    <select id="country-code" name="country-code" required style="width: 85px; padding: 12px 25px 12px 8px; border: 2px solid #ddd; border-radius: 8px; font-size: 0.9rem; transition: border-color 0.3s ease; background-color: white; cursor: pointer;">
+                                        <option value="+34">+34</option>
+                                        <option value="+91">+91</option>
+                                        <option value="+44">+44</option>
+                                        <option value="+1">+1</option>
+                                        <option value="+33">+33</option>
+                                        <option value="+49">+49</option>
+                                        <option value="+39">+39</option>
+                                        <option value="+31">+31</option>
+                                        <option value="+32">+32</option>
+                                        <option value="+351">+351</option>
+                                    </select>
+                                    <input type="tel" id="contact" name="contact" required pattern="[0-9]{9,15}" inputmode="numeric" minlength="9" maxlength="15" placeholder="Enter number without country code" title="Please enter a valid phone number (9-15 digits)" style="flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                </div>
                             </div>
                         </div>
                         
@@ -119,203 +133,241 @@
                             <!-- Email Field -->
                             <div class="form-group">
                                 <label for="email" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Email *</label>
-                                <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <input type="email" id="email" name="email" required maxlength="254" title="Please enter a valid email address" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
                             </div>
                             
                             <!-- Re-enter Email Field -->
                             <div class="form-group">
                                 <label for="emailConfirm" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Re-enter Email *</label>
-                                <input type="email" id="emailConfirm" name="emailConfirm" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
+                                <input type="email" id="emailConfirm" name="emailConfirm" required maxlength="254" title="Please re-enter your email address to confirm" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;">
                             </div>
                         </div>
                         
                         <!-- Contribution Types Section -->
-                        <div class="contribution-types" style="margin-bottom: 2rem;">
-                            <label style="display: block; margin-bottom: 1rem; color: #333; font-weight: 600; font-size: 1.1rem;">Contribution Types *</label>
-                            
-                            <!-- Category Selection Dropdown -->
-                            <div class="form-group" style="margin-bottom: 1.5rem;">
-                                <label for="categorySelect" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Select Membership *</label>
-                                <select id="categorySelect" name="categorySelect" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; background: white;">
-                                    <option value="">Please select your membership type</option>
-                                    <option value="bca-members">BCA Members</option>
-                                    <option value="guests">Guests</option>
-                                </select>
-                            </div>
-                            
-                            <!-- BCA Members Options -->
-                            <div id="bcaMembersOptions" class="contribution-options" style="display: none; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                        <div class="contribution-types" style="margin-bottom: 2rem;">                            
+                            <!-- BCA Members Section -->
+                            <div style="border: 2px solid var(--red); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; background: rgba(255, 255, 255, 0.8); position: relative;">
+                                <!-- BCA Members Tag -->
+                                <div style="position: absolute; top: -12px; left: 20px; background: var(--red); color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    Select Tickets (Mandatory) *
+                                </div>
+                                <!-- BCA Members Options -->
+                                <div id="bcaMembersOptions" class="contribution-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="adult" name="contributionTypes" value="adult" data-price="65" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
-                                        <label for="adult" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Adult</label>
-                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€65</span>
+                                        <input type="checkbox" id="adult" name="contributionTypes" value="adult" data-price="65" data-category="bca-members" style="width: 18px; height: 18px; accent-color: var(--red);">
+                                        <label for="adult" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Regular (above 12 years)</label>
+                                        <span style="color: var(--red); font-weight: 700; margin-left: auto;">€65</span>
                                     </div>
                                     <input type="number" id="adult-count" name="adult-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
                                 </div>
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="children" name="contributionTypes" value="children" data-price="35" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
+                                        <input type="checkbox" id="children" name="contributionTypes" value="children" data-price="35" data-category="bca-members" style="width: 18px; height: 18px; accent-color: var(--red);">
                                         <label for="children" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children (5-12 years)</label>
-                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€35</span>
+                                        <span style="color: var(--red); font-weight: 700; margin-left: auto;">€35</span>
                                     </div>
                                     <input type="number" id="children-count" name="children-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
                                 </div>
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="students" name="contributionTypes" value="students" data-price="55" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
-                                        <label for="students" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Students</label>
-                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€55</span>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <input type="checkbox" id="students" name="contributionTypes" value="students" data-price="55" data-category="bca-members" style="width: 18px; height: 18px; accent-color: var(--red);">
+                                        <label for="students" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Students (Individuals)</label>
+                                        <span style="color: var(--red); font-weight: 700; margin-left: auto;">€55</span>
                                     </div>
-                                    <input type="number" id="students-count" name="students-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
                                 </div>
                                 
                                 <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="children-under-5" name="contributionTypes" value="children-under-5" data-price="0" data-category="bca-members" style="width: 18px; height: 18px; accent-color: #FF6B35;">
-                                        <label for="children-under-5" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children under 5</label>
-                                        <span style="color: #228B22; font-weight: 700; margin-left: auto;">Free</span>
+                                        <input type="checkbox" id="children-under-5" name="contributionTypes" value="children-under-5" data-price="0" data-category="bca-members" style="width: 18px; height: 18px; accent-color: var(--red);">
+                                        <label for="children-under-5" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Children (upto 5 years)</label>
+                                        <span style="color: var(--green); font-weight: 700; margin-left: auto;">Free</span>
                                     </div>
                                     <input type="number" id="children-under-5-count" name="children-under-5-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
-                                </div>
-                            </div>
-                            
-                            <!-- Guests Options -->
-                            <div id="guestsOptions" class="contribution-options" style="display: none; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
-                                <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                        <input type="checkbox" id="day-pass" name="contributionTypes" value="day-pass" data-price="20" data-category="guests" style="width: 18px; height: 18px; accent-color: #FF6B35;">
-                                        <label for="day-pass" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Day Pass (Guests)</label>
-                                        <span style="color: #FF6B35; font-weight: 700; margin-left: auto;">€20</span>
-                                    </div>
-                                    <input type="number" id="day-pass-count" name="day-pass-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
-                                </div>
-                            </div>
-                            
-                            <!-- Ticket Validity Note -->
-                            <div style="background: rgba(255, 107, 53, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem; border-left: 4px solid #FF6B35;">
-                                <p style="color: #333; font-weight: 600; margin: 0; font-size: 1rem;">
-                                    <strong>NOTE:</strong> All tickets are for all day during puja (Sun, Sep 28, 2025 – Thu, Oct 2, 2025) except Day pass.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- Total Amount Display -->
-                        <div class="total-amount" style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
-                            <h4 style="color: #FF6B35; margin-bottom: 0.5rem; font-size: 1.2rem;">Total Amount</h4>
-                            <div id="totalAmount" style="font-size: 2rem; font-weight: 700; color: #FF6B35;">€0</div>
-                        </div>
-                        
-                        <!-- Bank Account Information (Hidden by default) -->
-                        <div id="bankInfo" style="display: none; background: linear-gradient(135deg, rgba(34, 139, 34, 0.05) 0%, rgba(50, 205, 50, 0.05) 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid #228B22; animation: slideInUp 0.5s ease-out;">
-                            <h4 style="color: #228B22; font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-university"></i> Bank Account Details
-                            </h4>
-                            <div class="bank-details" style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                <div style="margin-bottom: 1rem;">
-                                    <strong style="color: #333; font-size: 1.2rem;">Account Number:</strong>
-                                    <span style="color: #228B22; font-weight: 600; font-family: monospace; font-size: 1.4rem;">ES260049 2990 20 2914599908</span>
-                                </div>
-                                <div style="margin-bottom: 1rem;">
-                                    <strong style="color: #333; font-size: 1.2rem;">Bank:</strong>
-                                    <span style="color: #228B22; font-weight: 600; font-size: 1.3rem;">Santander</span>
-                                </div>
-                                <div style="margin-bottom: 1rem;">
-                                    <strong style="color: #333; font-size: 1.2rem;">Account Name:</strong>
-                                    <span style="color: #228B22; font-weight: 600; font-size: 1.3rem;">Bengali Cultural Association</span>
-                                </div>
-                                <div style="background: rgba(255, 107, 53, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid #FF6B35;">
-                                    <strong style="color: #ee2f0d; font-size: 1.2rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: #FF6B35; font-size: 1.3rem;">Your NAME - Donation</span>
                                 </div>
                                 
 
                             </div>
+                            </div>
+                            
+                            <!-- Guests Section
+                            <div style="border: 2px solid var(--red); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; background: rgba(255, 255, 255, 0.8); position: relative;">
+                                <!-- Guests Tag -->
+                                <!-- <div style="position: absolute; top: -12px; left: 20px; background: var(--red); color: white; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    Guests
+                                </div> -->
+                                <!-- Guests Options -->
+                                <!-- <div id="guestsOptions" class="contribution-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                                    <div class="contribution-option" style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 1rem; transition: all 0.3s ease;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                            <input type="checkbox" id="day-pass" name="contributionTypes" value="day-pass" data-price="20" data-category="guests" style="width: 18px; height: 18px; accent-color: var(--red);">
+                                            <label for="day-pass" style="font-weight: 600; color: #333; cursor: pointer; margin: 0;">Day Pass (Guests)</label>
+                                            <span style="color: var(--red); font-weight: 700; margin-left: auto;">€20</span>
+                                        </div>
+                                        <input type="number" id="day-pass-count" name="day-pass-count" min="0" value="0" placeholder="Count" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem; display: none;">
+                                    </div>
+                                </div>
+                            </div>  -->
+
+                            <!-- Ticket Validity Note -->
+                            <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem; border-left: 4px solid var(--red);">
+                                <p style="color: var(--red); font-weight: 600; margin: 0; font-size: 1rem;">
+                                    <strong>NOTE:</strong> All tickets are valid for full-day entry during the Puja period (Sunday, September 28 – Thursday, October 2, 2025).
+                                </p>
+                            </div>
+
+                            <!-- Additional Donation Section -->
+                            <div class="contribution-option" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(220, 53, 69, 0.1) 100%); border: 2px solid rgba(255, 193, 7, 0.3); border-radius: 10px; padding: 1.5rem; transition: all 0.3s ease; width: 100%; margin: 1rem 0;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                                    <div style="flex: 1; min-width: 250px;">
+                                        <h4 style="color: var(--red); font-size: 1.2rem; margin-bottom: 0.25rem;">
+                                            <i class="fas fa-heart" style="margin-right: 0.5rem; color: #ff4444;"></i>
+                                            Additional Donation (Optional)
+                                        </h4>
+                                        <p style="color: #666; font-size: 0.9rem; margin: 0;">Add any donation amount you wish to contribute.</p>
+                                        <small style="color: #666; font-size: 0.9rem; display: block; margin-top: 0.5rem;">
+                                            <i class="fas fa-info-circle" style="margin-right: 0.25rem;"></i>
+                                            Your ticket price covers the event cost. Any additional amount helps us organize better puja and events.
+                                        </small>
+                                    </div>
+                                    <div class="donation-controls" style="flex: 0 0 300px; min-width: 300px;">
+                                        <div style="position: relative; display: flex; align-items: center; gap: 8px;">
+                                            <button type="button" id="donation-minus" class="donation-btn" style="width: 40px; height: 40px; border: 2px solid #ddd; background: white; border-radius: 8px; font-size: 1.3rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #666; transition: all 0.3s ease; flex-shrink: 0;" title="Decrease donation">−</button>
+                                            <div style="position: relative; flex: 1; min-width: 120px;">
+                                                <span style="position: absolute; left: 12px; color: #f30505; font-weight: 600; font-size: 1.1rem; z-index: 1; top: 50%; transform: translateY(-50%);">€</span>
+                                                <input type="number" id="custom-donation-amount" name="custom-donation-amount" min="0" max="10000" step="0.01" placeholder="Optional donation amount" title="Optional: Add any donation amount you wish to contribute" style="width: 100%; padding: 12px 12px 12px 35px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; text-align: left; font-weight: 600;">
+                                            </div>
+                                            <button type="button" id="donation-plus" class="donation-btn" style="width: 40px; height: 40px; border: 2px solid #ddd; background: white; border-radius: 8px; font-size: 1.3rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #666; transition: all 0.3s ease; flex-shrink: 0;" title="Increase donation">+</button>
+                                        </div>
+                                        <!-- Warning message positioned within donation controls -->
+                                        <div id="custom-donation-warning" class="donation-warning" style="display: none; background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; border-radius: 6px; padding: 0.5rem 0.75rem; margin-top: 0.5rem;">
+                                            <p style="color: #ff4444; font-size: 0.85rem; margin: 0; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                                                <i class="fas fa-exclamation-triangle" style="font-size: 0.8rem;"></i>
+                                                <span>Please enter a valid amount greater than €0.</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
                         </div>
                         
-                        <!-- Payment Proof Field -->
+                        <!-- Total Amount Display -->
+                        <div class="total-amount" style="background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
+                            <h4 style="color: var(--red); margin-bottom: 0.5rem; font-size: 1.2rem;">Total Amount</h4>
+                            <div id="totalAmount" style="font-size: 2rem; font-weight: 700; color: var(--red);">€0</div>
+                        </div>
+                        
+                        <!-- Bank Account Information (Always visible) -->
+                        <div id="bankInfo" style="background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(32, 201, 151, 0.05) 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--green); animation: slideInUp 0.5s ease-out; position: relative;">
+                            <!-- Bank Details Tag -->
+                            
+                            <h4 style="color: var(--green); font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-university"></i> Bank Account Details
+                            </h4>
+                            
+                            <!-- Payment Instructions Note -->
+                            <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--red); margin-bottom: 1.5rem;">
+                                <p style="margin: 0; color: var(--red); font-weight: 600; font-size: 0.95rem;">
+                                    <i class="fas fa-exclamation-circle" style="color: var(--red); margin-right: 0.5rem;"></i>
+                                    NOTE: Please transfer the above amount to this bank account.
+                                </p>
+                            </div>
+
+                            <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--red); margin-bottom: 1rem;">
+                                <i class="fas fa-exclamation-circle" style="color: var(--red); margin-right: 0.5rem;"></i>
+                                <strong style="color: var(--red); font-size: 1.1rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: var(--red); font-size: 1.6rem;">Your NAME - Donation</span>
+                            </div>
+
+                            <div class="bank-details" style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: #333; font-size: 1.2rem;">Account Number:</strong>
+                                    <span style="color: var(--green); font-weight: 600; font-family: monospace; font-size: 1.4rem;">ES260049 2990 20 2914599908</span>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: #333; font-size: 1.2rem;">Bank:</strong>
+                                    <span style="color: var(--green); font-weight: 600; font-size: 1.3rem;">Santander</span>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: #333; font-size: 1.2rem;">Account Name:</strong>
+                                    <span style="color: var(--green); font-weight: 600; font-size: 1.3rem;">Bengali Cultural Association</span>
+                                </div>
+                                
+
+
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction ID Field -->
                         <div class="form-group" style="margin-bottom: 2rem;">
-                            <label for="paymentProof" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Payment Proof *</label>
-                            <input type="file" id="paymentProof" name="paymentProof" accept="image/*,.pdf" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; background: white;">
-                            <small style="color: #666; font-size: 0.9rem; margin-top: 0.5rem; display: block;">Please upload a screenshot or PDF of your payment confirmation</small>
+                            <label for="transactionId" style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">Transaction ID (Optional)</label>
+                            <input type="text" id="transactionId" name="transactionId" placeholder="Enter your payment transaction ID" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; background: white;">
+                            <small style="color: #666; font-size: 0.9rem; margin-top: 0.5rem; display: block;">Please provide your payment transaction ID for faster verification (optional)</small>
                         </div>
                         
                         <!-- Submit Button -->
                         <div class="form-submit" style="text-align: center;">
-                            <button type="submit" id="submitBtn" style="background: #FF6B35; color: white; border: none; padding: 15px 40px; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <button type="submit" id="submitBtn" style="background: var(--red); color: white; border: none; padding: 15px 40px; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
                                 <i class="fas fa-paper-plane"></i>
                                 Send Registration
                             </button>
                         </div>
                     </form>
                     
+                    
+                    
                     <!-- Success Message (Hidden by default) -->
-                    <div id="successMessage" style="display: none; background: linear-gradient(135deg, rgba(34, 139, 34, 0.1) 0%, rgba(50, 205, 50, 0.1) 100%); padding: 2rem; border-radius: 15px; text-align: center; border: 2px solid #228B22;">
-                        <div style="width: 80px; height: 80px; background: #228B22; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 2rem;">
+                    <div id="successMessage" style="display: none; background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(32, 201, 151, 0.1) 100%); padding: 2rem; border-radius: 15px; text-align: center; border: 2px solid var(--green);">
+                        <div style="width: 80px; height: 80px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 2rem;">
                             <i class="fas fa-check"></i>
                         </div>
-                        <h3 style="color: #228B22; font-size: 1.5rem; margin-bottom: 1rem;">Registration Submitted Successfully!</h3>
-                        <p style="color: #333; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">Thank you for registering for Durga Puja 2K25 Barcelona. You will receive your tickets shortly after payment verification.</p>
-                        <p style="color: #228B22; font-weight: 600; font-size: 1.2rem;">Thank you! 🙏</p>
+                        <h3 style="color: var(--green); font-size: 1.5rem; margin-bottom: 1rem;">Registration Submitted Successfully!</h3>
+                        <p style="color: #333; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">Thank you for registering for Durga Puja 2025 Barcelona. Please check you email for the registration confirmation. You will receive your tickets shortly after payment verification.</p>
+                        <p style="color: var(--green); font-weight: 600; font-size: 1.2rem;">Thank you! 🙏</p>
                     </div>
                 </div>
                 
-                <!-- Form Footer -->
-                <div class="form-footer" style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">📧 Need help? Contact us at <a href="mailto:info@bcaspain.org" style="color: #FF6B35; text-decoration: none;">info@bcaspain.org</a></p>
-                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                        <span style="background: rgba(255, 107, 53, 0.1); color: #FF6B35; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
-                            <i class="fas fa-shield-alt"></i> Secure Form
-                        </span>
-                        <span style="background: rgba(255, 215, 0, 0.1); color: #FF6B35; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
-                            <i class="fas fa-clock"></i> Quick Registration
-                        </span>
-                        <span style="background: rgba(34, 139, 34, 0.1); color: #228B22; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
-                            <i class="fas fa-check-circle"></i> Instant Confirmation
-                        </span>
-                    </div>
-                </div>
             </div>
             
             <!-- Registration Benefits -->
-            <div class="registration-benefits" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                <div class="benefit-card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-left: 4px solid #FF6B35;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <div style="width: 50px; height: 50px; background: #FF6B35; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+            <div class="registration-benefits" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <div class="benefit-card" style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); border-left: 3px solid var(--red);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div style="width: 35px; height: 35px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem;">
                             <i class="fas fa-ticket-alt"></i>
                         </div>
-                        <h4 style="color: #FF6B35; margin: 0; font-size: 1.3rem;">Guaranteed Entry</h4>
+                        <h4 style="color: var(--red); margin: 0; font-size: 1.1rem;">Guaranteed Entry</h4>
                     </div>
-                    <p style="color: #666; line-height: 1.6;">Secure your spot at all Durga Puja events with priority access and reserved seating.</p>
                 </div>
                 
-                <div class="benefit-card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-left: 4px solid #FFD700;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #FFD700 0%, #FF6B35 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                <div class="benefit-card" style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); border-left: 3px solid var(--yellow);">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div style="width: 35px; height: 35px; background: linear-gradient(135deg, var(--yellow) 0%, var(--red) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem;">
                             <i class="fas fa-utensils"></i>
                         </div>
-                        <h4 style="color: #FF6B35; margin: 0; font-size: 1.3rem;">Traditional Lunch</h4>
+                        <h4 style="color: var(--red); margin: 0; font-size: 1.1rem;">Traditional Lunch</h4>
                     </div>
-                    <p style="color: #666; line-height: 1.6;">Enjoy authentic Bengali cuisine including traditional dishes prepared with love and care.</p>
                 </div>
             </div>
 
              <!-- Closing Message -->
-             <div class="closing-message" style="text-align: center; background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%); padding: 2rem; border-radius: 15px;">
-                <p style="color: #333; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">We're grateful for the generosity shown during the Protima idol donations and look forward to your continued support to make this Durga Puja unforgettable. With the arrival of the divine murti, let's ensure the celebration is as grand as the occasion.</p>
-                <p style="color: #FF6B35; font-size: 1.2rem; font-weight: 600;">Thank you for your support! 🙏</p>
+             <div class="closing-message" style="text-align: center; background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%); padding: 1.5rem; border-radius: 10px;">
+                <p style="color: #333; font-size: 1rem; line-height: 1.5; margin-bottom: 0.75rem;">We're grateful for the generosity shown during the Protima idol donations and look forward to your continued support to make this Durga Puja unforgettable. With the arrival of the divine murti, let's ensure the celebration is as grand as the occasion.</p>
+                <p style="color: var(--red); font-size: 1.1rem; font-weight: 600;">Thank you for your support! 🙏</p>
             </div>
             
             <!-- Call to Action -->
-            <div class="registration-cta" style="text-align: center; margin-top: 4rem; padding: 3rem; background: #FF6B35; border-radius: 20px; color: white; box-shadow: 0 10px 30px rgba(255,107,53,0.3);">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Questions About Registration?</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Our team is here to help you with any questions</p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="contact.html" class="btn btn-primary" style="background: white; color: #FF6B35; font-size: 1.1rem; padding: 15px 30px; text-decoration: none; border-radius: 10px; font-weight: 600;">
+            <div class="registration-cta" style="text-align: center; margin-top: 1.5rem; padding: 1.5rem; background: var(--red); border-radius: 12px; color: white; box-shadow: 0 3px 15px rgba(220,53,69,0.3);">
+                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Questions About Registration?</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.9;">Our team is here to help you with any questions</p>
+                <div style="display: flex; gap: 0.3rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="contact.html" class="btn btn-primary" style="background: white; color: var(--red); font-size: 0.8rem; padding: 4px 12px; text-decoration: none; border-radius: 4px; font-weight: 600;">
                         <i class="fas fa-envelope"></i> Contact Us
                     </a>
-                    <a href="schedule.html" class="btn btn-secondary" style="border: 2px solid white; color: white; font-size: 1.1rem; padding: 15px 30px; text-decoration: none; border-radius: 10px; font-weight: 600;">
+                    <a href="schedule.html" class="btn btn-secondary" style="border: 2px solid white; color: white; font-size: 0.8rem; padding: 4px 12px; text-decoration: none; border-radius: 4px; font-weight: 600;">
                         <i class="fas fa-calendar"></i> View Schedule
                     </a>
                 </div>
@@ -382,6 +434,75 @@
             transition: all 0.3s ease;
         }
         
+        /* Country code select styles */
+        select#country-code {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 5px center;
+            background-size: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        select#country-code:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+        
+        select#country-code option {
+            padding: 8px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        
+        @media (max-width: 480px) {
+            select#country-code {
+                width: 70px !important;
+                padding: 10px 20px 10px 4px !important;
+                font-size: 0.85rem !important;
+            }
+            
+            select#country-code option {
+                font-size: 0.85rem;
+                padding: 6px;
+            }
+        }
+        
+        /* Hide number input spinners */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Firefox */
+        input[type="number"] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+        
+        /* Contact number validation styles */
+        input#contact:invalid {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+        
+        input#contact:valid {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+        
+        input#contact:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+        
         .form-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
@@ -408,18 +529,18 @@
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #FF6B35 !important;
-            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1) !important;
+            border-color: var(--red) !important;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
         }
         
         .form-group input:invalid,
         .form-group select:invalid {
-            border-color: #ff4444;
+            border-color: var(--red);
         }
         
         .form-group input:valid,
         .form-group select:valid {
-            border-color: #228B22;
+            border-color: var(--green);
         }
         
         /* Total amount animation */
@@ -429,7 +550,7 @@
         
         .total-amount:hover {
             transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
         }
         
         /* Submit button enhancements */
@@ -455,7 +576,7 @@
         
         #submitBtn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
         }
         
         #submitBtn:disabled {
@@ -505,8 +626,8 @@
         }
         
                     .contribution-option input[type="number"]:focus {
-                border-color: #FF6B35 !important;
-                box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1) !important;
+                border-color: var(--red) !important;
+                box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
             }
             
             /* Bank information styling */
@@ -532,7 +653,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: linear-gradient(135deg, #FF6B35 0%, #FFD700 100%);
+            background: linear-gradient(135deg, var(--red) 0%, var(--yellow) 100%);
             border-radius: 2px;
         }
         
@@ -621,6 +742,104 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         
+        /* Donation button styles */
+        .donation-btn {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .donation-btn:hover:not(:disabled) {
+            border-color: var(--red) !important;
+            color: var(--red) !important;
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .donation-btn:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+        }
+        
+        .donation-btn:disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+        }
+        
+        /* Donation warning styles */
+        .donation-warning {
+            animation: slideInDown 0.3s ease-out;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .donation-warning p {
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        
+        /* Donation validation message styles */
+        #donation-validation-msg {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+            line-height: 1.4;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding: 0.25rem 0;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Tablet Responsive Styles */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .donation-controls {
+                flex: 0 0 280px !important;
+                min-width: 280px !important;
+            }
+            
+            .donation-btn {
+                width: 38px !important;
+                height: 38px !important;
+                font-size: 1.2rem !important;
+            }
+            
+            #custom-donation-amount {
+                padding: 10px 10px 10px 32px !important;
+                font-size: 0.95rem !important;
+            }
+            
+            /* Tablet warning styling */
+            .donation-warning {
+                padding: 0.4rem 0.6rem !important;
+                margin-top: 0.4rem !important;
+            }
+            
+            .donation-warning p {
+                font-size: 0.8rem !important;
+            }
+            
+            .donation-warning i {
+                font-size: 0.75rem !important;
+            }
+            
+            /* Tablet donation validation message */
+            #donation-validation-msg {
+                font-size: 0.8rem !important;
+                margin-top: 0.4rem !important;
+                padding: 0.2rem 0 !important;
+            }
+        }
+        
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
             .registration-overview {
@@ -638,12 +857,12 @@
             
             /* Registration Info Mobile Styles */
             .registration-info {
-                padding: 1.5rem !important;
+                padding: 2.5rem !important;
                 margin-bottom: 2rem !important;
             }
             
             .registration-info .info-header h3 {
-                font-size: 1.5rem !important;
+                font-size: 2.5rem !important;
             }
             
             .registration-info .info-header p {
@@ -682,34 +901,38 @@
             }
             
             /* Bank Info Mobile Styles */
-            .bank-info {
-                padding: 1.5rem !important;
-                margin-bottom: 1.5rem !important;
+            #bankInfo {
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
             }
             
-            .bank-info h4 {
-                font-size: 1.3rem !important;
+            #bankInfo h4 {
+                font-size: 1.1rem !important;
+                margin-bottom: 1rem !important;
             }
             
             .bank-details {
-                padding: 1rem !important;
+                padding: 0.8rem !important;
             }
             
             .bank-details div {
-                margin-bottom: 0.8rem !important;
+                margin-bottom: 0.5rem !important;
             }
             
             .bank-details strong {
-                font-size: 1.1rem !important;
+                font-size: 0.9rem !important;
+                display: block !important;
             }
             
             .bank-details span {
-                font-size: 1.2rem !important;
+                font-size: 1rem !important;
             }
             
             .bank-details span[style*="font-family: monospace"] {
-                font-size: 1.3rem !important;
+                font-size: 1.1rem !important;
                 word-break: break-all;
+                display: block !important;
+                margin-top: 0.2rem !important;
             }
             
             /* Closing Message Mobile Styles */
@@ -753,15 +976,54 @@
             
             .contribution-options {
                 grid-template-columns: 1fr !important;
-                gap: 0.8rem !important;
+                gap: 0.6rem !important;
             }
             
             .contribution-option {
-                padding: 0.8rem !important;
+                padding: 0.6rem !important;
+            }
+            
+            .contribution-option > div:first-child {
+                margin-bottom: 0.3rem !important;
+            }
+            
+            .contribution-option label {
+                font-size: 0.9rem !important;
+            }
+            
+            .contribution-option input[type="number"] {
+                padding: 6px !important;
+                font-size: 0.85rem !important;
+                height: 32px !important;
+            }
+            
+            .contribution-option span {
+                font-size: 0.9rem !important;
             }
             
             .form-footer {
                 padding: 1rem !important;
+            }
+            
+            .form-footer {
+                padding: 0.8rem !important;
+            }
+
+            .form-footer > div {
+                font-size: 0.85rem !important;
+                line-height: 1.6 !important;
+            }
+            
+            .form-footer p {
+                margin: 0.2rem 0 !important;
+                padding: 0 !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .form-footer a {
+                display: inline-block !important;
+                padding: 0.1rem 0 !important;
+                color: var(--red) !important;
             }
             
             .form-footer span {
@@ -807,6 +1069,19 @@
                 font-size: 1rem !important;
             }
             
+            /* Maintain button colors on mobile */
+            .registration-cta .btn-primary {
+                background: white !important;
+                color: var(--red) !important;
+                border: 2px solid white !important;
+            }
+            
+            .registration-cta .btn-secondary {
+                background: transparent !important;
+                color: white !important;
+                border: 2px solid white !important;
+            }
+            
             .section-header h2 {
                 font-size: 2rem !important;
             }
@@ -824,7 +1099,7 @@
             }
             
             .registration-overview h3 {
-                font-size: 1.2rem !important;
+                font-size: 2.5rem !important;
             }
             
             /* Registration Info Extra Small Mobile */
@@ -833,7 +1108,7 @@
             }
             
             .registration-info .info-header h3 {
-                font-size: 1.3rem !important;
+                font-size: 2.5rem !important;
             }
             
             .registration-info .info-header p {
@@ -866,28 +1141,29 @@
             }
             
             /* Bank Info Extra Small Mobile */
-            .bank-info {
-                padding: 1rem !important;
-            }
-            
-            .bank-info h4 {
-                font-size: 1.2rem !important;
-            }
-            
-            .bank-details {
+            #bankInfo {
                 padding: 0.8rem !important;
             }
             
-            .bank-details strong {
+            #bankInfo h4 {
                 font-size: 1rem !important;
             }
             
+            .bank-details {
+                padding: 0.6rem !important;
+            }
+            
+            .bank-details strong {
+                font-size: 0.85rem !important;
+            }
+            
             .bank-details span {
-                font-size: 1.1rem !important;
+                font-size: 0.9rem !important;
             }
             
             .bank-details span[style*="font-family: monospace"] {
-                font-size: 1.2rem !important;
+                font-size: 1rem !important;
+                letter-spacing: -0.5px !important;
             }
             
             /* Closing Message Extra Small Mobile */
@@ -926,15 +1202,154 @@
             
             .contribution-options {
                 grid-template-columns: 1fr !important;
-                gap: 0.6rem !important;
+                gap: 0.5rem !important;
             }
             
             .contribution-option {
-                padding: 0.6rem !important;
+                padding: 0.5rem !important;
+            }
+            
+            .contribution-option > div:first-child {
+                margin-bottom: 0.25rem !important;
             }
             
             .contribution-option label {
+                font-size: 0.85rem !important;
+            }
+            
+            .contribution-option input[type="number"] {
+                padding: 5px !important;
+                font-size: 0.8rem !important;
+                height: 28px !important;
+            }
+            
+            .contribution-option span {
+                font-size: 0.85rem !important;
+            }
+            
+            /* BCA Members section mobile optimization */
+            .contribution-types > div:first-child {
+                padding: 1.5rem !important;
+            }
+            
+            /* Additional donation section extra small mobile optimization */
+            .contribution-option[style*="linear-gradient"] {
+                padding: 0.8rem !important;
+            }
+            
+            .contribution-option[style*="linear-gradient"] h4 {
                 font-size: 0.9rem !important;
+            }
+            
+            .contribution-option[style*="linear-gradient"] p {
+                font-size: 0.75rem !important;
+            }
+            
+            .contribution-option[style*="linear-gradient"] small {
+                font-size: 0.7rem !important;
+            }
+            
+            /* Extra small donation buttons */
+            .donation-btn {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 1rem !important;
+                border-width: 1.5px !important;
+            }
+            
+            #custom-donation-amount {
+                padding: 8px 8px 8px 28px !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .donation-controls > div {
+                gap: 4px !important;
+            }
+            
+            /* Extra small mobile warning styling */
+            .donation-warning {
+                padding: 0.3rem 0.5rem !important;
+                margin-top: 0.3rem !important;
+                border-radius: 4px !important;
+            }
+            
+            .donation-warning p {
+                font-size: 0.75rem !important;
+                gap: 0.3rem !important;
+                line-height: 1.3 !important;
+            }
+            
+            .donation-warning i {
+                font-size: 0.7rem !important;
+            }
+            
+            /* Extra small mobile donation validation message */
+            #donation-validation-msg {
+                font-size: 0.75rem !important;
+                margin-top: 0.3rem !important;
+                padding: 0.25rem 0 !important;
+                line-height: 1.3 !important;
+            }
+            
+            /* Donation controls mobile layout */
+            .contribution-option[style*="linear-gradient"] > div {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 1rem !important;
+            }
+            
+            .donation-controls {
+                flex: 1 1 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+                order: 2;
+            }
+            
+            .contribution-option[style*="linear-gradient"] > div > div:first-child {
+                order: 1;
+                flex: 1;
+            }
+            
+            /* Donation buttons mobile sizing */
+            .donation-btn {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 1.1rem !important;
+                border-radius: 6px !important;
+            }
+            
+            #custom-donation-amount {
+                padding: 10px 10px 10px 30px !important;
+                font-size: 0.9rem !important;
+                border-radius: 6px !important;
+            }
+            
+            .donation-controls > div {
+                gap: 6px !important;
+            }
+            
+            /* Mobile warning styling */
+            .donation-warning {
+                padding: 0.4rem 0.6rem !important;
+                margin-top: 0.4rem !important;
+                border-radius: 5px !important;
+            }
+            
+            .donation-warning p {
+                font-size: 0.8rem !important;
+                gap: 0.4rem !important;
+            }
+            
+            .donation-warning i {
+                font-size: 0.75rem !important;
+            }
+            
+            /* Mobile donation validation message */
+            #donation-validation-msg {
+                font-size: 0.8rem !important;
+                margin-top: 0.4rem !important;
+                padding: 0.3rem 0 !important;
+                line-height: 1.3 !important;
             }
             
             #bankInfo {
@@ -1038,7 +1453,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #FF6B35;
+            color: var(--red);
             font-weight: 600;
             z-index: 1;
             background: white;
@@ -1083,7 +1498,7 @@
         /* Form container enhancements */
         .form-container {
             background: linear-gradient(135deg, white 0%, #fefefe 100%);
-            border: 1px solid rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.1);
         }
         
         .form-container::before {
@@ -1093,7 +1508,7 @@
             left: 0;
             right: 0;
             height: 4px;
-background: #FF6B35;
+background: var(--red);
             border-radius: 20px 20px 0 0;
         }
     </style>
