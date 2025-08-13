@@ -262,11 +262,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateName() {
         const rawValue = nameField.value;
         
-
-        
-        // Don't validate on every keystroke - only validate when needed
-        if (rawValue.length < 2) return true;
-        
         let nameMsg = document.getElementById('name-validation-msg');
         
         if (!nameMsg) {
@@ -275,7 +270,8 @@ document.addEventListener('DOMContentLoaded', function() {
             nameMsg.style.fontSize = '0.85rem';
             nameMsg.style.marginTop = '0.25rem';
             nameMsg.style.transition = 'all 0.3s ease';
-            nameField.parentNode.appendChild(nameMsg);
+            // Insert the validation message after the name input field, not after the entire form group
+            nameField.parentNode.insertBefore(nameMsg, nameField.nextSibling);
         }
         
         // Only sanitize when submitting, not while typing
@@ -360,7 +356,8 @@ document.addEventListener('DOMContentLoaded', function() {
             phoneMsg.style.fontSize = '0.85rem';
             phoneMsg.style.marginTop = '0.25rem';
             phoneMsg.style.transition = 'all 0.3s ease';
-            contact.parentNode.appendChild(phoneMsg);
+            // Insert the validation message after the contact input field, not after the entire form group
+            contact.parentNode.parentNode.insertBefore(phoneMsg, contact.parentNode.nextSibling);
         }
         
         // Remove any non-numeric characters
