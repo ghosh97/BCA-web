@@ -398,10 +398,12 @@
     // Production Configuration
     const CONFIG = {
       VERIFICATION_HASH: "8a42bf6c280b1fb622b6ad63e3aebbb300849e0d1fcb35de9dfe2eb39cee0a0f", // Update with actual hash
-      API_TIMEOUT: 15000, // 15 seconds
-      AUTO_RESTART_DELAY: 2000, // 2 seconds
+      API_TIMEOUT: 8000, // Reduced from 15 seconds to 8 seconds for faster response
+      AUTO_RESTART_DELAY: 1000, // Reduced from 2 seconds to 1 second
       MAX_RETRIES: 3,
-      DEBUG_MODE: false // Set to false in production
+      DEBUG_MODE: false, // Set to false in production
+      CACHE_DURATION: 300000, // 5 minutes cache duration
+      MAX_CACHE_SIZE: 1000 // Maximum number of cached tickets
     };
 
     // Analytics and Monitoring
@@ -418,6 +420,108 @@
         console.error(`[Error] ${error.message}`, context);
         // In production, send to error tracking service
         // Example: Sentry.captureException(error, { extra: context });
+      }
+    };
+
+    // Smart Caching System
+    const TicketCache = {
+      cache: new Map(),
+      
+      // Generate cache key from QR text
+      getKey: function(qrText) {
+        return qrText.trim().toLowerCase();
+      },
+      
+      // Get cached result
+      get: function(qrText) {
+        const key = this.getKey(qrText);
+        const cached = this.cache.get(key);
+        
+        if (cached && Date.now() - cached.timestamp < CONFIG.CACHE_DURATION) {
+          if (CONFIG.DEBUG_MODE) {
+            console.log(`[Cache] Hit for: ${qrText.substring(0, 20)}...`);
+          }
+          Analytics.log('cache_hit', { qrText: qrText.substring(0, 20) + '...' });
+          return cached.result;
+        }
+        
+        if (cached && Date.now() - cached.timestamp >= CONFIG.CACHE_DURATION) {
+          this.cache.delete(key); // Remove expired cache
+          if (CONFIG.DEBUG_MODE) {
+            console.log(`[Cache] Expired for: ${qrText.substring(0, 20)}...`);
+          }
+        }
+        
+        return null;
+      },
+      
+      // Set cache result
+      set: function(qrText, result) {
+        const key = this.getKey(qrText);
+        
+        // Clean up old cache if we're at max size
+        if (this.cache.size >= CONFIG.MAX_CACHE_SIZE) {
+          this.cleanup();
+        }
+        
+        this.cache.set(key, {
+          result: result,
+          timestamp: Date.now(),
+          qrText: qrText
+        });
+        
+        if (CONFIG.DEBUG_MODE) {
+          console.log(`[Cache] Stored for: ${qrText.substring(0, 20)}...`);
+        }
+        Analytics.log('cache_set', { qrText: qrText.substring(0, 20) + '...', result: result });
+      },
+      
+      // Clear expired cache entries
+      cleanup: function() {
+        const now = Date.now();
+        let deletedCount = 0;
+        
+        for (const [key, value] of this.cache.entries()) {
+          if (now - value.timestamp >= CONFIG.CACHE_DURATION) {
+            this.cache.delete(key);
+            deletedCount++;
+          }
+        }
+        
+        if (CONFIG.DEBUG_MODE && deletedCount > 0) {
+          console.log(`[Cache] Cleaned up ${deletedCount} expired entries`);
+        }
+      },
+      
+      // Clear all cache
+      clear: function() {
+        this.cache.clear();
+        if (CONFIG.DEBUG_MODE) {
+          console.log('[Cache] All cache cleared');
+        }
+        Analytics.log('cache_cleared');
+      },
+      
+      // Get cache statistics
+      getStats: function() {
+        const now = Date.now();
+        let validEntries = 0;
+        let expiredEntries = 0;
+        
+        for (const [key, value] of this.cache.entries()) {
+          if (now - value.timestamp < CONFIG.CACHE_DURATION) {
+            validEntries++;
+          } else {
+            expiredEntries++;
+          }
+        }
+        
+        return {
+          total: this.cache.size,
+          valid: validEntries,
+          expired: expiredEntries,
+          maxSize: CONFIG.MAX_CACHE_SIZE
+        };
       }
     };
 
@@ -631,6 +735,18 @@
       async function verifyTicket() {
         if (!capturedText) return;
         
+        // Check cache first for instant response
+        const cachedResult = TicketCache.get(capturedText);
+        if (cachedResult) {
+          // Use cached result for instant response
+          document.getElementById("result").textContent = "⚡ Instant verification from cache";
+          
+          // Process cached result
+          processVerificationResult(cachedResult, true);
+          return;
+        }
+        
+        // No cache hit, proceed with API call
         document.getElementById("result").textContent = "🔍 Verifying ticket...";
         appState.lastScanTime = Date.now();
         
@@ -660,50 +776,11 @@
           
           appState.totalScans++;
           
-          if (data.ok && data.code === "CHECKED_IN") {
-            appState.successfulScans++;
-            document.getElementById("result").textContent = data.message;
-            document.getElementById("result").className = "status-valid";
-            document.getElementById("actionBtn").textContent = "✅ Success!";
-            document.getElementById("actionBtn").disabled = true;
-            workflowStep = 'completed';
-            
-            Analytics.log('ticket_verified', { 
-              success: true, 
-              responseTime: Date.now() - appState.lastScanTime 
-            });
-            
-            setTimeout(() => {
-              restartScanning();
-            }, CONFIG.AUTO_RESTART_DELAY);
-            
-          } else if (data.code === "ALREADY_USED") {
-            document.getElementById("result").textContent = data.message;
-            document.getElementById("result").className = "status-warning";
-            document.getElementById("actionBtn").textContent = "🔄 Scan Again";
-            document.getElementById("actionBtn").disabled = false;
-            workflowStep = 'scanning';
-            
-            Analytics.log('ticket_already_used');
-            
-          } else if (data.code === "NOT_FOUND") {
-            document.getElementById("result").textContent = data.message;
-            document.getElementById("result").className = "status-invalid";
-            document.getElementById("actionBtn").textContent = "🔄 Scan Again";
-            document.getElementById("actionBtn").disabled = false;
-            workflowStep = 'scanning';
-            
-            Analytics.log('ticket_not_found');
-            
-          } else {
-            document.getElementById("result").textContent = "❌ Unexpected response from server";
-            document.getElementById("result").className = "status-invalid";
-            document.getElementById("actionBtn").textContent = "🔄 Scan Again";
-            document.getElementById("actionBtn").disabled = false;
-            workflowStep = 'scanning';
-            
-            Analytics.log('unexpected_response', { data });
-          }
+          // Cache the result for future use
+          TicketCache.set(capturedText, data);
+          
+          // Process the result
+          processVerificationResult(data, false);
           
         } catch (error) {
           clearTimeout(timeoutId);
@@ -719,6 +796,57 @@
           document.getElementById("actionBtn").textContent = "🔄 Scan Again";
           document.getElementById("actionBtn").disabled = false;
           workflowStep = 'scanning';
+        }
+      }
+
+      // Process verification result (cached or fresh)
+      function processVerificationResult(data, fromCache = false) {
+        const cacheIndicator = fromCache ? " ⚡" : "";
+        
+        if (data.ok && data.code === "CHECKED_IN") {
+          appState.successfulScans++;
+          document.getElementById("result").textContent = data.message + cacheIndicator;
+          document.getElementById("result").className = "status-valid";
+          document.getElementById("actionBtn").textContent = "✅ Success!";
+          document.getElementById("actionBtn").disabled = true;
+          workflowStep = 'completed';
+          
+          Analytics.log('ticket_verified', { 
+            success: true, 
+            responseTime: fromCache ? 0 : Date.now() - appState.lastScanTime,
+            fromCache: fromCache
+          });
+          
+          setTimeout(() => {
+            restartScanning();
+          }, CONFIG.AUTO_RESTART_DELAY);
+          
+        } else if (data.code === "ALREADY_USED") {
+          document.getElementById("result").textContent = data.message + cacheIndicator;
+          document.getElementById("result").className = "status-warning";
+          document.getElementById("actionBtn").textContent = "🔄 Scan Again";
+          document.getElementById("actionBtn").disabled = false;
+          workflowStep = 'scanning';
+          
+          Analytics.log('ticket_already_used', { fromCache: fromCache });
+          
+        } else if (data.code === "NOT_FOUND") {
+          document.getElementById("result").textContent = data.message + cacheIndicator;
+          document.getElementById("result").className = "status-invalid";
+          document.getElementById("actionBtn").textContent = "🔄 Scan Again";
+          document.getElementById("actionBtn").disabled = false;
+          workflowStep = 'scanning';
+          
+          Analytics.log('ticket_not_found', { fromCache: fromCache });
+          
+        } else {
+          document.getElementById("result").textContent = "❌ Unexpected response from server" + cacheIndicator;
+          document.getElementById("result").className = "status-invalid";
+          document.getElementById("actionBtn").textContent = "🔄 Scan Again";
+          document.getElementById("actionBtn").disabled = false;
+          workflowStep = 'scanning';
+          
+          Analytics.log('unexpected_response', { data, fromCache: fromCache });
         }
       }
 
@@ -782,7 +910,46 @@
     window.addEventListener('load', () => {
       const loadTime = performance.now();
       Analytics.log('page_load', { loadTime: Math.round(loadTime) });
+      
+      // Log cache stats on page load
+      if (CONFIG.DEBUG_MODE) {
+        const cacheStats = TicketCache.getStats();
+        console.log('[Cache] Initial stats:', cacheStats);
+      }
     });
+
+    // Cache management functions (accessible from console for debugging)
+    window.TicketCache = TicketCache;
+    window.getCacheStats = function() {
+      const stats = TicketCache.getStats();
+      console.log('📊 Cache Statistics:', stats);
+      return stats;
+    };
+    
+    window.clearCache = function() {
+      TicketCache.clear();
+      console.log('🗑️ Cache cleared');
+    };
+    
+    window.showCachePerformance = function() {
+      const stats = TicketCache.getStats();
+      const hitRate = stats.total > 0 ? ((stats.valid / stats.total) * 100).toFixed(1) : 0;
+      
+      console.log(`
+🚀 Cache Performance Report:
+📊 Total Entries: ${stats.total}
+✅ Valid Entries: ${stats.valid}
+⏰ Expired Entries: ${stats.expired}
+🎯 Hit Rate: ${hitRate}%
+📏 Max Size: ${stats.maxSize}
+⏱️ Cache Duration: ${CONFIG.CACHE_DURATION / 1000}s
+      `);
+    };
+
+    // Auto-cleanup cache every 5 minutes
+    setInterval(() => {
+      TicketCache.cleanup();
+    }, 300000); // 5 minutes
 
     // Service Worker registration (for offline support)
     if ('serviceWorker' in navigator) {
