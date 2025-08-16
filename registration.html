@@ -80,13 +80,10 @@
                     <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">Join Us in Celebrating Durga Puja! </p>
                 </div>
                 
-                <div class="info-content" style="color: #333; line-height: 1.8; font-size: 1.1rem; margin-bottom: 2rem;">
+                <!-- <div class="info-content" style="color: #333; line-height: 1.8; font-size: 1.1rem; margin-bottom: 2rem;">
                     <p style="margin-bottom: 1.5rem;">We invite all members to celebrate the joyous Durga Puja with us this year. To help make this event memorable, we kindly ask you to register and contribute.</p>
-                </div>
+                </div> -->
                 
-
-                
-
             </div>
             
             <!-- Enhanced Form Container -->
@@ -227,10 +224,7 @@
                                             Additional Donation (Optional)
                                         </h4>
                                         <p style="color: #666; font-size: 0.9rem; margin: 0;">Add any donation amount you wish to contribute.</p>
-                                        <small style="color: #666; font-size: 0.9rem; display: block; margin-top: 0.5rem;">
-                                            <i class="fas fa-info-circle" style="margin-right: 0.25rem;"></i>
-                                            Your ticket price covers the event cost. Any additional amount helps us organize better puja and events.
-                                        </small>
+                
                                     </div>
                                     <div class="donation-controls" style="flex: 0 0 300px; min-width: 300px;">
                                         <div style="position: relative; display: flex; align-items: center; gap: 8px;">
@@ -261,44 +255,84 @@
                             <div id="totalAmount" style="font-size: 2rem; font-weight: 700; color: var(--red);">€0</div>
                         </div>
                         
-                        <!-- Bank Account Information (Always visible) -->
-                        <div id="bankInfo" style="background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(32, 201, 151, 0.05) 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--green); animation: slideInUp 0.5s ease-out; position: relative;">
-                            <!-- Bank Details Tag -->
+                        <!-- Payment Methods Information (Always visible) -->
+                        <div id="paymentInfo" style="background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(32, 201, 151, 0.05) 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 4px solid var(--green); animation: slideInUp 0.5s ease-out; position: relative;">
                             
-                            <h4 style="color: var(--green); font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-university"></i> Bank Account Details
+                            <!-- Payment Methods Header -->
+                            <h4 style="color: var(--green); font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; text-align: center; justify-content: center;">
+                                <i class="fas fa-credit-card"></i> Payment Methods
                             </h4>
                             
                             <!-- Payment Instructions Note -->
                             <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--red); margin-bottom: 1.5rem;">
                                 <p style="margin: 0; color: var(--red); font-weight: 600; font-size: 0.95rem;">
                                     <i class="fas fa-exclamation-circle" style="color: var(--red); margin-right: 0.5rem;"></i>
-                                    NOTE: Please transfer the above amount to this bank account.
+                                    NOTE: Please transfer the above amount using one of the payment methods below.
                                 </p>
                             </div>
 
-                            <div style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--red); margin-bottom: 1rem;">
-                                <i class="fas fa-exclamation-circle" style="color: var(--red); margin-right: 0.5rem;"></i>
-                                <strong style="color: var(--red); font-size: 1.1rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: var(--red); font-size: 1.6rem;">Your NAME - Donation</span>
+                            <!-- Important Payment Note -->
+                            <div style="background: rgba(220, 53, 69, 0.1); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--red); margin-bottom: 0.5rem;">
+                                <i class="fas fa-exclamation-circle" style="color: var(--red); margin-right: 0.5rem; font-size: 0.9rem;"></i>
+                                <strong style="color: var(--red); font-size: 0.9rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: var(--red); font-size: 1.2rem;">Your NAME - Donation</span>
                             </div>
+                            
 
-                            <div class="bank-details" style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                <div style="margin-bottom: 1rem;">
-                                    <strong style="color: #333; font-size: 1.2rem;">Account Number:</strong>
-                                    <span style="color: var(--green); font-weight: 600; font-family: monospace; font-size: 1.4rem;">ES260049 2990 20 2914599908</span>
+                            <!-- Method 1: Bank Transfer -->
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem; border: 2px solid var(--green);">
+                                <h5 style="color: var(--green); font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fas fa-university"></i> Method 1: Bank Transfer
+                                </h5>
+                                
+                                <div class="bank-details">
+                                    <div style="margin-bottom: 1rem;">
+                                        <strong style="color: #333; font-size: 1.1rem;">Account Number:</strong>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                                            <span id="bankAccountNumber" style="color: var(--green); font-weight: 500; font-family: monospace; font-size: 1.1rem;">ES260049 2990 20 2914599908</span>
+                                            <button type="button" class="copy-btn" onclick="copyToClipboard('bankAccountNumber', 'Bank account number')" title="Copy bank account number" style="background: var(--green); color: white; border: none; padding: 4px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px;">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <strong style="color: #333; font-size: 1.1rem;">Bank:</strong>
+                                        <span style="color: var(--green); font-weight: 600; font-size: 1.2rem;">Santander</span>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <strong style="color: #333; font-size: 1.1rem;">Account Name:</strong>
+                                        <span style="color: var(--green); font-weight: 600; font-size: 1.2rem;">Bengali Cultural Association</span>
+                                    </div>
                                 </div>
-                                <div style="margin-bottom: 1rem;">
-                                    <strong style="color: #333; font-size: 1.2rem;">Bank:</strong>
-                                    <span style="color: var(--green); font-weight: 600; font-size: 1.3rem;">Santander</span>
-                                </div>
-                                <div style="margin-bottom: 1rem;">
-                                    <strong style="color: #333; font-size: 1.2rem;">Account Name:</strong>
-                                    <span style="color: var(--green); font-weight: 600; font-size: 1.3rem;">Bengali Cultural Association</span>
+
+                            </div>
+                            
+                            <!-- OR Divider -->
+                            <div style="text-align: center; margin: 1.5rem 0; position: relative;">
+                                <div style="background: white; padding: 0 1rem; font-weight: 700; color: var(--red); font-size: 1.1rem; display: inline-block; position: relative; z-index: 2;">OR</div>
+                                <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent); z-index: 1;"></div>
+                            </div>
+                            
+                            <!-- Method 2: Baizum -->
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem; border: 2px solid var(--green);">
+                                <h5 style="color: var(--green); font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fas fa-mobile-alt"></i> Method 2: Baizum
+                                </h5>
+                                
+                                <div class="baizum-details">
+                                    <div style="margin-bottom: 1rem;">
+                                        <strong style="color: #333; font-size: 1.1rem;">Phone Number:</strong>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                                            <span id="baizumPhoneNumber" style="color: var(--green); font-weight: 600; font-size: 1.3rem;">+34 682 00 01 31</span>
+                                            <button type="button" class="copy-btn" onclick="copyToClipboard('baizumPhoneNumber', 'Baizum phone number')" title="Copy Baizum phone number" style="background: var(--green); color: white; border: none; padding: 4px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px;">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 
-
-
                             </div>
+                            
+            
                         </div>
                         
                         <!-- Transaction ID Field -->
@@ -413,6 +447,75 @@
       smoothscroll.polyfill();
             };
             document.head.appendChild(script);
+        }
+    </script>
+
+    <!-- Copy to Clipboard Functionality -->
+    <script>
+        function copyToClipboard(elementId, description) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            // Create a temporary textarea to copy the text
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    // Show success feedback
+                    showCopyFeedback(elementId, true);
+                } else {
+                    // Fallback for modern browsers
+                    navigator.clipboard.writeText(text).then(() => {
+                        showCopyFeedback(elementId, true);
+                    }).catch(() => {
+                        showCopyFeedback(elementId, false);
+                    });
+                }
+            } catch (err) {
+                // Fallback for modern browsers
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopyFeedback(elementId, true);
+                }).catch(() => {
+                    showCopyFeedback(elementId, false);
+                });
+            }
+            
+            document.body.removeChild(textarea);
+        }
+        
+        function showCopyFeedback(elementId, success) {
+            const copyBtn = document.querySelector(`#${elementId}`).nextElementSibling;
+            const copyIcon = copyBtn.querySelector('i');
+            
+            if (success) {
+                // Success state
+                copyIcon.className = 'fas fa-check';
+                copyBtn.style.background = 'var(--green)';
+                copyBtn.style.transform = 'scale(1.05)';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyIcon.className = 'fas fa-copy';
+                    copyBtn.style.background = 'var(--green)';
+                    copyBtn.style.transform = 'scale(1)';
+                }, 2000);
+            } else {
+                // Error state
+                copyIcon.className = 'fas fa-times';
+                copyBtn.style.background = 'var(--red)';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyIcon.className = 'fas fa-copy';
+                    copyBtn.style.background = 'var(--green)';
+                }, 2000);
+            }
         }
     </script>
 
@@ -630,15 +733,135 @@
                 box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
             }
             
-            /* Bank information styling */
-            #bankInfo {
-                transition: all 0.3s ease;
+                    /* Payment information styling */
+        #paymentInfo {
+            transition: all 0.3s ease;
+        }
+        
+        #paymentInfo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 139, 34, 0.15);
+        }
+        
+        /* Payment method cards styling */
+        #paymentInfo .bank-details,
+        #paymentInfo .baizum-details {
+            transition: all 0.3s ease;
+        }
+        
+        #paymentInfo .bank-details:hover,
+        #paymentInfo .baizum-details:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Copy button styling */
+        .copy-btn {
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            border: 1px solid transparent !important;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+            border-color: rgba(255,255,255,0.3) !important;
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+        }
+        
+        .copy-btn i {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Enhanced mobile copy button styling */
+        @media (max-width: 768px) {
+            .copy-btn {
+                border: 2px solid rgba(255,255,255,0.2) !important;
+                background: linear-gradient(135deg, var(--green) 0%, #28a745 100%) !important;
+                -webkit-tap-highlight-color: transparent !important;
+                touch-action: manipulation !important;
             }
             
-            #bankInfo:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(34, 139, 34, 0.15);
+            .copy-btn:hover {
+                border-color: rgba(255,255,255,0.4) !important;
+                background: linear-gradient(135deg, #28a745 0%, var(--green) 100%) !important;
             }
+            
+            .copy-btn:active {
+                transform: scale(0.95) !important;
+                transition: transform 0.1s ease !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .copy-btn {
+                border: 2px solid rgba(255,255,255,0.3) !important;
+                background: linear-gradient(135deg, var(--green) 0%, #28a745 100%) !important;
+                font-weight: bold !important;
+                -webkit-tap-highlight-color: transparent !important;
+                touch-action: manipulation !important;
+            }
+            
+            .copy-btn:hover {
+                border-color: rgba(255,255,255,0.5) !important;
+                background: linear-gradient(135deg, #28a745 0%, var(--green) 100%) !important;
+            }
+            
+            .copy-btn:active {
+                transform: scale(0.9) !important;
+                transition: transform 0.1s ease !important;
+            }
+        }
+        
+        /* Copy button responsive adjustments */
+        @media (max-width: 768px) {
+            .copy-btn {
+                width: 32px !important;
+                height: 32px !important;
+                padding: 4px !important;
+                border-radius: 6px !important;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+            }
+            
+            .copy-btn i {
+                font-size: 0.9rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .copy-btn {
+                width: 36px !important;
+                height: 36px !important;
+                padding: 5px !important;
+                border-radius: 8px !important;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.2) !important;
+            }
+            
+            .copy-btn i {
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* OR divider styling */
+        #paymentInfo .or-divider {
+            position: relative;
+            z-index: 1;
+        }
+        
+        #paymentInfo .or-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), transparent);
+            z-index: -1;
+        }
         
         /* Form Header Styling */
         .form-header {
@@ -802,6 +1025,37 @@
         
         /* Tablet Responsive Styles */
         @media (max-width: 1024px) and (min-width: 769px) {
+            /* Payment methods tablet optimization */
+            #paymentInfo h4 {
+                font-size: 1.3rem !important;
+            }
+            
+            #paymentInfo h5 {
+                font-size: 1.1rem !important;
+            }
+            
+            #paymentInfo .bank-details,
+            #paymentInfo .baizum-details {
+                padding: 1.2rem !important;
+            }
+            
+            /* Important payment note tablet optimization */
+            #paymentInfo .bank-details .important-payment-note,
+            #paymentInfo .baizum-details .important-payment-note {
+                padding: 0.7rem !important;
+                margin-bottom: 0.4rem !important;
+            }
+            
+            #paymentInfo .bank-details .important-payment-note strong,
+            #paymentInfo .baizum-details .important-payment-note strong {
+                font-size: 0.85rem !important;
+            }
+            
+            #paymentInfo .bank-details .important-payment-note span,
+            #paymentInfo .baizum-details .important-payment-note span {
+                font-size: 1.1rem !important;
+            }
+            
             .donation-controls {
                 flex: 0 0 280px !important;
                 min-width: 280px !important;
@@ -900,15 +1154,89 @@
                 font-size: 1.1rem !important;
             }
             
-            /* Bank Info Mobile Styles */
-            #bankInfo {
+            /* Payment Info Mobile Styles */
+            #paymentInfo {
                 padding: 1rem !important;
                 margin-bottom: 1rem !important;
             }
             
-            #bankInfo h4 {
+            #paymentInfo h4 {
                 font-size: 1.1rem !important;
                 margin-bottom: 1rem !important;
+            }
+            
+            #paymentInfo h5 {
+                font-size: 1rem !important;
+                margin-bottom: 0.8rem !important;
+            }
+            
+            #paymentInfo .bank-details,
+            #paymentInfo .baizum-details {
+                padding: 1rem !important;
+            }
+            
+            #paymentInfo .bank-details div,
+            #paymentInfo .baizum-details div {
+                margin-bottom: 0.5rem !important;
+            }
+            
+            #paymentInfo .bank-details strong,
+            #paymentInfo .baizum-details strong {
+                font-size: 0.9rem !important;
+                display: block !important;
+            }
+            
+            #paymentInfo .bank-details span,
+            #paymentInfo .baizum-details span {
+                font-size: 1rem !important;
+            }
+            
+            #paymentInfo .bank-details span[style*="font-family: monospace"] {
+                font-size: 1.1rem !important;
+                word-break: break-all;
+                display: block !important;
+                margin-top: 0.2rem !important;
+            }
+            
+            /* Copy button mobile layout optimization */
+            #paymentInfo .bank-details > div > div,
+            #paymentInfo .baizum-details > div > div {
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 0.75rem !important;
+                margin-top: 0.5rem !important;
+            }
+            
+            #paymentInfo .bank-details .copy-btn,
+            #paymentInfo .baizum-details .copy-btn {
+                align-self: center !important;
+                margin-top: 0 !important;
+                flex-shrink: 0 !important;
+            }
+            
+            #paymentInfo .bank-details span,
+            #paymentInfo .baizum-details span {
+                flex: 1 !important;
+                word-break: break-all !important;
+                min-width: 0 !important;
+            }
+            
+            /* Important payment note mobile optimization */
+            #paymentInfo .bank-details .important-payment-note,
+            #paymentInfo .baizum-details .important-payment-note {
+                padding: 0.6rem !important;
+                margin-bottom: 0.3rem !important;
+            }
+            
+            #paymentInfo .bank-details .important-payment-note strong,
+            #paymentInfo .baizum-details .important-payment-note strong {
+                font-size: 0.8rem !important;
+            }
+            
+            #paymentInfo .bank-details .important-payment-note span,
+            #paymentInfo .baizum-details .important-payment-note span {
+                font-size: 1rem !important;
             }
             
             .bank-details {
@@ -1140,13 +1468,84 @@
                 font-size: 1rem !important;
             }
             
-            /* Bank Info Extra Small Mobile */
-            #bankInfo {
+            /* Payment Info Extra Small Mobile */
+            #paymentInfo {
                 padding: 0.8rem !important;
             }
             
-            #bankInfo h4 {
+            #paymentInfo h4 {
                 font-size: 1rem !important;
+            }
+            
+            #paymentInfo h5 {
+                font-size: 0.9rem !important;
+                margin-bottom: 0.6rem !important;
+            }
+            
+            #paymentInfo .bank-details,
+            #paymentInfo .baizum-details {
+                padding: 0.8rem !important;
+            }
+            
+            #paymentInfo .bank-details div,
+            #paymentInfo .baizum-details div {
+                margin-bottom: 0.4rem !important;
+            }
+            
+            #paymentInfo .bank-details strong,
+            #paymentInfo .baizum-details strong {
+                font-size: 0.85rem !important;
+            }
+            
+            #paymentInfo .bank-details span,
+            #paymentInfo .baizum-details span {
+                font-size: 0.9rem !important;
+            }
+            
+            #paymentInfo .bank-details span[style*="font-family: monospace"] {
+                font-size: 1rem !important;
+                letter-spacing: -0.5px !important;
+            }
+            
+            /* Copy button extra small mobile layout optimization */
+            #paymentInfo .bank-details > div > div,
+            #paymentInfo .baizum-details > div > div {
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 0.6rem !important;
+                margin-top: 0.4rem !important;
+            }
+            
+            #paymentInfo .bank-details .copy-btn,
+            #paymentInfo .baizum-details .copy-btn {
+                align-self: center !important;
+                margin-top: 0 !important;
+                flex-shrink: 0 !important;
+            }
+            
+            #paymentInfo .bank-details span,
+            #paymentInfo .baizum-details span {
+                flex: 1 !important;
+                word-break: break-all !important;
+                min-width: 0 !important;
+            }
+            
+            /* Important payment note extra small mobile optimization */
+            #paymentInfo .bank-details .important-payment-note,
+            #paymentInfo .baizum-details .important-payment-note {
+                padding: 0.5rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            #paymentInfo .bank-details .important-payment-note strong,
+            #paymentInfo .baizum-details .important-payment-note strong {
+                font-size: 0.75rem !important;
+            }
+            
+            #paymentInfo .bank-details .important-payment-note span,
+            #paymentInfo .baizum-details .important-payment-note span {
+                font-size: 0.9rem !important;
             }
             
             .bank-details {
@@ -1352,11 +1751,11 @@
                 line-height: 1.3 !important;
             }
             
-            #bankInfo {
+            #paymentInfo {
                 padding: 1rem !important;
             }
             
-            #bankInfo h4 {
+            #paymentInfo h4 {
                 font-size: 1.2rem !important;
             }
             
