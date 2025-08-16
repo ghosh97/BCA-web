@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>QR Check-in</title>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 24px; }
+      input, button { font-size: 16px; padding: 8px; }
+      #result { margin-top: 12px; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <h1>QR Check-in</h1>
+    <input id="qrText" placeholder="Paste QR text here" />
+    <button id="checkBtn">Check In</button>
+    <div id="result"></div>
+
+    <script>
+      const WEB_APP_URL = "https://script.google.com/macros/s/YOUR_EXEC_URL/exec";
+
+      function callAppsScriptJSONP(qrText) {
+        return new Promise((resolve, reject) => {
+          const cb = "cb_" + Math.random().toString(36).slice(2);
+          window[cb] = (data) => {
+            try { resolve(data); }
+            finally {
+              delete window[cb];
+              script.remove();
+            }
+          };
+
+          const url = WEB_APP_URL + "?qrText=" + encodeURIComponent(qrText) + "&callback=" + cb;
+          const script = document.createElement("script");
+          script.src = url;
+          script.onerror = reject;
+          document.body.appendChild(script);
+        });
+      }
+
+      document.getElementById("checkBtn").addEventListener("click", async () => {
+        const qrText = document.getElementById("qrText").value.trim();
+        if (!qrText) {
+          document.getElementById("result").textContent = "Please enter a QR text.";
+          return;
+        }
+        document.getElementById("result").textContent = "Checking…";
+        try {
+          const res = await callAppsScriptJSONP(qrText);
+          document.getElementById("result").textContent = res.message;
+        } catch (err) {
+          console.error(err);
+          document.getElementById("result").textContent = "Error contacting server.";
+        }
+      });
+    </script>
+  </body>
+</html>

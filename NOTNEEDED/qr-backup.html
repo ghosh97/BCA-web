@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR Ticket Verification</title>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #222;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+    #reader {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1rem;
+      margin: 0.3rem 0;
+      min-height: 1.5em;
+    }
+    #scannedText strong {
+      font-weight: 700;
+    }
+    #result {
+      min-height: 1.5em;
+    }
+    .status-valid {
+      color: #27ae60;
+      font-weight: 600;
+    }
+    .status-invalid {
+      color: #e74c3c;
+      font-weight: 600;
+    }
+    button {
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      background-color: #3498db;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      margin: 0.3rem 0.5rem;
+      min-width: 120px;
+    }
+    button:disabled {
+      background-color: #95a5a6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    #buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      gap: 10px;
+      width: 100%;
+      max-width: 350px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎫 QR Ticket Verification</h1>
+
+  <div id="reader"></div>
+
+  <p id="scannedText">Scanned: <em>None</em></p>
+  <p id="result"></p>
+
+  <div id="buttons">
+    <button id="captureBtn" disabled>📸 Capture</button>
+    <button id="verifyBtn" disabled>🔍 Verify</button>
+    <button id="checkInBtn" disabled>✅ Check In</button>
+  </div>
+
+  <script>
+    let lastScannedText = null;
+    let capturedText = null;
+    let currentStream = null;
+    let scanningActive = true;
+
+    const qrScanner = new Html5Qrcode("reader");
+    const config = { fps: 10, qrbox: { width: 280, height: 280 } };
+
+    function updateUIAfterScan(text) {
+      document.getElementById("scannedText").innerHTML = `Scanned: <strong>${text}</strong>`;
+      document.getElementById("result").textContent = "";
+      document.getElementById("captureBtn").disabled = false;
+      document.getElementById("verifyBtn").disabled = true;
+      document.getElementById("checkInBtn").disabled = true;
+    }
+
+    function handleScan(qrText) {
+      if (!scanningActive) return;
+      if (qrText === lastScannedText) return;
+      lastScannedText = qrText;
+      updateUIAfterScan(qrText);
+    }
+
+    document.getElementById("captureBtn").addEventListener("click", () => {
+      capturedText = lastScannedText;
+      if (!capturedText) return;
+
+      scanningActive = false;
+      qrScanner.stop().then(() => {
+        document.getElementById("result").textContent = "📸 Captured QR code. Now click Verify.";
+        document.getElementById("captureBtn").disabled = true;
+        document.getElementById("verifyBtn").disabled = false;
+        document.getElementById("checkInBtn").disabled = true;
+      });
+    });
+
+    document.getElementById("verifyBtn").addEventListener("click", () => {
+      if (!capturedText) return;
+      document.getElementById("result").textContent = "🔍 Verifying...";
+      google.script.run.withSuccessHandler(msg => {
+        document.getElementById("result").textContent = msg;
+        if (msg.includes("Valid") && !msg.includes("Already Used")) {
+          document.getElementById("result").className = "status-valid";
+          document.getElementById("checkInBtn").disabled = false;
+        } else {
+          document.getElementById("result").className = "status-invalid";
+          document.getElementById("checkInBtn").disabled = true;
+        }
+        document.getElementById("verifyBtn").disabled = true;
+      }).verifyTicketWithoutMarking(capturedText);
+    });
+
+    document.getElementById("checkInBtn").addEventListener("click", () => {
+      if (!capturedText) return;
+      document.getElementById("result").textContent = "✅ Checking in...";
+      google.script.run.withSuccessHandler(msg => {
+        document.getElementById("result").textContent = msg;
+        document.getElementById("checkInBtn").disabled = true;
+        setTimeout(() => {
+          restartScanning();
+        }, 2000);
+      }).markTicketUsed(capturedText);
+    });
+
+    function restartScanning() {
+      lastScannedText = null;
+      capturedText = null;
+      scanningActive = true;
+      document.getElementById("scannedText").innerHTML = 'Scanned: <em>None</em>';
+      document.getElementById("result").textContent = 'Status: Waiting...';
+      document.getElementById("result").className = "";
+      document.getElementById("captureBtn").disabled = true;
+      document.getElementById("verifyBtn").disabled = true;
+      document.getElementById("checkInBtn").disabled = true;
+
+      qrScanner.start({ facingMode: "environment" }, config, handleScan)
+        .then(stream => {
+          currentStream = stream;
+        }).catch(err => {
+          document.getElementById("result").textContent = "❌ Camera error: " + err;
+        });
+    }
+
+    // Start scanning on load
+    Html5Qrcode.getCameras()
+      .then(cameras => {
+        if (cameras && cameras.length) {
+          qrScanner.start({ facingMode: "environment" }, config, handleScan)
+            .then(stream => {
+              currentStream = stream;
+            });
+        } else {
+          document.getElementById("result").textContent = "❌ No camera found.";
+        }
+      }).catch(err => {
+        document.getElementById("result").textContent = "❌ Camera error: " + err;
+      });
+  </script>
+
+</body>
+</html>

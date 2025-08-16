@@ -16,6 +16,9 @@ test-registration.html
 test-folder-access.html
 refistration-google-scriot.js
 
+NOTNEEDED/
+qr/hash-generator.html
+
 # Environment variables
 .env
 .env.local

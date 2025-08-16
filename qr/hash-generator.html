@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        input {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background: #28a745;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 SHA-256 Hash Generator</h1>
+        <p>Enter text to generate its SHA-256 hash:</p>
+        
+        <input type="text" id="inputText" placeholder="Enter text here..." value="bhoog">
+        <button onclick="generateHash()">Generate Hash</button>
+        
+        <div id="result" class="result" style="display: none;">
+            <strong>SHA-256 Hash:</strong><br>
+            <span id="hashResult"></span>
+            <br><br>
+            <button class="copy-btn" onclick="copyHash()">📋 Copy Hash</button>
+        </div>
+    </div>
+
+    <script>
+        async function generateHash() {
+            const input = document.getElementById('inputText').value;
+            if (!input) {
+                alert('Please enter some text');
+                return;
+            }
+
+            try {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                
+                document.getElementById('hashResult').textContent = hashHex;
+                document.getElementById('result').style.display = 'block';
+            } catch (error) {
+                alert('Error generating hash: ' + error.message);
+            }
+        }
+
+        function copyHash() {
+            const hash = document.getElementById('hashResult').textContent;
+            navigator.clipboard.writeText(hash).then(() => {
+                alert('Hash copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = hash;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Hash copied to clipboard!');
+            });
+        }
+
+        // Auto-generate hash for "bhoog" on page load
+        window.onload = function() {
+            generateHash();
+        };
+    </script>
+</body>
+</html>
