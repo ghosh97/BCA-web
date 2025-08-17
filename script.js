@@ -61,25 +61,40 @@ function initMobileButtonFix() {
     }
 }
 
-// Mobile Slideshow Reordering - Move slideshow after title on mobile
+// Mobile Slideshow and Countdown Reordering - Move slideshow after title and countdown before features on mobile
 function initMobileSlideshowReorder() {
     const isMobile = window.innerWidth <= 768;
     
-    console.log('Mobile slideshow reorder - isMobile:', isMobile);
+    console.log('Mobile slideshow and countdown reorder - isMobile:', isMobile);
     
     // Always clean up first to prevent duplicates
     const existingMobileSlideshow = document.querySelector('.mobile-slideshow');
+    const existingMobileCountdown = document.querySelector('.mobile-countdown');
+    
     if (existingMobileSlideshow) {
         console.log('Removing existing mobile slideshow');
         existingMobileSlideshow.remove();
     }
     
+    if (existingMobileCountdown) {
+        console.log('Removing existing mobile countdown');
+        existingMobileCountdown.remove();
+    }
+    
     if (isMobile) {
         const heroTitle = document.querySelector('.hero-text .hero-title');
         const slideshow = document.querySelector('.hero-right-section .slideshow-container');
+        const countdown = document.querySelector('.hero-right-section .countdown-section');
         const heroText = document.querySelector('.hero-text');
+        const heroFeatures = document.querySelector('.hero-text .hero-features');
         
-        console.log('Mobile mode - Elements found:', { heroTitle: !!heroTitle, slideshow: !!slideshow, heroText: !!heroText });
+        console.log('Mobile mode - Elements found:', { 
+            heroTitle: !!heroTitle, 
+            slideshow: !!slideshow, 
+            countdown: !!countdown,
+            heroText: !!heroText,
+            heroFeatures: !!heroFeatures
+        });
         
         if (heroTitle && slideshow && heroText) {
             // Clone the slideshow for mobile
@@ -94,12 +109,33 @@ function initMobileSlideshowReorder() {
             
             console.log('Mobile slideshow created and positioned');
         }
+        
+        if (countdown && heroFeatures) {
+            // Clone the countdown for mobile
+            const mobileCountdown = countdown.cloneNode(true);
+            mobileCountdown.classList.add('mobile-countdown');
+            
+            // Insert the countdown before the hero features (before Traditional Puja Rituals)
+            heroFeatures.insertAdjacentElement('beforebegin', mobileCountdown);
+            
+            // Hide the original countdown on mobile by adding a class
+            countdown.classList.add('hidden-on-mobile');
+            
+            console.log('Mobile countdown created and positioned before features');
+        }
     } else {
-        // On desktop, show original slideshow
+        // On desktop, show original slideshow and countdown
         const slideshow = document.querySelector('.hero-right-section .slideshow-container');
+        const countdown = document.querySelector('.hero-right-section .countdown-section');
+        
         if (slideshow) {
             slideshow.classList.remove('hidden-on-mobile');
             console.log('Desktop mode - original slideshow restored');
+        }
+        
+        if (countdown) {
+            countdown.classList.remove('hidden-on-mobile');
+            console.log('Desktop mode - original countdown restored');
         }
     }
 }
