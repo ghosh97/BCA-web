@@ -61,6 +61,54 @@ function initMobileButtonFix() {
     }
 }
 
+// Mobile Slideshow Reordering - Move slideshow after title on mobile
+function initMobileSlideshowReorder() {
+    const isMobile = window.innerWidth <= 768;
+    
+    console.log('Mobile slideshow reorder - isMobile:', isMobile);
+    
+    // Always clean up first to prevent duplicates
+    const existingMobileSlideshow = document.querySelector('.mobile-slideshow');
+    if (existingMobileSlideshow) {
+        console.log('Removing existing mobile slideshow');
+        existingMobileSlideshow.remove();
+    }
+    
+    if (isMobile) {
+        const heroTitle = document.querySelector('.hero-text .hero-title');
+        const slideshow = document.querySelector('.hero-right-section .slideshow-container');
+        const heroText = document.querySelector('.hero-text');
+        
+        console.log('Mobile mode - Elements found:', { heroTitle: !!heroTitle, slideshow: !!slideshow, heroText: !!heroText });
+        
+        if (heroTitle && slideshow && heroText) {
+            // Clone the slideshow for mobile
+            const mobileSlideshow = slideshow.cloneNode(true);
+            mobileSlideshow.classList.add('mobile-slideshow');
+            
+            // Insert the slideshow after the title
+            heroTitle.insertAdjacentElement('afterend', mobileSlideshow);
+            
+            // Hide the original slideshow on mobile by adding a class
+            slideshow.classList.add('hidden-on-mobile');
+            
+            console.log('Mobile slideshow created and positioned');
+        }
+    } else {
+        // On desktop, show original slideshow
+        const slideshow = document.querySelector('.hero-right-section .slideshow-container');
+        if (slideshow) {
+            slideshow.classList.remove('hidden-on-mobile');
+            console.log('Desktop mode - original slideshow restored');
+        }
+    }
+}
+
+// Handle window resize for slideshow reordering
+function handleSlideshowResize() {
+    initMobileSlideshowReorder();
+}
+
 // Update last modified time
 function updateLastModified() {
     const lastUpdatedElement = document.querySelector('.last-updated small');
@@ -909,6 +957,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initTouchGestures();
     initVideoModal();
     initMobileButtonFix(); // Initialize mobile button fix
+    initMobileSlideshowReorder(); // Initialize mobile slideshow reordering
+    
+    // Add resize event listener for slideshow reordering
+    window.addEventListener('resize', handleSlideshowResize);
     
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {

@@ -277,11 +277,38 @@
                                 <strong style="color: var(--red); font-size: 0.9rem;">Important:</strong> Please mention in subject/Concepto: <span style="font-weight: 700; color: var(--red); font-size: 1.2rem;">Your NAME - Donation</span>
                             </div>
                             
-
-                            <!-- Method 1: Bank Transfer -->
+                            <!-- Method 1: Baizum -->
                             <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem; border: 2px solid var(--green);">
                                 <h5 style="color: var(--green); font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="fas fa-university"></i> Method 1: Bank Transfer
+                                    <i class="fas fa-mobile-alt"></i> Method 1: Bizum
+                                </h5>
+                                
+                                <div class="baizum-details">
+                                    <div style="margin-bottom: 1rem;">
+                                        <strong style="color: #333; font-size: 1.1rem;">Phone Number:</strong>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                                            <span id="baizumPhoneNumber" style="color: var(--green); font-weight: 600; font-size: 1.3rem;">+34 682 00 01 31</span>
+                                            <button type="button" class="copy-btn" onclick="copyToClipboard('baizumPhoneNumber', 'Baizum phone number')" title="Copy Baizum phone number" style="background: var(--green); color: white; border: none; padding: 4px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px;">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            
+                            <!-- OR Divider -->
+                            <div style="text-align: center; margin: 1.5rem 0; position: relative;">
+                                <div style="background: white; padding: 0 1rem; font-weight: 700; color: var(--red); font-size: 1.1rem; display: inline-block; position: relative; z-index: 2;">OR</div>
+                                <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent); z-index: 1;"></div>
+                            </div>
+
+
+                            <!-- Method 2: Bank Transfer -->
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem; border: 2px solid var(--green);">
+                                <h5 style="color: var(--green); font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fas fa-university"></i> Method 2: Bank Transfer
                                 </h5>
                                 
                                 <div class="bank-details">
@@ -306,31 +333,7 @@
 
                             </div>
                             
-                            <!-- OR Divider -->
-                            <div style="text-align: center; margin: 1.5rem 0; position: relative;">
-                                <div style="background: white; padding: 0 1rem; font-weight: 700; color: var(--red); font-size: 1.1rem; display: inline-block; position: relative; z-index: 2;">OR</div>
-                                <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent); z-index: 1;"></div>
-                            </div>
                             
-                            <!-- Method 2: Baizum -->
-                            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem; border: 2px solid var(--green);">
-                                <h5 style="color: var(--green); font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="fas fa-mobile-alt"></i> Method 2: Baizum
-                                </h5>
-                                
-                                <div class="baizum-details">
-                                    <div style="margin-bottom: 1rem;">
-                                        <strong style="color: #333; font-size: 1.1rem;">Phone Number:</strong>
-                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
-                                            <span id="baizumPhoneNumber" style="color: var(--green); font-weight: 600; font-size: 1.3rem;">+34 682 00 01 31</span>
-                                            <button type="button" class="copy-btn" onclick="copyToClipboard('baizumPhoneNumber', 'Baizum phone number')" title="Copy Baizum phone number" style="background: var(--green); color: white; border: none; padding: 4px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px;">
-                                                <i class="fas fa-copy"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
                             
             
                         </div>

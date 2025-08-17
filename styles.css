@@ -1165,13 +1165,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Countdown Timer Styles */
 .countdown-section {
-    margin: 2rem auto;
-    max-width: 600px;
+    margin: 1.5rem auto;
+    max-width: 500px;
     width: 100%;
     background: rgba(0,0,0,0.25);
     backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
     border: 2px solid #ec5f08;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), 
                 0 5px 15px rgba(255, 215, 0, 0.1) inset;
@@ -1200,8 +1200,8 @@ h1, h2, h3, h4, h5, h6 {
 .countdown-title {
     color: var(--primary-color);
     text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
     font-family: 'Playfair Display', serif;
@@ -1211,7 +1211,7 @@ h1, h2, h3, h4, h5, h6 {
 .countdown-title i {
     margin-right: 0.75rem;
     color: #FFD700;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     animation: pulse 2s infinite, glow 3s ease-in-out infinite alternate;
     filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
 }
@@ -1224,7 +1224,7 @@ h1, h2, h3, h4, h5, h6 {
 .countdown {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.2rem;
+    gap: 1rem;
     align-items: stretch;
     justify-items: stretch;
     justify-content: center;
@@ -1237,15 +1237,15 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
-    padding: 1.2rem 0.6rem;
-    border-radius: 18px;
+    padding: 1rem 0.5rem;
+    border-radius: 16px;
     border: 1px solid rgba(255, 215, 0, 0.4);
     backdrop-filter: blur(12px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    min-height: 90px;
-    height: 90px;
+    min-height: 75px;
+    height: 75px;
     max-width: 100%;
     width: 100%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -1279,28 +1279,28 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 800;
     color: var(--text-dark);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
     font-family: 'Poppins', sans-serif;
     line-height: 1;
     text-align: center;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    min-height: 2.5rem;
+    min-height: 2rem;
     flex-shrink: 0;
 }
 
 .countdown-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--text-light);
     text-transform: uppercase;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    letter-spacing: 0.3px;
+    letter-spacing: 0.25px;
     text-align: center;
     margin-top: auto;
     width: 100%;
@@ -1312,7 +1312,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 20px;
+    min-height: 18px;
     line-height: 1.2;
     padding: 0 2px;
     flex-shrink: 0;
@@ -2712,34 +2712,34 @@ h1, h2, h3, h4, h5, h6 {
 
     /* Mobile countdown styles */
     .countdown-section {
-        margin: 1.5rem auto;
+        margin: 1rem auto;
         max-width: 100%;
-        padding: 2rem 1.5rem;
-        border-radius: 20px;
+        padding: 1.5rem 1rem;
+        border-radius: 18px;
     }
 
     .countdown-title {
-        font-size: 1.3rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
     }
 
     .countdown-title i {
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-right: 0.5rem;
     }
 
     .countdown {
         grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        gap: 0.8rem;
         align-items: stretch;
         justify-items: stretch;
     }
 
     .countdown-item {
-        padding: 1.5rem 0.8rem;
-        border-radius: 15px;
-        min-height: 100px;
-        height: 100px;
+        padding: 1rem 0.6rem;
+        border-radius: 14px;
+        min-height: 80px;
+        height: 80px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -2750,13 +2750,13 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .countdown-number {
-        font-size: 2.2rem;
-        margin-bottom: 0.4rem;
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
     }
 
     .countdown-label {
-        font-size: 0.8rem;
-        letter-spacing: 0.5px;
+        font-size: 0.7rem;
+        letter-spacing: 0.4px;
     }
 
     /* Footer responsive styles */
@@ -2929,33 +2929,33 @@ h1, h2, h3, h4, h5, h6 {
 
     /* Extra small screen countdown */
     .countdown-section {
-        margin: 1rem auto;
-        padding: 1.5rem 1rem;
-        border-radius: 18px;
+        margin: 0.8rem auto;
+        padding: 1.2rem 0.8rem;
+        border-radius: 16px;
         max-width: 100%;
     }
 
     .countdown-title {
-        font-size: 1.1rem;
-        margin-bottom: 1.2rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 
     .countdown-title i {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .countdown {
         grid-template-columns: repeat(4, 1fr);
-        gap: 0.7rem;
+        gap: 0.6rem;
         align-items: stretch;
         justify-items: stretch;
     }
 
     .countdown-item {
-        padding: 1.2rem 0.5rem;
-        border-radius: 12px;
-        min-height: 85px;
-        height: 85px;
+        padding: 0.8rem 0.4rem;
+        border-radius: 10px;
+        min-height: 70px;
+        height: 70px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -2966,14 +2966,14 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .countdown-number {
-        font-size: 1.8rem;
-        margin-bottom: 0.3rem;
-        min-height: 2.2rem;
+        font-size: 1.4rem;
+        margin-bottom: 0.25rem;
+        min-height: 1.8rem;
     }
 
     .countdown-label {
-        font-size: 0.7rem;
-        letter-spacing: 0.3px;
+        font-size: 0.6rem;
+        letter-spacing: 0.25px;
         line-height: 1.1;
         padding: 0 1px;
     }
@@ -4325,8 +4325,8 @@ section + section {
     
     /* Enhanced countdown for desktop */
     .countdown-section {
-        padding: 3rem 2.5rem;
-        border-radius: 28px;
+        padding: 2.5rem 2rem;
+        border-radius: 24px;
         backdrop-filter: blur(25px);
         box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
         border: 2px solid rgba(255, 215, 0, 0.3);
@@ -4334,27 +4334,27 @@ section + section {
     }
     
     .countdown-title {
-        font-size: 1.8rem;
-        margin-bottom: 2.5rem;
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
         color: var(--primary-color);
     }
     
     .countdown {
-        gap: 2rem;
+        gap: 1.5rem;
     }
     
     .countdown-item {
-        padding: 2.5rem 1.5rem;
-        min-height: 140px;
-        border-radius: 20px;
+        padding: 2rem 1.2rem;
+        min-height: 110px;
+        border-radius: 18px;
         backdrop-filter: blur(20px);
         background: rgba(255, 255, 255, 0.95);
         border: 1px solid rgba(255, 215, 0, 0.4);
     }
     
         .countdown-number {
-        font-size: 2.8rem;
-        margin-bottom: 0.6rem;
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
         color: var(--text-dark);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         display: flex;
@@ -4364,8 +4364,8 @@ section + section {
     }
 
     .countdown-label {
-        font-size: 0.9rem;
-        letter-spacing: 0.8px;
+        font-size: 0.8rem;
+        letter-spacing: 0.6px;
         color: var(--text-light);
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         display: flex;
@@ -5761,28 +5761,28 @@ section + section {
 
     .countdown-section {
         width: 100%;
-        max-width: 400px;
-        margin: 2rem auto;
-        padding: 1.5rem;
-        border-radius: 16px;
+        max-width: 350px;
+        margin: 1.5rem auto;
+        padding: 1.2rem;
+        border-radius: 14px;
     }
 
     .countdown {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        gap: 0.8rem;
     }
 
     .countdown-item {
-        padding: 1rem;
+        padding: 0.8rem;
         min-height: auto;
     }
 
     .countdown-number {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     .countdown-label {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
 }
 
@@ -5830,11 +5830,11 @@ section + section {
     }
 
     .countdown-section {
-        padding: 1rem;
+        padding: 0.8rem;
     }
 
     .countdown-number {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
 }
 

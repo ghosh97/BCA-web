@@ -151,6 +151,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Bot-like patterns
         if (nameValue.toLowerCase().includes('test') || 
+            nameValue.toLowerCase().includes('demo') ||
+            nameValue.toLowerCase().includes('@') ||
             emailValue.toLowerCase().includes('test@test') ||
             nameValue === emailValue.split('@')[0]) {
             return true;
