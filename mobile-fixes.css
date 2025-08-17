@@ -449,6 +449,11 @@ body {
         z-index: 10;
     }
 
+    /* Hide hero features (Traditional Puja Rituals) on mobile */
+    .hero-features {
+        display: none !important;
+    }
+
     .mobile-countdown .countdown-title {
         font-size: 1.1rem !important;
         margin-bottom: 1rem !important;
@@ -463,17 +468,27 @@ body {
     }
 
     .mobile-countdown .countdown {
-        gap: 0.8rem !important;
+        gap: 0.5rem !important;
         justify-content: center !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
     }
 
     .mobile-countdown .countdown-item {
-        padding: 0.8rem 0.4rem !important;
-        border-radius: 12px !important;
-        min-height: 70px !important;
-        height: 70px !important;
+        padding: 0.6rem 0.3rem !important;
+        border-radius: 10px !important;
+        min-height: 60px !important;
+        height: 60px !important;
         background: rgba(255, 255, 255, 0.95) !important;
         border: 1px solid rgba(255, 215, 0, 0.4) !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
     .mobile-countdown .countdown-number {
@@ -525,6 +540,80 @@ body {
     }
     
 
+}
+
+/* iPad and Tablet Navigation */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .navbar {
+        overflow: hidden;
+    }
+    
+    .nav-container {
+        padding: 0.8rem 1.5rem;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .nav-menu {
+        gap: 1rem;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        max-width: calc(100% - 200px);
+        overflow: hidden;
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+        padding: 0.4rem 0.6rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .logo-text {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+    
+    .logo-img {
+        width: 45px;
+        height: 45px;
+        flex-shrink: 0;
+    }
+}
+
+/* iPad Landscape Orientation */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+    .nav-container {
+        padding: 0.6rem 1.5rem;
+    }
+    
+    .nav-menu {
+        gap: 0.8rem;
+        max-width: calc(100% - 180px);
+    }
+    
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.5rem;
+    }
+}
+
+/* iPad Pro and Large Tablet */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .nav-container {
+        padding: 1rem 2rem;
+        max-width: 1200px;
+    }
+    
+    .nav-menu {
+        gap: 1.5rem;
+        max-width: calc(100% - 220px);
+    }
+    
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 0.5rem 0.8rem;
+    }
 }
 
 /* Mobile Navigation */
@@ -1117,20 +1206,24 @@ body {
         font-size: 0.9rem !important;
     }
 
+    .mobile-countdown .countdown {
+        gap: 0.4rem !important;
+    }
+
     .mobile-countdown .countdown-item {
-        padding: 0.6rem 0.3rem !important;
-        border-radius: 10px !important;
-        min-height: 60px !important;
-        height: 60px !important;
+        padding: 0.5rem 0.25rem !important;
+        border-radius: 8px !important;
+        min-height: 55px !important;
+        height: 55px !important;
     }
 
     .mobile-countdown .countdown-number {
-        font-size: 1.2rem !important;
-        min-height: 1.6rem !important;
+        font-size: 1.1rem !important;
+        min-height: 1.5rem !important;
     }
 
     .mobile-countdown .countdown-label {
-        font-size: 0.55rem !important;
+        font-size: 0.5rem !important;
     }
 }
 
@@ -1205,20 +1298,24 @@ body {
         font-size: 0.8rem !important;
     }
 
+    .mobile-countdown .countdown {
+        gap: 0.3rem !important;
+    }
+
     .mobile-countdown .countdown-item {
-        padding: 0.5rem 0.25rem !important;
-        border-radius: 8px !important;
-        min-height: 55px !important;
-        height: 55px !important;
+        padding: 0.4rem 0.2rem !important;
+        border-radius: 6px !important;
+        min-height: 50px !important;
+        height: 50px !important;
     }
 
     .mobile-countdown .countdown-number {
-        font-size: 1.1rem !important;
-        min-height: 1.4rem !important;
+        font-size: 1rem !important;
+        min-height: 1.3rem !important;
     }
 
     .mobile-countdown .countdown-label {
-        font-size: 0.5rem !important;
+        font-size: 0.45rem !important;
     }
 }
 

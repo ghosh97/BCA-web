@@ -86,14 +86,12 @@ function initMobileSlideshowReorder() {
         const slideshow = document.querySelector('.hero-right-section .slideshow-container');
         const countdown = document.querySelector('.hero-right-section .countdown-section');
         const heroText = document.querySelector('.hero-text');
-        const heroFeatures = document.querySelector('.hero-text .hero-features');
         
         console.log('Mobile mode - Elements found:', { 
             heroTitle: !!heroTitle, 
             slideshow: !!slideshow, 
             countdown: !!countdown,
-            heroText: !!heroText,
-            heroFeatures: !!heroFeatures
+            heroText: !!heroText
         });
         
         if (heroTitle && slideshow && heroText) {
@@ -110,18 +108,21 @@ function initMobileSlideshowReorder() {
             console.log('Mobile slideshow created and positioned');
         }
         
-        if (countdown && heroFeatures) {
+        if (countdown && heroText) {
             // Clone the countdown for mobile
             const mobileCountdown = countdown.cloneNode(true);
             mobileCountdown.classList.add('mobile-countdown');
             
-            // Insert the countdown before the hero features (before Traditional Puja Rituals)
-            heroFeatures.insertAdjacentElement('beforebegin', mobileCountdown);
+            // Insert the countdown after the subtitle (since features are hidden on mobile)
+            const heroSubtitle = heroText.querySelector('.hero-subtitle');
+            if (heroSubtitle) {
+                heroSubtitle.insertAdjacentElement('afterend', mobileCountdown);
+            }
             
             // Hide the original countdown on mobile by adding a class
             countdown.classList.add('hidden-on-mobile');
             
-            console.log('Mobile countdown created and positioned before features');
+            console.log('Mobile countdown created and positioned after subtitle');
         }
     } else {
         // On desktop, show original slideshow and countdown

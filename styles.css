@@ -2497,6 +2497,104 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Responsive Design */
+/* iPad and Tablet Navigation Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-container {
+        padding: 0.8rem 1.5rem;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    
+    .nav-menu {
+        gap: 1rem;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        max-width: calc(100% - 200px);
+        overflow: hidden;
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+        padding: 0.4rem 0.6rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .logo-text {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+    
+    .logo-img {
+        width: 45px;
+        height: 45px;
+        flex-shrink: 0;
+    }
+    
+    /* Ensure navbar doesn't overflow on iPad */
+    .navbar {
+        overflow: hidden;
+    }
+}
+
+/* Small iPad and Large Mobile */
+@media (min-width: 481px) and (max-width: 768px) {
+    .nav-container {
+        padding: 0.6rem 1rem;
+    }
+    
+    .nav-menu {
+        gap: 0.8rem;
+    }
+    
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
+    .logo-text {
+        font-size: 1rem;
+    }
+    
+    .logo-img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* iPad Pro and Large Tablet */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .nav-container {
+        padding: 1rem 2rem;
+        max-width: 1200px;
+    }
+    
+    .nav-menu {
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+/* iPad Landscape Orientation */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+    .nav-container {
+        padding: 0.6rem 1.5rem;
+    }
+    
+    .nav-menu {
+        gap: 0.8rem;
+    }
+    
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;
