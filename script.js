@@ -5,9 +5,7 @@ const navToggle = document.getElementById('nav-toggle');
 const navLinks = document.querySelectorAll('.nav-link');
 const backToTopBtn = document.getElementById('backToTop');
 const loading = document.getElementById('loading');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxCaption = document.getElementById('lightbox-caption');
+// Removed lightbox elements to prevent conflicts with gallery.html
 const contactForm = document.getElementById('contactForm');
 const newsletterForm = document.querySelector('.newsletter-form');
 
@@ -628,36 +626,8 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Lightbox Gallery
-function openLightbox(index) {
-    const images = [
-        'https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Durga+Puja+2024+1',
-        'https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Durga+Puja+2024+2',
-        'https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Durga+Puja+2024+3',
-        'https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Durga+Puja+2024+4',
-        'https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Durga+Puja+2024+5',
-        'https://via.placeholder.com/800x600/FF6B35/FFFFFF?text=Durga+Puja+2024+6'
-    ];
-    
-    const captions = [
-        'Traditional Durga Puja celebration in Barcelona',
-        'Community gathering during the festival',
-        'Cultural performances and music',
-        'Traditional Bengali cuisine',
-        'Children participating in rituals',
-        'Grand finale of the celebration'
-    ];
-    
-    lightboxImg.src = images[index];
-    lightboxCaption.textContent = captions[index];
-    lightbox.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
+// Lightbox Gallery - Removed to prevent conflicts with gallery.html
+// Gallery lightbox functionality is handled in gallery.html
 
 // Intersection Observer for Animations
 function initScrollAnimations() {
@@ -796,16 +766,8 @@ function initFormValidation() {
     }
 }
 
-// Keyboard Navigation for Lightbox
-function initLightboxKeyboard() {
-    document.addEventListener('keydown', (e) => {
-        if (lightbox && lightbox.style.display === 'block') {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        }
-    });
-}
+// Keyboard Navigation for Lightbox - Removed to prevent conflicts with gallery.html
+// Gallery lightbox keyboard functionality is handled in gallery.html
 
 // Touch Gestures for Mobile
 function initTouchGestures() {
@@ -988,7 +950,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initSmoothScrolling();
     initFormValidation();
-    initLightboxKeyboard();
+    // Removed initLightboxKeyboard() to prevent conflicts with gallery.html
     initScrollAnimations();
     initParallax();
     initTouchGestures();
@@ -1056,8 +1018,9 @@ if ('serviceWorker' in navigator) {
 // Export functions for global access
 window.scrollToSection = scrollToSection;
 window.scrollToTop = scrollToTop;
-window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox;
+// Removed conflicting lightbox functions
+// window.openLightbox = openLightbox;
+// window.closeLightbox = closeLightbox;
 
 // Video Modal Functions
 function openVideoModal(videoSrc, title) {

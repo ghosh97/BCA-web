@@ -1,6 +1,6 @@
-# Durga Puja 2K25 Barcelona - Modern Website
+# BCA Spain - Bengali Cultural Association Website
 
-A modern, feature-rich website for the Bengali Cultural Association's Durga Puja celebration in Barcelona. Built with HTML5, CSS3, and JavaScript, featuring a responsive design and interactive elements.
+A modern, feature-rich website for the Bengali Cultural Association (BCA) Spain. Built with HTML5, CSS3, and JavaScript, featuring a responsive design and interactive elements for cultural events and community engagement.
 
 ## 🌟 Features
 
@@ -20,14 +20,13 @@ A modern, feature-rich website for the Bengali Cultural Association's Durga Puja
 - **Multi-Page Architecture** - Dedicated pages for different sections
 
 ### Interactive Features
-- **Live Countdown Timer** - Countdown to Durga Puja 2025 (October 15, 2025)
+- **Live Countdown Timer** - Countdown to upcoming events
 - **Video Modal System** - Interactive video previews with full-screen playback
 - **Registration Form** - Complete registration system with validation and Google Sheets integration
 - **Contact Form** - Contact form with email validation and Google Sheets integration
-- **Newsletter Subscription** - Email subscription functionality
 - **Photo Gallery** - Lightbox gallery with keyboard navigation
 - **Event Timeline** - Visual timeline of festival events
-- **Interactive Maps** - Google Maps integration for venue locations
+- **QR Code Generator** - Custom QR code generation for events
 
 ### Performance & Optimization
 - **Fast Loading** - Optimized images (WebP format) and code
@@ -40,7 +39,7 @@ A modern, feature-rich website for the Bengali Cultural Association's Durga Puja
 ## 📁 Project Structure
 
 ```
-BCA-web/
+bcaspain.github.io/
 ├── index.html              # Main homepage with hero section and countdown
 ├── about.html              # About BCA and organization history
 ├── events.html             # Events/Attractions page
@@ -48,11 +47,16 @@ BCA-web/
 ├── gallery.html            # Photo gallery with lightbox
 ├── registration.html       # Registration form with payment options
 ├── contact.html            # Contact information and form
-├── styles.css              # Main stylesheet (5873 lines)
-├── mobile-fixes.css        # Mobile-specific optimizations
-├── script.js               # Main JavaScript functionality
-├── registration-form.js    # Registration form logic
+├── styles.css              # Main stylesheet (6995 lines)
+├── mobile-fixes.css        # Mobile-specific optimizations (2026 lines)
+├── script.js               # Main JavaScript functionality (1681 lines)
+├── registration-form.js    # Registration form logic (1504 lines)
 ├── README.md               # Project documentation
+├── CNAME                   # Custom domain configuration (bcaspain.org)
+├── favicon.ico             # Website favicon
+├── BCA-logo.webp          # BCA Spain logo
+├── adove.webp              # Decorative background image
+├── idol.jpg                # Cultural idol image
 ├── gallery/                # Image assets
 │   ├── g1.webp - g15.webp  # Gallery images
 │   └── a11.webp - a16.webp # Additional images
@@ -62,16 +66,13 @@ BCA-web/
 │   ├── dhunuchinaach.mp4   # Community bonding
 │   └── maadurgamurti.mp4   # Traditional puja rituals
 ├── members/                # Team member photos
-│   ├── p.jpeg
-│   ├── s.jpeg
-│   ├── s1.jpeg
-│   ├── t.jpeg
-│   └── vp.jpeg
-└── Various assets          # Logos, backgrounds, and other images
-    ├── bca-logo-another.jpg
-    ├── bca-background.jpeg
-    ├── idol.jpg
-    └── adove.webp
+│   ├── p.jpeg              # President photo
+│   ├── s.jpeg              # Secretary photo
+│   ├── s1.jpeg             # Additional secretary photo
+│   ├── t.jpeg              # Treasurer photo
+│   └── vp.jpeg             # Vice President photo
+└── qr/                     # QR code functionality
+    └── qr.html             # QR code generator page
 ```
 
 ## 🚀 Getting Started
@@ -120,7 +121,7 @@ The website uses CSS custom properties (variables) for easy color customization.
 ```
 
 ### Content
-- **Event Dates**: Update the countdown timer in `script.js` (line 8)
+- **Event Dates**: Update the countdown timer in `script.js`
 - **Event Information**: Modify the events section in `index.html`
 - **Contact Information**: Update contact details in the contact section
 - **Images**: Replace placeholder images with actual event photos
@@ -178,7 +179,13 @@ The website is fully responsive and optimized for:
 - **Real-time Validation**: Instant feedback on form inputs
 - **Email Confirmation**: Double email validation with visual indicators
 
-## 🌐 Browser Support
+## 🌐 Deployment
+
+The website is deployed on GitHub Pages and accessible at:
+- **GitHub Pages**: https://bcaspain.github.io
+- **Custom Domain**: https://bcaspain.org
+
+## 📱 Browser Support
 
 - Chrome 60+
 - Firefox 55+
@@ -189,20 +196,21 @@ The website is fully responsive and optimized for:
 
 For questions or support regarding this website:
 
-- **Email**: info@bcabarcelona.com
-- **Phone**: +34 123 456 789
-- **Address**: Barcelona, Spain
+- **Organization**: Bengali Cultural Association Spain
+- **Founded**: 2021
+- **Location**: Spain
+- **Mission**: Fostering unity and celebrating Bengali cultural events together
 
 ## 📄 License
 
-This project is created for the Bengali Cultural Association Barcelona. All rights reserved.
+This project is created for the Bengali Cultural Association Spain. All rights reserved.
 
 ## 🙏 Acknowledgments
 
 - **Google Fonts** for beautiful typography
 - **Font Awesome** for icons
-- **Bengali Cultural Association** for the inspiration
-- **Durga Puja Community** for cultural significance
+- **Bengali Cultural Association Spain** for the inspiration
+- **Bengali Community** for cultural significance
 - **Google Sheets API** for form data collection
 
 ## 🎯 Future Enhancements
@@ -253,7 +261,7 @@ Potential features for future versions:
 
 ## 📈 Analytics & Tracking
 
-- Google Analytics ready
+- Google Analytics integration (G-ZHNQ37V3SX)
 - Form submission tracking
 - User interaction analytics
 - Performance monitoring
@@ -261,10 +269,11 @@ Potential features for future versions:
 
 ---
 
-**Built with ❤️ for the Bengali Cultural Association Barcelona**
+**Built with ❤️ for the Bengali Cultural Association Spain**
 
-*Celebrating Durga Puja 2K25 in the heart of Barcelona*
+*Celebrating Bengali culture and fostering community unity in Spain*
 
 **Last Updated**: January 2025
 **Version**: 2.0
-**Status**: Production Ready 
+**Status**: Production Ready
+**Deployment**: GitHub Pages + Custom Domain 
