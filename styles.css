@@ -1004,7 +1004,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('adove.webp');
+    background-image: url('idol.jpg');
     background-size: cover;
     background-position: center;
     z-index: 1;
@@ -1959,7 +1959,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Team Section */
 .team-section {
     padding: 6rem 0;
-    background: var(--light-bg);
+    /* background: var(--light-bg); */
 }
 
 .team-content {
@@ -2217,7 +2217,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Contact Section */
 .contact {
     padding: 6rem 0;
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.05) 0%, rgba(253, 126, 20, 0.05) 100%);
+    /* background: linear-gradient(135deg, rgba(255, 193, 7, 0.05) 0%, rgba(253, 126, 20, 0.05) 100%); */
     position: relative;
     border: 2px solid rgba(253, 126, 20, 0.1);
     border-radius: var(--border-radius);
@@ -3126,7 +3126,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('adove.webp');
+    background-image: url('idol.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -4088,7 +4088,7 @@ section + section {
 /* High DPI displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .hero-background {
-        background-image: url('adove.webp') !important;
+        background-image: url('idol.jpg') !important;
     }
     
     .logo-img img {
@@ -5210,7 +5210,7 @@ section + section {
 
 /* Venue Section Styling */
 .venue-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    /* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
     padding: 4rem 0;
     position: relative;
 }
@@ -5583,7 +5583,7 @@ section + section {
 
 /* Venue Locations Section (Home Page) */
 .venue-locations {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    /* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
     padding: 4rem 0;
     position: relative;
 }
@@ -5594,10 +5594,10 @@ section + section {
 
 /* Locations Section (Contact Page) */  
 .locations-section {
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(253, 126, 20, 0.1) 100%);
+    /* background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(253, 126, 20, 0.1) 100%); */
     padding: 4rem 0;
     position: relative;
-    border: 2px solid rgba(253, 126, 20, 0.15);
+    /* border: 2px solid rgba(253, 126, 20, 0.15); */
     border-radius: var(--border-radius);
     margin: 2rem 0;
 }
@@ -6630,7 +6630,7 @@ section + section {
 /* Events Section Styles */
 .events-section {
     padding: 2.5rem 0;
-    background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(255, 193, 7, 0.05) 100%);
+    /* background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(255, 193, 7, 0.05) 100%); */
 }
 
 .events-grid {

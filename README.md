@@ -55,7 +55,7 @@ bcaspain.github.io/
 ├── CNAME                   # Custom domain configuration (bcaspain.org)
 ├── favicon.ico             # Website favicon
 ├── BCA-logo.webp          # BCA Spain logo
-├── adove.webp              # Decorative background image
+├── idol.jpg                # Decorative background image
 ├── idol.jpg                # Cultural idol image
 ├── gallery/                # Image assets
 │   ├── g1.webp - g15.webp  # Gallery images
